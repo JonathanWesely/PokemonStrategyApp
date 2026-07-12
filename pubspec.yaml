@@ -1,0 +1,32 @@
+name: pokemon_strategy_app
+description: Battle companion for Pokemon Champions — team builder, snapshot recognition, battle intel.
+publish_to: "none"
+version: 0.1.0
+
+environment:
+  sdk: ">=3.5.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  # Cloud vision recognizer (Anthropic API) + future data-pack refresh.
+  # Only cloud_vision_recognizer.dart and tool/update_data.dart touch it.
+  http: ^1.2.0
+  # Persistent storage: teams and settings (AppDatabase). Same stack as
+  # GolfSwingTrackerApp: sqflite on-device, sqflite_common pure-Dart types
+  # so the database layer stays testable without a phone.
+  sqflite: ^2.4.1
+  sqflite_common: ^2.5.0
+  path: ^1.9.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  # Runs AppDatabase against real SQLite in plain unit tests (no device).
+  sqflite_common_ffi: ^2.3.4
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/data/

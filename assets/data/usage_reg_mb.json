@@ -1,0 +1,3477 @@
+{
+ "schemaVersion": 1,
+ "generatedAt": "2026-07-11",
+ "regulation": "reg-mb",
+ "source": "starter-placeholder",
+ "note": "HAND-AUTHORED PLACEHOLDER usage data. Percentages are illustrative, not real ladder stats. Run tool/update_data.dart to replace.",
+ "pokemon": [
+  {
+   "speciesId": "incineroar",
+   "usagePercent": 48.2,
+   "moves": [
+    {
+     "id": "fake-out",
+     "pct": 88.1
+    },
+    {
+     "id": "knock-off",
+     "pct": 76.4
+    },
+    {
+     "id": "parting-shot",
+     "pct": 64.2
+    },
+    {
+     "id": "flare-blitz",
+     "pct": 58.9
+    },
+    {
+     "id": "will-o-wisp",
+     "pct": 26.3
+    },
+    {
+     "id": "u-turn",
+     "pct": 22.7
+    },
+    {
+     "id": "darkest-lariat",
+     "pct": 18.4
+    },
+    {
+     "id": "taunt",
+     "pct": 12.9
+    }
+   ],
+   "items": [
+    {
+     "id": "safety-goggles",
+     "pct": 34.6
+    },
+    {
+     "id": "sitrus-berry",
+     "pct": 23.1
+    },
+    {
+     "id": "assault-vest",
+     "pct": 16.8
+    },
+    {
+     "id": "rocky-helmet",
+     "pct": 10.2
+    },
+    {
+     "id": "covert-cloak",
+     "pct": 7.4
+    }
+   ],
+   "abilities": [
+    {
+     "name": "Intimidate",
+     "pct": 97.8
+    },
+    {
+     "name": "Blaze",
+     "pct": 2.2
+    }
+   ],
+   "spreads": [
+    {
+     "nature": "Careful",
+     "sp": {
+      "hp": 32,
+      "atk": 6,
+      "def": 8,
+      "spa": 0,
+      "spd": 16,
+      "spe": 4
+     },
+     "pct": 38.2
+    },
+    {
+     "nature": "Impish",
+     "sp": {
+      "hp": 32,
+      "atk": 0,
+      "def": 20,
+      "spa": 0,
+      "spd": 10,
+      "spe": 4
+     },
+     "pct": 24.6
+    },
+    {
+     "nature": "Adamant",
+     "sp": {
+      "hp": 28,
+      "atk": 32,
+      "def": 0,
+      "spa": 0,
+      "spd": 0,
+      "spe": 6
+     },
+     "pct": 14.1
+    }
+   ],
+   "teammates": [
+    {
+     "speciesId": "rillaboom",
+     "pct": 42.3
+    },
+    {
+     "speciesId": "archaludon",
+     "pct": 24.1
+    },
+    {
+     "speciesId": "dragonite",
+     "pct": 22.8
+    },
+    {
+     "speciesId": "pelipper",
+     "pct": 19.5
+    },
+    {
+     "speciesId": "farigiraf",
+     "pct": 12.2
+    },
+    {
+     "speciesId": "gholdengo",
+     "pct": 11.7
+    }
+   ]
+  },
+  {
+   "speciesId": "rillaboom",
+   "usagePercent": 39.7,
+   "moves": [
+    {
+     "id": "fake-out",
+     "pct": 82.3
+    },
+    {
+     "id": "grassy-glide",
+     "pct": 78.9
+    },
+    {
+     "id": "wood-hammer",
+     "pct": 61.2
+    },
+    {
+     "id": "u-turn",
+     "pct": 41.8
+    },
+    {
+     "id": "high-horsepower",
+     "pct": 28.4
+    },
+    {
+     "id": "knock-off",
+     "pct": 19.6
+    },
+    {
+     "id": "taunt",
+     "pct": 8.2
+    },
+    {
+     "id": "drum-beating",
+     "pct": 6.1
+    }
+   ],
+   "items": [
+    {
+     "id": "assault-vest",
+     "pct": 41.2
+    },
+    {
+     "id": "sitrus-berry",
+     "pct": 18.9
+    },
+    {
+     "id": "choice-band",
+     "pct": 14.3
+    },
+    {
+     "id": "loaded-dice",
+     "pct": 6.2
+    },
+    {
+     "id": "clear-amulet",
+     "pct": 5.8
+    }
+   ],
+   "abilities": [
+    {
+     "name": "Grassy Surge",
+     "pct": 96.4
+    },
+    {
+     "name": "Overgrow",
+     "pct": 3.6
+    }
+   ],
+   "spreads": [
+    {
+     "nature": "Adamant",
+     "sp": {
+      "hp": 28,
+      "atk": 32,
+      "def": 0,
+      "spa": 0,
+      "spd": 0,
+      "spe": 6
+     },
+     "pct": 44.8
+    },
+    {
+     "nature": "Careful",
+     "sp": {
+      "hp": 32,
+      "atk": 8,
+      "def": 6,
+      "spa": 0,
+      "spd": 16,
+      "spe": 4
+     },
+     "pct": 21.3
+    },
+    {
+     "nature": "Brave",
+     "sp": {
+      "hp": 32,
+      "atk": 32,
+      "def": 2,
+      "spa": 0,
+      "spd": 0,
+      "spe": 0
+     },
+     "pct": 9.4
+    }
+   ],
+   "teammates": [
+    {
+     "speciesId": "incineroar",
+     "pct": 42.3
+    },
+    {
+     "speciesId": "gengar",
+     "pct": 18.7
+    },
+    {
+     "speciesId": "chien-pao",
+     "pct": 16.2
+    },
+    {
+     "speciesId": "farigiraf",
+     "pct": 13.9
+    },
+    {
+     "speciesId": "annihilape",
+     "pct": 12.4
+    },
+    {
+     "speciesId": "whimsicott",
+     "pct": 9.8
+    }
+   ]
+  },
+  {
+   "speciesId": "amoonguss",
+   "usagePercent": 28.9,
+   "moves": [
+    {
+     "id": "spore",
+     "pct": 91.2
+    },
+    {
+     "id": "rage-powder",
+     "pct": 88.6
+    },
+    {
+     "id": "pollen-puff",
+     "pct": 67.3
+    },
+    {
+     "id": "protect",
+     "pct": 44.1
+    },
+    {
+     "id": "clear-smog",
+     "pct": 28.8
+    },
+    {
+     "id": "sludge-bomb",
+     "pct": 24.2
+    },
+    {
+     "id": "giga-drain",
+     "pct": 11.7
+    }
+   ],
+   "items": [
+    {
+     "id": "sitrus-berry",
+     "pct": 38.4
+    },
+    {
+     "id": "rocky-helmet",
+     "pct": 21.2
+    },
+    {
+     "id": "mental-herb",
+     "pct": 16.9
+    },
+    {
+     "id": "covert-cloak",
+     "pct": 12.1
+    },
+    {
+     "id": "leftovers",
+     "pct": 4.3
+    }
+   ],
+   "abilities": [
+    {
+     "name": "Regenerator",
+     "pct": 94.1
+    },
+    {
+     "name": "Effect Spore",
+     "pct": 5.9
+    }
+   ],
+   "spreads": [
+    {
+     "nature": "Calm",
+     "sp": {
+      "hp": 32,
+      "atk": 0,
+      "def": 14,
+      "spa": 4,
+      "spd": 16,
+      "spe": 0
+     },
+     "pct": 41.6
+    },
+    {
+     "nature": "Bold",
+     "sp": {
+      "hp": 32,
+      "atk": 0,
+      "def": 24,
+      "spa": 0,
+      "spd": 10,
+      "spe": 0
+     },
+     "pct": 28.3
+    },
+    {
+     "nature": "Sassy",
+     "sp": {
+      "hp": 32,
+      "atk": 0,
+      "def": 16,
+      "spa": 0,
+      "spd": 18,
+      "spe": 0
+     },
+     "pct": 17.2
+    }
+   ],
+   "teammates": [
+    {
+     "speciesId": "torkoal",
+     "pct": 26.4
+    },
+    {
+     "speciesId": "farigiraf",
+     "pct": 24.8
+    },
+    {
+     "speciesId": "urshifu-rapid-strike",
+     "pct": 21.3
+    },
+    {
+     "speciesId": "metagross",
+     "pct": 14.6
+    },
+    {
+     "speciesId": "tyranitar",
+     "pct": 9.1
+    },
+    {
+     "speciesId": "gyarados",
+     "pct": 8.8
+    }
+   ]
+  },
+  {
+   "speciesId": "landorus-therian",
+   "usagePercent": 36.4,
+   "moves": [
+    {
+     "id": "earthquake",
+     "pct": 64.7
+    },
+    {
+     "id": "rock-slide",
+     "pct": 61.2
+    },
+    {
+     "id": "u-turn",
+     "pct": 57.8
+    },
+    {
+     "id": "stomping-tantrum",
+     "pct": 31.4
+    },
+    {
+     "id": "protect",
+     "pct": 28.9
+    },
+    {
+     "id": "stone-edge",
+     "pct": 14.2
+    },
+    {
+     "id": "swords-dance",
+     "pct": 8.7
+    },
+    {
+     "id": "earth-power",
+     "pct": 6.3
+    }
+   ],
+   "items": [
+    {
+     "id": "choice-scarf",
+     "pct": 31.7
+    },
+    {
+     "id": "assault-vest",
+     "pct": 22.4
+    },
+    {
+     "id": "focus-sash",
+     "pct": 14.8
+    },
+    {
+     "id": "sitrus-berry",
+     "pct": 9.6
+    },
+    {
+     "id": "life-orb",
+     "pct": 8.2
+    }
+   ],
+   "abilities": [
+    {
+     "name": "Intimidate",
+     "pct": 100.0
+    }
+   ],
+   "spreads": [
+    {
+     "nature": "Adamant",
+     "sp": {
+      "hp": 4,
+      "atk": 32,
+      "def": 4,
+      "spa": 0,
+      "spd": 6,
+      "spe": 20
+     },
+     "pct": 36.9
+    },
+    {
+     "nature": "Jolly",
+     "sp": {
+      "hp": 0,
+      "atk": 32,
+      "def": 2,
+      "spa": 0,
+      "spd": 0,
+      "spe": 32
+     },
+     "pct": 33.4
+    },
+    {
+     "nature": "Careful",
+     "sp": {
+      "hp": 32,
+      "atk": 8,
+      "def": 0,
+      "spa": 0,
+      "spd": 22,
+      "spe": 4
+     },
+     "pct": 11.2
+    }
+   ],
+   "teammates": [
+    {
+     "speciesId": "whimsicott",
+     "pct": 22.6
+    },
+    {
+     "speciesId": "gengar",
+     "pct": 19.4
+    },
+    {
+     "speciesId": "gholdengo",
+     "pct": 18.8
+    },
+    {
+     "speciesId": "chien-pao",
+     "pct": 15.2
+    },
+    {
+     "speciesId": "metagross",
+     "pct": 13.7
+    },
+    {
+     "speciesId": "dragonite",
+     "pct": 11.9
+    }
+   ]
+  },
+  {
+   "speciesId": "garchomp",
+   "usagePercent": 21.8,
+   "moves": [
+    {
+     "id": "earthquake",
+     "pct": 78.4
+    },
+    {
+     "id": "dragon-claw",
+     "pct": 44.6
+    },
+    {
+     "id": "rock-slide",
+     "pct": 43.1
+    },
+    {
+     "id": "protect",
+     "pct": 41.2
+    },
+    {
+     "id": "swords-dance",
+     "pct": 22.8
+    },
+    {
+     "id": "scale-shot",
+     "pct": 18.4
+    },
+    {
+     "id": "stomping-tantrum",
+     "pct": 12.6
+    },
+    {
+     "id": "iron-head",
+     "pct": 8.9
+    }
+   ],
+   "items": [
+    {
+     "id": "clear-amulet",
+     "pct": 26.3
+    },
+    {
+     "id": "life-orb",
+     "pct": 22.7
+    },
+    {
+     "id": "focus-sash",
+     "pct": 18.1
+    },
+    {
+     "id": "choice-scarf",
+     "pct": 11.4
+    },
+    {
+     "id": "lum-berry",
+     "pct": 6.8
+    }
+   ],
+   "abilities": [
+    {
+     "name": "Rough Skin",
+     "pct": 88.7
+    },
+    {
+     "name": "Sand Veil",
+     "pct": 11.3
+    }
+   ],
+   "spreads": [
+    {
+     "nature": "Jolly",
+     "sp": {
+      "hp": 0,
+      "atk": 32,
+      "def": 2,
+      "spa": 0,
+      "spd": 0,
+      "spe": 32
+     },
+     "pct": 52.3
+    },
+    {
+     "nature": "Adamant",
+     "sp": {
+      "hp": 8,
+      "atk": 32,
+      "def": 4,
+      "spa": 0,
+      "spd": 0,
+      "spe": 22
+     },
+     "pct": 28.1
+    },
+    {
+     "nature": "Careful",
+     "sp": {
+      "hp": 32,
+      "atk": 10,
+      "def": 0,
+      "spa": 0,
+      "spd": 20,
+      "spe": 4
+     },
+     "pct": 6.2
+    }
+   ],
+   "teammates": [
+    {
+     "speciesId": "tyranitar",
+     "pct": 24.2
+    },
+    {
+     "speciesId": "incineroar",
+     "pct": 21.7
+    },
+    {
+     "speciesId": "grimmsnarl",
+     "pct": 16.8
+    },
+    {
+     "speciesId": "gholdengo",
+     "pct": 14.3
+    },
+    {
+     "speciesId": "whimsicott",
+     "pct": 11.2
+    },
+    {
+     "speciesId": "pelipper",
+     "pct": 8.4
+    }
+   ]
+  },
+  {
+   "speciesId": "dragonite",
+   "usagePercent": 24.6,
+   "moves": [
+    {
+     "id": "extreme-speed",
+     "pct": 81.3
+    },
+    {
+     "id": "protect",
+     "pct": 52.4
+    },
+    {
+     "id": "ice-spinner",
+     "pct": 44.7
+    },
+    {
+     "id": "earthquake",
+     "pct": 38.2
+    },
+    {
+     "id": "dragon-dance",
+     "pct": 31.6
+    },
+    {
+     "id": "dual-wingbeat",
+     "pct": 22.4
+    },
+    {
+     "id": "haze",
+     "pct": 14.8
+    },
+    {
+     "id": "roost",
+     "pct": 9.2
+    }
+   ],
+   "items": [
+    {
+     "id": "clear-amulet",
+     "pct": 29.4
+    },
+    {
+     "id": "lum-berry",
+     "pct": 21.6
+    },
+    {
+     "id": "choice-band",
+     "pct": 16.2
+    },
+    {
+     "id": "weakness-policy",
+     "pct": 10.8
+    },
+    {
+     "id": "sitrus-berry",
+     "pct": 8.7
+    }
+   ],
+   "abilities": [
+    {
+     "name": "Multiscale",
+     "pct": 92.6
+    },
+    {
+     "name": "Inner Focus",
+     "pct": 7.4
+    }
+   ],
+   "spreads": [
+    {
+     "nature": "Adamant",
+     "sp": {
+      "hp": 12,
+      "atk": 32,
+      "def": 4,
+      "spa": 0,
+      "spd": 4,
+      "spe": 14
+     },
+     "pct": 47.2
+    },
+    {
+     "nature": "Jolly",
+     "sp": {
+      "hp": 0,
+      "atk": 32,
+      "def": 2,
+      "spa": 0,
+      "spd": 0,
+      "spe": 32
+     },
+     "pct": 24.8
+    },
+    {
+     "nature": "Careful",
+     "sp": {
+      "hp": 32,
+      "atk": 12,
+      "def": 0,
+      "spa": 0,
+      "spd": 18,
+      "spe": 4
+     },
+     "pct": 8.1
+    }
+   ],
+   "teammates": [
+    {
+     "speciesId": "incineroar",
+     "pct": 22.8
+    },
+    {
+     "speciesId": "grimmsnarl",
+     "pct": 18.3
+    },
+    {
+     "speciesId": "archaludon",
+     "pct": 16.7
+    },
+    {
+     "speciesId": "whimsicott",
+     "pct": 13.4
+    },
+    {
+     "speciesId": "torkoal",
+     "pct": 9.6
+    },
+    {
+     "speciesId": "pelipper",
+     "pct": 9.2
+    }
+   ]
+  },
+  {
+   "speciesId": "charizard",
+   "usagePercent": 18.9,
+   "moves": [
+    {
+     "id": "heat-wave",
+     "pct": 71.2
+    },
+    {
+     "id": "protect",
+     "pct": 64.8
+    },
+    {
+     "id": "solar-beam",
+     "pct": 47.3
+    },
+    {
+     "id": "air-slash",
+     "pct": 26.9
+    },
+    {
+     "id": "weather-ball",
+     "pct": 22.4
+    },
+    {
+     "id": "overheat",
+     "pct": 14.7
+    },
+    {
+     "id": "hurricane",
+     "pct": 9.8
+    },
+    {
+     "id": "dragon-pulse",
+     "pct": 6.2
+    }
+   ],
+   "items": [
+    {
+     "id": "charizardite-y",
+     "pct": 58.3
+    },
+    {
+     "id": "choice-specs",
+     "pct": 12.4
+    },
+    {
+     "id": "life-orb",
+     "pct": 10.2
+    },
+    {
+     "id": "focus-sash",
+     "pct": 8.1
+    },
+    {
+     "id": "wide-lens",
+     "pct": 4.6
+    }
+   ],
+   "abilities": [
+    {
+     "name": "Solar Power",
+     "pct": 51.2
+    },
+    {
+     "name": "Blaze",
+     "pct": 48.8
+    }
+   ],
+   "spreads": [
+    {
+     "nature": "Modest",
+     "sp": {
+      "hp": 8,
+      "atk": 0,
+      "def": 4,
+      "spa": 32,
+      "spd": 4,
+      "spe": 18
+     },
+     "pct": 44.6
+    },
+    {
+     "nature": "Timid",
+     "sp": {
+      "hp": 0,
+      "atk": 0,
+      "def": 0,
+      "spa": 32,
+      "spd": 2,
+      "spe": 32
+     },
+     "pct": 38.9
+    },
+    {
+     "nature": "Quiet",
+     "sp": {
+      "hp": 32,
+      "atk": 0,
+      "def": 2,
+      "spa": 32,
+      "spd": 0,
+      "spe": 0
+     },
+     "pct": 6.4
+    }
+   ],
+   "teammates": [
+    {
+     "speciesId": "torkoal",
+     "pct": 28.7
+    },
+    {
+     "speciesId": "whimsicott",
+     "pct": 21.3
+    },
+    {
+     "speciesId": "rillaboom",
+     "pct": 18.6
+    },
+    {
+     "speciesId": "grimmsnarl",
+     "pct": 12.8
+    },
+    {
+     "speciesId": "landorus-therian",
+     "pct": 11.4
+    },
+    {
+     "speciesId": "farigiraf",
+     "pct": 8.2
+    }
+   ]
+  },
+  {
+   "speciesId": "gholdengo",
+   "usagePercent": 26.3,
+   "moves": [
+    {
+     "id": "make-it-rain",
+     "pct": 84.6
+    },
+    {
+     "id": "shadow-ball",
+     "pct": 71.2
+    },
+    {
+     "id": "protect",
+     "pct": 58.7
+    },
+    {
+     "id": "nasty-plot",
+     "pct": 42.3
+    },
+    {
+     "id": "thunderbolt",
+     "pct": 21.8
+    },
+    {
+     "id": "dazzling-gleam",
+     "pct": 12.4
+    },
+    {
+     "id": "focus-blast",
+     "pct": 6.8
+    }
+   ],
+   "items": [
+    {
+     "id": "choice-specs",
+     "pct": 28.9
+    },
+    {
+     "id": "life-orb",
+     "pct": 21.3
+    },
+    {
+     "id": "leftovers",
+     "pct": 18.7
+    },
+    {
+     "id": "covert-cloak",
+     "pct": 10.4
+    },
+    {
+     "id": "sitrus-berry",
+     "pct": 7.2
+    }
+   ],
+   "abilities": [
+    {
+     "name": "Good as Gold",
+     "pct": 100.0
+    }
+   ],
+   "spreads": [
+    {
+     "nature": "Modest",
+     "sp": {
+      "hp": 16,
+      "atk": 0,
+      "def": 4,
+      "spa": 32,
+      "spd": 4,
+      "spe": 10
+     },
+     "pct": 40.2
+    },
+    {
+     "nature": "Timid",
+     "sp": {
+      "hp": 0,
+      "atk": 0,
+      "def": 0,
+      "spa": 32,
+      "spd": 2,
+      "spe": 32
+     },
+     "pct": 31.7
+    },
+    {
+     "nature": "Quiet",
+     "sp": {
+      "hp": 32,
+      "atk": 0,
+      "def": 6,
+      "spa": 28,
+      "spd": 0,
+      "spe": 0
+     },
+     "pct": 11.3
+    }
+   ],
+   "teammates": [
+    {
+     "speciesId": "landorus-therian",
+     "pct": 18.8
+    },
+    {
+     "speciesId": "incineroar",
+     "pct": 17.2
+    },
+    {
+     "speciesId": "dragonite",
+     "pct": 14.6
+    },
+    {
+     "speciesId": "urshifu-rapid-strike",
+     "pct": 12.8
+    },
+    {
+     "speciesId": "whimsicott",
+     "pct": 11.6
+    },
+    {
+     "speciesId": "tyranitar",
+     "pct": 9.4
+    }
+   ]
+  },
+  {
+   "speciesId": "kingambit",
+   "usagePercent": 19.4,
+   "moves": [
+    {
+     "id": "kowtow-cleave",
+     "pct": 86.2
+    },
+    {
+     "id": "sucker-punch",
+     "pct": 84.7
+    },
+    {
+     "id": "iron-head",
+     "pct": 52.3
+    },
+    {
+     "id": "protect",
+     "pct": 38.4
+    },
+    {
+     "id": "swords-dance",
+     "pct": 31.2
+    },
+    {
+     "id": "low-kick",
+     "pct": 12.6
+    }
+   ],
+   "items": [
+    {
+     "id": "assault-vest",
+     "pct": 26.8
+    },
+    {
+     "id": "clear-amulet",
+     "pct": 22.4
+    },
+    {
+     "id": "sitrus-berry",
+     "pct": 16.2
+    },
+    {
+     "id": "lum-berry",
+     "pct": 12.7
+    },
+    {
+     "id": "choice-band",
+     "pct": 8.3
+    }
+   ],
+   "abilities": [
+    {
+     "name": "Defiant",
+     "pct": 71.4
+    },
+    {
+     "name": "Supreme Overlord",
+     "pct": 28.6
+    }
+   ],
+   "spreads": [
+    {
+     "nature": "Adamant",
+     "sp": {
+      "hp": 32,
+      "atk": 32,
+      "def": 2,
+      "spa": 0,
+      "spd": 0,
+      "spe": 0
+     },
+     "pct": 58.3
+    },
+    {
+     "nature": "Brave",
+     "sp": {
+      "hp": 32,
+      "atk": 32,
+      "def": 0,
+      "spa": 0,
+      "spd": 2,
+      "spe": 0
+     },
+     "pct": 22.6
+    },
+    {
+     "nature": "Careful",
+     "sp": {
+      "hp": 32,
+      "atk": 12,
+      "def": 0,
+      "spa": 0,
+      "spd": 22,
+      "spe": 0
+     },
+     "pct": 9.8
+    }
+   ],
+   "teammates": [
+    {
+     "speciesId": "whimsicott",
+     "pct": 21.4
+    },
+    {
+     "speciesId": "gengar",
+     "pct": 17.8
+    },
+    {
+     "speciesId": "farigiraf",
+     "pct": 16.3
+    },
+    {
+     "speciesId": "annihilape",
+     "pct": 12.7
+    },
+    {
+     "speciesId": "pelipper",
+     "pct": 10.6
+    },
+    {
+     "speciesId": "amoonguss",
+     "pct": 9.2
+    }
+   ]
+  },
+  {
+   "speciesId": "annihilape",
+   "usagePercent": 17.2,
+   "moves": [
+    {
+     "id": "rage-fist",
+     "pct": 92.4
+    },
+    {
+     "id": "drain-punch",
+     "pct": 68.3
+    },
+    {
+     "id": "protect",
+     "pct": 61.2
+    },
+    {
+     "id": "bulk-up",
+     "pct": 44.8
+    },
+    {
+     "id": "close-combat",
+     "pct": 22.6
+    },
+    {
+     "id": "taunt",
+     "pct": 18.2
+    },
+    {
+     "id": "ice-punch",
+     "pct": 9.4
+    },
+    {
+     "id": "u-turn",
+     "pct": 7.8
+    },
+    {
+     "id": "shadow-claw",
+     "pct": 4.2
+    }
+   ],
+   "items": [
+    {
+     "id": "leftovers",
+     "pct": 34.2
+    },
+    {
+     "id": "sitrus-berry",
+     "pct": 22.8
+    },
+    {
+     "id": "safety-goggles",
+     "pct": 12.4
+    },
+    {
+     "id": "covert-cloak",
+     "pct": 10.8
+    },
+    {
+     "id": "assault-vest",
+     "pct": 8.6
+    }
+   ],
+   "abilities": [
+    {
+     "name": "Defiant",
+     "pct": 82.3
+    },
+    {
+     "name": "Inner Focus",
+     "pct": 12.4
+    },
+    {
+     "name": "Vital Spirit",
+     "pct": 5.3
+    }
+   ],
+   "spreads": [
+    {
+     "nature": "Careful",
+     "sp": {
+      "hp": 32,
+      "atk": 8,
+      "def": 4,
+      "spa": 0,
+      "spd": 18,
+      "spe": 4
+     },
+     "pct": 42.7
+    },
+    {
+     "nature": "Adamant",
+     "sp": {
+      "hp": 24,
+      "atk": 28,
+      "def": 6,
+      "spa": 0,
+      "spd": 0,
+      "spe": 8
+     },
+     "pct": 28.4
+    },
+    {
+     "nature": "Jolly",
+     "sp": {
+      "hp": 8,
+      "atk": 24,
+      "def": 0,
+      "spa": 0,
+      "spd": 0,
+      "spe": 32
+     },
+     "pct": 11.2
+    }
+   ],
+   "teammates": [
+    {
+     "speciesId": "rillaboom",
+     "pct": 18.9
+    },
+    {
+     "speciesId": "grimmsnarl",
+     "pct": 17.2
+    },
+    {
+     "speciesId": "whimsicott",
+     "pct": 14.8
+    },
+    {
+     "speciesId": "kingambit",
+     "pct": 11.3
+    },
+    {
+     "speciesId": "pelipper",
+     "pct": 9.7
+    },
+    {
+     "speciesId": "gholdengo",
+     "pct": 8.6
+    }
+   ]
+  },
+  {
+   "speciesId": "pelipper",
+   "usagePercent": 15.8,
+   "moves": [
+    {
+     "id": "hurricane",
+     "pct": 81.2
+    },
+    {
+     "id": "protect",
+     "pct": 56.3
+    },
+    {
+     "id": "tailwind",
+     "pct": 52.7
+    },
+    {
+     "id": "muddy-water",
+     "pct": 44.2
+    },
+    {
+     "id": "weather-ball",
+     "pct": 31.6
+    },
+    {
+     "id": "wide-guard",
+     "pct": 22.3
+    },
+    {
+     "id": "u-turn",
+     "pct": 14.7
+    },
+    {
+     "id": "hydro-pump",
+     "pct": 12.2
+    },
+    {
+     "id": "roost",
+     "pct": 4.1
+    }
+   ],
+   "items": [
+    {
+     "id": "focus-sash",
+     "pct": 38.4
+    },
+    {
+     "id": "covert-cloak",
+     "pct": 16.2
+    },
+    {
+     "id": "life-orb",
+     "pct": 12.8
+    },
+    {
+     "id": "sitrus-berry",
+     "pct": 10.4
+    },
+    {
+     "id": "mystic-water",
+     "pct": 8.7
+    }
+   ],
+   "abilities": [
+    {
+     "name": "Drizzle",
+     "pct": 99.2
+    },
+    {
+     "name": "Keen Eye",
+     "pct": 0.8
+    }
+   ],
+   "spreads": [
+    {
+     "nature": "Modest",
+     "sp": {
+      "hp": 12,
+      "atk": 0,
+      "def": 6,
+      "spa": 32,
+      "spd": 4,
+      "spe": 12
+     },
+     "pct": 46.8
+    },
+    {
+     "nature": "Timid",
+     "sp": {
+      "hp": 4,
+      "atk": 0,
+      "def": 0,
+      "spa": 28,
+      "spd": 0,
+      "spe": 32
+     },
+     "pct": 27.3
+    },
+    {
+     "nature": "Bold",
+     "sp": {
+      "hp": 32,
+      "atk": 0,
+      "def": 22,
+      "spa": 12,
+      "spd": 0,
+      "spe": 0
+     },
+     "pct": 8.9
+    }
+   ],
+   "teammates": [
+    {
+     "speciesId": "archaludon",
+     "pct": 44.6
+    },
+    {
+     "speciesId": "urshifu-rapid-strike",
+     "pct": 26.8
+    },
+    {
+     "speciesId": "dragonite",
+     "pct": 14.2
+    },
+    {
+     "speciesId": "incineroar",
+     "pct": 12.3
+    },
+    {
+     "speciesId": "annihilape",
+     "pct": 9.7
+    },
+    {
+     "speciesId": "kingambit",
+     "pct": 7.2
+    }
+   ]
+  },
+  {
+   "speciesId": "torkoal",
+   "usagePercent": 12.6,
+   "moves": [
+    {
+     "id": "eruption",
+     "pct": 84.3
+    },
+    {
+     "id": "heat-wave",
+     "pct": 61.7
+    },
+    {
+     "id": "protect",
+     "pct": 48.2
+    },
+    {
+     "id": "body-press",
+     "pct": 32.6
+    },
+    {
+     "id": "yawn",
+     "pct": 21.4
+    },
+    {
+     "id": "earth-power",
+     "pct": 16.8
+    },
+    {
+     "id": "solar-beam",
+     "pct": 12.3
+    },
+    {
+     "id": "weather-ball",
+     "pct": 8.4
+    },
+    {
+     "id": "will-o-wisp",
+     "pct": 6.2
+    }
+   ],
+   "items": [
+    {
+     "id": "charcoal",
+     "pct": 31.2
+    },
+    {
+     "id": "sitrus-berry",
+     "pct": 22.6
+    },
+    {
+     "id": "eject-button",
+     "pct": 14.3
+    },
+    {
+     "id": "weakness-policy",
+     "pct": 12.1
+    },
+    {
+     "id": "leftovers",
+     "pct": 6.8
+    }
+   ],
+   "abilities": [
+    {
+     "name": "Drought",
+     "pct": 98.7
+    },
+    {
+     "name": "White Smoke",
+     "pct": 1.3
+    }
+   ],
+   "spreads": [
+    {
+     "nature": "Quiet",
+     "sp": {
+      "hp": 32,
+      "atk": 0,
+      "def": 2,
+      "spa": 32,
+      "spd": 0,
+      "spe": 0
+     },
+     "pct": 64.2
+    },
+    {
+     "nature": "Modest",
+     "sp": {
+      "hp": 32,
+      "atk": 0,
+      "def": 2,
+      "spa": 32,
+      "spd": 0,
+      "spe": 0
+     },
+     "pct": 21.8
+    },
+    {
+     "nature": "Bold",
+     "sp": {
+      "hp": 32,
+      "atk": 0,
+      "def": 24,
+      "spa": 10,
+      "spd": 0,
+      "spe": 0
+     },
+     "pct": 6.4
+    }
+   ],
+   "teammates": [
+    {
+     "speciesId": "amoonguss",
+     "pct": 26.4
+    },
+    {
+     "speciesId": "charizard",
+     "pct": 28.7
+    },
+    {
+     "speciesId": "farigiraf",
+     "pct": 22.3
+    },
+    {
+     "speciesId": "dragonite",
+     "pct": 9.6
+    },
+    {
+     "speciesId": "whimsicott",
+     "pct": 8.4
+    },
+    {
+     "speciesId": "metagross",
+     "pct": 7.8
+    }
+   ]
+  },
+  {
+   "speciesId": "archaludon",
+   "usagePercent": 22.7,
+   "moves": [
+    {
+     "id": "electro-shot",
+     "pct": 88.4
+    },
+    {
+     "id": "draco-meteor",
+     "pct": 64.2
+    },
+    {
+     "id": "protect",
+     "pct": 52.8
+    },
+    {
+     "id": "body-press",
+     "pct": 44.6
+    },
+    {
+     "id": "flash-cannon",
+     "pct": 31.2
+    },
+    {
+     "id": "thunderbolt",
+     "pct": 18.4
+    },
+    {
+     "id": "dragon-pulse",
+     "pct": 8.6
+    }
+   ],
+   "items": [
+    {
+     "id": "power-herb",
+     "pct": 41.3
+    },
+    {
+     "id": "assault-vest",
+     "pct": 24.6
+    },
+    {
+     "id": "leftovers",
+     "pct": 12.8
+    },
+    {
+     "id": "sitrus-berry",
+     "pct": 8.4
+    },
+    {
+     "id": "life-orb",
+     "pct": 6.2
+    }
+   ],
+   "abilities": [
+    {
+     "name": "Stamina",
+     "pct": 82.6
+    },
+    {
+     "name": "Sturdy",
+     "pct": 14.2
+    },
+    {
+     "name": "Stalwart",
+     "pct": 3.2
+    }
+   ],
+   "spreads": [
+    {
+     "nature": "Modest",
+     "sp": {
+      "hp": 16,
+      "atk": 0,
+      "def": 8,
+      "spa": 32,
+      "spd": 6,
+      "spe": 4
+     },
+     "pct": 43.2
+    },
+    {
+     "nature": "Quiet",
+     "sp": {
+      "hp": 32,
+      "atk": 0,
+      "def": 4,
+      "spa": 30,
+      "spd": 0,
+      "spe": 0
+     },
+     "pct": 26.8
+    },
+    {
+     "nature": "Bold",
+     "sp": {
+      "hp": 24,
+      "atk": 0,
+      "def": 28,
+      "spa": 14,
+      "spd": 0,
+      "spe": 0
+     },
+     "pct": 12.4
+    }
+   ],
+   "teammates": [
+    {
+     "speciesId": "pelipper",
+     "pct": 44.6
+    },
+    {
+     "speciesId": "incineroar",
+     "pct": 24.1
+    },
+    {
+     "speciesId": "dragonite",
+     "pct": 16.7
+    },
+    {
+     "speciesId": "urshifu-rapid-strike",
+     "pct": 13.2
+    },
+    {
+     "speciesId": "rillaboom",
+     "pct": 10.8
+    },
+    {
+     "speciesId": "grimmsnarl",
+     "pct": 9.4
+    }
+   ]
+  },
+  {
+   "speciesId": "chien-pao",
+   "usagePercent": 16.3,
+   "moves": [
+    {
+     "id": "icicle-crash",
+     "pct": 76.8
+    },
+    {
+     "id": "sucker-punch",
+     "pct": 72.4
+    },
+    {
+     "id": "protect",
+     "pct": 64.2
+    },
+    {
+     "id": "sacred-sword",
+     "pct": 58.7
+    },
+    {
+     "id": "ice-spinner",
+     "pct": 22.3
+    },
+    {
+     "id": "crunch",
+     "pct": 14.6
+    },
+    {
+     "id": "swords-dance",
+     "pct": 11.2
+    }
+   ],
+   "items": [
+    {
+     "id": "focus-sash",
+     "pct": 52.6
+    },
+    {
+     "id": "life-orb",
+     "pct": 18.3
+    },
+    {
+     "id": "clear-amulet",
+     "pct": 9.4
+    },
+    {
+     "id": "expert-belt",
+     "pct": 7.2
+    },
+    {
+     "id": "lum-berry",
+     "pct": 4.8
+    }
+   ],
+   "abilities": [
+    {
+     "name": "Sword of Ruin",
+     "pct": 100.0
+    }
+   ],
+   "spreads": [
+    {
+     "nature": "Jolly",
+     "sp": {
+      "hp": 0,
+      "atk": 32,
+      "def": 2,
+      "spa": 0,
+      "spd": 0,
+      "spe": 32
+     },
+     "pct": 61.4
+    },
+    {
+     "nature": "Adamant",
+     "sp": {
+      "hp": 4,
+      "atk": 32,
+      "def": 2,
+      "spa": 0,
+      "spd": 0,
+      "spe": 28
+     },
+     "pct": 27.2
+    },
+    {
+     "nature": "Hasty",
+     "sp": {
+      "hp": 0,
+      "atk": 28,
+      "def": 0,
+      "spa": 6,
+      "spd": 0,
+      "spe": 32
+     },
+     "pct": 4.6
+    }
+   ],
+   "teammates": [
+    {
+     "speciesId": "rillaboom",
+     "pct": 16.2
+    },
+    {
+     "speciesId": "landorus-therian",
+     "pct": 15.2
+    },
+    {
+     "speciesId": "gholdengo",
+     "pct": 13.8
+    },
+    {
+     "speciesId": "farigiraf",
+     "pct": 12.4
+    },
+    {
+     "speciesId": "grimmsnarl",
+     "pct": 11.6
+    },
+    {
+     "speciesId": "torkoal",
+     "pct": 6.8
+    }
+   ]
+  },
+  {
+   "speciesId": "gengar",
+   "usagePercent": 14.7,
+   "moves": [
+    {
+     "id": "shadow-ball",
+     "pct": 82.6
+    },
+    {
+     "id": "sludge-bomb",
+     "pct": 64.3
+    },
+    {
+     "id": "protect",
+     "pct": 48.7
+    },
+    {
+     "id": "icy-wind",
+     "pct": 34.2
+    },
+    {
+     "id": "dazzling-gleam",
+     "pct": 21.8
+    },
+    {
+     "id": "focus-blast",
+     "pct": 16.4
+    },
+    {
+     "id": "hypnosis",
+     "pct": 12.3
+    },
+    {
+     "id": "taunt",
+     "pct": 9.7
+    },
+    {
+     "id": "will-o-wisp",
+     "pct": 4.2
+    }
+   ],
+   "items": [
+    {
+     "id": "gengarite",
+     "pct": 56.8
+    },
+    {
+     "id": "focus-sash",
+     "pct": 21.4
+    },
+    {
+     "id": "life-orb",
+     "pct": 10.2
+    },
+    {
+     "id": "choice-specs",
+     "pct": 6.8
+    },
+    {
+     "id": "wide-lens",
+     "pct": 2.4
+    }
+   ],
+   "abilities": [
+    {
+     "name": "Cursed Body",
+     "pct": 100.0
+    }
+   ],
+   "spreads": [
+    {
+     "nature": "Timid",
+     "sp": {
+      "hp": 0,
+      "atk": 0,
+      "def": 0,
+      "spa": 32,
+      "spd": 2,
+      "spe": 32
+     },
+     "pct": 58.2
+    },
+    {
+     "nature": "Modest",
+     "sp": {
+      "hp": 8,
+      "atk": 0,
+      "def": 2,
+      "spa": 32,
+      "spd": 0,
+      "spe": 24
+     },
+     "pct": 27.4
+    },
+    {
+     "nature": "Quiet",
+     "sp": {
+      "hp": 30,
+      "atk": 0,
+      "def": 4,
+      "spa": 32,
+      "spd": 0,
+      "spe": 0
+     },
+     "pct": 4.8
+    }
+   ],
+   "teammates": [
+    {
+     "speciesId": "rillaboom",
+     "pct": 18.7
+    },
+    {
+     "speciesId": "landorus-therian",
+     "pct": 19.4
+    },
+    {
+     "speciesId": "kingambit",
+     "pct": 17.8
+    },
+    {
+     "speciesId": "incineroar",
+     "pct": 13.2
+    },
+    {
+     "speciesId": "whimsicott",
+     "pct": 10.4
+    },
+    {
+     "speciesId": "farigiraf",
+     "pct": 9.6
+    }
+   ]
+  },
+  {
+   "speciesId": "metagross",
+   "usagePercent": 11.2,
+   "moves": [
+    {
+     "id": "meteor-mash",
+     "pct": 88.7
+    },
+    {
+     "id": "bullet-punch",
+     "pct": 71.3
+    },
+    {
+     "id": "protect",
+     "pct": 62.4
+    },
+    {
+     "id": "zen-headbutt",
+     "pct": 44.2
+    },
+    {
+     "id": "stomping-tantrum",
+     "pct": 26.8
+    },
+    {
+     "id": "ice-punch",
+     "pct": 18.3
+    },
+    {
+     "id": "earthquake",
+     "pct": 12.6
+    }
+   ],
+   "items": [
+    {
+     "id": "metagrossite",
+     "pct": 61.2
+    },
+    {
+     "id": "assault-vest",
+     "pct": 14.8
+    },
+    {
+     "id": "clear-amulet",
+     "pct": 8.6
+    },
+    {
+     "id": "weakness-policy",
+     "pct": 6.4
+    },
+    {
+     "id": "lum-berry",
+     "pct": 3.2
+    }
+   ],
+   "abilities": [
+    {
+     "name": "Clear Body",
+     "pct": 94.6
+    },
+    {
+     "name": "Light Metal",
+     "pct": 5.4
+    }
+   ],
+   "spreads": [
+    {
+     "nature": "Adamant",
+     "sp": {
+      "hp": 20,
+      "atk": 32,
+      "def": 4,
+      "spa": 0,
+      "spd": 4,
+      "spe": 6
+     },
+     "pct": 48.3
+    },
+    {
+     "nature": "Jolly",
+     "sp": {
+      "hp": 0,
+      "atk": 32,
+      "def": 2,
+      "spa": 0,
+      "spd": 0,
+      "spe": 32
+     },
+     "pct": 31.2
+    },
+    {
+     "nature": "Brave",
+     "sp": {
+      "hp": 32,
+      "atk": 32,
+      "def": 0,
+      "spa": 0,
+      "spd": 2,
+      "spe": 0
+     },
+     "pct": 8.7
+    }
+   ],
+   "teammates": [
+    {
+     "speciesId": "amoonguss",
+     "pct": 14.6
+    },
+    {
+     "speciesId": "whimsicott",
+     "pct": 13.8
+    },
+    {
+     "speciesId": "tyranitar",
+     "pct": 12.4
+    },
+    {
+     "speciesId": "landorus-therian",
+     "pct": 13.7
+    },
+    {
+     "speciesId": "grimmsnarl",
+     "pct": 9.8
+    },
+    {
+     "speciesId": "torkoal",
+     "pct": 7.8
+    }
+   ]
+  },
+  {
+   "speciesId": "salamence",
+   "usagePercent": 9.8,
+   "moves": [
+    {
+     "id": "hyper-voice",
+     "pct": 74.2
+    },
+    {
+     "id": "protect",
+     "pct": 58.6
+    },
+    {
+     "id": "dual-wingbeat",
+     "pct": 42.3
+    },
+    {
+     "id": "draco-meteor",
+     "pct": 38.7
+    },
+    {
+     "id": "dragon-dance",
+     "pct": 26.4
+    },
+    {
+     "id": "earthquake",
+     "pct": 22.8
+    },
+    {
+     "id": "tailwind",
+     "pct": 18.2
+    },
+    {
+     "id": "flamethrower",
+     "pct": 8.6
+    },
+    {
+     "id": "dragon-claw",
+     "pct": 6.1
+    }
+   ],
+   "items": [
+    {
+     "id": "salamencite",
+     "pct": 67.4
+    },
+    {
+     "id": "choice-specs",
+     "pct": 8.2
+    },
+    {
+     "id": "life-orb",
+     "pct": 7.8
+    },
+    {
+     "id": "lum-berry",
+     "pct": 5.4
+    },
+    {
+     "id": "clear-amulet",
+     "pct": 4.2
+    }
+   ],
+   "abilities": [
+    {
+     "name": "Intimidate",
+     "pct": 89.3
+    },
+    {
+     "name": "Moxie",
+     "pct": 10.7
+    }
+   ],
+   "spreads": [
+    {
+     "nature": "Naive",
+     "sp": {
+      "hp": 0,
+      "atk": 6,
+      "def": 0,
+      "spa": 28,
+      "spd": 0,
+      "spe": 32
+     },
+     "pct": 34.6
+    },
+    {
+     "nature": "Timid",
+     "sp": {
+      "hp": 0,
+      "atk": 0,
+      "def": 0,
+      "spa": 32,
+      "spd": 2,
+      "spe": 32
+     },
+     "pct": 28.2
+    },
+    {
+     "nature": "Jolly",
+     "sp": {
+      "hp": 0,
+      "atk": 32,
+      "def": 2,
+      "spa": 0,
+      "spd": 0,
+      "spe": 32
+     },
+     "pct": 21.4
+    }
+   ],
+   "teammates": [
+    {
+     "speciesId": "incineroar",
+     "pct": 19.8
+    },
+    {
+     "speciesId": "kingambit",
+     "pct": 14.2
+    },
+    {
+     "speciesId": "gholdengo",
+     "pct": 13.6
+    },
+    {
+     "speciesId": "rillaboom",
+     "pct": 12.8
+    },
+    {
+     "speciesId": "amoonguss",
+     "pct": 10.2
+    },
+    {
+     "speciesId": "torkoal",
+     "pct": 6.4
+    }
+   ]
+  },
+  {
+   "speciesId": "lucario",
+   "usagePercent": 7.4,
+   "moves": [
+    {
+     "id": "close-combat",
+     "pct": 81.4
+    },
+    {
+     "id": "bullet-punch",
+     "pct": 64.2
+    },
+    {
+     "id": "protect",
+     "pct": 52.3
+    },
+    {
+     "id": "extreme-speed",
+     "pct": 44.8
+    },
+    {
+     "id": "aura-sphere",
+     "pct": 22.6
+    },
+    {
+     "id": "nasty-plot",
+     "pct": 16.3
+    },
+    {
+     "id": "swords-dance",
+     "pct": 14.2
+    },
+    {
+     "id": "meteor-mash",
+     "pct": 9.8
+    }
+   ],
+   "items": [
+    {
+     "id": "lucarionite",
+     "pct": 71.2
+    },
+    {
+     "id": "focus-sash",
+     "pct": 12.4
+    },
+    {
+     "id": "life-orb",
+     "pct": 8.6
+    },
+    {
+     "id": "clear-amulet",
+     "pct": 4.1
+    },
+    {
+     "id": "lum-berry",
+     "pct": 2.2
+    }
+   ],
+   "abilities": [
+    {
+     "name": "Inner Focus",
+     "pct": 58.4
+    },
+    {
+     "name": "Justified",
+     "pct": 32.2
+    },
+    {
+     "name": "Steadfast",
+     "pct": 9.4
+    }
+   ],
+   "spreads": [
+    {
+     "nature": "Jolly",
+     "sp": {
+      "hp": 0,
+      "atk": 32,
+      "def": 2,
+      "spa": 0,
+      "spd": 0,
+      "spe": 32
+     },
+     "pct": 44.6
+    },
+    {
+     "nature": "Adamant",
+     "sp": {
+      "hp": 4,
+      "atk": 32,
+      "def": 0,
+      "spa": 0,
+      "spd": 0,
+      "spe": 30
+     },
+     "pct": 32.8
+    },
+    {
+     "nature": "Timid",
+     "sp": {
+      "hp": 0,
+      "atk": 0,
+      "def": 0,
+      "spa": 32,
+      "spd": 2,
+      "spe": 32
+     },
+     "pct": 12.3
+    }
+   ],
+   "teammates": [
+    {
+     "speciesId": "whimsicott",
+     "pct": 18.4
+    },
+    {
+     "speciesId": "grimmsnarl",
+     "pct": 15.2
+    },
+    {
+     "speciesId": "incineroar",
+     "pct": 13.8
+    },
+    {
+     "speciesId": "pelipper",
+     "pct": 11.4
+    },
+    {
+     "speciesId": "farigiraf",
+     "pct": 9.2
+    },
+    {
+     "speciesId": "gengar",
+     "pct": 8.7
+    }
+   ]
+  },
+  {
+   "speciesId": "grimmsnarl",
+   "usagePercent": 18.6,
+   "moves": [
+    {
+     "id": "spirit-break",
+     "pct": 78.3
+    },
+    {
+     "id": "reflect",
+     "pct": 71.2
+    },
+    {
+     "id": "light-screen",
+     "pct": 68.4
+    },
+    {
+     "id": "fake-out",
+     "pct": 52.6
+    },
+    {
+     "id": "thunder-wave",
+     "pct": 44.8
+    },
+    {
+     "id": "taunt",
+     "pct": 31.2
+    },
+    {
+     "id": "protect",
+     "pct": 18.7
+    },
+    {
+     "id": "foul-play",
+     "pct": 12.4
+    }
+   ],
+   "items": [
+    {
+     "id": "light-clay",
+     "pct": 64.2
+    },
+    {
+     "id": "sitrus-berry",
+     "pct": 12.8
+    },
+    {
+     "id": "mental-herb",
+     "pct": 8.6
+    },
+    {
+     "id": "safety-goggles",
+     "pct": 6.4
+    },
+    {
+     "id": "covert-cloak",
+     "pct": 4.2
+    }
+   ],
+   "abilities": [
+    {
+     "name": "Prankster",
+     "pct": 99.4
+    },
+    {
+     "name": "Frisk",
+     "pct": 0.6
+    }
+   ],
+   "spreads": [
+    {
+     "nature": "Careful",
+     "sp": {
+      "hp": 32,
+      "atk": 4,
+      "def": 12,
+      "spa": 0,
+      "spd": 18,
+      "spe": 0
+     },
+     "pct": 52.4
+    },
+    {
+     "nature": "Impish",
+     "sp": {
+      "hp": 32,
+      "atk": 0,
+      "def": 22,
+      "spa": 0,
+      "spd": 12,
+      "spe": 0
+     },
+     "pct": 31.8
+    },
+    {
+     "nature": "Adamant",
+     "sp": {
+      "hp": 32,
+      "atk": 28,
+      "def": 6,
+      "spa": 0,
+      "spd": 0,
+      "spe": 0
+     },
+     "pct": 6.2
+    }
+   ],
+   "teammates": [
+    {
+     "speciesId": "dragonite",
+     "pct": 18.3
+    },
+    {
+     "speciesId": "annihilape",
+     "pct": 17.2
+    },
+    {
+     "speciesId": "garchomp",
+     "pct": 16.8
+    },
+    {
+     "speciesId": "metagross",
+     "pct": 9.8
+    },
+    {
+     "speciesId": "lucario",
+     "pct": 15.2
+    },
+    {
+     "speciesId": "chien-pao",
+     "pct": 11.6
+    }
+   ]
+  },
+  {
+   "speciesId": "whimsicott",
+   "usagePercent": 20.4,
+   "moves": [
+    {
+     "id": "tailwind",
+     "pct": 91.3
+    },
+    {
+     "id": "moonblast",
+     "pct": 76.8
+    },
+    {
+     "id": "encore",
+     "pct": 58.2
+    },
+    {
+     "id": "protect",
+     "pct": 42.6
+    },
+    {
+     "id": "helping-hand",
+     "pct": 31.4
+    },
+    {
+     "id": "taunt",
+     "pct": 22.8
+    },
+    {
+     "id": "leech-seed",
+     "pct": 12.3
+    },
+    {
+     "id": "hurricane",
+     "pct": 8.7
+    }
+   ],
+   "items": [
+    {
+     "id": "focus-sash",
+     "pct": 44.2
+    },
+    {
+     "id": "covert-cloak",
+     "pct": 21.6
+    },
+    {
+     "id": "mental-herb",
+     "pct": 12.4
+    },
+    {
+     "id": "sitrus-berry",
+     "pct": 8.2
+    },
+    {
+     "id": "wide-lens",
+     "pct": 3.6
+    }
+   ],
+   "abilities": [
+    {
+     "name": "Prankster",
+     "pct": 98.8
+    },
+    {
+     "name": "Infiltrator",
+     "pct": 1.2
+    }
+   ],
+   "spreads": [
+    {
+     "nature": "Timid",
+     "sp": {
+      "hp": 4,
+      "atk": 0,
+      "def": 0,
+      "spa": 28,
+      "spd": 0,
+      "spe": 32
+     },
+     "pct": 51.2
+    },
+    {
+     "nature": "Modest",
+     "sp": {
+      "hp": 16,
+      "atk": 0,
+      "def": 6,
+      "spa": 32,
+      "spd": 0,
+      "spe": 12
+     },
+     "pct": 22.4
+    },
+    {
+     "nature": "Calm",
+     "sp": {
+      "hp": 32,
+      "atk": 0,
+      "def": 8,
+      "spa": 0,
+      "spd": 24,
+      "spe": 0
+     },
+     "pct": 14.8
+    }
+   ],
+   "teammates": [
+    {
+     "speciesId": "landorus-therian",
+     "pct": 22.6
+    },
+    {
+     "speciesId": "charizard",
+     "pct": 21.3
+    },
+    {
+     "speciesId": "kingambit",
+     "pct": 21.4
+    },
+    {
+     "speciesId": "gholdengo",
+     "pct": 11.6
+    },
+    {
+     "speciesId": "lucario",
+     "pct": 18.4
+    },
+    {
+     "speciesId": "annihilape",
+     "pct": 14.8
+    }
+   ]
+  },
+  {
+   "speciesId": "ninetales-alola",
+   "usagePercent": 10.6,
+   "moves": [
+    {
+     "id": "aurora-veil",
+     "pct": 92.6
+    },
+    {
+     "id": "blizzard",
+     "pct": 81.4
+    },
+    {
+     "id": "freeze-dry",
+     "pct": 44.2
+    },
+    {
+     "id": "moonblast",
+     "pct": 38.6
+    },
+    {
+     "id": "protect",
+     "pct": 31.2
+    },
+    {
+     "id": "icy-wind",
+     "pct": 22.4
+    },
+    {
+     "id": "encore",
+     "pct": 14.8
+    },
+    {
+     "id": "dazzling-gleam",
+     "pct": 8.2
+    }
+   ],
+   "items": [
+    {
+     "id": "light-clay",
+     "pct": 71.3
+    },
+    {
+     "id": "focus-sash",
+     "pct": 14.2
+    },
+    {
+     "id": "choice-specs",
+     "pct": 5.8
+    },
+    {
+     "id": "sitrus-berry",
+     "pct": 4.2
+    },
+    {
+     "id": "wide-lens",
+     "pct": 2.1
+    }
+   ],
+   "abilities": [
+    {
+     "name": "Snow Warning",
+     "pct": 99.6
+    },
+    {
+     "name": "Snow Cloak",
+     "pct": 0.4
+    }
+   ],
+   "spreads": [
+    {
+     "nature": "Timid",
+     "sp": {
+      "hp": 0,
+      "atk": 0,
+      "def": 0,
+      "spa": 32,
+      "spd": 2,
+      "spe": 32
+     },
+     "pct": 64.8
+    },
+    {
+     "nature": "Modest",
+     "sp": {
+      "hp": 8,
+      "atk": 0,
+      "def": 0,
+      "spa": 32,
+      "spd": 0,
+      "spe": 24
+     },
+     "pct": 18.2
+    },
+    {
+     "nature": "Calm",
+     "sp": {
+      "hp": 32,
+      "atk": 0,
+      "def": 6,
+      "spa": 0,
+      "spd": 26,
+      "spe": 0
+     },
+     "pct": 6.4
+    }
+   ],
+   "teammates": [
+    {
+     "speciesId": "metagross",
+     "pct": 12.8
+    },
+    {
+     "speciesId": "kingambit",
+     "pct": 11.4
+    },
+    {
+     "speciesId": "dragonite",
+     "pct": 10.6
+    },
+    {
+     "speciesId": "farigiraf",
+     "pct": 9.8
+    },
+    {
+     "speciesId": "annihilape",
+     "pct": 8.4
+    },
+    {
+     "speciesId": "lucario",
+     "pct": 7.2
+    }
+   ]
+  },
+  {
+   "speciesId": "urshifu-rapid-strike",
+   "usagePercent": 25.2,
+   "moves": [
+    {
+     "id": "surging-strikes",
+     "pct": 94.2
+    },
+    {
+     "id": "close-combat",
+     "pct": 76.8
+    },
+    {
+     "id": "protect",
+     "pct": 52.4
+    },
+    {
+     "id": "aqua-jet",
+     "pct": 48.6
+    },
+    {
+     "id": "u-turn",
+     "pct": 31.2
+    },
+    {
+     "id": "detect",
+     "pct": 22.8
+    },
+    {
+     "id": "ice-punch",
+     "pct": 8.4
+    },
+    {
+     "id": "taunt",
+     "pct": 4.6
+    }
+   ],
+   "items": [
+    {
+     "id": "mystic-water",
+     "pct": 28.4
+    },
+    {
+     "id": "focus-sash",
+     "pct": 22.6
+    },
+    {
+     "id": "choice-scarf",
+     "pct": 14.8
+    },
+    {
+     "id": "assault-vest",
+     "pct": 12.2
+    },
+    {
+     "id": "life-orb",
+     "pct": 8.6
+    }
+   ],
+   "abilities": [
+    {
+     "name": "Unseen Fist",
+     "pct": 100.0
+    }
+   ],
+   "spreads": [
+    {
+     "nature": "Adamant",
+     "sp": {
+      "hp": 8,
+      "atk": 32,
+      "def": 2,
+      "spa": 0,
+      "spd": 0,
+      "spe": 24
+     },
+     "pct": 46.2
+    },
+    {
+     "nature": "Jolly",
+     "sp": {
+      "hp": 0,
+      "atk": 32,
+      "def": 2,
+      "spa": 0,
+      "spd": 0,
+      "spe": 32
+     },
+     "pct": 38.4
+    },
+    {
+     "nature": "Brave",
+     "sp": {
+      "hp": 32,
+      "atk": 32,
+      "def": 2,
+      "spa": 0,
+      "spd": 0,
+      "spe": 0
+     },
+     "pct": 4.8
+    }
+   ],
+   "teammates": [
+    {
+     "speciesId": "pelipper",
+     "pct": 26.8
+    },
+    {
+     "speciesId": "amoonguss",
+     "pct": 21.3
+    },
+    {
+     "speciesId": "gholdengo",
+     "pct": 12.8
+    },
+    {
+     "speciesId": "archaludon",
+     "pct": 13.2
+    },
+    {
+     "speciesId": "incineroar",
+     "pct": 11.6
+    },
+    {
+     "speciesId": "grimmsnarl",
+     "pct": 9.4
+    }
+   ]
+  },
+  {
+   "speciesId": "farigiraf",
+   "usagePercent": 13.8,
+   "moves": [
+    {
+     "id": "trick-room",
+     "pct": 86.4
+    },
+    {
+     "id": "psychic",
+     "pct": 62.3
+    },
+    {
+     "id": "helping-hand",
+     "pct": 54.2
+    },
+    {
+     "id": "protect",
+     "pct": 42.8
+    },
+    {
+     "id": "hyper-voice",
+     "pct": 31.6
+    },
+    {
+     "id": "foul-play",
+     "pct": 21.2
+    },
+    {
+     "id": "dazzling-gleam",
+     "pct": 12.4
+    }
+   ],
+   "items": [
+    {
+     "id": "sitrus-berry",
+     "pct": 31.2
+    },
+    {
+     "id": "mental-herb",
+     "pct": 22.4
+    },
+    {
+     "id": "leftovers",
+     "pct": 14.6
+    },
+    {
+     "id": "safety-goggles",
+     "pct": 10.8
+    },
+    {
+     "id": "covert-cloak",
+     "pct": 9.2
+    }
+   ],
+   "abilities": [
+    {
+     "name": "Armor Tail",
+     "pct": 88.6
+    },
+    {
+     "name": "Sap Sipper",
+     "pct": 8.2
+    },
+    {
+     "name": "Cud Chew",
+     "pct": 3.2
+    }
+   ],
+   "spreads": [
+    {
+     "nature": "Sassy",
+     "sp": {
+      "hp": 32,
+      "atk": 0,
+      "def": 16,
+      "spa": 0,
+      "spd": 18,
+      "spe": 0
+     },
+     "pct": 48.2
+    },
+    {
+     "nature": "Quiet",
+     "sp": {
+      "hp": 32,
+      "atk": 0,
+      "def": 4,
+      "spa": 28,
+      "spd": 2,
+      "spe": 0
+     },
+     "pct": 24.6
+    },
+    {
+     "nature": "Calm",
+     "sp": {
+      "hp": 32,
+      "atk": 0,
+      "def": 12,
+      "spa": 0,
+      "spd": 22,
+      "spe": 0
+     },
+     "pct": 12.8
+    }
+   ],
+   "teammates": [
+    {
+     "speciesId": "amoonguss",
+     "pct": 24.8
+    },
+    {
+     "speciesId": "torkoal",
+     "pct": 22.3
+    },
+    {
+     "speciesId": "rillaboom",
+     "pct": 13.9
+    },
+    {
+     "speciesId": "kingambit",
+     "pct": 16.3
+    },
+    {
+     "speciesId": "metagross",
+     "pct": 8.9
+    },
+    {
+     "speciesId": "incineroar",
+     "pct": 12.2
+    }
+   ]
+  },
+  {
+   "speciesId": "tyranitar",
+   "usagePercent": 8.9,
+   "moves": [
+    {
+     "id": "rock-slide",
+     "pct": 81.2
+    },
+    {
+     "id": "protect",
+     "pct": 56.4
+    },
+    {
+     "id": "crunch",
+     "pct": 52.8
+    },
+    {
+     "id": "low-kick",
+     "pct": 31.4
+    },
+    {
+     "id": "dragon-dance",
+     "pct": 22.6
+    },
+    {
+     "id": "stone-edge",
+     "pct": 18.2
+    },
+    {
+     "id": "ice-punch",
+     "pct": 14.6
+    },
+    {
+     "id": "earthquake",
+     "pct": 12.8
+    },
+    {
+     "id": "iron-head",
+     "pct": 6.4
+    }
+   ],
+   "items": [
+    {
+     "id": "tyranitarite",
+     "pct": 48.6
+    },
+    {
+     "id": "assault-vest",
+     "pct": 18.2
+    },
+    {
+     "id": "sitrus-berry",
+     "pct": 12.4
+    },
+    {
+     "id": "lum-berry",
+     "pct": 8.6
+    },
+    {
+     "id": "weakness-policy",
+     "pct": 6.2
+    }
+   ],
+   "abilities": [
+    {
+     "name": "Sand Stream",
+     "pct": 96.8
+    },
+    {
+     "name": "Unnerve",
+     "pct": 3.2
+    }
+   ],
+   "spreads": [
+    {
+     "nature": "Adamant",
+     "sp": {
+      "hp": 24,
+      "atk": 32,
+      "def": 4,
+      "spa": 0,
+      "spd": 6,
+      "spe": 0
+     },
+     "pct": 42.6
+    },
+    {
+     "nature": "Careful",
+     "sp": {
+      "hp": 32,
+      "atk": 8,
+      "def": 2,
+      "spa": 0,
+      "spd": 24,
+      "spe": 0
+     },
+     "pct": 26.8
+    },
+    {
+     "nature": "Jolly",
+     "sp": {
+      "hp": 0,
+      "atk": 32,
+      "def": 2,
+      "spa": 0,
+      "spd": 0,
+      "spe": 32
+     },
+     "pct": 16.4
+    }
+   ],
+   "teammates": [
+    {
+     "speciesId": "garchomp",
+     "pct": 24.2
+    },
+    {
+     "speciesId": "metagross",
+     "pct": 12.4
+    },
+    {
+     "speciesId": "amoonguss",
+     "pct": 9.1
+    },
+    {
+     "speciesId": "gholdengo",
+     "pct": 9.4
+    },
+    {
+     "speciesId": "incineroar",
+     "pct": 8.6
+    },
+    {
+     "speciesId": "landorus-therian",
+     "pct": 7.8
+    }
+   ]
+  },
+  {
+   "speciesId": "gyarados",
+   "usagePercent": 7.2,
+   "moves": [
+    {
+     "id": "waterfall",
+     "pct": 84.6
+    },
+    {
+     "id": "protect",
+     "pct": 61.2
+    },
+    {
+     "id": "dragon-dance",
+     "pct": 48.7
+    },
+    {
+     "id": "ice-fang",
+     "pct": 32.4
+    },
+    {
+     "id": "earthquake",
+     "pct": 24.6
+    },
+    {
+     "id": "taunt",
+     "pct": 18.2
+    },
+    {
+     "id": "thunder-wave",
+     "pct": 12.8
+    }
+   ],
+   "items": [
+    {
+     "id": "sitrus-berry",
+     "pct": 26.4
+    },
+    {
+     "id": "clear-amulet",
+     "pct": 21.8
+    },
+    {
+     "id": "lum-berry",
+     "pct": 14.2
+    },
+    {
+     "id": "leftovers",
+     "pct": 12.6
+    },
+    {
+     "id": "mystic-water",
+     "pct": 8.4
+    }
+   ],
+   "abilities": [
+    {
+     "name": "Intimidate",
+     "pct": 91.2
+    },
+    {
+     "name": "Moxie",
+     "pct": 8.8
+    }
+   ],
+   "spreads": [
+    {
+     "nature": "Adamant",
+     "sp": {
+      "hp": 12,
+      "atk": 32,
+      "def": 4,
+      "spa": 0,
+      "spd": 0,
+      "spe": 18
+     },
+     "pct": 44.8
+    },
+    {
+     "nature": "Jolly",
+     "sp": {
+      "hp": 0,
+      "atk": 32,
+      "def": 2,
+      "spa": 0,
+      "spd": 0,
+      "spe": 32
+     },
+     "pct": 34.2
+    },
+    {
+     "nature": "Careful",
+     "sp": {
+      "hp": 32,
+      "atk": 10,
+      "def": 0,
+      "spa": 0,
+      "spd": 20,
+      "spe": 4
+     },
+     "pct": 8.6
+    }
+   ],
+   "teammates": [
+    {
+     "speciesId": "amoonguss",
+     "pct": 8.8
+    },
+    {
+     "speciesId": "rillaboom",
+     "pct": 12.6
+    },
+    {
+     "speciesId": "grimmsnarl",
+     "pct": 11.4
+    },
+    {
+     "speciesId": "gholdengo",
+     "pct": 10.2
+    },
+    {
+     "speciesId": "whimsicott",
+     "pct": 9.6
+    },
+    {
+     "speciesId": "incineroar",
+     "pct": 8.9
+    }
+   ]
+  },
+  {
+   "speciesId": "talonflame",
+   "usagePercent": 6.8,
+   "moves": [
+    {
+     "id": "brave-bird",
+     "pct": 86.2
+    },
+    {
+     "id": "tailwind",
+     "pct": 81.4
+    },
+    {
+     "id": "flare-blitz",
+     "pct": 52.6
+    },
+    {
+     "id": "protect",
+     "pct": 44.2
+    },
+    {
+     "id": "will-o-wisp",
+     "pct": 26.8
+    },
+    {
+     "id": "u-turn",
+     "pct": 22.4
+    },
+    {
+     "id": "dual-wingbeat",
+     "pct": 12.6
+    },
+    {
+     "id": "taunt",
+     "pct": 9.8
+    }
+   ],
+   "items": [
+    {
+     "id": "focus-sash",
+     "pct": 41.2
+    },
+    {
+     "id": "covert-cloak",
+     "pct": 18.6
+    },
+    {
+     "id": "life-orb",
+     "pct": 12.4
+    },
+    {
+     "id": "sitrus-berry",
+     "pct": 9.8
+    },
+    {
+     "id": "charcoal",
+     "pct": 4.6
+    }
+   ],
+   "abilities": [
+    {
+     "name": "Gale Wings",
+     "pct": 97.4
+    },
+    {
+     "name": "Flame Body",
+     "pct": 2.6
+    }
+   ],
+   "spreads": [
+    {
+     "nature": "Jolly",
+     "sp": {
+      "hp": 0,
+      "atk": 32,
+      "def": 2,
+      "spa": 0,
+      "spd": 0,
+      "spe": 32
+     },
+     "pct": 58.4
+    },
+    {
+     "nature": "Adamant",
+     "sp": {
+      "hp": 8,
+      "atk": 32,
+      "def": 0,
+      "spa": 0,
+      "spd": 0,
+      "spe": 26
+     },
+     "pct": 28.2
+    },
+    {
+     "nature": "Timid",
+     "sp": {
+      "hp": 0,
+      "atk": 0,
+      "def": 8,
+      "spa": 26,
+      "spd": 0,
+      "spe": 32
+     },
+     "pct": 4.2
+    }
+   ],
+   "teammates": [
+    {
+     "speciesId": "urshifu-rapid-strike",
+     "pct": 14.2
+    },
+    {
+     "speciesId": "annihilape",
+     "pct": 12.8
+    },
+    {
+     "speciesId": "kingambit",
+     "pct": 11.6
+    },
+    {
+     "speciesId": "rillaboom",
+     "pct": 10.4
+    },
+    {
+     "speciesId": "gholdengo",
+     "pct": 9.2
+    },
+    {
+     "speciesId": "landorus-therian",
+     "pct": 8.6
+    }
+   ]
+  }
+ ]
+}

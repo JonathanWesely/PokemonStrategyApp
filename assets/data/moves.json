@@ -1,0 +1,1006 @@
+{
+ "schemaVersion": 1,
+ "generatedAt": "2026-07-11",
+ "moves": [
+  {
+   "id": "fake-out",
+   "name": "Fake Out",
+   "type": "Normal",
+   "category": "Physical",
+   "power": 40,
+   "accuracy": 100,
+   "priority": 3,
+   "note": "Flinches; only works first turn out"
+  },
+  {
+   "id": "flare-blitz",
+   "name": "Flare Blitz",
+   "type": "Fire",
+   "category": "Physical",
+   "power": 120,
+   "accuracy": 100,
+   "priority": 0,
+   "note": "33% recoil"
+  },
+  {
+   "id": "knock-off",
+   "name": "Knock Off",
+   "type": "Dark",
+   "category": "Physical",
+   "power": 65,
+   "accuracy": 100,
+   "priority": 0,
+   "note": "Removes target's item; 1.5x if it holds one"
+  },
+  {
+   "id": "parting-shot",
+   "name": "Parting Shot",
+   "type": "Dark",
+   "category": "Status",
+   "power": null,
+   "accuracy": 100,
+   "priority": 0,
+   "note": "Lowers Atk/SpA, then switches out"
+  },
+  {
+   "id": "u-turn",
+   "name": "U-turn",
+   "type": "Bug",
+   "category": "Physical",
+   "power": 70,
+   "accuracy": 100,
+   "priority": 0,
+   "note": "Switches out after hitting"
+  },
+  {
+   "id": "protect",
+   "name": "Protect",
+   "type": "Normal",
+   "category": "Status",
+   "power": null,
+   "accuracy": null,
+   "priority": 4,
+   "note": ""
+  },
+  {
+   "id": "detect",
+   "name": "Detect",
+   "type": "Fighting",
+   "category": "Status",
+   "power": null,
+   "accuracy": null,
+   "priority": 4,
+   "note": ""
+  },
+  {
+   "id": "darkest-lariat",
+   "name": "Darkest Lariat",
+   "type": "Dark",
+   "category": "Physical",
+   "power": 85,
+   "accuracy": 100,
+   "priority": 0,
+   "note": "Ignores target's stat changes"
+  },
+  {
+   "id": "will-o-wisp",
+   "name": "Will-O-Wisp",
+   "type": "Fire",
+   "category": "Status",
+   "power": null,
+   "accuracy": 85,
+   "priority": 0,
+   "note": "Burns"
+  },
+  {
+   "id": "taunt",
+   "name": "Taunt",
+   "type": "Dark",
+   "category": "Status",
+   "power": null,
+   "accuracy": 100,
+   "priority": 0,
+   "note": ""
+  },
+  {
+   "id": "snarl",
+   "name": "Snarl",
+   "type": "Dark",
+   "category": "Special",
+   "power": 55,
+   "accuracy": 95,
+   "priority": 0,
+   "note": "Hits both foes; lowers SpA"
+  },
+  {
+   "id": "close-combat",
+   "name": "Close Combat",
+   "type": "Fighting",
+   "category": "Physical",
+   "power": 120,
+   "accuracy": 100,
+   "priority": 0,
+   "note": "Lowers own Def/SpD"
+  },
+  {
+   "id": "grassy-glide",
+   "name": "Grassy Glide",
+   "type": "Grass",
+   "category": "Physical",
+   "power": 55,
+   "accuracy": 100,
+   "priority": 0,
+   "note": "+1 priority in Grassy Terrain"
+  },
+  {
+   "id": "wood-hammer",
+   "name": "Wood Hammer",
+   "type": "Grass",
+   "category": "Physical",
+   "power": 120,
+   "accuracy": 100,
+   "priority": 0,
+   "note": "33% recoil"
+  },
+  {
+   "id": "drum-beating",
+   "name": "Drum Beating",
+   "type": "Grass",
+   "category": "Physical",
+   "power": 80,
+   "accuracy": 100,
+   "priority": 0,
+   "note": "Lowers target Speed"
+  },
+  {
+   "id": "high-horsepower",
+   "name": "High Horsepower",
+   "type": "Ground",
+   "category": "Physical",
+   "power": 95,
+   "accuracy": 95,
+   "priority": 0,
+   "note": ""
+  },
+  {
+   "id": "spore",
+   "name": "Spore",
+   "type": "Grass",
+   "category": "Status",
+   "power": null,
+   "accuracy": 100,
+   "priority": 0,
+   "note": "Sleeps; grass types immune"
+  },
+  {
+   "id": "rage-powder",
+   "name": "Rage Powder",
+   "type": "Bug",
+   "category": "Status",
+   "power": null,
+   "accuracy": null,
+   "priority": 2,
+   "note": "Redirects attacks this turn"
+  },
+  {
+   "id": "pollen-puff",
+   "name": "Pollen Puff",
+   "type": "Bug",
+   "category": "Special",
+   "power": 90,
+   "accuracy": 100,
+   "priority": 0,
+   "note": "Heals allies instead of damaging"
+  },
+  {
+   "id": "clear-smog",
+   "name": "Clear Smog",
+   "type": "Poison",
+   "category": "Special",
+   "power": 50,
+   "accuracy": null,
+   "priority": 0,
+   "note": "Resets target stat changes"
+  },
+  {
+   "id": "sludge-bomb",
+   "name": "Sludge Bomb",
+   "type": "Poison",
+   "category": "Special",
+   "power": 90,
+   "accuracy": 100,
+   "priority": 0,
+   "note": "30% poison"
+  },
+  {
+   "id": "giga-drain",
+   "name": "Giga Drain",
+   "type": "Grass",
+   "category": "Special",
+   "power": 75,
+   "accuracy": 100,
+   "priority": 0,
+   "note": "Heals 50% of damage dealt"
+  },
+  {
+   "id": "earthquake",
+   "name": "Earthquake",
+   "type": "Ground",
+   "category": "Physical",
+   "power": 100,
+   "accuracy": 100,
+   "priority": 0,
+   "note": "Hits all others incl. ally"
+  },
+  {
+   "id": "stomping-tantrum",
+   "name": "Stomping Tantrum",
+   "type": "Ground",
+   "category": "Physical",
+   "power": 75,
+   "accuracy": 100,
+   "priority": 0,
+   "note": "2x if last move failed"
+  },
+  {
+   "id": "earth-power",
+   "name": "Earth Power",
+   "type": "Ground",
+   "category": "Special",
+   "power": 90,
+   "accuracy": 100,
+   "priority": 0,
+   "note": "10% -1 SpD"
+  },
+  {
+   "id": "rock-slide",
+   "name": "Rock Slide",
+   "type": "Rock",
+   "category": "Physical",
+   "power": 75,
+   "accuracy": 90,
+   "priority": 0,
+   "note": "Hits both foes; 30% flinch"
+  },
+  {
+   "id": "stone-edge",
+   "name": "Stone Edge",
+   "type": "Rock",
+   "category": "Physical",
+   "power": 100,
+   "accuracy": 80,
+   "priority": 0,
+   "note": "High crit ratio"
+  },
+  {
+   "id": "wide-guard",
+   "name": "Wide Guard",
+   "type": "Rock",
+   "category": "Status",
+   "power": null,
+   "accuracy": null,
+   "priority": 3,
+   "note": "Blocks spread moves this turn"
+  },
+  {
+   "id": "icy-wind",
+   "name": "Icy Wind",
+   "type": "Ice",
+   "category": "Special",
+   "power": 55,
+   "accuracy": 95,
+   "priority": 0,
+   "note": "Hits both foes; lowers Speed"
+  },
+  {
+   "id": "ice-beam",
+   "name": "Ice Beam",
+   "type": "Ice",
+   "category": "Special",
+   "power": 90,
+   "accuracy": 100,
+   "priority": 0,
+   "note": "10% freeze"
+  },
+  {
+   "id": "blizzard",
+   "name": "Blizzard",
+   "type": "Ice",
+   "category": "Special",
+   "power": 110,
+   "accuracy": 70,
+   "priority": 0,
+   "note": "Hits both foes; sure-hit in snow"
+  },
+  {
+   "id": "aurora-veil",
+   "name": "Aurora Veil",
+   "type": "Ice",
+   "category": "Status",
+   "power": null,
+   "accuracy": null,
+   "priority": 0,
+   "note": "Halves damage 5 turns; needs snow"
+  },
+  {
+   "id": "freeze-dry",
+   "name": "Freeze-Dry",
+   "type": "Ice",
+   "category": "Special",
+   "power": 70,
+   "accuracy": 100,
+   "priority": 0,
+   "note": "Super effective vs Water"
+  },
+  {
+   "id": "ice-spinner",
+   "name": "Ice Spinner",
+   "type": "Ice",
+   "category": "Physical",
+   "power": 80,
+   "accuracy": 100,
+   "priority": 0,
+   "note": "Removes terrain"
+  },
+  {
+   "id": "icicle-crash",
+   "name": "Icicle Crash",
+   "type": "Ice",
+   "category": "Physical",
+   "power": 85,
+   "accuracy": 90,
+   "priority": 0,
+   "note": "30% flinch"
+  },
+  {
+   "id": "ice-punch",
+   "name": "Ice Punch",
+   "type": "Ice",
+   "category": "Physical",
+   "power": 75,
+   "accuracy": 100,
+   "priority": 0,
+   "note": "10% freeze"
+  },
+  {
+   "id": "ice-fang",
+   "name": "Ice Fang",
+   "type": "Ice",
+   "category": "Physical",
+   "power": 65,
+   "accuracy": 95,
+   "priority": 0,
+   "note": "10% freeze/flinch"
+  },
+  {
+   "id": "haze",
+   "name": "Haze",
+   "type": "Ice",
+   "category": "Status",
+   "power": null,
+   "accuracy": null,
+   "priority": 0,
+   "note": "Resets all stat changes"
+  },
+  {
+   "id": "tailwind",
+   "name": "Tailwind",
+   "type": "Flying",
+   "category": "Status",
+   "power": null,
+   "accuracy": null,
+   "priority": 0,
+   "note": "Doubles team Speed 4 turns"
+  },
+  {
+   "id": "hurricane",
+   "name": "Hurricane",
+   "type": "Flying",
+   "category": "Special",
+   "power": 110,
+   "accuracy": 70,
+   "priority": 0,
+   "note": "Sure-hit in rain; 30% confuse"
+  },
+  {
+   "id": "air-slash",
+   "name": "Air Slash",
+   "type": "Flying",
+   "category": "Special",
+   "power": 75,
+   "accuracy": 95,
+   "priority": 0,
+   "note": "30% flinch"
+  },
+  {
+   "id": "dual-wingbeat",
+   "name": "Dual Wingbeat",
+   "type": "Flying",
+   "category": "Physical",
+   "power": 40,
+   "accuracy": 90,
+   "priority": 0,
+   "note": "Hits twice"
+  },
+  {
+   "id": "brave-bird",
+   "name": "Brave Bird",
+   "type": "Flying",
+   "category": "Physical",
+   "power": 120,
+   "accuracy": 100,
+   "priority": 0,
+   "note": "33% recoil"
+  },
+  {
+   "id": "roost",
+   "name": "Roost",
+   "type": "Flying",
+   "category": "Status",
+   "power": null,
+   "accuracy": null,
+   "priority": 0,
+   "note": "Heals 50%; grounds user this turn"
+  },
+  {
+   "id": "heat-wave",
+   "name": "Heat Wave",
+   "type": "Fire",
+   "category": "Special",
+   "power": 95,
+   "accuracy": 90,
+   "priority": 0,
+   "note": "Hits both foes; 10% burn"
+  },
+  {
+   "id": "eruption",
+   "name": "Eruption",
+   "type": "Fire",
+   "category": "Special",
+   "power": 150,
+   "accuracy": 100,
+   "priority": 0,
+   "note": "Power scales with user HP"
+  },
+  {
+   "id": "flamethrower",
+   "name": "Flamethrower",
+   "type": "Fire",
+   "category": "Special",
+   "power": 90,
+   "accuracy": 100,
+   "priority": 0,
+   "note": "10% burn"
+  },
+  {
+   "id": "overheat",
+   "name": "Overheat",
+   "type": "Fire",
+   "category": "Special",
+   "power": 130,
+   "accuracy": 90,
+   "priority": 0,
+   "note": "-2 own SpA"
+  },
+  {
+   "id": "weather-ball",
+   "name": "Weather Ball",
+   "type": "Normal",
+   "category": "Special",
+   "power": 50,
+   "accuracy": 100,
+   "priority": 0,
+   "note": "100 BP + type change in weather"
+  },
+  {
+   "id": "solar-beam",
+   "name": "Solar Beam",
+   "type": "Grass",
+   "category": "Special",
+   "power": 120,
+   "accuracy": 100,
+   "priority": 0,
+   "note": "No charge turn in sun"
+  },
+  {
+   "id": "leech-seed",
+   "name": "Leech Seed",
+   "type": "Grass",
+   "category": "Status",
+   "power": null,
+   "accuracy": 90,
+   "priority": 0,
+   "note": ""
+  },
+  {
+   "id": "body-press",
+   "name": "Body Press",
+   "type": "Fighting",
+   "category": "Physical",
+   "power": 80,
+   "accuracy": 100,
+   "priority": 0,
+   "note": "Uses Def as attacking stat"
+  },
+  {
+   "id": "yawn",
+   "name": "Yawn",
+   "type": "Normal",
+   "category": "Status",
+   "power": null,
+   "accuracy": null,
+   "priority": 0,
+   "note": "Target sleeps next turn"
+  },
+  {
+   "id": "draco-meteor",
+   "name": "Draco Meteor",
+   "type": "Dragon",
+   "category": "Special",
+   "power": 130,
+   "accuracy": 90,
+   "priority": 0,
+   "note": "-2 own SpA"
+  },
+  {
+   "id": "dragon-pulse",
+   "name": "Dragon Pulse",
+   "type": "Dragon",
+   "category": "Special",
+   "power": 85,
+   "accuracy": 100,
+   "priority": 0,
+   "note": ""
+  },
+  {
+   "id": "dragon-claw",
+   "name": "Dragon Claw",
+   "type": "Dragon",
+   "category": "Physical",
+   "power": 80,
+   "accuracy": 100,
+   "priority": 0,
+   "note": ""
+  },
+  {
+   "id": "dragon-dance",
+   "name": "Dragon Dance",
+   "type": "Dragon",
+   "category": "Status",
+   "power": null,
+   "accuracy": null,
+   "priority": 0,
+   "note": "+1 Atk/Spe"
+  },
+  {
+   "id": "scale-shot",
+   "name": "Scale Shot",
+   "type": "Dragon",
+   "category": "Physical",
+   "power": 25,
+   "accuracy": 90,
+   "priority": 0,
+   "note": "2-5 hits; +1 Spe, -1 Def"
+  },
+  {
+   "id": "flash-cannon",
+   "name": "Flash Cannon",
+   "type": "Steel",
+   "category": "Special",
+   "power": 80,
+   "accuracy": 100,
+   "priority": 0,
+   "note": "10% -1 SpD"
+  },
+  {
+   "id": "electro-shot",
+   "name": "Electro Shot",
+   "type": "Electric",
+   "category": "Special",
+   "power": 130,
+   "accuracy": 100,
+   "priority": 0,
+   "note": "Charges; fires same turn in rain; +1 SpA"
+  },
+  {
+   "id": "make-it-rain",
+   "name": "Make It Rain",
+   "type": "Steel",
+   "category": "Special",
+   "power": 120,
+   "accuracy": 100,
+   "priority": 0,
+   "note": "Hits both foes; -1 own SpA"
+  },
+  {
+   "id": "shadow-ball",
+   "name": "Shadow Ball",
+   "type": "Ghost",
+   "category": "Special",
+   "power": 80,
+   "accuracy": 100,
+   "priority": 0,
+   "note": "20% -1 SpD"
+  },
+  {
+   "id": "shadow-claw",
+   "name": "Shadow Claw",
+   "type": "Ghost",
+   "category": "Physical",
+   "power": 70,
+   "accuracy": 100,
+   "priority": 0,
+   "note": "High crit ratio"
+  },
+  {
+   "id": "nasty-plot",
+   "name": "Nasty Plot",
+   "type": "Dark",
+   "category": "Status",
+   "power": null,
+   "accuracy": null,
+   "priority": 0,
+   "note": "+2 SpA"
+  },
+  {
+   "id": "thunderbolt",
+   "name": "Thunderbolt",
+   "type": "Electric",
+   "category": "Special",
+   "power": 90,
+   "accuracy": 100,
+   "priority": 0,
+   "note": "10% paralyze"
+  },
+  {
+   "id": "thunder-wave",
+   "name": "Thunder Wave",
+   "type": "Electric",
+   "category": "Status",
+   "power": null,
+   "accuracy": 90,
+   "priority": 0,
+   "note": "Paralyzes"
+  },
+  {
+   "id": "thunder-punch",
+   "name": "Thunder Punch",
+   "type": "Electric",
+   "category": "Physical",
+   "power": 75,
+   "accuracy": 100,
+   "priority": 0,
+   "note": "10% paralyze"
+  },
+  {
+   "id": "iron-head",
+   "name": "Iron Head",
+   "type": "Steel",
+   "category": "Physical",
+   "power": 80,
+   "accuracy": 100,
+   "priority": 0,
+   "note": "30% flinch"
+  },
+  {
+   "id": "sucker-punch",
+   "name": "Sucker Punch",
+   "type": "Dark",
+   "category": "Physical",
+   "power": 70,
+   "accuracy": 100,
+   "priority": 1,
+   "note": "Fails unless target attacks"
+  },
+  {
+   "id": "kowtow-cleave",
+   "name": "Kowtow Cleave",
+   "type": "Dark",
+   "category": "Physical",
+   "power": 85,
+   "accuracy": null,
+   "priority": 0,
+   "note": "Never misses"
+  },
+  {
+   "id": "swords-dance",
+   "name": "Swords Dance",
+   "type": "Normal",
+   "category": "Status",
+   "power": null,
+   "accuracy": null,
+   "priority": 0,
+   "note": "+2 Atk"
+  },
+  {
+   "id": "rage-fist",
+   "name": "Rage Fist",
+   "type": "Ghost",
+   "category": "Physical",
+   "power": 50,
+   "accuracy": 100,
+   "priority": 0,
+   "note": "+50 BP per hit taken"
+  },
+  {
+   "id": "drain-punch",
+   "name": "Drain Punch",
+   "type": "Fighting",
+   "category": "Physical",
+   "power": 75,
+   "accuracy": 100,
+   "priority": 0,
+   "note": "Heals 50% of damage dealt"
+  },
+  {
+   "id": "bulk-up",
+   "name": "Bulk Up",
+   "type": "Fighting",
+   "category": "Status",
+   "power": null,
+   "accuracy": null,
+   "priority": 0,
+   "note": "+1 Atk/Def"
+  },
+  {
+   "id": "spirit-break",
+   "name": "Spirit Break",
+   "type": "Fairy",
+   "category": "Physical",
+   "power": 75,
+   "accuracy": 100,
+   "priority": 0,
+   "note": "Lowers SpA"
+  },
+  {
+   "id": "reflect",
+   "name": "Reflect",
+   "type": "Psychic",
+   "category": "Status",
+   "power": null,
+   "accuracy": null,
+   "priority": 0,
+   "note": "Halves physical damage 5 turns"
+  },
+  {
+   "id": "light-screen",
+   "name": "Light Screen",
+   "type": "Psychic",
+   "category": "Status",
+   "power": null,
+   "accuracy": null,
+   "priority": 0,
+   "note": "Halves special damage 5 turns"
+  },
+  {
+   "id": "moonblast",
+   "name": "Moonblast",
+   "type": "Fairy",
+   "category": "Special",
+   "power": 95,
+   "accuracy": 100,
+   "priority": 0,
+   "note": "30% -1 SpA"
+  },
+  {
+   "id": "dazzling-gleam",
+   "name": "Dazzling Gleam",
+   "type": "Fairy",
+   "category": "Special",
+   "power": 80,
+   "accuracy": 100,
+   "priority": 0,
+   "note": "Hits both foes"
+  },
+  {
+   "id": "encore",
+   "name": "Encore",
+   "type": "Normal",
+   "category": "Status",
+   "power": null,
+   "accuracy": 100,
+   "priority": 0,
+   "note": "Locks target into last move"
+  },
+  {
+   "id": "helping-hand",
+   "name": "Helping Hand",
+   "type": "Normal",
+   "category": "Status",
+   "power": null,
+   "accuracy": null,
+   "priority": 5,
+   "note": "Ally's move 1.5x"
+  },
+  {
+   "id": "sacred-sword",
+   "name": "Sacred Sword",
+   "type": "Fighting",
+   "category": "Physical",
+   "power": 90,
+   "accuracy": 100,
+   "priority": 0,
+   "note": "Ignores target's stat changes"
+  },
+  {
+   "id": "crunch",
+   "name": "Crunch",
+   "type": "Dark",
+   "category": "Physical",
+   "power": 80,
+   "accuracy": 100,
+   "priority": 0,
+   "note": "20% -1 Def"
+  },
+  {
+   "id": "aqua-jet",
+   "name": "Aqua Jet",
+   "type": "Water",
+   "category": "Physical",
+   "power": 40,
+   "accuracy": 100,
+   "priority": 1,
+   "note": ""
+  },
+  {
+   "id": "surging-strikes",
+   "name": "Surging Strikes",
+   "type": "Water",
+   "category": "Physical",
+   "power": 25,
+   "accuracy": 100,
+   "priority": 0,
+   "note": "3 hits, always crits"
+  },
+  {
+   "id": "waterfall",
+   "name": "Waterfall",
+   "type": "Water",
+   "category": "Physical",
+   "power": 80,
+   "accuracy": 100,
+   "priority": 0,
+   "note": "20% flinch"
+  },
+  {
+   "id": "muddy-water",
+   "name": "Muddy Water",
+   "type": "Water",
+   "category": "Special",
+   "power": 90,
+   "accuracy": 85,
+   "priority": 0,
+   "note": "Hits both foes; 30% -1 accuracy"
+  },
+  {
+   "id": "hydro-pump",
+   "name": "Hydro Pump",
+   "type": "Water",
+   "category": "Special",
+   "power": 110,
+   "accuracy": 80,
+   "priority": 0,
+   "note": ""
+  },
+  {
+   "id": "focus-blast",
+   "name": "Focus Blast",
+   "type": "Fighting",
+   "category": "Special",
+   "power": 120,
+   "accuracy": 70,
+   "priority": 0,
+   "note": "10% -1 SpD"
+  },
+  {
+   "id": "hypnosis",
+   "name": "Hypnosis",
+   "type": "Psychic",
+   "category": "Status",
+   "power": null,
+   "accuracy": 60,
+   "priority": 0,
+   "note": "Sleeps"
+  },
+  {
+   "id": "trick-room",
+   "name": "Trick Room",
+   "type": "Psychic",
+   "category": "Status",
+   "power": null,
+   "accuracy": null,
+   "priority": -7,
+   "note": "Slower moves first, 5 turns"
+  },
+  {
+   "id": "psychic",
+   "name": "Psychic",
+   "type": "Psychic",
+   "category": "Special",
+   "power": 90,
+   "accuracy": 100,
+   "priority": 0,
+   "note": "10% -1 SpD"
+  },
+  {
+   "id": "zen-headbutt",
+   "name": "Zen Headbutt",
+   "type": "Psychic",
+   "category": "Physical",
+   "power": 80,
+   "accuracy": 90,
+   "priority": 0,
+   "note": "20% flinch"
+  },
+  {
+   "id": "hyper-voice",
+   "name": "Hyper Voice",
+   "type": "Normal",
+   "category": "Special",
+   "power": 90,
+   "accuracy": 100,
+   "priority": 0,
+   "note": "Hits both foes; sound"
+  },
+  {
+   "id": "foul-play",
+   "name": "Foul Play",
+   "type": "Dark",
+   "category": "Physical",
+   "power": 95,
+   "accuracy": 100,
+   "priority": 0,
+   "note": "Uses target's Attack stat"
+  },
+  {
+   "id": "extreme-speed",
+   "name": "Extreme Speed",
+   "type": "Normal",
+   "category": "Physical",
+   "power": 80,
+   "accuracy": 100,
+   "priority": 2,
+   "note": ""
+  },
+  {
+   "id": "meteor-mash",
+   "name": "Meteor Mash",
+   "type": "Steel",
+   "category": "Physical",
+   "power": 90,
+   "accuracy": 90,
+   "priority": 0,
+   "note": "20% +1 Atk"
+  },
+  {
+   "id": "bullet-punch",
+   "name": "Bullet Punch",
+   "type": "Steel",
+   "category": "Physical",
+   "power": 40,
+   "accuracy": 100,
+   "priority": 1,
+   "note": ""
+  },
+  {
+   "id": "aura-sphere",
+   "name": "Aura Sphere",
+   "type": "Fighting",
+   "category": "Special",
+   "power": 80,
+   "accuracy": null,
+   "priority": 0,
+   "note": "Never misses"
+  },
+  {
+   "id": "low-kick",
+   "name": "Low Kick",
+   "type": "Fighting",
+   "category": "Physical",
+   "power": null,
+   "accuracy": 100,
+   "priority": 0,
+   "note": "Power scales with target weight"
+  }
+ ]
+}

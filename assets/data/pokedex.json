@@ -1,0 +1,951 @@
+{
+ "schemaVersion": 1,
+ "generatedAt": "2026-07-11",
+ "source": "starter-placeholder",
+ "note": "Accurate base stats/types/abilities; learnsets abbreviated to notable competitive moves. Run tool/update_data.dart for full data.",
+ "species": [
+  {
+   "id": "incineroar",
+   "name": "Incineroar",
+   "types": [
+    "Fire",
+    "Dark"
+   ],
+   "baseStats": {
+    "hp": 95,
+    "atk": 115,
+    "def": 90,
+    "spa": 80,
+    "spd": 90,
+    "spe": 60
+   },
+   "abilities": [
+    "Blaze",
+    "Intimidate"
+   ],
+   "learnset": [
+    "fake-out",
+    "flare-blitz",
+    "knock-off",
+    "parting-shot",
+    "u-turn",
+    "protect",
+    "darkest-lariat",
+    "will-o-wisp",
+    "taunt",
+    "snarl",
+    "close-combat"
+   ],
+   "megas": []
+  },
+  {
+   "id": "rillaboom",
+   "name": "Rillaboom",
+   "types": [
+    "Grass"
+   ],
+   "baseStats": {
+    "hp": 100,
+    "atk": 125,
+    "def": 90,
+    "spa": 60,
+    "spd": 70,
+    "spe": 85
+   },
+   "abilities": [
+    "Overgrow",
+    "Grassy Surge"
+   ],
+   "learnset": [
+    "fake-out",
+    "grassy-glide",
+    "wood-hammer",
+    "u-turn",
+    "protect",
+    "knock-off",
+    "high-horsepower",
+    "drum-beating",
+    "taunt"
+   ],
+   "megas": []
+  },
+  {
+   "id": "amoonguss",
+   "name": "Amoonguss",
+   "types": [
+    "Grass",
+    "Poison"
+   ],
+   "baseStats": {
+    "hp": 114,
+    "atk": 85,
+    "def": 70,
+    "spa": 85,
+    "spd": 80,
+    "spe": 30
+   },
+   "abilities": [
+    "Effect Spore",
+    "Regenerator"
+   ],
+   "learnset": [
+    "spore",
+    "rage-powder",
+    "pollen-puff",
+    "clear-smog",
+    "sludge-bomb",
+    "protect",
+    "giga-drain"
+   ],
+   "megas": []
+  },
+  {
+   "id": "landorus-therian",
+   "name": "Landorus-Therian",
+   "types": [
+    "Ground",
+    "Flying"
+   ],
+   "baseStats": {
+    "hp": 89,
+    "atk": 145,
+    "def": 90,
+    "spa": 105,
+    "spd": 80,
+    "spe": 91
+   },
+   "abilities": [
+    "Intimidate"
+   ],
+   "learnset": [
+    "earthquake",
+    "stomping-tantrum",
+    "rock-slide",
+    "u-turn",
+    "protect",
+    "stone-edge",
+    "earth-power",
+    "swords-dance",
+    "taunt"
+   ],
+   "megas": []
+  },
+  {
+   "id": "garchomp",
+   "name": "Garchomp",
+   "types": [
+    "Dragon",
+    "Ground"
+   ],
+   "baseStats": {
+    "hp": 108,
+    "atk": 130,
+    "def": 95,
+    "spa": 80,
+    "spd": 85,
+    "spe": 102
+   },
+   "abilities": [
+    "Sand Veil",
+    "Rough Skin"
+   ],
+   "learnset": [
+    "earthquake",
+    "dragon-claw",
+    "rock-slide",
+    "protect",
+    "swords-dance",
+    "scale-shot",
+    "stomping-tantrum",
+    "iron-head"
+   ],
+   "megas": []
+  },
+  {
+   "id": "dragonite",
+   "name": "Dragonite",
+   "types": [
+    "Dragon",
+    "Flying"
+   ],
+   "baseStats": {
+    "hp": 91,
+    "atk": 134,
+    "def": 95,
+    "spa": 100,
+    "spd": 95,
+    "spe": 80
+   },
+   "abilities": [
+    "Inner Focus",
+    "Multiscale"
+   ],
+   "learnset": [
+    "extreme-speed",
+    "dragon-dance",
+    "ice-spinner",
+    "earthquake",
+    "protect",
+    "roost",
+    "dual-wingbeat",
+    "iron-head",
+    "haze"
+   ],
+   "megas": []
+  },
+  {
+   "id": "charizard",
+   "name": "Charizard",
+   "types": [
+    "Fire",
+    "Flying"
+   ],
+   "baseStats": {
+    "hp": 78,
+    "atk": 84,
+    "def": 78,
+    "spa": 109,
+    "spd": 85,
+    "spe": 100
+   },
+   "abilities": [
+    "Blaze",
+    "Solar Power"
+   ],
+   "learnset": [
+    "heat-wave",
+    "flamethrower",
+    "air-slash",
+    "solar-beam",
+    "protect",
+    "overheat",
+    "hurricane",
+    "dragon-pulse",
+    "weather-ball"
+   ],
+   "megas": [
+    {
+     "id": "charizard-mega-x",
+     "name": "Mega Charizard X",
+     "types": [
+      "Fire",
+      "Dragon"
+     ],
+     "baseStats": {
+      "hp": 78,
+      "atk": 130,
+      "def": 111,
+      "spa": 130,
+      "spd": 85,
+      "spe": 100
+     },
+     "ability": "Tough Claws",
+     "item": "charizardite-x"
+    },
+    {
+     "id": "charizard-mega-y",
+     "name": "Mega Charizard Y",
+     "types": [
+      "Fire",
+      "Flying"
+     ],
+     "baseStats": {
+      "hp": 78,
+      "atk": 104,
+      "def": 78,
+      "spa": 159,
+      "spd": 115,
+      "spe": 100
+     },
+     "ability": "Drought",
+     "item": "charizardite-y"
+    }
+   ]
+  },
+  {
+   "id": "gholdengo",
+   "name": "Gholdengo",
+   "types": [
+    "Steel",
+    "Ghost"
+   ],
+   "baseStats": {
+    "hp": 87,
+    "atk": 60,
+    "def": 95,
+    "spa": 133,
+    "spd": 91,
+    "spe": 84
+   },
+   "abilities": [
+    "Good as Gold"
+   ],
+   "learnset": [
+    "make-it-rain",
+    "shadow-ball",
+    "nasty-plot",
+    "protect",
+    "thunderbolt",
+    "dazzling-gleam",
+    "focus-blast"
+   ],
+   "megas": []
+  },
+  {
+   "id": "kingambit",
+   "name": "Kingambit",
+   "types": [
+    "Dark",
+    "Steel"
+   ],
+   "baseStats": {
+    "hp": 100,
+    "atk": 135,
+    "def": 120,
+    "spa": 60,
+    "spd": 85,
+    "spe": 50
+   },
+   "abilities": [
+    "Defiant",
+    "Supreme Overlord"
+   ],
+   "learnset": [
+    "kowtow-cleave",
+    "sucker-punch",
+    "iron-head",
+    "swords-dance",
+    "protect",
+    "low-kick"
+   ],
+   "megas": []
+  },
+  {
+   "id": "annihilape",
+   "name": "Annihilape",
+   "types": [
+    "Fighting",
+    "Ghost"
+   ],
+   "baseStats": {
+    "hp": 110,
+    "atk": 115,
+    "def": 80,
+    "spa": 50,
+    "spd": 90,
+    "spe": 90
+   },
+   "abilities": [
+    "Vital Spirit",
+    "Inner Focus",
+    "Defiant"
+   ],
+   "learnset": [
+    "rage-fist",
+    "drain-punch",
+    "close-combat",
+    "protect",
+    "taunt",
+    "bulk-up",
+    "ice-punch",
+    "u-turn",
+    "shadow-claw"
+   ],
+   "megas": []
+  },
+  {
+   "id": "pelipper",
+   "name": "Pelipper",
+   "types": [
+    "Water",
+    "Flying"
+   ],
+   "baseStats": {
+    "hp": 60,
+    "atk": 50,
+    "def": 100,
+    "spa": 95,
+    "spd": 70,
+    "spe": 65
+   },
+   "abilities": [
+    "Keen Eye",
+    "Drizzle",
+    "Rain Dish"
+   ],
+   "learnset": [
+    "hurricane",
+    "weather-ball",
+    "muddy-water",
+    "hydro-pump",
+    "protect",
+    "tailwind",
+    "u-turn",
+    "wide-guard",
+    "roost"
+   ],
+   "megas": []
+  },
+  {
+   "id": "torkoal",
+   "name": "Torkoal",
+   "types": [
+    "Fire"
+   ],
+   "baseStats": {
+    "hp": 70,
+    "atk": 85,
+    "def": 140,
+    "spa": 85,
+    "spd": 70,
+    "spe": 20
+   },
+   "abilities": [
+    "White Smoke",
+    "Drought",
+    "Shell Armor"
+   ],
+   "learnset": [
+    "eruption",
+    "heat-wave",
+    "body-press",
+    "protect",
+    "will-o-wisp",
+    "yawn",
+    "solar-beam",
+    "earth-power",
+    "weather-ball"
+   ],
+   "megas": []
+  },
+  {
+   "id": "archaludon",
+   "name": "Archaludon",
+   "types": [
+    "Steel",
+    "Dragon"
+   ],
+   "baseStats": {
+    "hp": 90,
+    "atk": 105,
+    "def": 130,
+    "spa": 125,
+    "spd": 65,
+    "spe": 85
+   },
+   "abilities": [
+    "Stamina",
+    "Sturdy",
+    "Stalwart"
+   ],
+   "learnset": [
+    "electro-shot",
+    "draco-meteor",
+    "body-press",
+    "flash-cannon",
+    "protect",
+    "dragon-pulse",
+    "thunderbolt"
+   ],
+   "megas": []
+  },
+  {
+   "id": "chien-pao",
+   "name": "Chien-Pao",
+   "types": [
+    "Dark",
+    "Ice"
+   ],
+   "baseStats": {
+    "hp": 80,
+    "atk": 120,
+    "def": 80,
+    "spa": 90,
+    "spd": 65,
+    "spe": 135
+   },
+   "abilities": [
+    "Sword of Ruin"
+   ],
+   "learnset": [
+    "icicle-crash",
+    "sucker-punch",
+    "sacred-sword",
+    "ice-spinner",
+    "protect",
+    "crunch",
+    "swords-dance"
+   ],
+   "megas": []
+  },
+  {
+   "id": "gengar",
+   "name": "Gengar",
+   "types": [
+    "Ghost",
+    "Poison"
+   ],
+   "baseStats": {
+    "hp": 60,
+    "atk": 65,
+    "def": 60,
+    "spa": 130,
+    "spd": 75,
+    "spe": 110
+   },
+   "abilities": [
+    "Cursed Body"
+   ],
+   "learnset": [
+    "shadow-ball",
+    "sludge-bomb",
+    "focus-blast",
+    "icy-wind",
+    "protect",
+    "hypnosis",
+    "dazzling-gleam",
+    "taunt",
+    "will-o-wisp"
+   ],
+   "megas": [
+    {
+     "id": "gengar-mega",
+     "name": "Mega Gengar",
+     "types": [
+      "Ghost",
+      "Poison"
+     ],
+     "baseStats": {
+      "hp": 60,
+      "atk": 65,
+      "def": 80,
+      "spa": 170,
+      "spd": 95,
+      "spe": 130
+     },
+     "ability": "Shadow Tag",
+     "item": "gengarite"
+    }
+   ]
+  },
+  {
+   "id": "metagross",
+   "name": "Metagross",
+   "types": [
+    "Steel",
+    "Psychic"
+   ],
+   "baseStats": {
+    "hp": 80,
+    "atk": 135,
+    "def": 130,
+    "spa": 95,
+    "spd": 90,
+    "spe": 70
+   },
+   "abilities": [
+    "Clear Body",
+    "Light Metal"
+   ],
+   "learnset": [
+    "meteor-mash",
+    "bullet-punch",
+    "zen-headbutt",
+    "earthquake",
+    "protect",
+    "ice-punch",
+    "stomping-tantrum"
+   ],
+   "megas": [
+    {
+     "id": "metagross-mega",
+     "name": "Mega Metagross",
+     "types": [
+      "Steel",
+      "Psychic"
+     ],
+     "baseStats": {
+      "hp": 80,
+      "atk": 145,
+      "def": 150,
+      "spa": 105,
+      "spd": 110,
+      "spe": 110
+     },
+     "ability": "Tough Claws",
+     "item": "metagrossite"
+    }
+   ]
+  },
+  {
+   "id": "salamence",
+   "name": "Salamence",
+   "types": [
+    "Dragon",
+    "Flying"
+   ],
+   "baseStats": {
+    "hp": 95,
+    "atk": 135,
+    "def": 80,
+    "spa": 110,
+    "spd": 80,
+    "spe": 100
+   },
+   "abilities": [
+    "Intimidate",
+    "Moxie"
+   ],
+   "learnset": [
+    "hyper-voice",
+    "dual-wingbeat",
+    "dragon-dance",
+    "earthquake",
+    "protect",
+    "tailwind",
+    "draco-meteor",
+    "dragon-claw",
+    "flamethrower"
+   ],
+   "megas": [
+    {
+     "id": "salamence-mega",
+     "name": "Mega Salamence",
+     "types": [
+      "Dragon",
+      "Flying"
+     ],
+     "baseStats": {
+      "hp": 95,
+      "atk": 145,
+      "def": 130,
+      "spa": 120,
+      "spd": 90,
+      "spe": 120
+     },
+     "ability": "Aerilate",
+     "item": "salamencite"
+    }
+   ]
+  },
+  {
+   "id": "lucario",
+   "name": "Lucario",
+   "types": [
+    "Fighting",
+    "Steel"
+   ],
+   "baseStats": {
+    "hp": 70,
+    "atk": 110,
+    "def": 70,
+    "spa": 115,
+    "spd": 70,
+    "spe": 90
+   },
+   "abilities": [
+    "Steadfast",
+    "Inner Focus",
+    "Justified"
+   ],
+   "learnset": [
+    "close-combat",
+    "bullet-punch",
+    "aura-sphere",
+    "nasty-plot",
+    "protect",
+    "extreme-speed",
+    "swords-dance",
+    "meteor-mash"
+   ],
+   "megas": [
+    {
+     "id": "lucario-mega",
+     "name": "Mega Lucario",
+     "types": [
+      "Fighting",
+      "Steel"
+     ],
+     "baseStats": {
+      "hp": 70,
+      "atk": 145,
+      "def": 88,
+      "spa": 140,
+      "spd": 70,
+      "spe": 112
+     },
+     "ability": "Adaptability",
+     "item": "lucarionite"
+    }
+   ]
+  },
+  {
+   "id": "grimmsnarl",
+   "name": "Grimmsnarl",
+   "types": [
+    "Dark",
+    "Fairy"
+   ],
+   "baseStats": {
+    "hp": 95,
+    "atk": 120,
+    "def": 65,
+    "spa": 95,
+    "spd": 75,
+    "spe": 60
+   },
+   "abilities": [
+    "Prankster",
+    "Frisk",
+    "Pickpocket"
+   ],
+   "learnset": [
+    "spirit-break",
+    "fake-out",
+    "reflect",
+    "light-screen",
+    "thunder-wave",
+    "taunt",
+    "foul-play",
+    "protect"
+   ],
+   "megas": []
+  },
+  {
+   "id": "whimsicott",
+   "name": "Whimsicott",
+   "types": [
+    "Grass",
+    "Fairy"
+   ],
+   "baseStats": {
+    "hp": 60,
+    "atk": 67,
+    "def": 85,
+    "spa": 77,
+    "spd": 75,
+    "spe": 116
+   },
+   "abilities": [
+    "Prankster",
+    "Infiltrator",
+    "Chlorophyll"
+   ],
+   "learnset": [
+    "tailwind",
+    "moonblast",
+    "encore",
+    "helping-hand",
+    "protect",
+    "leech-seed",
+    "taunt",
+    "hurricane"
+   ],
+   "megas": []
+  },
+  {
+   "id": "ninetales-alola",
+   "name": "Ninetales-Alola",
+   "types": [
+    "Ice",
+    "Fairy"
+   ],
+   "baseStats": {
+    "hp": 73,
+    "atk": 67,
+    "def": 75,
+    "spa": 81,
+    "spd": 100,
+    "spe": 109
+   },
+   "abilities": [
+    "Snow Cloak",
+    "Snow Warning"
+   ],
+   "learnset": [
+    "aurora-veil",
+    "blizzard",
+    "freeze-dry",
+    "moonblast",
+    "protect",
+    "icy-wind",
+    "encore",
+    "dazzling-gleam"
+   ],
+   "megas": []
+  },
+  {
+   "id": "urshifu-rapid-strike",
+   "name": "Urshifu-Rapid-Strike",
+   "types": [
+    "Fighting",
+    "Water"
+   ],
+   "baseStats": {
+    "hp": 100,
+    "atk": 130,
+    "def": 100,
+    "spa": 63,
+    "spd": 60,
+    "spe": 97
+   },
+   "abilities": [
+    "Unseen Fist"
+   ],
+   "learnset": [
+    "surging-strikes",
+    "close-combat",
+    "aqua-jet",
+    "protect",
+    "u-turn",
+    "ice-punch",
+    "detect",
+    "taunt"
+   ],
+   "megas": []
+  },
+  {
+   "id": "farigiraf",
+   "name": "Farigiraf",
+   "types": [
+    "Normal",
+    "Psychic"
+   ],
+   "baseStats": {
+    "hp": 120,
+    "atk": 90,
+    "def": 70,
+    "spa": 110,
+    "spd": 70,
+    "spe": 60
+   },
+   "abilities": [
+    "Cud Chew",
+    "Armor Tail",
+    "Sap Sipper"
+   ],
+   "learnset": [
+    "psychic",
+    "hyper-voice",
+    "trick-room",
+    "protect",
+    "helping-hand",
+    "dazzling-gleam",
+    "foul-play"
+   ],
+   "megas": []
+  },
+  {
+   "id": "tyranitar",
+   "name": "Tyranitar",
+   "types": [
+    "Rock",
+    "Dark"
+   ],
+   "baseStats": {
+    "hp": 100,
+    "atk": 134,
+    "def": 110,
+    "spa": 95,
+    "spd": 100,
+    "spe": 61
+   },
+   "abilities": [
+    "Sand Stream",
+    "Unnerve"
+   ],
+   "learnset": [
+    "rock-slide",
+    "crunch",
+    "stone-edge",
+    "protect",
+    "dragon-dance",
+    "earthquake",
+    "ice-punch",
+    "iron-head",
+    "low-kick"
+   ],
+   "megas": [
+    {
+     "id": "tyranitar-mega",
+     "name": "Mega Tyranitar",
+     "types": [
+      "Rock",
+      "Dark"
+     ],
+     "baseStats": {
+      "hp": 100,
+      "atk": 164,
+      "def": 150,
+      "spa": 95,
+      "spd": 120,
+      "spe": 71
+     },
+     "ability": "Sand Stream",
+     "item": "tyranitarite"
+    }
+   ]
+  },
+  {
+   "id": "gyarados",
+   "name": "Gyarados",
+   "types": [
+    "Water",
+    "Flying"
+   ],
+   "baseStats": {
+    "hp": 95,
+    "atk": 125,
+    "def": 79,
+    "spa": 60,
+    "spd": 100,
+    "spe": 81
+   },
+   "abilities": [
+    "Intimidate",
+    "Moxie"
+   ],
+   "learnset": [
+    "waterfall",
+    "dragon-dance",
+    "protect",
+    "ice-fang",
+    "earthquake",
+    "taunt",
+    "thunder-wave"
+   ],
+   "megas": []
+  },
+  {
+   "id": "talonflame",
+   "name": "Talonflame",
+   "types": [
+    "Fire",
+    "Flying"
+   ],
+   "baseStats": {
+    "hp": 78,
+    "atk": 81,
+    "def": 71,
+    "spa": 74,
+    "spd": 69,
+    "spe": 126
+   },
+   "abilities": [
+    "Flame Body",
+    "Gale Wings"
+   ],
+   "learnset": [
+    "brave-bird",
+    "flare-blitz",
+    "dual-wingbeat",
+    "tailwind",
+    "protect",
+    "u-turn",
+    "will-o-wisp",
+    "taunt"
+   ],
+   "megas": []
+  }
+ ]
+}
