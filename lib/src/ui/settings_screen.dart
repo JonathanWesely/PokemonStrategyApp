@@ -42,6 +42,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       style: TextStyle(fontSize: 11)),
                 ),
                 RadioListTile<String>(
+                  value: 'local',
+                  title: Text('Local / on-device (no cloud AI)'),
+                  subtitle: Text(
+                      'Realtime tracking, offline: you confirm the enemies, the '
+                      'app shows types, stats, base stats & matchups. Camera '
+                      'auto-detect (sprite + OCR) lands in a later phase.',
+                      style: TextStyle(fontSize: 11)),
+                ),
+                RadioListTile<String>(
                   value: 'cloud-vision',
                   title: Text('Cloud vision (Anthropic API)'),
                   subtitle: Text(

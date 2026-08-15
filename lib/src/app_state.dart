@@ -13,12 +13,13 @@ import 'models/recognition_result.dart';
 import 'models/regulation.dart';
 import 'models/team.dart';
 import 'recognition/cloud_vision_recognizer.dart';
+import 'recognition/local_recognizer.dart';
 import 'recognition/mock_recognizer.dart';
 import 'recognition/recognition_service.dart';
 import 'storage/app_database.dart';
 
 const settingApiKey = 'anthropic_api_key';
-const settingEngine = 'recognition_engine'; // 'mock' | 'cloud-vision'
+const settingEngine = 'recognition_engine'; // 'mock' | 'cloud-vision' | 'local'
 
 class AppState extends ChangeNotifier {
   final DataPack pack;
@@ -47,9 +48,12 @@ class AppState extends ChangeNotifier {
   }
 
   void _rebuildRecognizer() {
-    _recognizer = (engineName == 'cloud-vision' && apiKey.isNotEmpty)
-        ? CloudVisionRecognizer(pack, apiKey: apiKey)
-        : MockRecognizer(pack);
+    _recognizer = switch (engineName) {
+      'cloud-vision' when apiKey.isNotEmpty =>
+        CloudVisionRecognizer(pack, apiKey: apiKey),
+      'local' => LocalRecognizer(pack),
+      _ => MockRecognizer(pack),
+    };
   }
 
   // -------------------------------------------------------------- teams --
@@ -99,8 +103,12 @@ class AppState extends ChangeNotifier {
   }
 
   /// Run the current recognition engine on a snapshot and merge the result
-  /// into the battle (enemy side only — your side is already known).
-  Future<RecognitionResult> runSnapshot(Uint8List imageBytes) async {
+  /// into the battle (enemy side only — your side is already known). [screen]
+  /// tells the engine whether it's reading the team-preview or battle screen.
+  Future<RecognitionResult> runSnapshot(
+    Uint8List imageBytes, {
+    RecognitionScreen screen = RecognitionScreen.battle,
+  }) async {
     final session = battle;
     if (session == null) {
       throw const RecognitionException('No battle in progress.');
@@ -110,6 +118,7 @@ class AppState extends ChangeNotifier {
       context: BattleSnapshotContext(
         yourSpeciesIds: [for (final p in session.picks) p.speciesId],
         enemyFieldSlots: session.format.fieldSlots,
+        screen: screen,
       ),
     );
     for (final slot in result.enemies) {

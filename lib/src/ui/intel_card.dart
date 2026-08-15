@@ -16,7 +16,12 @@ import 'widgets.dart';
 class EnemyIntelCard extends StatelessWidget {
   final EnemyPokemon enemy;
 
-  const EnemyIntelCard({super.key, required this.enemy});
+  /// When true (the Local / data-only engine), show only confirmed facts —
+  /// types, base stats, matchups — and render moves/ability/item as "?" slots
+  /// you fill in as they're revealed, instead of usage predictions.
+  final bool factsOnly;
+
+  const EnemyIntelCard({super.key, required this.enemy, this.factsOnly = false});
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +29,8 @@ class EnemyIntelCard extends StatelessWidget {
     final pack = state.pack;
     final species = pack.speciesById(enemy.speciesId);
     if (species == null) return const SizedBox.shrink();
+
+    if (factsOnly) return _factsOnlyCard(context, state, species);
 
     final battle = state.battle!;
     final teammates = [
@@ -195,6 +202,159 @@ class EnemyIntelCard extends StatelessWidget {
           ),
       ],
     );
+  }
+
+  // -------------------------------------------------------- facts-only card --
+
+  /// Data-only enemy card (Local engine): confirmed facts + "?" reveal slots.
+  Widget _factsOnlyCard(BuildContext context, AppState state, Species species) {
+    final pack = state.pack;
+    final megaForme =
+        enemy.mega && species.megas.isNotEmpty ? species.megas.first : null;
+    final types = megaForme?.types ?? species.types;
+    final baseStats = megaForme?.baseStats ?? species.baseStats;
+    // Matchups use only what's confirmed: a Mega's fixed ability, else the
+    // revealed ability (if any), plus the revealed item.
+    final ability = megaForme?.ability ?? enemy.revealedAbility;
+    final profile = pack.typeChart
+        .defensiveProfile(types, ability: ability, itemId: enemy.revealedItem);
+    final revealedMoveList = enemy.revealedMoves.toList();
+    final unknownMoves = (4 - revealedMoveList.length).clamp(0, 4);
+    final labelStyle = Theme.of(context).textTheme.labelLarge;
+
+    return Card(
+      margin: const EdgeInsets.symmetric(vertical: 5),
+      child: Padding(
+        padding: const EdgeInsets.all(10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                const Icon(Icons.smart_toy, size: 16, color: Colors.red),
+                const SizedBox(width: 6),
+                Expanded(
+                  child: Text(megaForme?.name ?? species.name,
+                      style: const TextStyle(
+                          fontSize: 15, fontWeight: FontWeight.w700)),
+                ),
+                if (enemy.hpPercent != null)
+                  Text('${enemy.hpPercent}% HP',
+                      style: const TextStyle(fontSize: 12)),
+                if (species.megas.isNotEmpty)
+                  IconButton(
+                    tooltip: enemy.mega ? 'Revert forme' : 'Mark as Mega',
+                    icon: Icon(Icons.flash_on,
+                        size: 18,
+                        color: enemy.mega ? Colors.purple : Colors.grey),
+                    onPressed: () =>
+                        state.mutateBattle(() => enemy.mega = !enemy.mega),
+                  ),
+                IconButton(
+                  tooltip: 'Bench',
+                  icon: const Icon(Icons.arrow_downward, size: 18),
+                  onPressed: () =>
+                      state.mutateBattle(() => enemy.onField = false),
+                ),
+                IconButton(
+                  tooltip: 'Remove (misrecognized)',
+                  icon: const Icon(Icons.delete_outline, size: 18),
+                  onPressed: () => state.removeEnemy(enemy),
+                ),
+              ],
+            ),
+            Wrap(spacing: 4, children: [for (final t in types) TypeChip(t)]),
+            const Divider(),
+            MatchupGroups(profile: profile),
+            const Divider(),
+            Text('Base stats (Champions)', style: labelStyle),
+            const SizedBox(height: 4),
+            BaseStatsRow(baseStats),
+            const Divider(),
+            Text('Moves — tap ? to fill in as revealed', style: labelStyle),
+            for (final id in revealedMoveList)
+              RevealSlotRow(
+                label: pack.moveName(id),
+                subtitle: pack.moveById(id)?.summary,
+                leadingChip:
+                    TypeChip(pack.moveById(id)?.type ?? 'Normal', small: true),
+                onTap: () =>
+                    state.mutateBattle(() => enemy.revealedMoves.remove(id)),
+              ),
+            for (var i = 0; i < unknownMoves; i++)
+              RevealSlotRow(
+                label: null,
+                hint: 'tap to set move',
+                onTap: () => _revealMove(context, state, species),
+              ),
+            const Divider(),
+            Text('Ability', style: labelStyle),
+            RevealSlotRow(
+              label: megaForme?.ability ?? enemy.revealedAbility,
+              hint: 'tap to set ability',
+              onTap: megaForme != null
+                  ? () {}
+                  : () {
+                      if (enemy.revealedAbility != null) {
+                        state.mutateBattle(() => enemy.revealedAbility = null);
+                      } else {
+                        _revealAbility(context, state, species);
+                      }
+                    },
+            ),
+            const Divider(),
+            Text('Item', style: labelStyle),
+            RevealSlotRow(
+              label:
+                  enemy.revealedItem == null ? null : pack.itemName(enemy.revealedItem),
+              hint: 'tap to set item',
+              onTap: () => _revealItem(context, state),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Future<void> _revealMove(
+      BuildContext context, AppState state, Species species) async {
+    final pack = state.pack;
+    final entries = <MapEntry<String, String>>[
+      for (final id in species.learnset)
+        if (!enemy.revealedMoves.contains(id)) MapEntry(id, pack.moveName(id)),
+    ]..sort((a, b) => a.value.compareTo(b.value));
+    if (entries.isEmpty) return;
+    final chosen =
+        await showPickerDialog(context, title: 'Reveal a move', entries: entries);
+    if (chosen != null) {
+      state.mutateBattle(() => enemy.revealedMoves.add(chosen));
+    }
+  }
+
+  Future<void> _revealAbility(
+      BuildContext context, AppState state, Species species) async {
+    final entries = [for (final a in species.abilities) MapEntry(a, a)];
+    final chosen = await showPickerDialog(context,
+        title: 'Reveal ability', entries: entries);
+    if (chosen != null) {
+      state.mutateBattle(() => enemy.revealedAbility = chosen);
+    }
+  }
+
+  Future<void> _revealItem(BuildContext context, AppState state) async {
+    final pack = state.pack;
+    if (enemy.revealedItem != null) {
+      state.mutateBattle(() => enemy.revealedItem = null);
+      return;
+    }
+    final entries = <MapEntry<String, String>>[
+      for (final item in pack.items.values) MapEntry(item.id, item.name),
+    ]..sort((a, b) => a.value.compareTo(b.value));
+    final chosen =
+        await showPickerDialog(context, title: 'Reveal item', entries: entries);
+    if (chosen != null) {
+      state.mutateBattle(() => enemy.revealedItem = chosen);
+    }
   }
 }
 

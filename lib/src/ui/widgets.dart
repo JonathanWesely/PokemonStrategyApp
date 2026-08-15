@@ -4,6 +4,7 @@ library;
 import 'package:flutter/material.dart';
 
 import '../models/prediction.dart';
+import '../models/species.dart';
 
 const typeColors = <String, Color>{
   'Normal': Color(0xFFA8A77A),
@@ -200,4 +201,117 @@ class RatedOptionRow extends StatelessWidget {
       ),
     );
   }
+}
+
+/// Raw base-stat readout (the species line, before SP/nature). Pure fact —
+/// safe to show for any Pokemon, no prediction involved.
+class BaseStatsRow extends StatelessWidget {
+  final BaseStats base;
+
+  const BaseStatsRow(this.base, {super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        for (final key in statKeys)
+          Expanded(
+            child: Column(
+              children: [
+                Text(statLabels[key] ?? key,
+                    style: const TextStyle(
+                        fontSize: 10, fontWeight: FontWeight.w600)),
+                Text('${base.byKey(key)}',
+                    style: const TextStyle(fontSize: 12)),
+              ],
+            ),
+          ),
+      ],
+    );
+  }
+}
+
+/// One "fill in the blank" slot for the facts-only enemy card: shows a
+/// revealed fact (green check) or a "?" you tap to reveal / correct.
+class RevealSlotRow extends StatelessWidget {
+  /// The revealed label, or null while still unknown.
+  final String? label;
+  final String? subtitle;
+
+  /// Hint shown on the right while unknown (e.g. 'tap to set move').
+  final String hint;
+  final VoidCallback onTap;
+  final Widget? leadingChip;
+
+  const RevealSlotRow({
+    super.key,
+    required this.label,
+    required this.onTap,
+    this.subtitle,
+    this.hint = 'tap to reveal',
+    this.leadingChip,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final known = label != null;
+    return InkWell(
+      onTap: onTap,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 4),
+        child: Row(
+          children: [
+            Icon(known ? Icons.check_circle : Icons.help_outline,
+                size: 16, color: known ? Colors.green : Colors.grey.shade400),
+            const SizedBox(width: 6),
+            if (known && leadingChip != null) ...[
+              leadingChip!,
+              const SizedBox(width: 6),
+            ],
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(known ? label! : '?',
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: known ? FontWeight.w700 : FontWeight.w400,
+                        color: known ? null : Colors.grey,
+                      )),
+                  if (known && subtitle != null)
+                    Text(subtitle!,
+                        style: TextStyle(
+                            fontSize: 10, color: Colors.grey.shade600)),
+                ],
+              ),
+            ),
+            Text(known ? 'seen' : hint,
+                style: TextStyle(fontSize: 10, color: Colors.grey.shade600)),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+/// A simple scrollable single-choice picker. Returns the chosen id, or null if
+/// dismissed. Shared by enemy-species entry and the reveal-slot pickers.
+Future<String?> showPickerDialog(
+  BuildContext context, {
+  required String title,
+  required List<MapEntry<String, String>> entries,
+}) {
+  return showDialog<String>(
+    context: context,
+    builder: (context) => SimpleDialog(
+      title: Text(title),
+      children: [
+        for (final e in entries)
+          SimpleDialogOption(
+            onPressed: () => Navigator.pop(context, e.key),
+            child: Text(e.value),
+          ),
+      ],
+    ),
+  );
 }
