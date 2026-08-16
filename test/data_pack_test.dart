@@ -102,9 +102,9 @@ void main() {
     test('exact, case-insensitive, and partial matches', () {
       expect(pack.resolveSpeciesName('Incineroar'), 'incineroar');
       expect(pack.resolveSpeciesName('incineroar'), 'incineroar');
-      expect(pack.resolveSpeciesName('URSHIFU-RAPID-STRIKE'),
-          'urshifu-rapid-strike');
-      expect(pack.resolveSpeciesName('Ninetales'), 'ninetales-alola');
+      expect(pack.resolveSpeciesName('BASCULEGION-MALE'),
+          'basculegion-male');
+      expect(pack.resolveSpeciesName('Ninetales'), 'ninetales');
       expect(pack.resolveSpeciesName('SomeNicknameXYZ'), isNull);
       expect(pack.resolveSpeciesName(''), isNull);
     });

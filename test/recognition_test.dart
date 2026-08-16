@@ -20,7 +20,7 @@ import 'helpers.dart';
 void main() {
   final pack = loadRealDataPack();
   const context = BattleSnapshotContext(
-    yourSpeciesIds: ['chien-pao', 'torkoal', 'amoonguss', 'farigiraf'],
+    yourSpeciesIds: ['weavile', 'torkoal', 'whimsicott', 'farigiraf'],
     enemyFieldSlots: 2,
   );
 
@@ -30,7 +30,7 @@ void main() {
           .recognize(Uint8List(0), context: context);
       expect(result.engine, 'mock');
       expect(result.yours.length, 2);
-      expect(result.yours.first.speciesId, 'chien-pao');
+      expect(result.yours.first.speciesId, 'weavile');
       expect(result.enemies.length, 2);
       expect(result.enemies.map((e) => e.speciesId).toSet().length, 2);
       for (final enemy in result.enemies) {
@@ -40,15 +40,15 @@ void main() {
 
     test('scripted enemies are returned verbatim', () async {
       final mock = MockRecognizer(pack,
-          scriptedEnemies: ['incineroar', 'rillaboom']);
+          scriptedEnemies: ['incineroar', 'talonflame']);
       final result = await mock.recognize(Uint8List(0), context: context);
       expect(result.enemies.map((e) => e.speciesId).toList(),
-          ['incineroar', 'rillaboom']);
+          ['incineroar', 'talonflame']);
     });
 
     test('preview screen yields a full enemy team', () async {
       const previewContext = BattleSnapshotContext(
-        yourSpeciesIds: ['chien-pao', 'torkoal', 'amoonguss', 'farigiraf'],
+        yourSpeciesIds: ['weavile', 'torkoal', 'whimsicott', 'farigiraf'],
         enemyFieldSlots: 2,
         enemyTeamSize: 6,
         screen: RecognitionScreen.preview,
@@ -87,13 +87,13 @@ void main() {
             'confidence': 0.97
           },
           {
-            'name': 'Rillaboom',
+            'name': 'Talonflame',
             'side': 'enemy',
             'hpPercent': null,
             'mega': false,
             'confidence': 0.91
           },
-          {'name': 'Chien-Pao', 'side': 'yours', 'hpPercent': 100},
+          {'name': 'Weavile', 'side': 'yours', 'hpPercent': 100},
         ]
       }));
 
@@ -112,7 +112,7 @@ void main() {
       expect(result.enemies.length, 2);
       expect(result.enemies.first.speciesId, 'incineroar');
       expect(result.enemies.first.hpPercent, 87);
-      expect(result.yours.single.speciesId, 'chien-pao');
+      expect(result.yours.single.speciesId, 'weavile');
 
       // Request sanity: right headers, image attached, right endpoint.
       expect(seen!.headers['x-api-key'], 'sk-test');
@@ -126,7 +126,7 @@ void main() {
     test('preview screen changes the prompt to sprite identification',
         () async {
       const previewContext = BattleSnapshotContext(
-        yourSpeciesIds: ['chien-pao', 'torkoal', 'amoonguss', 'farigiraf'],
+        yourSpeciesIds: ['weavile', 'torkoal', 'whimsicott', 'farigiraf'],
         enemyFieldSlots: 2,
         enemyTeamSize: 6,
         screen: RecognitionScreen.preview,

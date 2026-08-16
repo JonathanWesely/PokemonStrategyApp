@@ -1,16 +1,91 @@
 {
  "schemaVersion": 1,
- "generatedAt": "2026-08-15",
+ "generatedAt": "2026-08-16",
  "items": [
+  {
+   "id": "abomasnowite",
+   "name": "Abomasnowite",
+   "desc": "Mega Stone: lets Abomasnow Mega Evolve."
+  },
+  {
+   "id": "absolite",
+   "name": "Absolite",
+   "desc": "Mega Stone: lets Absol Mega Evolve. (Held: Allows Absol to Mega Evolve into Mega Absol.)"
+  },
+  {
+   "id": "aerodactylite",
+   "name": "Aerodactylite",
+   "desc": "Mega Stone: lets Aerodactyl Mega Evolve. (Held: Allows Aerodactyl to Mega Evolve into Mega Aerodactyl.)"
+  },
+  {
+   "id": "aggronite",
+   "name": "Aggronite",
+   "desc": "Mega Stone: lets Aggron Mega Evolve. (Held: Allows Aggron to Mega Evolve into Mega Aggron.)"
+  },
   {
    "id": "air-balloon",
    "name": "Air Balloon",
    "desc": "Immune to Ground until hit"
   },
   {
+   "id": "alakazamite",
+   "name": "Alakazamite",
+   "desc": "Mega Stone: lets Alakazam Mega Evolve."
+  },
+  {
+   "id": "altariaite",
+   "name": "Altariaite",
+   "desc": "Mega Stone: lets Altaria Mega Evolve."
+  },
+  {
+   "id": "ampharosite",
+   "name": "Ampharosite",
+   "desc": "Mega Stone: lets Ampharos Mega Evolve. (Held: Allows Ampharos to Mega Evolve into Mega Ampharos.)"
+  },
+  {
    "id": "assault-vest",
    "name": "Assault Vest",
    "desc": "1.5x SpD; only attacking moves"
+  },
+  {
+   "id": "audinoite",
+   "name": "Audinoite",
+   "desc": "Mega Stone: lets Audino Mega Evolve."
+  },
+  {
+   "id": "banetteite",
+   "name": "Banetteite",
+   "desc": "Mega Stone: lets Banette Mega Evolve."
+  },
+  {
+   "id": "barbaracleite",
+   "name": "Barbaracleite",
+   "desc": "Mega Stone: lets Barbaracle Mega Evolve."
+  },
+  {
+   "id": "beedrillite",
+   "name": "Beedrillite",
+   "desc": "Mega Stone: lets Beedrill Mega Evolve. (Held: Allows Beedrill to Mega Evolve into Mega Beedrill.)"
+  },
+  {
+   "id": "blastoiseite",
+   "name": "Blastoiseite",
+   "desc": "Mega Stone: lets Blastoise Mega Evolve."
+  },
+  {
+   "id": "blazikenite",
+   "name": "Blazikenite",
+   "desc": "Mega Stone: lets Blaziken Mega Evolve. (Held: Allows Blaziken to Mega Evolve into Mega Blaziken.)"
+  },
+  {
+   "id": "cameruptite",
+   "name": "Cameruptite",
+   "desc": "Mega Stone: lets Camerupt Mega Evolve. (Held: Allows Camerupt to Mega Evolve into Mega Camerupt.)"
+  },
+  {
+   "id": "chandelureite",
+   "name": "Chandelureite",
+   "desc": "Mega Stone: lets Chandelure Mega Evolve."
   },
   {
    "id": "charcoal",
@@ -26,6 +101,16 @@
    "id": "charizardite-y",
    "name": "Charizardite Y",
    "desc": "Mega Stone: Charizard -> Mega Charizard Y"
+  },
+  {
+   "id": "chesnaughtite",
+   "name": "Chesnaughtite",
+   "desc": "Mega Stone: lets Chesnaught Mega Evolve."
+  },
+  {
+   "id": "chimechoite",
+   "name": "Chimechoite",
+   "desc": "Mega Stone: lets Chimecho Mega Evolve."
   },
   {
    "id": "choice-band",
@@ -53,9 +138,44 @@
    "desc": "Blocks stat drops (Intimidate etc.)"
   },
   {
+   "id": "clefableite",
+   "name": "Clefableite",
+   "desc": "Mega Stone: lets Clefable Mega Evolve."
+  },
+  {
    "id": "covert-cloak",
    "name": "Covert Cloak",
    "desc": "Blocks secondary effects (Fake Out flinch etc.)"
+  },
+  {
+   "id": "crabominableite",
+   "name": "Crabominableite",
+   "desc": "Mega Stone: lets Crabominable Mega Evolve."
+  },
+  {
+   "id": "delphoxite",
+   "name": "Delphoxite",
+   "desc": "Mega Stone: lets Delphox Mega Evolve."
+  },
+  {
+   "id": "dragalgeite",
+   "name": "Dragalgeite",
+   "desc": "Mega Stone: lets Dragalge Mega Evolve."
+  },
+  {
+   "id": "dragoniteite",
+   "name": "Dragoniteite",
+   "desc": "Mega Stone: lets Dragonite Mega Evolve."
+  },
+  {
+   "id": "drampaite",
+   "name": "Drampaite",
+   "desc": "Mega Stone: lets Drampa Mega Evolve."
+  },
+  {
+   "id": "eelektrossite",
+   "name": "Eelektrossite",
+   "desc": "Mega Stone: lets Eelektross Mega Evolve."
   },
   {
    "id": "eject-button",
@@ -63,9 +183,29 @@
    "desc": "Switches holder out when hit"
   },
   {
+   "id": "emboarite",
+   "name": "Emboarite",
+   "desc": "Mega Stone: lets Emboar Mega Evolve."
+  },
+  {
+   "id": "excadrillite",
+   "name": "Excadrillite",
+   "desc": "Mega Stone: lets Excadrill Mega Evolve."
+  },
+  {
    "id": "expert-belt",
    "name": "Expert Belt",
    "desc": "1.2x super-effective damage"
+  },
+  {
+   "id": "falinksite",
+   "name": "Falinksite",
+   "desc": "Mega Stone: lets Falinks Mega Evolve."
+  },
+  {
+   "id": "feraligatrite",
+   "name": "Feraligatrite",
+   "desc": "Mega Stone: lets Feraligatr Mega Evolve."
   },
   {
    "id": "figy-berry",
@@ -78,6 +218,11 @@
    "desc": "Burns holder at end of turn"
   },
   {
+   "id": "floetteite",
+   "name": "Floetteite",
+   "desc": "Mega Stone: lets Floette Mega Evolve."
+  },
+  {
    "id": "focus-sash",
    "name": "Focus Sash",
    "desc": "Survives a KO from full HP once"
@@ -85,7 +230,22 @@
   {
    "id": "froslassite",
    "name": "Froslassite",
-   "desc": "Mega Stone (Champions): lets Froslass Mega Evolve. Mega forme stats pending a data update \u2014 run tool/update_data.dart after the community documents them."
+   "desc": "Mega Stone: lets Froslass Mega Evolve (Pokemon Champions)."
+  },
+  {
+   "id": "galladeite",
+   "name": "Galladeite",
+   "desc": "Mega Stone: lets Gallade Mega Evolve."
+  },
+  {
+   "id": "garchompite",
+   "name": "Garchompite",
+   "desc": "Mega Stone: lets Garchomp Mega Evolve. (Held: Allows Garchomp to Mega Evolve into Mega Garchomp.)"
+  },
+  {
+   "id": "gardevoirite",
+   "name": "Gardevoirite",
+   "desc": "Mega Stone: lets Gardevoir Mega Evolve. (Held: Allows Gardevoir to Mega Evolve into Mega Gardevoir.)"
   },
   {
    "id": "gengarite",
@@ -93,9 +253,54 @@
    "desc": "Mega Stone: Gengar -> Mega Gengar"
   },
   {
+   "id": "glalieite",
+   "name": "Glalieite",
+   "desc": "Mega Stone: lets Glalie Mega Evolve."
+  },
+  {
+   "id": "glimmoraite",
+   "name": "Glimmoraite",
+   "desc": "Mega Stone: lets Glimmora Mega Evolve."
+  },
+  {
+   "id": "golurkite",
+   "name": "Golurkite",
+   "desc": "Mega Stone: lets Golurk Mega Evolve."
+  },
+  {
+   "id": "greninjaite",
+   "name": "Greninjaite",
+   "desc": "Mega Stone: lets Greninja Mega Evolve."
+  },
+  {
+   "id": "gyaradosite",
+   "name": "Gyaradosite",
+   "desc": "Mega Stone: lets Gyarados Mega Evolve. (Held: Allows Gyarados to Mega Evolve into Mega Gyarados.)"
+  },
+  {
+   "id": "hawluchaite",
+   "name": "Hawluchaite",
+   "desc": "Mega Stone: lets Hawlucha Mega Evolve."
+  },
+  {
+   "id": "heracrossite",
+   "name": "Heracrossite",
+   "desc": "Mega Stone: lets Heracross Mega Evolve."
+  },
+  {
+   "id": "houndoomite",
+   "name": "Houndoomite",
+   "desc": "Mega Stone: lets Houndoom Mega Evolve."
+  },
+  {
    "id": "iron-ball",
    "name": "Iron Ball",
    "desc": "Halves Speed; grounds holder"
+  },
+  {
+   "id": "kangaskhanite",
+   "name": "Kangaskhanite",
+   "desc": "Mega Stone: lets Kangaskhan Mega Evolve. (Held: Allows Kangaskhan to Mega Evolve into Mega Kangaskhan.)"
   },
   {
    "id": "kasib-berry",
@@ -123,6 +328,11 @@
    "desc": "Multi-hit moves hit 4-5 times"
   },
   {
+   "id": "lopunnyite",
+   "name": "Lopunnyite",
+   "desc": "Mega Stone: lets Lopunny Mega Evolve."
+  },
+  {
    "id": "lucarionite",
    "name": "Lucarionite",
    "desc": "Mega Stone: Lucario -> Mega Lucario"
@@ -133,9 +343,39 @@
    "desc": "Cures any status once"
   },
   {
+   "id": "malamarite",
+   "name": "Malamarite",
+   "desc": "Mega Stone: lets Malamar Mega Evolve."
+  },
+  {
+   "id": "manectricite",
+   "name": "Manectricite",
+   "desc": "Mega Stone: lets Manectric Mega Evolve."
+  },
+  {
+   "id": "mawileite",
+   "name": "Mawileite",
+   "desc": "Mega Stone: lets Mawile Mega Evolve."
+  },
+  {
+   "id": "medichamite",
+   "name": "Medichamite",
+   "desc": "Mega Stone: lets Medicham Mega Evolve. (Held: Allows Medicham to Mega Evolve into Mega Medicham.)"
+  },
+  {
+   "id": "meganiumite",
+   "name": "Meganiumite",
+   "desc": "Mega Stone: lets Meganium Mega Evolve."
+  },
+  {
    "id": "mental-herb",
    "name": "Mental Herb",
    "desc": "Cures Taunt/Encore/infatuation once"
+  },
+  {
+   "id": "meowsticite",
+   "name": "Meowsticite",
+   "desc": "Mega Stone: lets Meowstic Mega Evolve."
   },
   {
    "id": "metagrossite",
@@ -148,9 +388,34 @@
    "desc": "1.2x Water moves"
   },
   {
+   "id": "pidgeotite",
+   "name": "Pidgeotite",
+   "desc": "Mega Stone: lets Pidgeot Mega Evolve. (Held: Allows Pidgeot to Mega Evolve into Mega Pidgeot.)"
+  },
+  {
+   "id": "pinsirite",
+   "name": "Pinsirite",
+   "desc": "Mega Stone: lets Pinsir Mega Evolve. (Held: Allows Pinsir to Mega Evolve into Mega Pinsir.)"
+  },
+  {
    "id": "power-herb",
    "name": "Power Herb",
    "desc": "Skips charge turn once (Electro Shot etc.)"
+  },
+  {
+   "id": "pyroarite",
+   "name": "Pyroarite",
+   "desc": "Mega Stone: lets Pyroar Mega Evolve."
+  },
+  {
+   "id": "raichuite-x",
+   "name": "Raichuite X",
+   "desc": "Mega Stone: lets Raichu X Mega Evolve."
+  },
+  {
+   "id": "raichuite-y",
+   "name": "Raichuite Y",
+   "desc": "Mega Stone: lets Raichu Y Mega Evolve."
   },
   {
    "id": "red-card",
@@ -163,6 +428,11 @@
    "desc": "Contact attackers lose 1/6 HP"
   },
   {
+   "id": "sableyeite",
+   "name": "Sableyeite",
+   "desc": "Mega Stone: lets Sableye Mega Evolve."
+  },
+  {
    "id": "safety-goggles",
    "name": "Safety Goggles",
    "desc": "Immune to powder moves and weather chip"
@@ -173,14 +443,84 @@
    "desc": "Mega Stone: Salamence -> Mega Salamence"
   },
   {
+   "id": "sceptileite",
+   "name": "Sceptileite",
+   "desc": "Mega Stone: lets Sceptile Mega Evolve."
+  },
+  {
+   "id": "scizorite",
+   "name": "Scizorite",
+   "desc": "Mega Stone: lets Scizor Mega Evolve. (Held: Allows Scizor to Mega Evolve into Mega Scizor.)"
+  },
+  {
+   "id": "scolipedeite",
+   "name": "Scolipedeite",
+   "desc": "Mega Stone: lets Scolipede Mega Evolve."
+  },
+  {
+   "id": "scovillainite",
+   "name": "Scovillainite",
+   "desc": "Mega Stone: lets Scovillain Mega Evolve."
+  },
+  {
+   "id": "scraftyite",
+   "name": "Scraftyite",
+   "desc": "Mega Stone: lets Scrafty Mega Evolve."
+  },
+  {
+   "id": "sharpedoite",
+   "name": "Sharpedoite",
+   "desc": "Mega Stone: lets Sharpedo Mega Evolve."
+  },
+  {
    "id": "sitrus-berry",
    "name": "Sitrus Berry",
    "desc": "Restores 25% HP at half HP"
   },
   {
+   "id": "skarmoryite",
+   "name": "Skarmoryite",
+   "desc": "Mega Stone: lets Skarmory Mega Evolve."
+  },
+  {
+   "id": "slowbroite",
+   "name": "Slowbroite",
+   "desc": "Mega Stone: lets Slowbro Mega Evolve."
+  },
+  {
+   "id": "staraptorite",
+   "name": "Staraptorite",
+   "desc": "Mega Stone: lets Staraptor Mega Evolve."
+  },
+  {
+   "id": "starmieite",
+   "name": "Starmieite",
+   "desc": "Mega Stone: lets Starmie Mega Evolve."
+  },
+  {
+   "id": "steelixite",
+   "name": "Steelixite",
+   "desc": "Mega Stone: lets Steelix Mega Evolve. (Held: Allows Steelix to Mega Evolve into Mega Steelix.)"
+  },
+  {
+   "id": "swampertite",
+   "name": "Swampertite",
+   "desc": "Mega Stone: lets Swampert Mega Evolve. (Held: Allows Swampert to Mega Evolve into Mega Swampert.)"
+  },
+  {
    "id": "tyranitarite",
    "name": "Tyranitarite",
    "desc": "Mega Stone: Tyranitar -> Mega Tyranitar"
+  },
+  {
+   "id": "venusaurite",
+   "name": "Venusaurite",
+   "desc": "Mega Stone: lets Venusaur Mega Evolve. (Held: Allows Venusaur to Mega Evolve into Mega Venusaur.)"
+  },
+  {
+   "id": "victreebelite",
+   "name": "Victreebelite",
+   "desc": "Mega Stone: lets Victreebel Mega Evolve."
   },
   {
    "id": "weakness-policy",

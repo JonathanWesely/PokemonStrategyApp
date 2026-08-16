@@ -65,14 +65,17 @@ void main() {
     expect(result.map((e) => e.speciesId).toSet(), {'umbreon', 'sneasler'});
   });
 
-  test('regional formes resolve from the base name the game displays', () {
+  test('base names resolve to base formes; odd formes resolve by prefix', () {
     final lines = [
-      const OcrLine('Decidueye', cx: 0.6, cy: 0.06), // pack id decidueye-hisui
-      const OcrLine('Ninetales', cx: 0.8, cy: 0.06), // pack id ninetales-alola
+      // Base Decidueye and Ninetales are in Champions now — the plain name
+      // means the plain forme (tap-to-correct covers regional variants).
+      const OcrLine('Decidueye', cx: 0.6, cy: 0.06),
+      // "Floette" on screen = the Eternal Flower forme (id floette-eternal).
+      const OcrLine('Floette', cx: 0.8, cy: 0.06),
     ];
     final result = matcher.match(lines, context);
     expect(result.map((e) => e.speciesId).toSet(),
-        {'decidueye-hisui', 'ninetales-alola'});
+        {'decidueye', 'floette-eternal'});
   });
 
   test('ignores UI words and unknown names', () {

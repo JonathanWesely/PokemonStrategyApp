@@ -105,10 +105,12 @@ dart run tool/update_data.dart
 ## What's still fake / pending
 
 - **Usage percentages** are hand-authored placeholders (home-screen banner
-  reminds you) until the Phase 0 fetchers land in `tool/update_data.dart`.
-- **Roster is 35 species** (26 starters + your two teams from the photos).
-- **Mega Froslass**: the Froslassite item exists; the forme needs real
-  stats from a data update.
+  reminds you) until the Phase 0 fetchers land in `tool/update_data.dart` —
+  and only ~29 species have even placeholder usage; the rest show their
+  learnset with the "no usage data" dimming.
+- The roster itself is complete: **the full Champions dex** (208 species
+  incl. regional forms, all 75 Megas with real stats — Mega Froslass
+  included).
 
 ## iPhone
 

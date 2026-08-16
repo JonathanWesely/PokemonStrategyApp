@@ -75,11 +75,16 @@ class BattleTextMatcher {
     for (final s in pack.species.values) {
       if (_clean(s.name) == q || s.id.replaceAll('-', '') == q) return s.id;
     }
-    // Regional formes: the game shows "Decidueye", the pack id is
-    // decidueye-hisui — accept a prefix match either way.
+    // Formes: the game shows "Floette", the pack id is floette-eternal —
+    // accept a prefix match on the display name or the id either way.
     for (final s in pack.species.values) {
       final name = _clean(s.name);
-      if (q.length >= 5 && (name.startsWith(q) || q.startsWith(name))) {
+      final id = s.id.replaceAll('-', '');
+      if (q.length >= 5 &&
+          (name.startsWith(q) ||
+              q.startsWith(name) ||
+              id.startsWith(q) ||
+              q.startsWith(id))) {
         return s.id;
       }
     }

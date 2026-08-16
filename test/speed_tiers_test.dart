@@ -11,9 +11,9 @@ import 'helpers.dart';
 void main() {
   final pack = loadRealDataPack();
 
-  PokemonBuild jollyMaxSpeChienPao() => PokemonBuild(
-        speciesId: 'chien-pao',
-        ability: 'Sword of Ruin',
+  PokemonBuild jollyMaxSpeDragapult() => PokemonBuild(
+        speciesId: 'dragapult',
+        ability: 'Infiltrator',
         nature: 'Jolly',
         sp: {'spe': 32, 'atk': 32, 'def': 2},
       );
@@ -21,14 +21,14 @@ void main() {
   test('your Pokemon get exact speeds, enemies get ranges', () {
     final tiers = buildSpeedTiers(
       pack,
-      [jollyMaxSpeChienPao()],
+      [jollyMaxSpeDragapult()],
       [EnemyPokemon(speciesId: 'incineroar')],
     );
     expect(tiers.length, 2);
 
     final yours = tiers.firstWhere((t) => t.yours);
     expect(yours.isExact, isTrue);
-    expect(yours.likely, 205); // Jolly max-Spe Chien-Pao
+    expect(yours.likely, 213); // Jolly max-Spe Dragapult
 
     final enemy = tiers.firstWhere((t) => !t.yours);
     expect(enemy.isExact, isFalse);
@@ -39,7 +39,7 @@ void main() {
   test('entries sort fastest-likely first', () {
     final tiers = buildSpeedTiers(
       pack,
-      [jollyMaxSpeChienPao()],
+      [jollyMaxSpeDragapult()],
       [
         EnemyPokemon(speciesId: 'incineroar'),
         EnemyPokemon(speciesId: 'gengar'),
@@ -48,21 +48,21 @@ void main() {
     for (var i = 1; i < tiers.length; i++) {
       expect(tiers[i - 1].likely, greaterThanOrEqualTo(tiers[i].likely));
     }
-    expect(tiers.first.likely, 205);
+    expect(tiers.first.likely, 213);
   });
 
   test('choice scarf: applied exactly to yours, flagged for enemies', () {
-    final scarfed = jollyMaxSpeChienPao()..itemId = 'choice-scarf';
+    final scarfed = jollyMaxSpeDragapult()..itemId = 'choice-scarf';
     final enemy = EnemyPokemon(speciesId: 'incineroar')
       ..revealedItem = 'choice-scarf';
     final tiers = buildSpeedTiers(pack, [scarfed], [enemy]);
 
-    expect(tiers.firstWhere((t) => t.yours).likely, 307); // 205 * 1.5
+    expect(tiers.firstWhere((t) => t.yours).likely, 319); // 213 * 1.5
     expect(tiers.firstWhere((t) => !t.yours).scarfLikely, isTrue);
   });
 
   test('nickname is used as the label when set', () {
-    final build = jollyMaxSpeChienPao()..nickname = 'Snowball';
+    final build = jollyMaxSpeDragapult()..nickname = 'Snowball';
     final tiers = buildSpeedTiers(pack, [build], []);
     expect(tiers.single.label, 'Snowball');
   });

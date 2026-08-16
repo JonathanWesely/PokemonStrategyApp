@@ -46,12 +46,17 @@ when `test/fixtures/preview1.jpeg` is absent.
 
 ## Gotchas
 
-- Mega Froslass exists in Champions (Jonathan runs Froslassite) but has no
-  documented stats yet — the item exists in `items.json`, the forme is
-  deliberately NOT in `pokedex.json`. Add it via a data update when the
-  community documents the stats; don't invent numbers.
-- Usage percentages are hand-authored placeholders
-  (`source: starter-placeholder`); the home-screen banner says so.
+- The pack holds the FULL Champions roster (2026-08-16 import): 223
+  pokedex entries (208 species + regional forms, Bulbapedia list) and all
+  75 Megas with real stats from the updated PokeAPI dump (incl. Champions
+  originals like Mega Froslass). Six VGC staples the July scaffold guessed
+  are NOT in Champions and were removed (rillaboom, amoonguss,
+  landorus-therian, chien-pao, salamence, urshifu-rapid-strike) — don't
+  reference them in tests. Importer: full_roster.py (session workspace;
+  fetches PokeAPI's GitHub dump).
+- Usage percentages are hand-authored placeholders for ~29 species only
+  (`source: starter-placeholder`); everything else falls back to learnset
+  with dimmed confidence. The home-screen banner says so.
 - The sprite matcher's constants were tuned against
   `test/fixtures/preview1.jpeg` via a Python parity prototype; if you touch
   segmentation, re-run the fixture tests and expect to regenerate

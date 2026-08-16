@@ -37,10 +37,10 @@ void main() {
   test('item clause: ranked only', () {
     final a = legalIncineroar();
     final b = PokemonBuild(
-      speciesId: 'rillaboom',
-      ability: 'Grassy Surge',
+      speciesId: 'talonflame',
+      ability: 'Gale Wings',
       itemId: 'safety-goggles',
-      moveIds: ['fake-out', 'grassy-glide'],
+      moveIds: ['brave-bird', 'u-turn'],
     );
     final team = Team(name: 't', builds: [a, b]);
     expect(
@@ -63,7 +63,7 @@ void main() {
   test('wrong ability and off-learnset moves are flagged', () {
     final build = legalIncineroar()
       ..ability = 'Drizzle'
-      ..moveIds = ['surging-strikes'];
+      ..moveIds = ['hydro-pump'];
     final issues =
         lintTeam(Team(name: 't', builds: [build]), ranked, pack);
     expect(issues.any((i) => i.message.contains('cannot have the ability')),

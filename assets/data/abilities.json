@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "generatedAt": "2026-08-15",
+ "generatedAt": "2026-08-16",
  "source": "pokeapi",
  "abilities": [
   {
@@ -14,14 +14,64 @@
    "desc": "Turns the bearer's Normal moves into Flying moves and strengthens them to 1.3\u00d7 their power."
   },
   {
+   "id": "aftermath",
+   "name": "Aftermath",
+   "desc": "Damages the attacker for 1/4 its max HP when knocked out by a contact move."
+  },
+  {
+   "id": "analytic",
+   "name": "Analytic",
+   "desc": "Strengthens moves to 1.3\u00d7 their power when moving last."
+  },
+  {
+   "id": "anger-point",
+   "name": "Anger Point",
+   "desc": "Raises Attack to the maximum of six stages upon receiving a critical hit."
+  },
+  {
+   "id": "anticipation",
+   "name": "Anticipation",
+   "desc": "Notifies all trainers upon entering battle if an opponent has a super-effective move, Self-Destruct, Explosion, or a one-hit KO move."
+  },
+  {
    "id": "armor-tail",
    "name": "Armor Tail",
    "desc": "Prevents the opponent from using any moves that have priority, such as Quick Attack."
   },
   {
+   "id": "aroma-veil",
+   "name": "Aroma Veil",
+   "desc": "Protects allies against moves that affect their mental state."
+  },
+  {
+   "id": "battle-armor",
+   "name": "Battle Armor",
+   "desc": "Protects against critical hits."
+  },
+  {
+   "id": "berserk",
+   "name": "Berserk",
+   "desc": "Raises this Pok\u00e9mon's Special Attack by one stage every time its HP drops below half."
+  },
+  {
+   "id": "big-pecks",
+   "name": "Big Pecks",
+   "desc": "Protects against Defense drops."
+  },
+  {
    "id": "blaze",
    "name": "Blaze",
    "desc": "Strengthens Fire moves to inflict 1.5\u00d7 damage at 1/3 max HP or less."
+  },
+  {
+   "id": "bulletproof",
+   "name": "Bulletproof",
+   "desc": "Protects against bullet, ball, and bomb-based moves."
+  },
+  {
+   "id": "cheek-pouch",
+   "name": "Cheek Pouch",
+   "desc": "Restores HP upon eating a Berry, in addition to the Berry's effect."
   },
   {
    "id": "chlorophyll",
@@ -34,9 +84,39 @@
    "desc": "Prevents stats from being lowered by other Pok\u00e9mon."
   },
   {
+   "id": "cloud-nine",
+   "name": "Cloud Nine",
+   "desc": "Negates all effects of weather, but does not prevent the weather itself."
+  },
+  {
+   "id": "competitive",
+   "name": "Competitive",
+   "desc": "Raises Special Attack by two stages upon having any stat lowered."
+  },
+  {
+   "id": "compound-eyes",
+   "name": "Compound Eyes",
+   "desc": "Increases moves' accuracy to 1.3\u00d7."
+  },
+  {
+   "id": "contrary",
+   "name": "Contrary",
+   "desc": "Inverts stat changes."
+  },
+  {
+   "id": "corrosion",
+   "name": "Corrosion",
+   "desc": "This Pok\u00e9mon can inflict poison on Poison and Steel Pok\u00e9mon."
+  },
+  {
    "id": "cud-chew",
    "name": "Cud Chew",
    "desc": "Causes the Pok\u00e9mon to reuse an already consumed Berry at the end of the next turn."
+  },
+  {
+   "id": "curious-medicine",
+   "name": "Curious Medicine",
+   "desc": "Resets all stat changes upon entering battlefield."
   },
   {
    "id": "cursed-body",
@@ -49,9 +129,24 @@
    "desc": "Has a 30% chance of infatuating attacking Pok\u00e9mon on contact."
   },
   {
+   "id": "damp",
+   "name": "Damp",
+   "desc": "Prevents Self-Destruct, Explosion, and Aftermath from working while the Pok\u00e9mon is in battle."
+  },
+  {
    "id": "defiant",
    "name": "Defiant",
    "desc": "Raises Attack two stages upon having any stat lowered."
+  },
+  {
+   "id": "disguise",
+   "name": "Disguise",
+   "desc": "Prevents the first instance of battle damage."
+  },
+  {
+   "id": "dragonize",
+   "name": "Dragonize",
+   "desc": "The Pok\u00e9mon's Normal-type moves become Dragon-type moves and their power is boosted by 20%."
   },
   {
    "id": "drizzle",
@@ -64,9 +159,54 @@
    "desc": "Summons strong sunlight that lasts indefinitely upon entering battle."
   },
   {
+   "id": "dry-skin",
+   "name": "Dry Skin",
+   "desc": "Causes 1/8 max HP in damage each turn during strong sunlight, but heals for 1/8 max HP during rain.  Increases damage from Fire moves to 1.25\u00d7, but absorbs Water moves, healing for 1/4 max HP."
+  },
+  {
+   "id": "early-bird",
+   "name": "Early Bird",
+   "desc": "Makes sleep pass twice as quickly."
+  },
+  {
+   "id": "earth-eater",
+   "name": "Earth Eater",
+   "desc": "Restores HP when hit by a Ground-type move."
+  },
+  {
+   "id": "eelevate",
+   "name": "Eelevate",
+   "desc": "The Pok\u00e9mon floats off the ground, making it immune to Ground-type moves, as well as the Spikes, Toxic Spikes, and Sticky Web statuses. When the Pok\u00e9mon knocks out a target with an attack, its highest stat is boosted by 1 stage."
+  },
+  {
    "id": "effect-spore",
    "name": "Effect Spore",
    "desc": "Has a 30% chance of inflcting either paralysis, poison, or sleep on attacking Pok\u00e9mon on contact."
+  },
+  {
+   "id": "electric-surge",
+   "name": "Electric Surge",
+   "desc": "When this Pok\u00e9mon enters battle, it changes the terrain to Electric Terrain."
+  },
+  {
+   "id": "electromorphosis",
+   "name": "Electromorphosis",
+   "desc": "When hit by an attack, the power of the next Electric-type move it uses is doubled."
+  },
+  {
+   "id": "fairy-aura",
+   "name": "Fairy Aura",
+   "desc": "Strengthens Fairy moves to 1.33\u00d7 their power for all friendly and opposing Pok\u00e9mon."
+  },
+  {
+   "id": "filter",
+   "name": "Filter",
+   "desc": "Decreases damage taken from super-effective moves by 1/4."
+  },
+  {
+   "id": "fire-mane",
+   "name": "Fire Mane",
+   "desc": "Boosts the power of the Pok\u00e9mon's Fire-type moves by 50%."
   },
   {
    "id": "flame-body",
@@ -79,9 +219,39 @@
    "desc": "Protects against Fire moves.  Once one has been blocked, the Pok\u00e9mon's own Fire moves inflict 1.5\u00d7 damage until it leaves battle."
   },
   {
+   "id": "flower-veil",
+   "name": "Flower Veil",
+   "desc": "Protects friendly Grass Pok\u00e9mon from having their stats lowered by other Pok\u00e9mon."
+  },
+  {
+   "id": "fluffy",
+   "name": "Fluffy",
+   "desc": "Damage from contact moves is halved.  Damage from Fire moves is doubled."
+  },
+  {
+   "id": "forecast",
+   "name": "Forecast",
+   "desc": "Changes Castform's type and form to match the weather."
+  },
+  {
+   "id": "forewarn",
+   "name": "Forewarn",
+   "desc": "Reveals the opponents' strongest move upon entering battle."
+  },
+  {
+   "id": "friend-guard",
+   "name": "Friend Guard",
+   "desc": "Decreases all direct damage taken by friendly Pok\u00e9mon to 0.75\u00d7."
+  },
+  {
    "id": "frisk",
    "name": "Frisk",
    "desc": "Reveals an opponent's held item upon entering battle."
+  },
+  {
+   "id": "fur-coat",
+   "name": "Fur Coat",
+   "desc": "Halves damage from physical attacks."
   },
   {
    "id": "gale-wings",
@@ -89,14 +259,34 @@
    "desc": "Raises Flying moves' priority by one stage."
   },
   {
+   "id": "gluttony",
+   "name": "Gluttony",
+   "desc": "Makes the Pok\u00e9mon eat any held Berry triggered by low HP below 1/2 its max HP."
+  },
+  {
    "id": "good-as-gold",
    "name": "Good as Gold",
    "desc": "Gives immunity to status moves."
   },
   {
-   "id": "grassy-surge",
-   "name": "Grassy Surge",
-   "desc": "When this Pok\u00e9mon enters battle, it changes the terrain to Grassy Terrain."
+   "id": "gooey",
+   "name": "Gooey",
+   "desc": "Lowers attacking Pok\u00e9mon's Speed by one stage on contact."
+  },
+  {
+   "id": "guts",
+   "name": "Guts",
+   "desc": "Increases Attack to 1.5\u00d7 with a major status ailment."
+  },
+  {
+   "id": "harvest",
+   "name": "Harvest",
+   "desc": "Has a 50% chance of restoring a used Berry after each turn if the Pok\u00e9mon has held no items in the meantime."
+  },
+  {
+   "id": "healer",
+   "name": "Healer",
+   "desc": "Has a 30% chance of curing each adjacent ally of any major status ailment after each turn."
   },
   {
    "id": "heatproof",
@@ -104,9 +294,39 @@
    "desc": "Halves damage from Fire moves and burns."
   },
   {
+   "id": "heavy-metal",
+   "name": "Heavy Metal",
+   "desc": "Doubles the Pok\u00e9mon's weight."
+  },
+  {
    "id": "hospitality",
    "name": "Hospitality",
    "desc": "When a Pok\u00e9mon with Hospitality enters a battle, it restores HP for an ally by 25%."
+  },
+  {
+   "id": "huge-power",
+   "name": "Huge Power",
+   "desc": "Doubles Attack in battle."
+  },
+  {
+   "id": "hunger-switch",
+   "name": "Hunger Switch",
+   "desc": "Causes Morpeko to change its form each turn, alternating between Full Belly Mode and Hangry Mode"
+  },
+  {
+   "id": "hustle",
+   "name": "Hustle",
+   "desc": "Strengthens physical moves to inflict 1.5\u00d7 damage, but decreases their accuracy to 0.8\u00d7."
+  },
+  {
+   "id": "hydration",
+   "name": "Hydration",
+   "desc": "Cures any major status ailment after each turn during rain."
+  },
+  {
+   "id": "hyper-cutter",
+   "name": "Hyper Cutter",
+   "desc": "Prevents Attack from being lowered by other Pok\u00e9mon."
   },
   {
    "id": "ice-body",
@@ -114,9 +334,34 @@
    "desc": "Heals for 1/16 max HP after each turn during hail.  Protects against hail damage."
   },
   {
+   "id": "illuminate",
+   "name": "Illuminate",
+   "desc": "Doubles the wild encounter rate."
+  },
+  {
+   "id": "illusion",
+   "name": "Illusion",
+   "desc": "Takes the appearance of the last conscious party Pok\u00e9mon upon being sent out until hit by a damaging move."
+  },
+  {
+   "id": "immunity",
+   "name": "Immunity",
+   "desc": "Prevents poison."
+  },
+  {
+   "id": "imposter",
+   "name": "Imposter",
+   "desc": "Transforms upon entering battle."
+  },
+  {
    "id": "infiltrator",
    "name": "Infiltrator",
    "desc": "Bypasses Light Screen, Reflect, and Safeguard."
+  },
+  {
+   "id": "innards-out",
+   "name": "Innards Out",
+   "desc": "When this Pok\u00e9mon faints from an opponent's move, that opponent takes damage equal to the HP this Pok\u00e9mon had remaining."
   },
   {
    "id": "inner-focus",
@@ -124,9 +369,19 @@
    "desc": "Prevents flinching."
   },
   {
+   "id": "insomnia",
+   "name": "Insomnia",
+   "desc": "Prevents sleep."
+  },
+  {
    "id": "intimidate",
    "name": "Intimidate",
    "desc": "Lowers opponents' Attack one stage upon entering battle."
+  },
+  {
+   "id": "iron-fist",
+   "name": "Iron Fist",
+   "desc": "Strengthens punch-based moves to 1.2\u00d7 their power."
   },
   {
    "id": "justified",
@@ -139,9 +394,114 @@
    "desc": "Prevents accuracy from being lowered."
   },
   {
+   "id": "klutz",
+   "name": "Klutz",
+   "desc": "Prevents the Pok\u00e9mon from using its held item in battle."
+  },
+  {
+   "id": "leaf-guard",
+   "name": "Leaf Guard",
+   "desc": "Protects against major status ailments during strong sunlight."
+  },
+  {
+   "id": "levitate",
+   "name": "Levitate",
+   "desc": "Evades Ground moves."
+  },
+  {
    "id": "light-metal",
    "name": "Light Metal",
    "desc": "Halves the Pok\u00e9mon's weight."
+  },
+  {
+   "id": "lightning-rod",
+   "name": "Lightning Rod",
+   "desc": "Redirects single-target Electric moves to this Pok\u00e9mon where possible.  Absorbs Electric moves, raising Special Attack one stage."
+  },
+  {
+   "id": "limber",
+   "name": "Limber",
+   "desc": "Prevents paralysis."
+  },
+  {
+   "id": "liquid-voice",
+   "name": "Liquid Voice",
+   "desc": "Sound-based moves become Water-type."
+  },
+  {
+   "id": "long-reach",
+   "name": "Long Reach",
+   "desc": "This Pok\u00e9mon's moves do not make contact."
+  },
+  {
+   "id": "magic-bounce",
+   "name": "Magic Bounce",
+   "desc": "Reflects most non-damaging moves back at their user."
+  },
+  {
+   "id": "magic-guard",
+   "name": "Magic Guard",
+   "desc": "Protects against damage not directly caused by a move."
+  },
+  {
+   "id": "magician",
+   "name": "Magician",
+   "desc": "Steals the target's held item when the bearer uses a damaging move."
+  },
+  {
+   "id": "magma-armor",
+   "name": "Magma Armor",
+   "desc": "Prevents freezing."
+  },
+  {
+   "id": "marvel-scale",
+   "name": "Marvel Scale",
+   "desc": "Increases Defense to 1.5\u00d7 with a major status ailment."
+  },
+  {
+   "id": "mega-launcher",
+   "name": "Mega Launcher",
+   "desc": "Strengthens aura and pulse moves to 1.5\u00d7 their power."
+  },
+  {
+   "id": "mega-sol",
+   "name": "Mega Sol",
+   "desc": "The Pok\u00e9mon can use its moves as if the weather were harsh sunlight."
+  },
+  {
+   "id": "merciless",
+   "name": "Merciless",
+   "desc": "This Pok\u00e9mon's moves critical hit against poisoned targets."
+  },
+  {
+   "id": "mimicry",
+   "name": "Mimicry",
+   "desc": "Changes type depending on the terrain."
+  },
+  {
+   "id": "minus",
+   "name": "Minus",
+   "desc": "Increases Special Attack to 1.5\u00d7 when a friendly Pok\u00e9mon has Plus or Minus."
+  },
+  {
+   "id": "mirror-armor",
+   "name": "Mirror Armor",
+   "desc": "Reflects any stat-lowering effects."
+  },
+  {
+   "id": "mold-breaker",
+   "name": "Mold Breaker",
+   "desc": "Bypasses targets' abilities if they could hinder or prevent a move."
+  },
+  {
+   "id": "moody",
+   "name": "Moody",
+   "desc": "Raises a random stat two stages and lowers another one stage after each turn."
+  },
+  {
+   "id": "motor-drive",
+   "name": "Motor Drive",
+   "desc": "Absorbs Electric moves, raising Speed one stage."
   },
   {
    "id": "moxie",
@@ -154,6 +514,36 @@
    "desc": "Halves damage taken from full HP."
   },
   {
+   "id": "mummy",
+   "name": "Mummy",
+   "desc": "Changes attacking Pok\u00e9mon's abilities to Mummy on contact."
+  },
+  {
+   "id": "natural-cure",
+   "name": "Natural Cure",
+   "desc": "Cures any major status ailment upon switching out."
+  },
+  {
+   "id": "no-guard",
+   "name": "No Guard",
+   "desc": "Ensures all moves used by and against the Pok\u00e9mon hit."
+  },
+  {
+   "id": "oblivious",
+   "name": "Oblivious",
+   "desc": "Prevents infatuation and protects against Captivate."
+  },
+  {
+   "id": "opportunist",
+   "name": "Opportunist",
+   "desc": "Copies stat boosts by the opponent."
+  },
+  {
+   "id": "overcoat",
+   "name": "Overcoat",
+   "desc": "Protects against damage from weather."
+  },
+  {
    "id": "overgrow",
    "name": "Overgrow",
    "desc": "Strengthens Grass moves to inflict 1.5\u00d7 damage at 1/3 max HP or less."
@@ -164,14 +554,44 @@
    "desc": "Prevents confusion."
   },
   {
+   "id": "parental-bond",
+   "name": "Parental Bond",
+   "desc": "Lets the bearer hit twice with damaging moves.  The second hit has half power."
+  },
+  {
    "id": "pickpocket",
    "name": "Pickpocket",
    "desc": "Steals attacking Pok\u00e9mon's held items on contact."
   },
   {
+   "id": "pickup",
+   "name": "Pickup",
+   "desc": "Picks up other Pok\u00e9mon's used and Flung held items.  May also pick up an item after battle."
+  },
+  {
+   "id": "piercing-drill",
+   "name": "Piercing Drill",
+   "desc": "When the Pok\u00e9mon uses contact moves, it can hit even targets that are protecting themselves."
+  },
+  {
    "id": "pixilate",
    "name": "Pixilate",
    "desc": "Turns the bearer's Normal moves into Fairy moves and strengthens them to 1.3\u00d7 their power."
+  },
+  {
+   "id": "plus",
+   "name": "Plus",
+   "desc": "Increases Special Attack to 1.5\u00d7 when a friendly Pok\u00e9mon has Plus or Minus."
+  },
+  {
+   "id": "poison-heal",
+   "name": "Poison Heal",
+   "desc": "Heals for 1/8 max HP after each turn when poisoned in place of damage."
+  },
+  {
+   "id": "poison-point",
+   "name": "Poison Point",
+   "desc": "Has a 30% chance of poisoning attacking Pok\u00e9mon on contact."
   },
   {
    "id": "poison-touch",
@@ -189,9 +609,54 @@
    "desc": "Increases the PP cost of moves targetting the Pok\u00e9mon by one."
   },
   {
+   "id": "protean",
+   "name": "Protean",
+   "desc": "Changes the bearer's type to match each move it uses."
+  },
+  {
+   "id": "pure-power",
+   "name": "Pure Power",
+   "desc": "Doubles Attack in battle."
+  },
+  {
+   "id": "purifying-salt",
+   "name": "Purifying Salt",
+   "desc": "Protects from status conditions and halves damage from Ghost-type moves."
+  },
+  {
+   "id": "queenly-majesty",
+   "name": "Queenly Majesty",
+   "desc": "Opposing Pok\u00e9mon cannot use priority attacks."
+  },
+  {
+   "id": "quick-draw",
+   "name": "Quick Draw",
+   "desc": "Enables the Pok\u00e9mon to move first occasionally."
+  },
+  {
+   "id": "quick-feet",
+   "name": "Quick Feet",
+   "desc": "Increases Speed to 1.5\u00d7 with a major status ailment."
+  },
+  {
    "id": "rain-dish",
    "name": "Rain Dish",
    "desc": "Heals for 1/16 max HP after each turn during rain."
+  },
+  {
+   "id": "receiver",
+   "name": "Receiver",
+   "desc": "When an ally faints, this Pok\u00e9mon gains its Ability."
+  },
+  {
+   "id": "reckless",
+   "name": "Reckless",
+   "desc": "Strengthens recoil moves to 1.2\u00d7 their power."
+  },
+  {
+   "id": "refrigerate",
+   "name": "Refrigerate",
+   "desc": "Turns the bearer's Normal moves into Ice moves and strengthens them to 1.3\u00d7 their power."
   },
   {
    "id": "regenerator",
@@ -199,14 +664,39 @@
    "desc": "Heals for 1/3 max HP upon switching out."
   },
   {
+   "id": "ripen",
+   "name": "Ripen",
+   "desc": "Doubles the effect of berries."
+  },
+  {
+   "id": "rivalry",
+   "name": "Rivalry",
+   "desc": "Increases damage inflicted to 1.25\u00d7 against Pok\u00e9mon of the same gender, but decreases damage to 0.75\u00d7 against the opposite gender."
+  },
+  {
+   "id": "rock-head",
+   "name": "Rock Head",
+   "desc": "Protects against recoil damage."
+  },
+  {
    "id": "rough-skin",
    "name": "Rough Skin",
    "desc": "Damages attacking Pok\u00e9mon for 1/8 their max HP on contact."
   },
   {
+   "id": "sand-force",
+   "name": "Sand Force",
+   "desc": "Strengthens Rock, Ground, and Steel moves to 1.3\u00d7 their power during a sandstorm.  Protects against sandstorm damage."
+  },
+  {
    "id": "sand-rush",
    "name": "Sand Rush",
    "desc": "Doubles Speed during a sandstorm.  Protects against sandstorm damage."
+  },
+  {
+   "id": "sand-spit",
+   "name": "Sand Spit",
+   "desc": "Creates a sandstorm when hit by an attack."
   },
   {
    "id": "sand-stream",
@@ -229,14 +719,54 @@
    "desc": "Lets the Pok\u00e9mon's Normal and Fighting moves hit Ghost Pok\u00e9mon."
   },
   {
+   "id": "screen-cleaner",
+   "name": "Screen Cleaner",
+   "desc": "Nullifies effects of Light Screen, Reflect, and Aurora Veil."
+  },
+  {
    "id": "shadow-tag",
    "name": "Shadow Tag",
    "desc": "Prevents opponents from fleeing or switching out."
   },
   {
+   "id": "sharpness",
+   "name": "Sharpness",
+   "desc": "Powers up slicing moves."
+  },
+  {
+   "id": "shed-skin",
+   "name": "Shed Skin",
+   "desc": "Has a 33% chance of curing any major status ailment after each turn."
+  },
+  {
+   "id": "sheer-force",
+   "name": "Sheer Force",
+   "desc": "Strengthens moves with extra effects to 1.3\u00d7 their power, but prevents their extra effects."
+  },
+  {
    "id": "shell-armor",
    "name": "Shell Armor",
    "desc": "Protects against critical hits."
+  },
+  {
+   "id": "shield-dust",
+   "name": "Shield Dust",
+   "desc": "Protects against incoming moves' extra effects."
+  },
+  {
+   "id": "skill-link",
+   "name": "Skill Link",
+   "desc": "Extends two-to-five-hit moves and Triple Kick to their full length every time."
+  },
+  {
+   "id": "slush-rush",
+   "name": "Slush Rush",
+   "desc": "During Hail, this Pok\u00e9mon has double Speed."
+  },
+  {
+   "id": "sniper",
+   "name": "Sniper",
+   "desc": "Strengthens critical hits to inflict 3\u00d7 damage rather than 2\u00d7."
   },
   {
    "id": "snow-cloak",
@@ -254,6 +784,31 @@
    "desc": "Increases Special Attack to 1.5\u00d7 but costs 1/8 max HP after each turn during strong sunlight."
   },
   {
+   "id": "solid-rock",
+   "name": "Solid Rock",
+   "desc": "Decreases damage taken from super-effective moves by 1/4."
+  },
+  {
+   "id": "soundproof",
+   "name": "Soundproof",
+   "desc": "Protects against sound-based moves."
+  },
+  {
+   "id": "speed-boost",
+   "name": "Speed Boost",
+   "desc": "Raises Speed one stage after each turn."
+  },
+  {
+   "id": "spicy-spray",
+   "name": "Spicy Spray",
+   "desc": "When the Pok\u00e9mon takes damage from a move, it burns the attacker."
+  },
+  {
+   "id": "stall",
+   "name": "Stall",
+   "desc": "Makes the Pok\u00e9mon move last within its move's priority bracket."
+  },
+  {
    "id": "stalwart",
    "name": "Stalwart",
    "desc": "Ignores moves and abilities that draw in moves."
@@ -264,9 +819,34 @@
    "desc": "Raises this Pok\u00e9mon's Defense by one stage when it takes damage from a move."
   },
   {
+   "id": "stance-change",
+   "name": "Stance Change",
+   "desc": "Changes Aegislash to Blade Forme before using a damaging move, or Shield Forme before using King\u2019s Shield."
+  },
+  {
+   "id": "static",
+   "name": "Static",
+   "desc": "Has a 30% chance of paralyzing attacking Pok\u00e9mon on contact."
+  },
+  {
    "id": "steadfast",
    "name": "Steadfast",
    "desc": "Raises Speed one stage upon flinching."
+  },
+  {
+   "id": "stench",
+   "name": "Stench",
+   "desc": "Has a 10% chance of making target Pok\u00e9mon flinch with each hit."
+  },
+  {
+   "id": "sticky-hold",
+   "name": "Sticky Hold",
+   "desc": "Prevents a held item from being removed by other Pok\u00e9mon."
+  },
+  {
+   "id": "strong-jaw",
+   "name": "Strong Jaw",
+   "desc": "Strengthens biting moves to 1.5\u00d7 their power."
   },
   {
    "id": "sturdy",
@@ -274,14 +854,49 @@
    "desc": "Prevents being KOed from full HP, leaving 1 HP instead.  Protects against the one-hit KO moves regardless of HP."
   },
   {
+   "id": "suction-cups",
+   "name": "Suction Cups",
+   "desc": "Prevents being forced out of battle by other Pok\u00e9mon's moves."
+  },
+  {
+   "id": "super-luck",
+   "name": "Super Luck",
+   "desc": "Raises moves' critical hit rates one stage."
+  },
+  {
+   "id": "supersweet-syrup",
+   "name": "Supersweet Syrup",
+   "desc": "Once per battle, when a Pok\u00e9mon with Supersweet Syrup enters the battle, it lowers the evasion stat of all adjacent opponents by one stage."
+  },
+  {
    "id": "supreme-overlord",
    "name": "Supreme Overlord",
    "desc": "Attack and Special Attack are boosted for each party Pok\u00e9mon that has been defeated."
   },
   {
-   "id": "sword-of-ruin",
-   "name": "Sword of Ruin",
-   "desc": "Lowers Defense of all Pok\u00e9mon except itself."
+   "id": "surge-surfer",
+   "name": "Surge Surfer",
+   "desc": "Doubles this Pok\u00e9mon's Speed on Electric Terrain."
+  },
+  {
+   "id": "swarm",
+   "name": "Swarm",
+   "desc": "Strengthens Bug moves to inflict 1.5\u00d7 damage at 1/3 max HP or less."
+  },
+  {
+   "id": "sweet-veil",
+   "name": "Sweet Veil",
+   "desc": "Prevents friendly Pok\u00e9mon from sleeping."
+  },
+  {
+   "id": "swift-swim",
+   "name": "Swift Swim",
+   "desc": "Doubles Speed during rain."
+  },
+  {
+   "id": "symbiosis",
+   "name": "Symbiosis",
+   "desc": "Passes the bearer's held item to an ally when the ally uses up its item."
   },
   {
    "id": "synchronize",
@@ -289,9 +904,49 @@
    "desc": "Copies burns, paralysis, and poison received onto the Pok\u00e9mon that inflicted them."
   },
   {
+   "id": "tangled-feet",
+   "name": "Tangled Feet",
+   "desc": "Doubles evasion when confused."
+  },
+  {
+   "id": "technician",
+   "name": "Technician",
+   "desc": "Strengthens moves of 60 base power or less to 1.5\u00d7 their power."
+  },
+  {
+   "id": "telepathy",
+   "name": "Telepathy",
+   "desc": "Protects against friendly Pok\u00e9mon's damaging moves."
+  },
+  {
+   "id": "thick-fat",
+   "name": "Thick Fat",
+   "desc": "Halves damage from Fire and Ice moves."
+  },
+  {
+   "id": "torrent",
+   "name": "Torrent",
+   "desc": "Strengthens Water moves to inflict 1.5\u00d7 damage at 1/3 max HP or less."
+  },
+  {
    "id": "tough-claws",
    "name": "Tough Claws",
    "desc": "Strengthens moves that make contact to 1.33\u00d7 their power."
+  },
+  {
+   "id": "toxic-debris",
+   "name": "Toxic Debris",
+   "desc": "Scatters poison spikes at the feet of the opposing team when the Pok\u00e9mon takes damage from physical moves."
+  },
+  {
+   "id": "trace",
+   "name": "Trace",
+   "desc": "Copies an opponent's ability upon entering battle."
+  },
+  {
+   "id": "unaware",
+   "name": "Unaware",
+   "desc": "Ignores other Pok\u00e9mon's stat modifiers for damage and accuracy calculation."
   },
   {
    "id": "unburden",
@@ -314,9 +969,39 @@
    "desc": "Prevents sleep."
   },
   {
+   "id": "volt-absorb",
+   "name": "Volt Absorb",
+   "desc": "Absorbs Electric moves, healing for 1/4 max HP."
+  },
+  {
+   "id": "wandering-spirit",
+   "name": "Wandering Spirit",
+   "desc": "Swaps abilities with opponents on contact."
+  },
+  {
+   "id": "water-absorb",
+   "name": "Water Absorb",
+   "desc": "Absorbs Water moves, healing for 1/4 max HP."
+  },
+  {
+   "id": "water-bubble",
+   "name": "Water Bubble",
+   "desc": "Halves damage from Fire moves, doubles damage of Water moves, and prevents burns."
+  },
+  {
+   "id": "weak-armor",
+   "name": "Weak Armor",
+   "desc": "Raises Speed and lowers Defense by one stage each upon being hit by a physical move."
+  },
+  {
    "id": "white-smoke",
    "name": "White Smoke",
    "desc": "Prevents stats from being lowered by other Pok\u00e9mon."
+  },
+  {
+   "id": "zero-to-hero",
+   "name": "Zero to Hero",
+   "desc": "Transforms into its Hero Form when switching out."
   }
  ]
 }

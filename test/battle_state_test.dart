@@ -19,15 +19,15 @@ void main() {
         format: doubles,
         team: Team(name: 'T', builds: [
           build('incineroar'),
-          build('chien-pao'),
+          build('weavile'),
           build('gengar'),
-          build('amoonguss'),
+          build('whimsicott'),
         ]),
         picks: [
           build('incineroar'),
-          build('chien-pao'),
+          build('weavile'),
           build('gengar'),
-          build('amoonguss'),
+          build('whimsicott'),
         ],
       );
 
@@ -37,9 +37,9 @@ void main() {
         format: doubles,
         team: Team(name: 'T', builds: [
           build('incineroar'),
-          build('chien-pao'),
+          build('weavile'),
           build('gengar'),
-          build('amoonguss'),
+          build('whimsicott'),
           build('torkoal'),
           build('pelipper'),
         ]),
@@ -57,9 +57,9 @@ void main() {
         format: doubles,
         team: Team(name: 'T', builds: [
           build('incineroar'),
-          build('chien-pao'),
+          build('weavile'),
           build('gengar'),
-          build('amoonguss'),
+          build('whimsicott'),
           build('torkoal'),
           build('pelipper'),
         ]),
@@ -67,8 +67,8 @@ void main() {
       s.setPicks([
         build('gengar'),
         build('torkoal'),
-        build('chien-pao'),
-        build('amoonguss'),
+        build('weavile'),
+        build('whimsicott'),
       ]);
       expect(s.picksChosen, isTrue);
       expect(s.picks.length, 4);
@@ -103,7 +103,7 @@ void main() {
       final s = session();
       s.addEnemy('incineroar'); // on field
       s.addEnemy('gengar'); // on field — both slots full
-      s.addEnemy('amoonguss'); // benches the oldest
+      s.addEnemy('talonflame'); // benches the oldest
       expect(s.enemiesOnField.length, 2);
       expect(s.enemyBench.length, 1);
       expect(s.enemyUnknownReserveCount, 1);
