@@ -97,27 +97,40 @@ class BattleTextMatcher {
   static String _clean(String s) =>
       s.toLowerCase().replaceAll(RegExp(r'[^a-z]'), '');
 
-  /// HP percent from the same or a nearby line: "44%", "44 %", "177/202".
+  /// HP percent from the NEAREST matching line: "44%", "44 %", "177/202".
+  /// Nearest matters — the two enemy banners sit side by side, so a
+  /// first-match scan can grab the neighbor's HP.
   int? _hpNear(List<OcrLine> lines, int i) {
     final anchor = lines[i];
+    int? best;
+    var bestDist = double.infinity;
     for (final line in lines) {
-      if ((line.cy - anchor.cy).abs() > 0.08 ||
-          (line.cx - anchor.cx).abs() > 0.25) {
-        continue;
-      }
+      final dy = (line.cy - anchor.cy).abs();
+      final dx = (line.cx - anchor.cx).abs();
+      if (dy > 0.08 || dx > 0.25) continue;
+      int? value;
       final pct = RegExp(r'(\d{1,3})\s*%').firstMatch(line.text);
       if (pct != null) {
         final v = int.parse(pct.group(1)!);
-        if (v >= 0 && v <= 100) return v;
+        if (v >= 0 && v <= 100) value = v;
       }
-      final frac = RegExp(r'(\d{1,3})\s*/\s*(\d{1,3})').firstMatch(line.text);
-      if (frac != null) {
-        final cur = int.parse(frac.group(1)!);
-        final max = int.parse(frac.group(2)!);
-        if (max > 0 && cur <= max) return (cur * 100 / max).round();
+      if (value == null) {
+        final frac =
+            RegExp(r'(\d{1,3})\s*/\s*(\d{1,3})').firstMatch(line.text);
+        if (frac != null) {
+          final cur = int.parse(frac.group(1)!);
+          final max = int.parse(frac.group(2)!);
+          if (max > 0 && cur <= max) value = (cur * 100 / max).round();
+        }
+      }
+      if (value == null) continue;
+      final dist = dx * dx + dy * dy;
+      if (dist < bestDist) {
+        bestDist = dist;
+        best = value;
       }
     }
-    return null;
+    return best;
   }
 
   static int _editDistance(String a, String b, {int max = 2}) {

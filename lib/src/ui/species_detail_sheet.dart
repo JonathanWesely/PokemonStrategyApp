@@ -20,7 +20,8 @@ import '../prediction/prediction_engine.dart';
 import 'info_sheets.dart';
 import 'widgets.dart';
 
-/// Open the detail sheet as a scrollable modal.
+/// Open the detail sheet as a scrollable modal. [build] is non-null when
+/// this is one of YOUR Pokemon.
 void showSpeciesDetail(
   BuildContext context, {
   required String speciesId,
@@ -33,7 +34,7 @@ void showSpeciesDetail(
     showDragHandle: true,
     builder: (_) => SpeciesDetailSheet(
       speciesId: speciesId,
-      build: build,
+      ownBuild: build,
       showPredictions: showPredictions,
     ),
   );
@@ -42,8 +43,9 @@ void showSpeciesDetail(
 class SpeciesDetailSheet extends StatelessWidget {
   final String speciesId;
 
-  /// Non-null when this is one of YOUR Pokemon (adds exact stats + your moves).
-  final PokemonBuild? build;
+  /// Non-null when this is one of YOUR Pokemon (adds exact stats + your
+  /// moves). Named ownBuild because StatelessWidget already has build().
+  final PokemonBuild? ownBuild;
 
   /// Show usage-based meta predictions (preview screen); off for pure facts.
   final bool showPredictions;
@@ -51,7 +53,7 @@ class SpeciesDetailSheet extends StatelessWidget {
   const SpeciesDetailSheet({
     super.key,
     required this.speciesId,
-    this.build,
+    this.ownBuild,
     this.showPredictions = false,
   });
 
@@ -67,16 +69,16 @@ class SpeciesDetailSheet extends StatelessWidget {
       );
     }
 
-    final megaId = build?.megaFormeId;
+    final megaId = ownBuild?.megaFormeId;
     final types = species.typesFor(megaId);
     final baseStats = species.baseStatsFor(megaId);
 
     // Weakness/resistance from confirmed facts: your ability/item, or (for a
     // previewed enemy) the most common ability when predictions are on.
-    String? profileAbility = build?.ability;
-    String? profileItem = build?.itemId;
+    String? profileAbility = ownBuild?.ability;
+    String? profileItem = ownBuild?.itemId;
     EnemyIntel? intel;
-    if (showPredictions || build == null) {
+    if (showPredictions || ownBuild == null) {
       intel = PredictionEngine(pack).intelFor(EnemyPokemon(speciesId: speciesId));
       profileAbility ??= intel.abilities.isEmpty ? null : intel.abilities.first.id;
     }
@@ -103,19 +105,19 @@ class SpeciesDetailSheet extends StatelessWidget {
                     style: theme.textTheme.titleLarge
                         ?.copyWith(fontWeight: FontWeight.w700)),
               ),
-              Icon(build != null ? Icons.person : Icons.smart_toy,
+              Icon(ownBuild != null ? Icons.person : Icons.smart_toy,
                   size: 18,
-                  color: build != null ? Colors.blue : Colors.red),
+                  color: ownBuild != null ? Colors.blue : Colors.red),
             ],
           ),
           const SizedBox(height: 6),
           Wrap(spacing: 4, children: [for (final t in types) TypeChip(t)]),
 
-          if (build != null) ...[
+          if (ownBuild != null) ...[
             const SizedBox(height: 6),
             Text(
-              '${build!.ability.isEmpty ? '—' : build!.ability} · '
-              '${pack.itemName(build!.itemId)} · ${build!.nature}',
+              '${ownBuild!.ability.isEmpty ? '—' : ownBuild!.ability} · '
+              '${pack.itemName(ownBuild!.itemId)} · ${ownBuild!.nature}',
               style: const TextStyle(fontSize: 12),
             ),
           ],
@@ -125,12 +127,12 @@ class SpeciesDetailSheet extends StatelessWidget {
           const SizedBox(height: 4),
           BaseStatsRow(baseStats),
 
-          if (build != null) ...[
+          if (ownBuild != null) ...[
             const SizedBox(height: 10),
             Text('Your stats (level 50)', style: theme.textTheme.labelLarge),
             const SizedBox(height: 4),
             _exactStatsRow(StatCalculator.computeStats(
-                baseStats, build!.sp, build!.nature)),
+                baseStats, ownBuild!.sp, ownBuild!.nature)),
           ],
 
           const Divider(height: 20),
@@ -154,10 +156,13 @@ class SpeciesDetailSheet extends StatelessWidget {
             ],
           ),
 
-          if (build != null) ...[
+          if (ownBuild != null) ...[
             const Divider(height: 20),
             Text('Your moves', style: theme.textTheme.labelLarge),
-            for (final moveId in build!.moveIds) _moveLine(pack, moveId),
+            for (final moveId in ownBuild!.moveIds)
+              InkWell(
+                  onTap: () => showMoveInfo(context, pack, moveId),
+                  child: _moveLine(pack, moveId)),
           ],
 
           const Divider(height: 20),
@@ -206,6 +211,7 @@ class SpeciesDetailSheet extends StatelessWidget {
                 children: [
                   for (final e in intel.teammates.entries.take(4))
                     Chip(
+                      avatar: SpeciesIcon(e.key, size: 18),
                       label: Text(
                           '${pack.speciesName(e.key)} ${e.value.toStringAsFixed(0)}%',
                           style: const TextStyle(fontSize: 11)),

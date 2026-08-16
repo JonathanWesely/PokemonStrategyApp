@@ -31,7 +31,7 @@ Future<Uint8List?> _bundleLoader(String path) async {
   }
 }
 
-/// Exemplar persistence: PNGs under <documents>/exemplars/<speciesId>/.
+/// Exemplar persistence: PNGs under `documents/exemplars/speciesId/`.
 Future<ExemplarStore> _buildExemplarStore() async {
   final store = ExemplarStore(loadBundled: _bundleLoader);
   final docs = await getApplicationDocumentsDirectory();

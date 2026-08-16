@@ -1,4 +1,8 @@
 include: package:flutter_lints/flutter.yaml
 
+analyzer:
+  exclude:
+    - _to_delete/**
+
 linter:
   rules:
