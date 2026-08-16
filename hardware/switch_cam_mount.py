@@ -11,13 +11,13 @@ the exemplar matcher learns from exactly this viewpoint anyway).
 Battery tray rides LOW on the back plate to counterweight the boom.
 Slide the clamp anywhere along the edge — keep it off the vent slots.
 
-Output: one binary STL of overlapping closed cuboid shells (every slicer
-unions them). Print flat on the back plate, PETG, 3-4 perimeters.
+Output: ONE watertight manifold STL (all cuboids boolean-unioned via
+trimesh+manifold3d, with 0.4-4 mm weld overlaps at every joint). Print
+flat on the back plate, PETG, 3-4 perimeters, supports under boom/head.
 """
 import math
 import os
 import numpy as np
-from stl import mesh
 
 OUT = "/home/claude/app/hardware/switch_cam_mount.stl"
 
@@ -76,8 +76,8 @@ WIN = 12.0          # lens window in the plate
 SCREEN_CENTER = np.array([0.0, -GAP / 2, -45.0])   # ~45 mm below top edge
 
 # ---------------------------------------------------------------- clamp ----
-box(W, LIP_T, LIP_DROP, 0, -GAP / 2 - LIP_T / 2, -LIP_DROP)     # front lip
-box(W, BACK_T, BACK_DROP, 0, GAP / 2 + BACK_T / 2, -BACK_DROP)  # back plate
+box(W, LIP_T, LIP_DROP + 0.6, 0, -GAP / 2 - LIP_T / 2, -LIP_DROP)  # front lip (welds into spine)
+box(W, BACK_T, BACK_DROP + 0.6, 0, GAP / 2 + BACK_T / 2, -BACK_DROP)  # back plate (welds into spine)
 span = GAP + LIP_T + BACK_T
 span_cy = (-GAP / 2 - LIP_T + GAP / 2 + BACK_T) / 2
 box(PAD_W, span, BRIDGE_T, -(W - PAD_W) / 2, span_cy, 0)        # bridge pad L
@@ -89,7 +89,7 @@ box(W, BACK_T, BRIDGE_T, 0, GAP / 2 + BACK_T / 2, 0)            # rear spine
 # Root at the front spine top, leaning forward BOOM_ANGLE above horizontal.
 root = np.array([0.0, -GAP / 2 - LIP_T / 2, BRIDGE_T])
 Rb = rot_x(90.0 - BOOM_ANGLE)   # tips the boom forward-UP over the screen
-box(BOOM_W, BOOM_T, BOOM_LEN, root[0], root[1], root[2] - 0.0,
+box(BOOM_W, BOOM_T, BOOM_LEN + 4.0, root[0], root[1], root[2] - 4.0,
     rot=Rb, pivot=root)
 # gusset at the root so the boom doesn't hinge at a layer line
 box(BOOM_W, 10.0, BRIDGE_T + 4.0, 0, -GAP / 2 - LIP_T - 3.0, -2.0)
@@ -117,15 +117,15 @@ strip = (PL_W - WIN) / 2
 hbox(strip, PL_D, PL_T, -(WIN + strip) / 2, hy, hz)
 hbox(strip, PL_D, PL_T, (WIN + strip) / 2, hy, hz)
 edge = (PL_D - WIN) / 2
-hbox(WIN, edge, PL_T, 0, hy - (WIN + edge) / 2, hz)
-hbox(WIN, edge, PL_T, 0, hy + (WIN + edge) / 2, hz)
+hbox(WIN + 0.8, edge, PL_T, 0, hy - (WIN + edge) / 2, hz)
+hbox(WIN + 0.8, edge, PL_T, 0, hy + (WIN + edge) / 2, hz)
 # rim walls (open toward the boom side to slide the board in)
-hbox(RIM, PL_D, 6.0, -(BAY_W / 2 + RIM / 2), hy, hz + PL_T)
-hbox(RIM, PL_D, 6.0, (BAY_W / 2 + RIM / 2), hy, hz + PL_T)
-hbox(BAY_W + 2 * RIM, RIM, 6.0, 0, hy - PL_D / 2 + RIM / 2, hz + PL_T)
+hbox(RIM, PL_D, 6.4, -(BAY_W / 2 + RIM / 2), hy, hz + PL_T - 0.4)
+hbox(RIM, PL_D, 6.4, (BAY_W / 2 + RIM / 2), hy, hz + PL_T - 0.4)
+hbox(BAY_W + 2 * RIM, RIM, 6.4, 0, hy - PL_D / 2 + RIM / 2, hz + PL_T - 0.4)
 # zip-tie bars under the plate
-hbox(PL_W, 4.0, 2.0, 0, hy - PL_D / 2 + 6.0, hz - 2.0)
-hbox(PL_W, 4.0, 2.0, 0, hy + PL_D / 2 - 6.0, hz - 2.0)
+hbox(PL_W, 4.0, 2.0, 0, hy - PL_D / 2 + 6.0, hz - 1.6)
+hbox(PL_W, 4.0, 2.0, 0, hy + PL_D / 2 - 6.0, hz - 1.6)
 
 # Tilt head about the boom tip so the lens looks back-down at the screen.
 Rh = rot_x(TILT)
@@ -136,20 +136,33 @@ box(BOOM_W, BOOM_T, 8.0, tip[0], tip[1], tip[2] - 6.0)
 
 # ------------------------------------------------------------ battery tray --
 BT_W, BT_D = 32.0, 7.5     # 502030 LiPo: 30 x 20 x ~5.5
-bt_y = GAP / 2 + BACK_T
+bt_y = GAP / 2 + BACK_T - 0.8  # 0.8 weld into the back plate
 box(BT_W, BT_D, 2.0, 0, bt_y + BT_D / 2, -28.0)                  # floor
 box(BT_W, 2.0, 22.0, 0, bt_y + BT_D - 1.0, -28.0)                # outer wall
 box(2.0, BT_D, 22.0, -(BT_W / 2 - 1.0), bt_y + BT_D / 2, -28.0)  # side L
 box(2.0, BT_D, 22.0, (BT_W / 2 - 1.0), bt_y + BT_D / 2, -28.0)   # side R
 
 # ---------------------------------------------------------------- export ----
-data = np.zeros(len(parts) * len(FACES), dtype=mesh.Mesh.dtype)
-for i, v in enumerate(parts):
-    for j, f in enumerate(FACES):
-        data["vectors"][i * len(FACES) + j] = v[f]
-m = mesh.Mesh(data)
+# Boolean-union every cuboid into ONE watertight manifold (print services
+# choke on piles of overlapping shells). Requires: pip install trimesh manifold3d
+import trimesh
+
+solids = [trimesh.Trimesh(vertices=v, faces=FACES, process=True) for v in parts]
+for i, sld in enumerate(solids):
+    if not sld.is_volume:
+        raise SystemExit(f"part {i} is not a closed volume — fix the generator")
+united = trimesh.boolean.union(solids, engine="manifold")
+united.merge_vertices()
+if not united.is_watertight:
+    raise SystemExit("union is not watertight")
+bodies = united.split(only_watertight=False)
+if len(bodies) != 1:
+    raise SystemExit(f"union produced {len(bodies)} disconnected bodies — "
+                     "a joint is only touching, not overlapping")
 os.makedirs(os.path.dirname(OUT), exist_ok=True)
-m.save(OUT)
+united.export(OUT)
+print(f"UNION OK: single watertight body, {len(united.faces)} triangles, "
+      f"volume {united.volume / 1000:.1f} cm3")
 
 # ------------------------------------------------------------- validation --
 all_v = np.vstack(parts)
@@ -167,16 +180,12 @@ corners = [np.array([sx * 77.5, -GAP / 2, z])
 angles = [math.degrees(math.acos(float(np.clip(
     np.dot(axis, (c - lens) / np.linalg.norm(c - lens)), -1, 1))))
     for c in corners]
-def vol(msh):
-    v0, v1, v2 = msh.vectors[:, 0], msh.vectors[:, 1], msh.vectors[:, 2]
-    return abs(np.einsum('ij,ij->i', v0, np.cross(v1, v2)).sum()) / 6.0
-
-print(f"parts {len(parts)}  triangles {len(data)}")
+print(f"parts {len(parts)}  triangles {len(united.faces)}")
 print(f"bbox x {all_v[:,0].min():.0f}..{all_v[:,0].max():.0f}  "
       f"y {all_v[:,1].min():.0f}..{all_v[:,1].max():.0f}  "
       f"z {all_v[:,2].min():.0f}..{all_v[:,2].max():.0f} (mm)")
-print(f"volume {vol(m)/1000:.1f} cm3  (~printed weight w/ infill ≈ "
-      f"{vol(m)/1000*1.27*0.5:.0f} g PETG)")
+print(f"volume {united.volume/1000:.1f} cm3  (~printed weight w/ infill ≈ "
+      f"{united.volume/1000*1.27*0.55:.0f} g PETG)")
 print(f"lens position y={lens[1]:.0f} z={lens[2]:.0f} "
       f"(={-lens[1]-GAP/2:.0f} mm in front of screen, {lens[2]:.0f} mm up)")
 print(f"distance to screen center {dist:.0f} mm  "
