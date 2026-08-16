@@ -35,6 +35,17 @@ def rot_x(deg):
                      [0, math.cos(a), -math.sin(a)],
                      [0, math.sin(a), math.cos(a)]])
 
+_jit_n = [0]
+def _jit():
+    """Deterministic micro-offset (±0.03 mm) per part: breaks exact
+    coplanarity between unioned faces, which otherwise leaves T-vertices
+    that repair tools can misread. Physically irrelevant at print scale."""
+    _jit_n[0] += 1
+    k = _jit_n[0]
+    return np.array([((k * 7) % 11 - 5) * 0.006,
+                     ((k * 5) % 9 - 4) * 0.006,
+                     ((k * 3) % 7 - 3) * 0.008])
+
 def box(w, d, h, cx, cy, z0, rot=None, pivot=None):
     """Cuboid: width x (along edge), depth y, height z, base at z0,
     centered at (cx, cy). Optional rotation about pivot."""
@@ -48,6 +59,7 @@ def box(w, d, h, cx, cy, z0, rot=None, pivot=None):
     if rot is not None:
         p = np.asarray(pivot, dtype=float)
         v = (v - p) @ np.asarray(rot).T + p
+    v = v + _jit()
     parts.append(v)
     return v
 
@@ -106,28 +118,46 @@ def hbox(w, d, h, cx, cy, z0):
     v[:, 0] += cx
     v[:, 1] += cy
     v[:, 2] += z0
+    v = v + _jit()
     head.append(v)
     return v
 
-# Pre-tilt: tray plate horizontal at the boom tip, board bay on top, the
-# lens window centered at the tip; the XIAO sits lens-down over the window.
+# Pre-tilt: tray plate horizontal at the boom tip, board bay on top. The
+# lens window sits FORWARD of the boom joint (the joint wedge lives under
+# the plate's solid rear band) so nothing printed blocks the lens.
 hy, hz = tip[1], tip[2]
+WINDOW_FWD = 15.0                 # window center this far forward of the tip
+cy_p = hy - 9.0                   # plate center: spans [hy-24 .. hy+6]
+wy = hy - WINDOW_FWD              # window spans [hy-21 .. hy-9]
 strip = (PL_W - WIN) / 2
-# plate strips around the lens window (window centered on the tip)
-hbox(strip, PL_D, PL_T, -(WIN + strip) / 2, hy, hz)
-hbox(strip, PL_D, PL_T, (WIN + strip) / 2, hy, hz)
-edge = (PL_D - WIN) / 2
-hbox(WIN + 0.8, edge, PL_T, 0, hy - (WIN + edge) / 2, hz)
-hbox(WIN + 0.8, edge, PL_T, 0, hy + (WIN + edge) / 2, hz)
+# plate strips around the lens window
+hbox(strip, PL_D, PL_T, -(WIN + strip) / 2, cy_p, hz)
+hbox(strip, PL_D, PL_T, (WIN + strip) / 2, cy_p, hz)
+front_d = (wy - WIN / 2) - (cy_p - PL_D / 2)   # plate front edge -> window
+rear_d = (cy_p + PL_D / 2) - (wy + WIN / 2)    # window -> plate rear edge
+hbox(WIN + 0.8, front_d + 0.4, PL_T, 0,
+     cy_p - PL_D / 2 + (front_d + 0.4) / 2, hz)
+hbox(WIN + 0.8, rear_d + 0.4, PL_T, 0,
+     cy_p + PL_D / 2 - (rear_d + 0.4) / 2, hz)
 # rim walls (open toward the boom side to slide the board in)
-hbox(RIM, PL_D, 6.4, -(BAY_W / 2 + RIM / 2), hy, hz + PL_T - 0.4)
-hbox(RIM, PL_D, 6.4, (BAY_W / 2 + RIM / 2), hy, hz + PL_T - 0.4)
-hbox(BAY_W + 2 * RIM, RIM, 6.4, 0, hy - PL_D / 2 + RIM / 2, hz + PL_T - 0.4)
-# zip-tie bars under the plate
-hbox(PL_W, 4.0, 2.0, 0, hy - PL_D / 2 + 6.0, hz - 1.6)
-hbox(PL_W, 4.0, 2.0, 0, hy + PL_D / 2 - 6.0, hz - 1.6)
+hbox(RIM, PL_D, 6.4, -(BAY_W / 2 + RIM / 2), cy_p, hz + PL_T - 0.4)
+hbox(RIM, PL_D, 6.4, (BAY_W / 2 + RIM / 2), cy_p, hz + PL_T - 0.4)
+hbox(BAY_W + 2 * RIM, RIM, 6.4, 0, cy_p - PL_D / 2 + RIM / 2,
+     hz + PL_T - 0.4)
+# zip-tie bars under the plate — kept clear of the window opening
+hbox(PL_W, 3.0, 2.0, 0, cy_p - PL_D / 2 + 1.5, hz - 1.6)   # front edge
+hbox(PL_W, 3.0, 2.0, 0, hy - 7.0, hz - 1.6)                # behind window
 
 # Tilt head about the boom tip so the lens looks back-down at the screen.
+# The window moved forward of the pivot, so solve the tilt numerically.
+def _aim_error(tilt_deg):
+    R = rot_x(tilt_deg)
+    lens_p = (np.array([0.0, wy, hz + PL_T]) - tip) @ R.T + tip
+    ax = R @ np.array([0, 0, -1.0])
+    to_c = SCREEN_CENTER - lens_p
+    to_c = to_c / np.linalg.norm(to_c)
+    return math.degrees(math.acos(float(np.clip(np.dot(ax, to_c), -1, 1))))
+TILT = min(np.arange(20.0, 70.0, 0.1), key=_aim_error)
 Rh = rot_x(TILT)
 for v in head:
     parts.append((v - tip) @ Rh.T + tip)
@@ -152,7 +182,6 @@ for i, sld in enumerate(solids):
     if not sld.is_volume:
         raise SystemExit(f"part {i} is not a closed volume — fix the generator")
 united = trimesh.boolean.union(solids, engine="manifold")
-united.merge_vertices()
 if not united.is_watertight:
     raise SystemExit("union is not watertight")
 bodies = united.split(only_watertight=False)
@@ -166,7 +195,7 @@ print(f"UNION OK: single watertight body, {len(united.faces)} triangles, "
 
 # ------------------------------------------------------------- validation --
 all_v = np.vstack(parts)
-lens_pre = np.array([0.0, hy, hz])
+lens_pre = np.array([0.0, wy, hz + PL_T])
 lens = (lens_pre - tip) @ Rh.T + tip
 axis = Rh @ np.array([0, 0, -1.0])          # lens optical axis
 to_c = SCREEN_CENTER - lens
@@ -180,7 +209,7 @@ corners = [np.array([sx * 77.5, -GAP / 2, z])
 angles = [math.degrees(math.acos(float(np.clip(
     np.dot(axis, (c - lens) / np.linalg.norm(c - lens)), -1, 1))))
     for c in corners]
-print(f"parts {len(parts)}  triangles {len(united.faces)}")
+print(f"parts {len(parts)}  triangles {len(united.faces)}  solved TILT {TILT:.1f} deg")
 print(f"bbox x {all_v[:,0].min():.0f}..{all_v[:,0].max():.0f}  "
       f"y {all_v[:,1].min():.0f}..{all_v[:,1].max():.0f}  "
       f"z {all_v[:,2].min():.0f}..{all_v[:,2].max():.0f} (mm)")

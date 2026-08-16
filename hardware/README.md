@@ -22,7 +22,9 @@ third-party app may read. So: a 5-gram dev-board camera we fully control.
 
 ## The printed part (`switch_cam_mount.stl`)
 
-**v2 (2026-08-16): pre-flight verified for print services** — the STL
+**v3 (2026-08-16): Jonathan caught the boom joint sitting inside the lens window** — the window/camera bay now sits 15 mm forward of the joint, tilt re-solved (48°, 0.0° aim error, 42° incidence), and five ray-casts from the lens (center + screen corners) verify nothing printed blocks the view. Micro-jitter (≤0.03 mm) breaks exact face coplanarity so mesh checkers see one clean solid on reload.
+
+**v2 pre-flight (superseded but still true of v3)** — the STL
 is now a single boolean-unioned watertight manifold (trimesh +
 manifold3d; checked: 1 body, consistent winding, valid volume,
 21.1 cm³, 40×125×97 mm, all walls ≥2 mm). Every joint has a real
