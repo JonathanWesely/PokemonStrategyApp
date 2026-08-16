@@ -54,18 +54,28 @@ dart run tool/update_data.dart
 
 **A. With the fixture photos (most reliable, no camera):**
 
-1. Drag `test\fixtures\preview1.jpeg` (and battle1/battle2) from Explorer
-   onto the emulator window — they land in the emulator's gallery
-   (Downloads).
+1. Get the photos into the emulator (adb is the reliable way; drag-drop
+   works but the gallery may not index until a reboot):
+
+   ```powershell
+   adb push test\fixtures\preview1.jpeg /sdcard/Pictures/
+   adb push test\fixtures\battle1.jpeg /sdcard/Pictures/
+   adb push test\fixtures\battle2.jpeg /sdcard/Pictures/
+   adb shell am broadcast -a android.intent.action.MEDIA_SCANNER_SCAN_FILE -d file:///sdcard/Pictures/preview1.jpeg
+   ```
+
 2. In the app: battle icon on your team card → pick the doubles format →
-   pick 4 → Start battle.
+   **Start battle**. The battle opens on **Team Preview** — you scout
+   BEFORE picking, like the real game.
 3. Team Preview tab → **Scan preview** → tap the **gallery icon** →
    choose preview1 → the six enemy boxes fill in. Amber box = the
    matcher's guess: tap it to confirm or pick the runner-up (each
    confirmation teaches the matcher).
-4. Battle tab → **Scan battle** → gallery icon → battle1 → Umbreon and
-   Sneasler appear on-field with HP. (OCR runs on-device via ML Kit — it
-   works on the emulator, no Play Services needed.)
+4. Battle tab → **lock in your 4** (tap in send-out order; first two
+   lead — the ★ badges; ✎ next to "Your picks" changes them later) →
+   then **Scan battle** → gallery icon → battle1 → Umbreon and Sneasler
+   appear on-field with HP. (OCR runs on-device via ML Kit — it works on
+   the emulator, no Play Services needed.)
 
 **B. With your laptop webcam as the emulator's camera:**
 

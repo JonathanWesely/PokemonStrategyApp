@@ -209,8 +209,18 @@ class AppState extends ChangeNotifier {
 
   // ------------------------------------------------------------- battle --
 
-  void startBattle(FormatSpec format, Team team, List<PokemonBuild> picks) {
+  /// Open a battle. Picks are usually chosen later, INSIDE the battle
+  /// (Battle tab), after scouting the enemy on Team Preview — the same order
+  /// the game itself forces.
+  void startBattle(FormatSpec format, Team team,
+      {List<PokemonBuild>? picks}) {
     battle = BattleSession(format: format, team: team, picks: picks);
+    notifyListeners();
+  }
+
+  /// Lock in (or change) which of your six you're bringing.
+  void setPicks(List<PokemonBuild> picks) {
+    battle?.setPicks(picks);
     notifyListeners();
   }
 
@@ -257,7 +267,11 @@ class AppState extends ChangeNotifier {
     final result = await _recognizer.recognize(
       imageBytes,
       context: BattleSnapshotContext(
-        yourSpeciesIds: [for (final p in session.picks) p.speciesId],
+        // Preview screen shows your whole six; the battle screen only your
+        // picks (which may not be locked yet during scouting).
+        yourSpeciesIds: screen == RecognitionScreen.preview
+            ? [for (final b in session.team.builds) b.speciesId]
+            : [for (final p in session.picks) p.speciesId],
         enemyFieldSlots: session.format.fieldSlots,
         enemyTeamSize: session.format.teamSize,
         screen: screen,

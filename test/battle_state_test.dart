@@ -31,6 +31,61 @@ void main() {
         ],
       );
 
+  group('pick-later flow (scout first, then lock picks)', () {
+    test('battle starts unpicked; Team Preview still fully usable', () {
+      final s = BattleSession(
+        format: doubles,
+        team: Team(name: 'T', builds: [
+          build('incineroar'),
+          build('chien-pao'),
+          build('gengar'),
+          build('amoonguss'),
+          build('torkoal'),
+          build('pelipper'),
+        ]),
+      );
+      expect(s.picksChosen, isFalse);
+      expect(s.picks, isEmpty);
+      expect(s.activeYours, isEmpty);
+      // Scouting works before any picks exist.
+      s.enemyPreview.add(PreviewSlot('umbreon'));
+      expect(s.enemyPreview, isNotEmpty);
+    });
+
+    test('setPicks locks the order and defaults the leads', () {
+      final s = BattleSession(
+        format: doubles,
+        team: Team(name: 'T', builds: [
+          build('incineroar'),
+          build('chien-pao'),
+          build('gengar'),
+          build('amoonguss'),
+          build('torkoal'),
+          build('pelipper'),
+        ]),
+      );
+      s.setPicks([
+        build('gengar'),
+        build('torkoal'),
+        build('chien-pao'),
+        build('amoonguss'),
+      ]);
+      expect(s.picksChosen, isTrue);
+      expect(s.picks.length, 4);
+      expect([for (final p in s.activeYours) p.speciesId],
+          ['gengar', 'torkoal']); // first two lead
+      // Re-picking replaces cleanly.
+      s.setPicks([
+        build('incineroar'),
+        build('pelipper'),
+        build('gengar'),
+        build('torkoal'),
+      ]);
+      expect(s.activeYours.first.speciesId, 'incineroar');
+      expect(s.picks.length, 4);
+    });
+  });
+
   group('reserve derivation (doubles)', () {
     test('two lead, two of your reserves', () {
       final s = session();

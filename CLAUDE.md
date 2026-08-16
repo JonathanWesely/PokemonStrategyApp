@@ -12,6 +12,9 @@ updated when direction changes — Jonathan relies on it between sessions.
 - **Battle mode = two tabs** (`ui/battle_screen.dart`):
   *Team Preview* — your 6 vs enemy 6 boxes; tap for the full per-species
   page. *Battle* — on-field intel cards + predicted enemy bench.
+  **Picks are chosen INSIDE the battle** (Battle tab shows the selector
+  until locked; ✎ to change) — scout preview first, then commit, same
+  order the game forces. BattleSession starts with empty picks.
 - **Color language everywhere**: green = confirmed this battle, amber =
   predicted (usage data), grey = unknown. Applies to preview boxes, move/
   item/ability rows, bench chips.

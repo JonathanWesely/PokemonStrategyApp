@@ -94,7 +94,9 @@ class BattleSession {
   final FormatSpec format;
   final Team team;
 
-  /// The 3 (singles) or 4 (doubles) builds brought to this battle.
+  /// The 3 (singles) or 4 (doubles) builds brought to this battle. EMPTY
+  /// until the player locks their picks — the battle opens on Team Preview
+  /// first (scout the enemy, THEN choose), mirroring the real game flow.
   final List<PokemonBuild> picks;
 
   /// Indexes into [picks] currently on the field.
@@ -108,8 +110,25 @@ class BattleSession {
   /// Team Preview tab and narrows which four they can have brought.
   final List<PreviewSlot> enemyPreview = [];
 
-  BattleSession({required this.format, required this.team, required this.picks}) {
+  BattleSession(
+      {required this.format, required this.team, List<PokemonBuild>? picks})
+      : picks = picks ?? [] {
     // Lead slots default to the first 1 or 2 picks.
+    for (var i = 0; i < format.fieldSlots && i < this.picks.length; i++) {
+      activePickIndexes.add(i);
+    }
+  }
+
+  /// True once the player has locked in their 3 (singles) / 4 (doubles).
+  bool get picksChosen => picks.length >= format.pickSize;
+
+  /// Lock in (or change) the picks; order matters — the first
+  /// [FormatSpec.fieldSlots] lead.
+  void setPicks(List<PokemonBuild> newPicks) {
+    picks
+      ..clear()
+      ..addAll(newPicks.take(format.pickSize));
+    activePickIndexes.clear();
     for (var i = 0; i < format.fieldSlots && i < picks.length; i++) {
       activePickIndexes.add(i);
     }

@@ -35,6 +35,11 @@ class BattleScreen extends StatefulWidget {
 class _BattleScreenState extends State<BattleScreen> {
   bool _recognizing = false;
 
+  /// Pick-selection state (Battle tab): team-build indexes in chosen order —
+  /// the first [FormatSpec.fieldSlots] lead.
+  final List<int> _pickOrder = [];
+  bool _editingPicks = false;
+
   /// Mock engine: no camera needed, recognize an empty image directly.
   /// Local / API engines: open the camera capture screen.
   Future<void> _scan(RecognitionScreen mode) async {
@@ -246,8 +251,113 @@ class _BattleScreenState extends State<BattleScreen> {
                   color: Colors.grey.shade600),
             ),
           ),
+        if (!battle.picksChosen)
+          Padding(
+            padding: const EdgeInsets.only(top: 12),
+            child: Card(
+              color: Colors.amber.shade50,
+              child: Padding(
+                padding: const EdgeInsets.all(12),
+                child: Text(
+                  'When you\'ve seen enough, head to the Battle tab to lock '
+                  'in your ${battle.format.pickSize}.',
+                  style: const TextStyle(fontSize: 12),
+                ),
+              ),
+            ),
+          ),
         const SizedBox(height: 24),
       ],
+    );
+  }
+
+  // -------------------------------------------------------- pick selection --
+
+  /// Shown on the Battle tab until picks are locked (and when editing them):
+  /// choose your 3/4 in send-out order, exactly like the game's selection
+  /// step — but with the Team Preview scout one tab away.
+  Widget _buildPickSelector(BuildContext context, AppState state) {
+    final battle = state.battle!;
+    final pickSize = battle.format.pickSize;
+    final leads = battle.format.fieldSlots;
+
+    return ListView(
+      padding: const EdgeInsets.all(12),
+      children: [
+        Text('Select your $pickSize',
+            style: Theme.of(context).textTheme.titleMedium),
+        const SizedBox(height: 4),
+        Text(
+          'Tap in the order you\'d send them out — the first '
+          '$leads lead${leads > 1 ? '' : 's'}. Check the Team Preview tab '
+          'for their six before you commit.',
+          style: TextStyle(fontSize: 12, color: Colors.grey.shade700),
+        ),
+        const SizedBox(height: 8),
+        for (var i = 0; i < battle.team.builds.length; i++)
+          _pickTile(context, state, i),
+        const SizedBox(height: 12),
+        FilledButton.icon(
+          icon: const Icon(Icons.check),
+          label: Text('Lock in picks (${_pickOrder.length}/$pickSize)'),
+          onPressed: _pickOrder.length == pickSize
+              ? () {
+                  state.setPicks(
+                      [for (final i in _pickOrder) battle.team.builds[i]]);
+                  setState(() => _editingPicks = false);
+                }
+              : null,
+        ),
+        if (battle.picksChosen)
+          TextButton(
+            onPressed: () => setState(() => _editingPicks = false),
+            child: const Text('Cancel — keep current picks'),
+          ),
+      ],
+    );
+  }
+
+  Widget _pickTile(BuildContext context, AppState state, int i) {
+    final pack = state.pack;
+    final battle = state.battle!;
+    final build = battle.team.builds[i];
+    final order = _pickOrder.indexOf(i);
+    final selected = order >= 0;
+    final isLead = selected && order < battle.format.fieldSlots;
+    return Card(
+      color: selected
+          ? (isLead ? Colors.blue.shade50 : Colors.blue.shade50.withAlpha(120))
+          : null,
+      margin: const EdgeInsets.symmetric(vertical: 3),
+      child: ListTile(
+        leading: SpeciesIcon(build.speciesId, size: 36),
+        title: Text(build.nickname ?? pack.speciesName(build.speciesId),
+            style: const TextStyle(fontWeight: FontWeight.w600)),
+        subtitle: Text(
+          build.moveIds.map(pack.moveName).join(', '),
+          style: const TextStyle(fontSize: 11),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
+        trailing: selected
+            ? CircleAvatar(
+                radius: 14,
+                backgroundColor:
+                    isLead ? Colors.blue : Colors.blueGrey.shade300,
+                child: Text(
+                  isLead ? '${order + 1}★' : '${order + 1}',
+                  style: const TextStyle(fontSize: 11, color: Colors.white),
+                ),
+              )
+            : const Icon(Icons.radio_button_unchecked, size: 20),
+        onTap: () => setState(() {
+          if (selected) {
+            _pickOrder.remove(i);
+          } else if (_pickOrder.length < battle.format.pickSize) {
+            _pickOrder.add(i);
+          }
+        }),
+      ),
     );
   }
 
@@ -334,6 +444,10 @@ class _BattleScreenState extends State<BattleScreen> {
   Widget _buildBattleTab(BuildContext context, AppState state) {
     final pack = state.pack;
     final battle = state.battle!;
+    // Picks are chosen HERE, after scouting Team Preview — game order.
+    if (!battle.picksChosen || _editingPicks) {
+      return _buildPickSelector(context, state);
+    }
     final tiers =
         buildSpeedTiers(pack, battle.activeYours, battle.enemiesOnField);
     final benchPredictions = PredictionEngine(pack).predictBench(battle);
@@ -435,8 +549,27 @@ class _BattleScreenState extends State<BattleScreen> {
         ],
 
         const SizedBox(height: 8),
-        Text('Your picks (tap to set who is on the field)',
-            style: Theme.of(context).textTheme.titleSmall),
+        Row(
+          children: [
+            Text('Your picks (tap to set who is on the field)',
+                style: Theme.of(context).textTheme.titleSmall),
+            const Spacer(),
+            IconButton(
+              tooltip: 'Change picks',
+              visualDensity: VisualDensity.compact,
+              icon: const Icon(Icons.edit, size: 16),
+              onPressed: () => setState(() {
+                _pickOrder
+                  ..clear()
+                  ..addAll([
+                    for (final p in battle.picks)
+                      battle.team.builds.indexOf(p)
+                  ].where((i) => i >= 0));
+                _editingPicks = true;
+              }),
+            ),
+          ],
+        ),
         Wrap(
           spacing: 6,
           children: [
