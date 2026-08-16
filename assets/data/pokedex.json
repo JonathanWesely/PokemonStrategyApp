@@ -1,8 +1,8 @@
 {
  "schemaVersion": 1,
- "generatedAt": "2026-07-11",
+ "generatedAt": "2026-08-15",
  "source": "starter-placeholder",
- "note": "Accurate base stats/types/abilities; learnsets abbreviated to notable competitive moves. Run tool/update_data.dart for full data.",
+ "note": "Starter pack + photo-roster expansion (2026-08-15): real base stats/types/abilities from PokeAPI; learnsets curated & validated against PokeAPI learn data. Usage percentages remain placeholders.",
  "species": [
   {
    "id": "incineroar",
@@ -944,6 +944,296 @@
     "u-turn",
     "will-o-wisp",
     "taunt"
+   ],
+   "megas": []
+  },
+  {
+   "id": "froslass",
+   "name": "Froslass",
+   "types": [
+    "Ice",
+    "Ghost"
+   ],
+   "baseStats": {
+    "hp": 70,
+    "atk": 80,
+    "def": 70,
+    "spa": 80,
+    "spd": 70,
+    "spe": 110
+   },
+   "abilities": [
+    "Snow Cloak",
+    "Cursed Body"
+   ],
+   "learnset": [
+    "icy-wind",
+    "blizzard",
+    "ice-beam",
+    "shadow-ball",
+    "thunder-wave",
+    "will-o-wisp",
+    "destiny-bond",
+    "taunt",
+    "helping-hand",
+    "protect"
+   ],
+   "megas": []
+  },
+  {
+   "id": "avalugg",
+   "name": "Avalugg",
+   "types": [
+    "Ice"
+   ],
+   "baseStats": {
+    "hp": 95,
+    "atk": 117,
+    "def": 184,
+    "spa": 44,
+    "spd": 46,
+    "spe": 28
+   },
+   "abilities": [
+    "Own Tempo",
+    "Ice Body",
+    "Sturdy"
+   ],
+   "learnset": [
+    "avalanche",
+    "ice-spinner",
+    "icicle-crash",
+    "body-press",
+    "heavy-slam",
+    "earthquake",
+    "rock-slide",
+    "recover",
+    "iron-defense",
+    "curse",
+    "wide-guard",
+    "protect"
+   ],
+   "megas": []
+  },
+  {
+   "id": "sinistcha",
+   "name": "Sinistcha",
+   "types": [
+    "Grass",
+    "Ghost"
+   ],
+   "baseStats": {
+    "hp": 71,
+    "atk": 60,
+    "def": 106,
+    "spa": 121,
+    "spd": 80,
+    "spe": 70
+   },
+   "abilities": [
+    "Hospitality",
+    "Heatproof"
+   ],
+   "learnset": [
+    "matcha-gotcha",
+    "hex",
+    "shadow-ball",
+    "strength-sap",
+    "trick-room",
+    "calm-mind",
+    "energy-ball",
+    "life-dew",
+    "protect"
+   ],
+   "megas": []
+  },
+  {
+   "id": "sneasler",
+   "name": "Sneasler",
+   "types": [
+    "Fighting",
+    "Poison"
+   ],
+   "baseStats": {
+    "hp": 80,
+    "atk": 130,
+    "def": 60,
+    "spa": 40,
+    "spd": 80,
+    "spe": 120
+   },
+   "abilities": [
+    "Pressure",
+    "Unburden",
+    "Poison Touch"
+   ],
+   "learnset": [
+    "dire-claw",
+    "close-combat",
+    "fake-out",
+    "poison-jab",
+    "throat-chop",
+    "u-turn",
+    "acrobatics",
+    "feint",
+    "swords-dance",
+    "protect"
+   ],
+   "megas": []
+  },
+  {
+   "id": "umbreon",
+   "name": "Umbreon",
+   "types": [
+    "Dark"
+   ],
+   "baseStats": {
+    "hp": 95,
+    "atk": 65,
+    "def": 110,
+    "spa": 60,
+    "spd": 130,
+    "spe": 65
+   },
+   "abilities": [
+    "Synchronize",
+    "Inner Focus"
+   ],
+   "learnset": [
+    "foul-play",
+    "snarl",
+    "moonlight",
+    "yawn",
+    "helping-hand",
+    "taunt",
+    "toxic",
+    "protect"
+   ],
+   "megas": []
+  },
+  {
+   "id": "decidueye-hisui",
+   "name": "Decidueye-Hisui",
+   "types": [
+    "Grass",
+    "Fighting"
+   ],
+   "baseStats": {
+    "hp": 88,
+    "atk": 112,
+    "def": 80,
+    "spa": 95,
+    "spd": 95,
+    "spe": 60
+   },
+   "abilities": [
+    "Overgrow",
+    "Scrappy"
+   ],
+   "learnset": [
+    "triple-arrows",
+    "leaf-blade",
+    "brave-bird",
+    "sucker-punch",
+    "u-turn",
+    "swords-dance",
+    "taunt",
+    "protect"
+   ],
+   "megas": []
+  },
+  {
+   "id": "lycanroc",
+   "name": "Lycanroc",
+   "types": [
+    "Rock"
+   ],
+   "baseStats": {
+    "hp": 75,
+    "atk": 115,
+    "def": 65,
+    "spa": 55,
+    "spd": 65,
+    "spe": 112
+   },
+   "abilities": [
+    "Keen Eye",
+    "Sand Rush",
+    "Steadfast"
+   ],
+   "learnset": [
+    "accelerock",
+    "rock-slide",
+    "stone-edge",
+    "close-combat",
+    "crunch",
+    "play-rough",
+    "swords-dance",
+    "taunt",
+    "protect"
+   ],
+   "megas": []
+  },
+  {
+   "id": "arcanine",
+   "name": "Arcanine",
+   "types": [
+    "Fire"
+   ],
+   "baseStats": {
+    "hp": 90,
+    "atk": 110,
+    "def": 80,
+    "spa": 100,
+    "spd": 80,
+    "spe": 95
+   },
+   "abilities": [
+    "Intimidate",
+    "Flash Fire",
+    "Justified"
+   ],
+   "learnset": [
+    "flare-blitz",
+    "extreme-speed",
+    "close-combat",
+    "crunch",
+    "wild-charge",
+    "will-o-wisp",
+    "snarl",
+    "morning-sun",
+    "protect"
+   ],
+   "megas": []
+  },
+  {
+   "id": "sylveon",
+   "name": "Sylveon",
+   "types": [
+    "Fairy"
+   ],
+   "baseStats": {
+    "hp": 95,
+    "atk": 65,
+    "def": 65,
+    "spa": 110,
+    "spd": 130,
+    "spe": 60
+   },
+   "abilities": [
+    "Cute Charm",
+    "Pixilate"
+   ],
+   "learnset": [
+    "hyper-voice",
+    "moonblast",
+    "shadow-ball",
+    "mystical-fire",
+    "calm-mind",
+    "wish",
+    "yawn",
+    "helping-hand",
+    "protect"
    ],
    "megas": []
   }

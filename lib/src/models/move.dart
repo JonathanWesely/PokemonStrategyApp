@@ -18,6 +18,9 @@ class MoveData {
   final int priority;
   final String note;
 
+  /// Longer effect description (from the data pack; may be empty).
+  final String desc;
+
   const MoveData({
     required this.id,
     required this.name,
@@ -27,6 +30,7 @@ class MoveData {
     this.accuracy,
     this.priority = 0,
     this.note = '',
+    this.desc = '',
   });
 
   factory MoveData.fromJson(Map<String, dynamic> json) => MoveData(
@@ -38,6 +42,7 @@ class MoveData {
         accuracy: json['accuracy'] as int?,
         priority: (json['priority'] as int?) ?? 0,
         note: (json['note'] as String?) ?? '',
+        desc: (json['desc'] as String?) ?? '',
       );
 
   bool get isStatus => category == 'Status';

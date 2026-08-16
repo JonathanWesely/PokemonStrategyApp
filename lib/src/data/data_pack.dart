@@ -5,6 +5,7 @@ library;
 
 import 'dart:convert';
 
+import '../models/ability.dart';
 import '../models/item.dart';
 import '../models/move.dart';
 import '../models/regulation.dart';
@@ -16,6 +17,10 @@ class DataPack {
   final Map<String, Species> species;
   final Map<String, MoveData> moves;
   final Map<String, ItemData> items;
+
+  /// Keyed by DISPLAY NAME ("Intimidate") because that's how species
+  /// reference their abilities in the pokedex pack.
+  final Map<String, AbilityData> abilities;
   final TypeChart typeChart;
   final UsageStats usage;
   final List<FormatSpec> formats;
@@ -26,6 +31,7 @@ class DataPack {
     required this.species,
     required this.moves,
     required this.items,
+    required this.abilities,
     required this.typeChart,
     required this.usage,
     required this.formats,
@@ -40,11 +46,13 @@ class DataPack {
     required String typeChartJson,
     required String usageJson,
     required String regulationsJson,
+    String abilitiesJson = '{"abilities":[]}',
   }) {
     final pokedex = jsonDecode(pokedexJson) as Map<String, dynamic>;
     final movesDoc = jsonDecode(movesJson) as Map<String, dynamic>;
     final itemsDoc = jsonDecode(itemsJson) as Map<String, dynamic>;
     final regsDoc = jsonDecode(regulationsJson) as Map<String, dynamic>;
+    final abilitiesDoc = jsonDecode(abilitiesJson) as Map<String, dynamic>;
 
     return DataPack(
       species: {
@@ -59,6 +67,10 @@ class DataPack {
         for (final i in itemsDoc['items'] as List)
           (i as Map<String, dynamic>)['id'] as String: ItemData.fromJson(i),
       },
+      abilities: {
+        for (final a in (abilitiesDoc['abilities'] as List?) ?? const [])
+          (a as Map<String, dynamic>)['name'] as String: AbilityData.fromJson(a),
+      },
       typeChart:
           TypeChart.fromJson(jsonDecode(typeChartJson) as Map<String, dynamic>),
       usage: UsageStats.fromJson(jsonDecode(usageJson) as Map<String, dynamic>),
@@ -72,6 +84,10 @@ class DataPack {
   }
 
   Species? speciesById(String id) => species[id];
+
+  AbilityData? abilityByName(String name) => abilities[name];
+
+  String abilityDesc(String name) => abilities[name]?.desc ?? '';
 
   MoveData? moveById(String id) => moves[id];
 

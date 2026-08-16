@@ -1,21 +1,11 @@
 {
  "schemaVersion": 1,
- "generatedAt": "2026-07-11",
+ "generatedAt": "2026-08-15",
  "items": [
   {
-   "id": "sitrus-berry",
-   "name": "Sitrus Berry",
-   "desc": "Restores 25% HP at half HP"
-  },
-  {
-   "id": "lum-berry",
-   "name": "Lum Berry",
-   "desc": "Cures any status once"
-  },
-  {
-   "id": "figy-berry",
-   "name": "Figy Berry",
-   "desc": "Restores 33% HP at low HP; confuses if -Atk nature mismatch"
+   "id": "air-balloon",
+   "name": "Air Balloon",
+   "desc": "Immune to Ground until hit"
   },
   {
    "id": "assault-vest",
@@ -23,129 +13,9 @@
    "desc": "1.5x SpD; only attacking moves"
   },
   {
-   "id": "focus-sash",
-   "name": "Focus Sash",
-   "desc": "Survives a KO from full HP once"
-  },
-  {
-   "id": "choice-scarf",
-   "name": "Choice Scarf",
-   "desc": "1.5x Speed; locks into one move"
-  },
-  {
-   "id": "choice-band",
-   "name": "Choice Band",
-   "desc": "1.5x Attack; locks into one move"
-  },
-  {
-   "id": "choice-specs",
-   "name": "Choice Specs",
-   "desc": "1.5x SpA; locks into one move"
-  },
-  {
-   "id": "life-orb",
-   "name": "Life Orb",
-   "desc": "1.3x damage; 10% HP recoil per attack"
-  },
-  {
-   "id": "leftovers",
-   "name": "Leftovers",
-   "desc": "Heals 1/16 HP each turn"
-  },
-  {
-   "id": "safety-goggles",
-   "name": "Safety Goggles",
-   "desc": "Immune to powder moves and weather chip"
-  },
-  {
-   "id": "covert-cloak",
-   "name": "Covert Cloak",
-   "desc": "Blocks secondary effects (Fake Out flinch etc.)"
-  },
-  {
-   "id": "rocky-helmet",
-   "name": "Rocky Helmet",
-   "desc": "Contact attackers lose 1/6 HP"
-  },
-  {
-   "id": "clear-amulet",
-   "name": "Clear Amulet",
-   "desc": "Blocks stat drops (Intimidate etc.)"
-  },
-  {
-   "id": "mystic-water",
-   "name": "Mystic Water",
-   "desc": "1.2x Water moves"
-  },
-  {
    "id": "charcoal",
    "name": "Charcoal",
    "desc": "1.2x Fire moves"
-  },
-  {
-   "id": "light-clay",
-   "name": "Light Clay",
-   "desc": "Screens last 8 turns"
-  },
-  {
-   "id": "eject-button",
-   "name": "Eject Button",
-   "desc": "Switches holder out when hit"
-  },
-  {
-   "id": "red-card",
-   "name": "Red Card",
-   "desc": "Forces attacker to switch when holder is hit"
-  },
-  {
-   "id": "wide-lens",
-   "name": "Wide Lens",
-   "desc": "1.1x accuracy"
-  },
-  {
-   "id": "expert-belt",
-   "name": "Expert Belt",
-   "desc": "1.2x super-effective damage"
-  },
-  {
-   "id": "weakness-policy",
-   "name": "Weakness Policy",
-   "desc": "+2 Atk/SpA when hit super-effectively"
-  },
-  {
-   "id": "mental-herb",
-   "name": "Mental Herb",
-   "desc": "Cures Taunt/Encore/infatuation once"
-  },
-  {
-   "id": "power-herb",
-   "name": "Power Herb",
-   "desc": "Skips charge turn once (Electro Shot etc.)"
-  },
-  {
-   "id": "white-herb",
-   "name": "White Herb",
-   "desc": "Restores lowered stats once"
-  },
-  {
-   "id": "loaded-dice",
-   "name": "Loaded Dice",
-   "desc": "Multi-hit moves hit 4-5 times"
-  },
-  {
-   "id": "flame-orb",
-   "name": "Flame Orb",
-   "desc": "Burns holder at end of turn"
-  },
-  {
-   "id": "air-balloon",
-   "name": "Air Balloon",
-   "desc": "Immune to Ground until hit"
-  },
-  {
-   "id": "iron-ball",
-   "name": "Iron Ball",
-   "desc": "Halves Speed; grounds holder"
   },
   {
    "id": "charizardite-x",
@@ -158,19 +28,99 @@
    "desc": "Mega Stone: Charizard -> Mega Charizard Y"
   },
   {
+   "id": "choice-band",
+   "name": "Choice Band",
+   "desc": "1.5x Attack; locks into one move"
+  },
+  {
+   "id": "choice-scarf",
+   "name": "Choice Scarf",
+   "desc": "1.5x Speed; locks into one move"
+  },
+  {
+   "id": "choice-specs",
+   "name": "Choice Specs",
+   "desc": "1.5x SpA; locks into one move"
+  },
+  {
+   "id": "chople-berry",
+   "name": "Chople Berry",
+   "desc": "Halves the damage of one supereffective Fighting-type attack, then is consumed."
+  },
+  {
+   "id": "clear-amulet",
+   "name": "Clear Amulet",
+   "desc": "Blocks stat drops (Intimidate etc.)"
+  },
+  {
+   "id": "covert-cloak",
+   "name": "Covert Cloak",
+   "desc": "Blocks secondary effects (Fake Out flinch etc.)"
+  },
+  {
+   "id": "eject-button",
+   "name": "Eject Button",
+   "desc": "Switches holder out when hit"
+  },
+  {
+   "id": "expert-belt",
+   "name": "Expert Belt",
+   "desc": "1.2x super-effective damage"
+  },
+  {
+   "id": "figy-berry",
+   "name": "Figy Berry",
+   "desc": "Restores 33% HP at low HP; confuses if -Atk nature mismatch"
+  },
+  {
+   "id": "flame-orb",
+   "name": "Flame Orb",
+   "desc": "Burns holder at end of turn"
+  },
+  {
+   "id": "focus-sash",
+   "name": "Focus Sash",
+   "desc": "Survives a KO from full HP once"
+  },
+  {
+   "id": "froslassite",
+   "name": "Froslassite",
+   "desc": "Mega Stone (Champions): lets Froslass Mega Evolve. Mega forme stats pending a data update \u2014 run tool/update_data.dart after the community documents them."
+  },
+  {
    "id": "gengarite",
    "name": "Gengarite",
    "desc": "Mega Stone: Gengar -> Mega Gengar"
   },
   {
-   "id": "metagrossite",
-   "name": "Metagrossite",
-   "desc": "Mega Stone: Metagross -> Mega Metagross"
+   "id": "iron-ball",
+   "name": "Iron Ball",
+   "desc": "Halves Speed; grounds holder"
   },
   {
-   "id": "salamencite",
-   "name": "Salamencite",
-   "desc": "Mega Stone: Salamence -> Mega Salamence"
+   "id": "kasib-berry",
+   "name": "Kasib Berry",
+   "desc": "Halves the damage of one supereffective Ghost-type attack, then is consumed."
+  },
+  {
+   "id": "leftovers",
+   "name": "Leftovers",
+   "desc": "Heals 1/16 HP each turn"
+  },
+  {
+   "id": "life-orb",
+   "name": "Life Orb",
+   "desc": "1.3x damage; 10% HP recoil per attack"
+  },
+  {
+   "id": "light-clay",
+   "name": "Light Clay",
+   "desc": "Screens last 8 turns"
+  },
+  {
+   "id": "loaded-dice",
+   "name": "Loaded Dice",
+   "desc": "Multi-hit moves hit 4-5 times"
   },
   {
    "id": "lucarionite",
@@ -178,9 +128,74 @@
    "desc": "Mega Stone: Lucario -> Mega Lucario"
   },
   {
+   "id": "lum-berry",
+   "name": "Lum Berry",
+   "desc": "Cures any status once"
+  },
+  {
+   "id": "mental-herb",
+   "name": "Mental Herb",
+   "desc": "Cures Taunt/Encore/infatuation once"
+  },
+  {
+   "id": "metagrossite",
+   "name": "Metagrossite",
+   "desc": "Mega Stone: Metagross -> Mega Metagross"
+  },
+  {
+   "id": "mystic-water",
+   "name": "Mystic Water",
+   "desc": "1.2x Water moves"
+  },
+  {
+   "id": "power-herb",
+   "name": "Power Herb",
+   "desc": "Skips charge turn once (Electro Shot etc.)"
+  },
+  {
+   "id": "red-card",
+   "name": "Red Card",
+   "desc": "Forces attacker to switch when holder is hit"
+  },
+  {
+   "id": "rocky-helmet",
+   "name": "Rocky Helmet",
+   "desc": "Contact attackers lose 1/6 HP"
+  },
+  {
+   "id": "safety-goggles",
+   "name": "Safety Goggles",
+   "desc": "Immune to powder moves and weather chip"
+  },
+  {
+   "id": "salamencite",
+   "name": "Salamencite",
+   "desc": "Mega Stone: Salamence -> Mega Salamence"
+  },
+  {
+   "id": "sitrus-berry",
+   "name": "Sitrus Berry",
+   "desc": "Restores 25% HP at half HP"
+  },
+  {
    "id": "tyranitarite",
    "name": "Tyranitarite",
    "desc": "Mega Stone: Tyranitar -> Mega Tyranitar"
+  },
+  {
+   "id": "weakness-policy",
+   "name": "Weakness Policy",
+   "desc": "+2 Atk/SpA when hit super-effectively"
+  },
+  {
+   "id": "white-herb",
+   "name": "White Herb",
+   "desc": "Restores lowered stats once"
+  },
+  {
+   "id": "wide-lens",
+   "name": "Wide Lens",
+   "desc": "1.1x accuracy"
   }
  ]
 }

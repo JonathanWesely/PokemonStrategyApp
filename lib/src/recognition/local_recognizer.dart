@@ -1,29 +1,33 @@
 /// On-device / local recognition engine — no network, no cloud AI, no
-/// per-call cost. The honest "data-only" floor.
+/// per-call cost.
 ///
-/// Track 1 (today): performs NO fabrication. It reports your side (already
-/// known from your picks) and identifies no enemies — the Team Preview boxes
-/// and manual entry let you fill the enemy side in yourself, so nothing is
-/// ever guessed. This is the seam the Track 2 on-device pipeline plugs into:
-///   - team-preview screen (no names): a bundled TFLite sprite classifier over
-///     the six detected sprite boxes;
-///   - battle screen (names shown): on-device OCR of the name labels resolved
-///     via DataPack.resolveSpeciesName.
-/// Both are camera + on-device only; see docs/RECOGNITION_PROMPT.md and the
-/// project plan. Until then this engine keeps the whole flow usable offline.
+/// Team-preview screen (no names in-game): the pure-Dart [SpriteMatcher]
+/// segments the six enemy sprite panels and matches them against the
+/// exemplar library (sprites saved from your own confirmed photos, plus
+/// bundled seeds) with bundled official art as the cold-start fallback.
+/// Low-confidence slots surface their runners-up so the UI can offer
+/// one-tap correction — and every confirmation feeds the exemplar library,
+/// so this engine sharpens with every battle.
+///
+/// Battle screen (names shown): on-device OCR (ML Kit, injected behind the
+/// [TextOcr] seam) reads the name banners; [BattleTextMatcher] resolves them
+/// against the roster with fuzzy matching and reads HP where visible.
 library;
 
 import 'dart:typed_data';
 
 import '../data/data_pack.dart';
 import '../models/recognition_result.dart';
+import 'battle_ocr.dart';
 import 'recognition_service.dart';
+import 'sprite_matcher.dart';
 
 class LocalRecognizer implements RecognitionService {
-  // Retained for the Track 2 pipeline (sprite classifier + OCR name lookup).
   final DataPack pack;
+  final SpriteMatcher matcher;
+  final TextOcr? ocr;
 
-  const LocalRecognizer(this.pack);
+  const LocalRecognizer(this.pack, {required this.matcher, this.ocr});
 
   @override
   String get name => 'local';
@@ -33,19 +37,60 @@ class LocalRecognizer implements RecognitionService {
     Uint8List imageBytes, {
     required BattleSnapshotContext context,
   }) async {
-    // No camera pipeline is wired yet (Track 2). Report your side from the
-    // known picks and identify zero enemies, so the app never invents an
-    // opponent — you confirm every enemy by hand. Returning your side keeps
-    // the result shape identical to the other engines.
+    if (imageBytes.isEmpty) {
+      throw const RecognitionException(
+          'No image — take a photo or import a screenshot.');
+    }
+    return switch (context.screen) {
+      RecognitionScreen.preview => _recognizePreview(imageBytes, context),
+      RecognitionScreen.battle => _recognizeBattle(imageBytes, context),
+    };
+  }
+
+  Future<RecognitionResult> _recognizePreview(
+      Uint8List imageBytes, BattleSnapshotContext context) async {
+    final matches = await matcher.matchPreview(imageBytes,
+        expectedPanels: context.enemyTeamSize);
+    if (matches.isEmpty) {
+      throw const RecognitionException(
+          'Could not find the enemy team panels in this photo. Make sure the '
+          'whole team-select screen is in frame, or fill the boxes in '
+          'manually.');
+    }
     final slots = <RecognizedPokemon>[
-      for (final id in context.yourSpeciesIds.take(context.enemyFieldSlots))
+      for (final m in matches)
         RecognizedPokemon(
-          speciesId: id,
-          side: BattleSide.yours,
-          confidence: 1.0,
-          hpPercent: 100,
+          speciesId: m.assigned.speciesId,
+          side: BattleSide.enemy,
+          confidence: m.assigned.score.clamp(0.0, 1.0),
+          alternatives: [
+            for (final c in m.ranked.take(4))
+              if (c.speciesId != m.assigned.speciesId)
+                RecognizedAlt(speciesId: c.speciesId, confidence: c.score),
+          ],
+          spriteCrop: m.cropPng,
         ),
+      // Your side needs no recognition — the app knows your team.
+      for (final id in context.yourSpeciesIds)
+        RecognizedPokemon(speciesId: id, side: BattleSide.yours),
     ];
+    return RecognitionResult(slots: slots, engine: name);
+  }
+
+  Future<RecognitionResult> _recognizeBattle(
+      Uint8List imageBytes, BattleSnapshotContext context) async {
+    final engine = ocr;
+    if (engine == null) {
+      throw const RecognitionException(
+          'On-device OCR is not available here — add the enemy manually.');
+    }
+    final lines = await engine.readLines(imageBytes);
+    final slots = BattleTextMatcher(pack).match(lines, context);
+    if (slots.isEmpty) {
+      throw const RecognitionException(
+          'No Pokemon names found in this photo — make sure the name banners '
+          'are visible, or add the enemy manually.');
+    }
     return RecognitionResult(slots: slots, engine: name);
   }
 }

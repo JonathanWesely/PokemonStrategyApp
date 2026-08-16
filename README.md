@@ -1,23 +1,40 @@
 # PokemonStrategyApp
 
-Flutter battle companion for **Pokemon Champions**: build and save teams
-(SP system: 66 points, 32/stat, fixed 31 IVs), then during a battle,
-snapshot the screen and get the intel the game hides — ability-aware type
-matchups, exact stats for your side, and predicted stats / moves / items /
-abilities for the enemy side from competitive usage data, with a speed-tier
-strip and a tap-to-confirm reveal ledger that sharpens predictions as the
-battle progresses.
+Flutter battle companion for **Pokemon Champions**: create a local account,
+build and save teams (SP system: 66 points, 32/stat, fixed 31 IVs), then
+during a battle point your camera at the screen and get the intel the game
+hides — on two live tabs:
+
+* **Team vs. Team** — your 6 vs the enemy 6 as tappable boxes. The enemy
+  side fills in from a photo of the team-select screen via **2D sprite
+  recognition** (their sprites have no names in-game). Tap any of the 12
+  boxes for that Pokemon's full page: base stats, typing,
+  weakness/resistance chart, learnable moves, abilities, and the most
+  common competitive build (moves / item / ability / SP spread).
+* **Battle tracking** — after both sides pick 4: the on-field Pokemon
+  (recognized by OCR of the name banners), your reserves (known), and the
+  enemy's **predicted** bench. Every predicted fact renders amber; when the
+  battle reveals it (a move used, an item shown), tap it and it flips to
+  confirmed green and the predictions re-rank. Moves, abilities, and items
+  are tappable for full descriptions.
+
+Match results save to per-profile **match history**.
 
 See `PokemonStrategyApp.md` in the Obsidian vault for the full project
-plan (architecture, phases, data-update ritual). Sibling project of
-GolfSwingTrackerApp — same toolchain, same mock-first workflow.
+plan; `CLAUDE.md` here for session-to-session conventions. Sibling project
+of GolfSwingTrackerApp — same toolchain, same mock-first workflow.
 
-**Status: scaffold (plan Phases 0–2 in starter form), pre-camera.**
-Everything runs against a mock recognition engine and a bundled starter
-data pack: team builder with legality linting, battle setup for all four
-Champions formats, the full intel dashboard, prediction engine v1 with
-reveal promotion, cloud-vision recognizer (implemented + tested against a
-fake API; camera wiring is Phase 3), SQLite persistence.
+**Status: two-tab battle companion with camera capture, three recognition
+engines, profiles + match history. Pre-release; usage stats still
+placeholder.**
+
+## Recognition engines (Settings)
+
+| engine | needs | how it works |
+|---|---|---|
+| **Local** (default) | nothing — offline, free | Pure-Dart sprite matcher for the preview screen (exemplar library that **learns from every photo you confirm** + bundled art fallback) and on-device ML Kit OCR for the battle screen |
+| **API** | an API key | Any vision model: Anthropic, or OpenAI-compatible endpoints (OpenAI, Gemini, local Ollama/LM Studio) — most accurate from day one |
+| **Mock** | nothing | Simulated enemies for emulator demos |
 
 ## Quick start
 
@@ -28,66 +45,76 @@ flutter create . --platforms=android,ios --org com.jonwes --project-name pokemon
 dart run tool/setup_platforms.dart
 flutter pub get
 # 3. Verify everything:
+flutter analyze
 flutter test
-dart run tool/update_data.dart   # data-pack validator (update ritual step 3)
+dart run tool/update_data.dart   # data-pack validator
 # 4. Run it (Android emulator or phone):
 flutter run
 ```
 
-`GETTING_STARTED.md` has the click-by-click version.
+`GETTING_STARTED.md` has the click-by-click version, including how to test
+recognition on the emulator with your laptop webcam or the fixture photos.
 
 ## Architecture
 
 ```
 lib/
-  main.dart                     opens DB, loads data pack, restores state
+  main.dart                     opens DB, loads packs, wires exemplar store
   src/
-    app_state.dart              teams + settings + active battle + engine swap
-    models/                     Species, MoveData, PokemonBuild, Team,
-                                BattleSession/EnemyPokemon (reveal ledger),
-                                RecognitionResult, EnemyIntel, FormatSpec
-    data/
-      data_pack.dart            bundled JSON -> typed lookups (pure Dart)
-      asset_loader.dart         the only data file that imports Flutter
-      type_chart.dart           18x18 + ability/item modifiers (Levitate...)
-      stat_calculator.dart      level-50 SP math (ground-truth tested)
-      usage_stats.dart          per-regulation usage pack
-      legality.dart             team linting per format clauses
+    app_state.dart              profiles, teams, matches, settings, battle,
+                                engine swap (local | api | mock)
+    models/                     Species, MoveData, AbilityData, PokemonBuild,
+                                Team, BattleSession (+PreviewSlot, reveal
+                                ledger), MatchRecord/Profile, Recognition*
+    data/                       data_pack, asset_loader, type_chart,
+                                stat_calculator, usage_stats, legality
     prediction/
-      prediction_engine.dart    usage lookup + reveal promotion (v1)
+      prediction_engine.dart    usage lookup + reveal promotion + bench
+                                prediction (scouted roster × co-usage)
       speed_tiers.dart          who-outspeeds-whom strip
     recognition/
-      recognition_service.dart  abstract engine interface
-      mock_recognizer.dart      simulated snapshots (no camera/key needed)
-      cloud_vision_recognizer.dart  the ONLY file that touches the network
-    storage/app_database.dart   SQLite: teams + settings
-    ui/                         home, team/build editors (SP sliders),
-                                battle setup, battle screen, intel cards
-assets/data/                    pokedex, moves, items, type chart,
-                                usage_reg_mb, regulations (all versioned)
+      recognition_service.dart  engine seam (+ RecognitionScreen)
+      sprite_matcher.dart       2D sprite recognition, pure Dart (preview)
+      battle_ocr.dart           OCR-lines -> Pokemon (battle), pure Dart
+      mlkit_ocr.dart            the ONLY file importing ML Kit
+      local_recognizer.dart     wires the two local pipelines
+      cloud_vision_recognizer.dart  ApiRecognizer — the ONLY networked file
+      mock_recognizer.dart      simulated snapshots
+    storage/app_database.dart   SQLite v2: profiles, teams, matches, settings
+    ui/                         home (profiles/history), team/build editors,
+                                battle setup, two-tab battle screen,
+                                capture screen (ONLY camera import),
+                                intel cards, species detail, info sheets
+assets/
+  data/                         pokedex, moves (+desc), items, abilities,
+                                type chart, usage_reg_mb, regulations
+  sprites/ + sprites/home + sprites/icons   2D art for UI + matcher
+  exemplars/                    seed sprites segmented from real photos —
+                                the local matcher's starting knowledge
 test/                           ground-truth stat math, type chart,
-                                predictions, recognition vs fake API,
-                                legality, storage (ffi), pack integrity
+                                predictions (+bench), recognition (both API
+                                wire formats), sprite matcher (synthetic +
+                                real fixture photos), OCR matching, storage
+                                (+v1->v2 migration), legality, pack integrity
+test/fixtures/                  real Champions photos (preview1/battle1/2)
 tool/setup_platforms.dart       permissions patcher (run after flutter create)
 tool/update_data.dart           data validator; Phase 0 adds the fetchers
-docs/RECOGNITION_PROMPT.md      vision prompt + JSON contract
+docs/RECOGNITION_PROMPT.md      engine contracts (local pipeline + API)
 docs/DATA_UPDATE.md             per-regulation update checklist
 ```
 
-## How the mock enables pre-camera development
+## The exemplar loop (why local recognition gets better)
 
-`MockRecognizer` plays the role the simulated swing sensor played in the
-golf app: it returns plausible usage-weighted enemies behind the same
-`RecognitionService` interface the cloud engine implements, so the entire
-battle flow — dashboard, predictions, reveal ledger, speed strip — runs on
-an emulator with no camera, no API key, and no game. The cloud engine is
-exercised in tests against a fake HTTP transport (`http`'s MockClient)
-that replays canned Anthropic API responses, including messy ones
-(code-fence-wrapped JSON, unknown species, API errors).
+The sprite matcher's trusted signal is comparing against sprites segmented
+from **your own previous photos** — same console, same lighting, same art.
+It ships with seeds from real photos (assets/exemplars/); every slot you
+confirm in the app adds another. Cold start leans on bundled official art
+with capped confidence, so early sessions ask for a tap or two of
+confirmation per team and improve from there.
 
 ## Updating data when Champions adds new Pokemon
 
 One command, no code changes: `dart run tool/update_data.dart` — see
-docs/DATA_UPDATE.md for the per-regulation ritual and what's still TODO
-(the Phase 0 fetchers). New species/moves/items/Megas are pure data;
-only brand-new Omni Ring mechanics (a new gimmick) need a code session.
+docs/DATA_UPDATE.md. New species/moves/items/Megas are pure data; only
+brand-new Omni Ring mechanics need a code session. (Known gap: Mega
+Froslass — the stone item exists, the forme awaits documented stats.)

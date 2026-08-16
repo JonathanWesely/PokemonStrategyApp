@@ -3,6 +3,8 @@ library;
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:pokemon_strategy_app/src/models/battle_state.dart';
+import 'package:pokemon_strategy_app/src/models/pokemon_build.dart';
+import 'package:pokemon_strategy_app/src/models/team.dart';
 import 'package:pokemon_strategy_app/src/prediction/prediction_engine.dart';
 
 import 'helpers.dart';
@@ -65,6 +67,64 @@ void main() {
       expect(intel.items.first.id, 'assault-vest');
       expect(intel.items.first.confirmed, isTrue);
       expect(intel.abilities.first.confirmed, isTrue);
+    });
+  });
+
+  group('bench prediction (predicted enemy reserves)', () {
+    test('predicts from the scouted roster, sharpened by co-usage', () {
+      final doubles =
+          pack.formats.firstWhere((f) => f.isDoubles && f.pickSize == 4);
+      final session = BattleSession(
+        format: doubles,
+        team: Team(name: 'T', builds: [PokemonBuild(speciesId: 'froslass')]),
+        picks: [
+          PokemonBuild(speciesId: 'froslass'),
+          PokemonBuild(speciesId: 'grimmsnarl'),
+          PokemonBuild(speciesId: 'avalugg'),
+          PokemonBuild(speciesId: 'sinistcha'),
+        ],
+      );
+      for (final id in [
+        'umbreon', 'sneasler', 'decidueye-hisui',
+        'lycanroc', 'arcanine', 'sylveon'
+      ]) {
+        session.enemyPreview.add(PreviewSlot(id));
+      }
+      session.addEnemy('umbreon');
+      session.addEnemy('sneasler');
+
+      final bench = engine.predictBench(session);
+      expect(bench.length, session.enemyUnknownReserveCount); // 2
+      final scoutedLeft = {
+        'decidueye-hisui', 'lycanroc', 'arcanine', 'sylveon'
+      };
+      for (final option in bench) {
+        expect(scoutedLeft, contains(option.id),
+            reason: 'bench predictions come from the scouted roster');
+        expect(option.confirmed, isFalse);
+        expect(option.pct, greaterThan(0));
+      }
+    });
+
+    test('falls back to overall usage when nothing is scouted', () {
+      final doubles =
+          pack.formats.firstWhere((f) => f.isDoubles && f.pickSize == 4);
+      final session = BattleSession(
+        format: doubles,
+        team: Team(name: 'T', builds: []),
+        picks: [
+          PokemonBuild(speciesId: 'froslass'),
+          PokemonBuild(speciesId: 'grimmsnarl'),
+          PokemonBuild(speciesId: 'avalugg'),
+          PokemonBuild(speciesId: 'sinistcha'),
+        ],
+      );
+      session.addEnemy('incineroar');
+      final bench = engine.predictBench(session);
+      expect(bench.length, session.enemyUnknownReserveCount);
+      for (final option in bench) {
+        expect(option.id, isNot('incineroar'));
+      }
     });
   });
 

@@ -1,7 +1,10 @@
 /// AppDatabase against real SQLite (sqflite_common_ffi) — no device needed.
 library;
 
+import 'dart:io';
+
 import 'package:flutter_test/flutter_test.dart';
+import 'package:pokemon_strategy_app/src/models/match_record.dart';
 import 'package:pokemon_strategy_app/src/models/pokemon_build.dart';
 import 'package:pokemon_strategy_app/src/models/team.dart';
 import 'package:pokemon_strategy_app/src/storage/app_database.dart';
@@ -81,5 +84,99 @@ void main() {
     await db.setSetting('anthropic_api_key', 'sk-test-2');
     expect(await db.getSetting('anthropic_api_key'), 'sk-test-2');
     await db.close();
+  });
+
+  test('a default profile always exists; profiles CRUD works', () async {
+    final db = await openTestDb();
+    final profiles = await db.loadProfiles();
+    expect(profiles, isNotEmpty);
+    final created = await db.createProfile('Jonathan');
+    expect(created.id, greaterThan(profiles.last.id));
+    await db.renameProfile(created.id, 'Jon');
+    final renamed = (await db.loadProfiles())
+        .singleWhere((p) => p.id == created.id);
+    expect(renamed.name, 'Jon');
+    await db.close();
+  });
+
+  test('teams are scoped to their profile', () async {
+    final db = await openTestDb();
+    final second = await db.createProfile('Alt');
+    await db.saveTeam(sampleTeam()); // default profile 1
+    await db.saveTeam(sampleTeam(), profileId: second.id);
+    expect((await db.loadTeams()).length, 1);
+    expect((await db.loadTeams(profileId: second.id)).length, 1);
+    expect((await db.loadTeams(profileId: 9999)), isEmpty);
+    await db.close();
+  });
+
+  test('matches round-trip with their snapshot', () async {
+    final db = await openTestDb();
+    final saved = await db.saveMatch(MatchRecord(
+      profileId: 1,
+      date: '2026-08-16T10:00:00',
+      formatId: 'ranked-doubles',
+      formatName: 'Ranked Battle (Reg M-B Doubles)',
+      teamName: 'Rain team',
+      result: 'win',
+      snapshot: {
+        'enemies': [
+          {'speciesId': 'umbreon', 'revealedMoves': ['foul-play']},
+          {'speciesId': 'sneasler'},
+        ],
+      },
+    ));
+    expect(saved.id, isNotNull);
+    final loaded = await db.loadMatches();
+    expect(loaded.length, 1);
+    expect(loaded.single.result, 'win');
+    expect(loaded.single.enemySpeciesIds, ['umbreon', 'sneasler']);
+    await db.deleteMatch(saved.id!);
+    expect(await db.loadMatches(), isEmpty);
+    await db.close();
+  });
+
+  test('v1 database migrates in place, keeping teams', () async {
+    // Build a v1 schema by hand in a temp file, then reopen through
+    // AppDatabase so onUpgrade runs.
+    final dir = Directory.systemTemp.createTempSync('psa_migration');
+    final path = '${dir.path}${Platform.pathSeparator}v1.db';
+    final raw = await databaseFactoryFfi.openDatabase(path,
+        options: OpenDatabaseOptions(
+          version: 1,
+          onCreate: (db, version) async {
+            await db.execute('''
+              CREATE TABLE teams (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT NOT NULL,
+                json TEXT NOT NULL,
+                updated_at TEXT NOT NULL
+              )
+            ''');
+            await db.execute('''
+              CREATE TABLE settings (
+                key TEXT PRIMARY KEY,
+                value TEXT NOT NULL
+              )
+            ''');
+          },
+        ));
+    await raw.insert('teams', {
+      'name': 'Old team',
+      'json': sampleTeam().encode(),
+      'updated_at': '2026-07-11T00:00:00',
+    });
+    await raw.close();
+
+    final db = await AppDatabase.open(databaseFactoryFfi, path: path);
+    final teams = await db.loadTeams(); // default profile 1
+    expect(teams.length, 1);
+    expect(teams.single.name, 'Rain team');
+    expect(await db.loadProfiles(), isNotEmpty);
+    expect(await db.loadMatches(), isEmpty); // table exists post-migration
+    await db.close();
+    try {
+      dir.deleteSync(recursive: true);
+    } catch (_) {}
   });
 }

@@ -9,9 +9,21 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  # Cloud vision recognizer (Anthropic API) + future data-pack refresh.
+  # API recognizer (Anthropic / OpenAI-compatible) + future data-pack refresh.
   # Only cloud_vision_recognizer.dart and tool/update_data.dart touch it.
   http: ^1.2.0
+  # Local (on-device) recognition: pure-Dart sprite matching for the
+  # team-preview screen. Used by sprite_matcher.dart only.
+  image: ^4.3.0
+  # On-device OCR of battle-screen name banners (Local engine, battle tab).
+  # Imported ONLY by mlkit_ocr.dart.
+  google_mlkit_text_recognition: ^0.13.1
+  # Camera capture + gallery import for snapshots. Imported ONLY by
+  # capture_screen.dart.
+  camera: ^0.11.0
+  image_picker: ^1.1.2
+  # Documents directory for the persisted exemplar library.
+  path_provider: ^2.1.4
   # Persistent storage: teams and settings (AppDatabase). Same stack as
   # GolfSwingTrackerApp: sqflite on-device, sqflite_common pure-Dart types
   # so the database layer stays testable without a phone.
@@ -30,3 +42,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/data/
+    - assets/sprites/
+    - assets/sprites/home/
+    - assets/sprites/icons/
+    - assets/exemplars/

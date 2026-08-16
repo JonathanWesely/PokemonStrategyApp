@@ -15,5 +15,6 @@ Future<DataPack> loadDataPackFromAssets({AssetBundle? bundle}) async {
     typeChartJson: await b.loadString('assets/data/type_chart.json'),
     usageJson: await b.loadString('assets/data/usage_reg_mb.json'),
     regulationsJson: await b.loadString('assets/data/regulations.json'),
+    abilitiesJson: await b.loadString('assets/data/abilities.json'),
   );
 }

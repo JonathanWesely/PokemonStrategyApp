@@ -47,8 +47,14 @@ effects, and a dashboard toggle. Everything else stays data-driven.
 | File | Contents | Schema notes |
 |---|---|---|
 | `pokedex.json` | species: types, baseStats, abilities, learnset, megas | `source`, `generatedAt` at top |
-| `moves.json` | id, name, type, category, power, accuracy, priority, note | `power: null` = status/varies; `accuracy: null` = never misses |
+| `moves.json` | id, name, type, category, power, accuracy, priority, note, desc | `power: null` = status/varies; `accuracy: null` = never misses; `desc` feeds the tap-for-info sheets |
 | `items.json` | id, name, desc | Mega Stones: desc starts "Mega Stone" |
+| `abilities.json` | id, name (display), desc | keyed by display name — species reference abilities by name |
 | `type_chart.json` | 18 types + attack map | only non-1.0 multipliers stored |
 | `usage_<reg>.json` | per species: usage%, moves/items/abilities pct, spreads (nature+SP), teammates | `regulation` + `source` at top |
 | `regulations.json` | the format picker list | pickSize 3 (singles) / 4 (doubles) |
+
+New species also need their art: `assets/sprites/home/<id>.png` (UI + the
+local matcher; PokeAPI "home" render, ≤96px), plus optionally
+`assets/sprites/icons/<id>.png` and `assets/sprites/<id>.png` as extra
+matcher variants. The validator flags missing home sprites.

@@ -1,4 +1,9 @@
 /// The dashboard cards: everything the game hides, one card per Pokemon.
+///
+/// Color language: green = confirmed this battle (the reveal ledger),
+/// amber = predicted from usage data, grey = unknown/no data. Tap a row to
+/// confirm/unconfirm it; tap the info icon for what the move/ability/item
+/// does; use the "+" rows for reveals the predictions didn't list.
 library;
 
 import 'package:flutter/material.dart';
@@ -9,6 +14,7 @@ import '../models/battle_state.dart';
 import '../models/pokemon_build.dart';
 import '../models/species.dart';
 import '../prediction/prediction_engine.dart';
+import 'info_sheets.dart';
 import 'widgets.dart';
 
 /// Card for one ENEMY Pokemon: predicted stats/moves/items/abilities with
@@ -16,12 +22,7 @@ import 'widgets.dart';
 class EnemyIntelCard extends StatelessWidget {
   final EnemyPokemon enemy;
 
-  /// When true (the Local / data-only engine), show only confirmed facts —
-  /// types, base stats, matchups — and render moves/ability/item as "?" slots
-  /// you fill in as they're revealed, instead of usage predictions.
-  final bool factsOnly;
-
-  const EnemyIntelCard({super.key, required this.enemy, this.factsOnly = false});
+  const EnemyIntelCard({super.key, required this.enemy});
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +30,6 @@ class EnemyIntelCard extends StatelessWidget {
     final pack = state.pack;
     final species = pack.speciesById(enemy.speciesId);
     if (species == null) return const SizedBox.shrink();
-
-    if (factsOnly) return _factsOnlyCard(context, state, species);
 
     final battle = state.battle!;
     final teammates = [
@@ -50,6 +49,7 @@ class EnemyIntelCard extends StatelessWidget {
       itemId: enemy.revealedItem,
     );
     final dim = !intel.fromUsageData;
+    final labelStyle = Theme.of(context).textTheme.labelLarge;
 
     return Card(
       margin: const EdgeInsets.symmetric(vertical: 5),
@@ -60,7 +60,7 @@ class EnemyIntelCard extends StatelessWidget {
           children: [
             Row(
               children: [
-                const Icon(Icons.smart_toy, size: 16, color: Colors.red),
+                SpeciesIcon(enemy.speciesId, size: 30),
                 const SizedBox(width: 6),
                 Expanded(
                   child: Text(
@@ -110,19 +110,22 @@ class EnemyIntelCard extends StatelessWidget {
             MatchupGroups(profile: profile),
             const Divider(),
 
-            Text('Predicted stats (level 50)',
-                style: Theme.of(context).textTheme.labelLarge),
+            Text('Base stats (Champions)', style: labelStyle),
+            const SizedBox(height: 4),
+            BaseStatsRow(megaForme?.baseStats ?? species.baseStats),
+            const SizedBox(height: 6),
+            Text('Predicted stats (level 50)', style: labelStyle),
             const SizedBox(height: 4),
             _statRangesTable(intel.statRanges),
             const Divider(),
 
-            Text('Predicted moves — tap when revealed',
-                style: Theme.of(context).textTheme.labelLarge),
+            Text('Moves — tap when revealed', style: labelStyle),
             for (final option in intel.moves.take(8))
               RatedOptionRow(
                 option: option,
                 dim: dim,
                 subtitle: pack.moveById(option.id)?.summary,
+                onInfo: () => showMoveInfo(context, pack, option.id),
                 onConfirm: () => state.mutateBattle(() {
                   if (option.confirmed) {
                     enemy.revealedMoves.remove(option.id);
@@ -131,41 +134,53 @@ class EnemyIntelCard extends StatelessWidget {
                   }
                 }),
               ),
+            _addUnlistedRow(
+              context,
+              label: 'Saw a move not listed?',
+              onTap: () => _revealMove(context, state, species),
+            ),
             const Divider(),
 
-            Text('Predicted item', style: Theme.of(context).textTheme.labelLarge),
+            Text('Item', style: labelStyle),
             for (final option in intel.items.take(4))
               RatedOptionRow(
                 option: option,
                 dim: dim,
+                onInfo: () => showItemInfo(context, pack, option.id),
                 onConfirm: () => state.mutateBattle(() {
-                  enemy.revealedItem =
-                      option.confirmed ? null : option.id;
+                  enemy.revealedItem = option.confirmed ? null : option.id;
                 }),
               ),
+            _addUnlistedRow(
+              context,
+              label: 'Different item?',
+              onTap: () => _revealItem(context, state),
+            ),
             const Divider(),
 
-            Text('Predicted ability',
-                style: Theme.of(context).textTheme.labelLarge),
+            Text('Ability', style: labelStyle),
             for (final option in intel.abilities.take(3))
               RatedOptionRow(
                 option: option,
                 dim: dim,
-                onConfirm: () => state.mutateBattle(() {
-                  enemy.revealedAbility =
-                      option.confirmed ? null : option.id;
-                }),
+                onInfo: () => showAbilityInfo(context, pack, option.id),
+                onConfirm: megaForme != null
+                    ? null // a Mega's ability is fixed by the forme
+                    : () => state.mutateBattle(() {
+                          enemy.revealedAbility =
+                              option.confirmed ? null : option.id;
+                        }),
               ),
 
             if (intel.teammates.isNotEmpty) ...[
               const Divider(),
-              Text('Common partners',
-                  style: Theme.of(context).textTheme.labelLarge),
+              Text('Common partners', style: labelStyle),
               Wrap(
                 spacing: 4,
                 children: [
                   for (final entry in intel.teammates.entries.take(4))
                     Chip(
+                      avatar: SpeciesIcon(entry.key, size: 18),
                       label: Text(
                         '${pack.speciesName(entry.key)} '
                         '${entry.value.toStringAsFixed(0)}%',
@@ -176,6 +191,25 @@ class EnemyIntelCard extends StatelessWidget {
                 ],
               ),
             ],
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _addUnlistedRow(BuildContext context,
+      {required String label, required VoidCallback onTap}) {
+    return InkWell(
+      onTap: onTap,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 3),
+        child: Row(
+          children: [
+            Icon(Icons.add_circle_outline,
+                size: 15, color: Colors.grey.shade500),
+            const SizedBox(width: 6),
+            Text(label,
+                style: TextStyle(fontSize: 11, color: Colors.grey.shade600)),
           ],
         ),
       ),
@@ -204,118 +238,6 @@ class EnemyIntelCard extends StatelessWidget {
     );
   }
 
-  // -------------------------------------------------------- facts-only card --
-
-  /// Data-only enemy card (Local engine): confirmed facts + "?" reveal slots.
-  Widget _factsOnlyCard(BuildContext context, AppState state, Species species) {
-    final pack = state.pack;
-    final megaForme =
-        enemy.mega && species.megas.isNotEmpty ? species.megas.first : null;
-    final types = megaForme?.types ?? species.types;
-    final baseStats = megaForme?.baseStats ?? species.baseStats;
-    // Matchups use only what's confirmed: a Mega's fixed ability, else the
-    // revealed ability (if any), plus the revealed item.
-    final ability = megaForme?.ability ?? enemy.revealedAbility;
-    final profile = pack.typeChart
-        .defensiveProfile(types, ability: ability, itemId: enemy.revealedItem);
-    final revealedMoveList = enemy.revealedMoves.toList();
-    final unknownMoves = (4 - revealedMoveList.length).clamp(0, 4);
-    final labelStyle = Theme.of(context).textTheme.labelLarge;
-
-    return Card(
-      margin: const EdgeInsets.symmetric(vertical: 5),
-      child: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                const Icon(Icons.smart_toy, size: 16, color: Colors.red),
-                const SizedBox(width: 6),
-                Expanded(
-                  child: Text(megaForme?.name ?? species.name,
-                      style: const TextStyle(
-                          fontSize: 15, fontWeight: FontWeight.w700)),
-                ),
-                if (enemy.hpPercent != null)
-                  Text('${enemy.hpPercent}% HP',
-                      style: const TextStyle(fontSize: 12)),
-                if (species.megas.isNotEmpty)
-                  IconButton(
-                    tooltip: enemy.mega ? 'Revert forme' : 'Mark as Mega',
-                    icon: Icon(Icons.flash_on,
-                        size: 18,
-                        color: enemy.mega ? Colors.purple : Colors.grey),
-                    onPressed: () =>
-                        state.mutateBattle(() => enemy.mega = !enemy.mega),
-                  ),
-                IconButton(
-                  tooltip: 'Bench',
-                  icon: const Icon(Icons.arrow_downward, size: 18),
-                  onPressed: () =>
-                      state.mutateBattle(() => enemy.onField = false),
-                ),
-                IconButton(
-                  tooltip: 'Remove (misrecognized)',
-                  icon: const Icon(Icons.delete_outline, size: 18),
-                  onPressed: () => state.removeEnemy(enemy),
-                ),
-              ],
-            ),
-            Wrap(spacing: 4, children: [for (final t in types) TypeChip(t)]),
-            const Divider(),
-            MatchupGroups(profile: profile),
-            const Divider(),
-            Text('Base stats (Champions)', style: labelStyle),
-            const SizedBox(height: 4),
-            BaseStatsRow(baseStats),
-            const Divider(),
-            Text('Moves — tap ? to fill in as revealed', style: labelStyle),
-            for (final id in revealedMoveList)
-              RevealSlotRow(
-                label: pack.moveName(id),
-                subtitle: pack.moveById(id)?.summary,
-                leadingChip:
-                    TypeChip(pack.moveById(id)?.type ?? 'Normal', small: true),
-                onTap: () =>
-                    state.mutateBattle(() => enemy.revealedMoves.remove(id)),
-              ),
-            for (var i = 0; i < unknownMoves; i++)
-              RevealSlotRow(
-                label: null,
-                hint: 'tap to set move',
-                onTap: () => _revealMove(context, state, species),
-              ),
-            const Divider(),
-            Text('Ability', style: labelStyle),
-            RevealSlotRow(
-              label: megaForme?.ability ?? enemy.revealedAbility,
-              hint: 'tap to set ability',
-              onTap: megaForme != null
-                  ? () {}
-                  : () {
-                      if (enemy.revealedAbility != null) {
-                        state.mutateBattle(() => enemy.revealedAbility = null);
-                      } else {
-                        _revealAbility(context, state, species);
-                      }
-                    },
-            ),
-            const Divider(),
-            Text('Item', style: labelStyle),
-            RevealSlotRow(
-              label:
-                  enemy.revealedItem == null ? null : pack.itemName(enemy.revealedItem),
-              hint: 'tap to set item',
-              onTap: () => _revealItem(context, state),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
   Future<void> _revealMove(
       BuildContext context, AppState state, Species species) async {
     final pack = state.pack;
@@ -331,22 +253,8 @@ class EnemyIntelCard extends StatelessWidget {
     }
   }
 
-  Future<void> _revealAbility(
-      BuildContext context, AppState state, Species species) async {
-    final entries = [for (final a in species.abilities) MapEntry(a, a)];
-    final chosen = await showPickerDialog(context,
-        title: 'Reveal ability', entries: entries);
-    if (chosen != null) {
-      state.mutateBattle(() => enemy.revealedAbility = chosen);
-    }
-  }
-
   Future<void> _revealItem(BuildContext context, AppState state) async {
     final pack = state.pack;
-    if (enemy.revealedItem != null) {
-      state.mutateBattle(() => enemy.revealedItem = null);
-      return;
-    }
     final entries = <MapEntry<String, String>>[
       for (final item in pack.items.values) MapEntry(item.id, item.name),
     ]..sort((a, b) => a.value.compareTo(b.value));
@@ -393,7 +301,7 @@ class YourIntelCard extends StatelessWidget {
           children: [
             Row(
               children: [
-                const Icon(Icons.person, size: 16, color: Colors.blue),
+                SpeciesIcon(pokemonBuild.speciesId, size: 30),
                 const SizedBox(width: 6),
                 Expanded(
                   child: Text(
@@ -402,8 +310,15 @@ class YourIntelCard extends StatelessWidget {
                         fontSize: 15, fontWeight: FontWeight.w700),
                   ),
                 ),
-                Text('${pokemonBuild.ability} · ${pack.itemName(pokemonBuild.itemId)}',
-                    style: const TextStyle(fontSize: 11)),
+                InkWell(
+                  onTap: pokemonBuild.ability.isEmpty
+                      ? null
+                      : () =>
+                          showAbilityInfo(context, pack, pokemonBuild.ability),
+                  child: Text(
+                      '${pokemonBuild.ability} · ${pack.itemName(pokemonBuild.itemId)}',
+                      style: const TextStyle(fontSize: 11)),
+                ),
               ],
             ),
             Wrap(spacing: 4, children: [for (final t in types) TypeChip(t)]),
@@ -429,22 +344,25 @@ class YourIntelCard extends StatelessWidget {
             ),
             const Divider(),
             for (final moveId in pokemonBuild.moveIds)
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 2),
-                child: Row(
-                  children: [
-                    TypeChip(pack.moveById(moveId)?.type ?? 'Normal',
-                        small: true),
-                    const SizedBox(width: 6),
-                    Expanded(
-                      child: Text(pack.moveName(moveId),
-                          style: const TextStyle(
-                              fontSize: 13, fontWeight: FontWeight.w500)),
-                    ),
-                    Text(pack.moveById(moveId)?.summary ?? '',
-                        style: TextStyle(
-                            fontSize: 10, color: Colors.grey.shade700)),
-                  ],
+              InkWell(
+                onTap: () => showMoveInfo(context, pack, moveId),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 2),
+                  child: Row(
+                    children: [
+                      TypeChip(pack.moveById(moveId)?.type ?? 'Normal',
+                          small: true),
+                      const SizedBox(width: 6),
+                      Expanded(
+                        child: Text(pack.moveName(moveId),
+                            style: const TextStyle(
+                                fontSize: 13, fontWeight: FontWeight.w500)),
+                      ),
+                      Text(pack.moveById(moveId)?.summary ?? '',
+                          style: TextStyle(
+                              fontSize: 10, color: Colors.grey.shade700)),
+                    ],
+                  ),
                 ),
               ),
           ],

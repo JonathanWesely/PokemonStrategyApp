@@ -90,6 +90,47 @@ class PredictionEngine {
     );
   }
 
+  /// Predict which of the enemy's scouted-but-unseen Pokemon were brought to
+  /// the battle (the amber bench icons). Candidates come from the Team
+  /// Preview roster minus the already-revealed enemies, ranked by usage and
+  /// co-usage with what's on the field; falls back to overall usage when the
+  /// roster hasn't been scouted.
+  List<RatedOption> predictBench(BattleSession session) {
+    final revealed = {for (final e in session.enemies) e.speciesId};
+    final scouted = [
+      for (final s in session.enemyPreview)
+        if (!revealed.contains(s.speciesId)) s.speciesId
+    ];
+    final candidates = scouted.isNotEmpty
+        ? scouted
+        : [
+            for (final u in pack.usage.bySpecies.values)
+              if (!revealed.contains(u.speciesId)) u.speciesId
+          ];
+    final scores = <String, double>{};
+    for (final id in candidates) {
+      final usage = pack.usage.forSpecies(id);
+      var score = usage?.usagePercent ?? 1.0;
+      for (final e in session.enemies) {
+        final mates = pack.usage.forSpecies(e.speciesId)?.teammates;
+        score += (mates?[id] ?? 0) * 1.5; // co-usage sharpens the guess
+      }
+      scores[id] = score;
+    }
+    final ranked = scores.entries.toList()
+      ..sort((a, b) => b.value.compareTo(a.value));
+    final top = ranked.take(session.enemyUnknownReserveCount).toList();
+    final max = top.isEmpty ? 1.0 : top.first.value;
+    return [
+      for (final e in top)
+        RatedOption(
+          id: e.key,
+          label: pack.speciesName(e.key),
+          pct: max <= 0 ? 0 : (e.value / max * 100).clamp(0, 100).toDouble(),
+        ),
+    ];
+  }
+
   String? _megaIdFor(EnemyPokemon enemy) {
     final species = pack.speciesById(enemy.speciesId);
     if (species == null || species.megas.isEmpty) return null;

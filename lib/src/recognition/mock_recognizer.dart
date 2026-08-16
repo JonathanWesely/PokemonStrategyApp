@@ -44,8 +44,12 @@ class MockRecognizer implements RecognitionService {
       ));
     }
 
-    final enemyIds = scriptedEnemies ?? _sampleEnemies(context.enemyFieldSlots);
-    for (final id in enemyIds.take(context.enemyFieldSlots)) {
+    // Preview screen shows the enemy's whole team; battle shows the field.
+    final enemyCount = context.screen == RecognitionScreen.preview
+        ? context.enemyTeamSize
+        : context.enemyFieldSlots;
+    final enemyIds = scriptedEnemies ?? _sampleEnemies(enemyCount);
+    for (final id in enemyIds.take(enemyCount)) {
       slots.add(RecognizedPokemon(
         speciesId: id,
         side: BattleSide.enemy,

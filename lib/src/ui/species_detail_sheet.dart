@@ -17,6 +17,7 @@ import '../models/pokemon_build.dart';
 import '../models/prediction.dart';
 import '../models/species.dart';
 import '../prediction/prediction_engine.dart';
+import 'info_sheets.dart';
 import 'widgets.dart';
 
 /// Open the detail sheet as a scrollable modal.
@@ -95,15 +96,16 @@ class SpeciesDetailSheet extends StatelessWidget {
         children: [
           Row(
             children: [
-              Icon(build != null ? Icons.person : Icons.catching_pokemon,
-                  size: 18,
-                  color: build != null ? Colors.blue : Colors.red),
+              SpeciesIcon(speciesId, size: 44),
               const SizedBox(width: 8),
               Expanded(
                 child: Text(species.name,
                     style: theme.textTheme.titleLarge
                         ?.copyWith(fontWeight: FontWeight.w700)),
               ),
+              Icon(build != null ? Icons.person : Icons.smart_toy,
+                  size: 18,
+                  color: build != null ? Colors.blue : Colors.red),
             ],
           ),
           const SizedBox(height: 6),
@@ -137,16 +139,17 @@ class SpeciesDetailSheet extends StatelessWidget {
           MatchupGroups(profile: profile),
 
           const Divider(height: 20),
-          Text('Abilities', style: theme.textTheme.labelLarge),
+          Text('Abilities — tap for details', style: theme.textTheme.labelLarge),
           const SizedBox(height: 4),
           Wrap(
             spacing: 6,
             runSpacing: 4,
             children: [
               for (final a in species.abilities)
-                Chip(
+                ActionChip(
                   label: Text(a, style: const TextStyle(fontSize: 11)),
                   visualDensity: VisualDensity.compact,
+                  onPressed: () => showAbilityInfo(context, pack, a),
                 ),
             ],
           ),
@@ -158,9 +161,12 @@ class SpeciesDetailSheet extends StatelessWidget {
           ],
 
           const Divider(height: 20),
-          Text('Can learn (starter pack — abbreviated)',
+          Text('Can learn (tap a move for details)',
               style: theme.textTheme.labelLarge),
-          for (final moveId in species.learnset) _moveLine(pack, moveId),
+          for (final moveId in species.learnset)
+            InkWell(
+                onTap: () => showMoveInfo(context, pack, moveId),
+                child: _moveLine(pack, moveId)),
 
           if (showPredictions && intel != null) ...[
             const Divider(height: 20),
@@ -173,20 +179,25 @@ class SpeciesDetailSheet extends StatelessWidget {
                       color: Colors.grey)),
             const SizedBox(height: 4),
             if (intel.spreads.isNotEmpty)
-              Text('Spread: ${_spreadText(intel.spreads.first)}',
+              Text('Common spread: ${_spreadText(intel.spreads.first)}',
                   style: const TextStyle(fontSize: 12)),
             const SizedBox(height: 4),
             for (final option in intel.moves.take(6))
               RatedOptionRow(
                   option: option,
                   dim: !intel.fromUsageData,
-                  subtitle: pack.moveById(option.id)?.summary),
-            if (intel.items.isNotEmpty) ...[
-              const SizedBox(height: 4),
-              Text('Item: ${intel.items.first.label} '
-                  '(${intel.items.first.pct.toStringAsFixed(0)}%)',
-                  style: const TextStyle(fontSize: 12)),
-            ],
+                  subtitle: pack.moveById(option.id)?.summary,
+                  onInfo: () => showMoveInfo(context, pack, option.id)),
+            for (final option in intel.items.take(2))
+              RatedOptionRow(
+                  option: option,
+                  dim: !intel.fromUsageData,
+                  onInfo: () => showItemInfo(context, pack, option.id)),
+            for (final option in intel.abilities.take(2))
+              RatedOptionRow(
+                  option: option,
+                  dim: !intel.fromUsageData,
+                  onInfo: () => showAbilityInfo(context, pack, option.id)),
             if (intel.teammates.isNotEmpty) ...[
               const SizedBox(height: 6),
               Text('Common partners', style: theme.textTheme.labelLarge),

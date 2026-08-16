@@ -43,6 +43,7 @@ void main() {
   final typeChart = load('type_chart.json');
   final usage = load('usage_reg_mb.json');
   final regulations = load('regulations.json');
+  final abilitiesDoc = load('abilities.json');
 
   final types = ((typeChart['types'] as List?) ?? const []).cast<String>();
   final moveIds = {
@@ -52,6 +53,10 @@ void main() {
   final itemIds = {
     for (final i in (itemsDoc['items'] as List?) ?? const [])
       (i as Map<String, dynamic>)['id'] as String
+  };
+  final abilityNames = {
+    for (final a in (abilitiesDoc['abilities'] as List?) ?? const [])
+      (a as Map<String, dynamic>)['name'] as String
   };
 
   // ---- pokedex checks ----
@@ -68,6 +73,11 @@ void main() {
     if (((s['abilities'] as List?) ?? const []).isEmpty) {
       problems.add('$id: no abilities');
     }
+    for (final a in ((s['abilities'] as List?) ?? const []).cast<String>()) {
+      if (!abilityNames.contains(a)) {
+        problems.add('$id: ability "$a" missing from abilities.json');
+      }
+    }
     for (final m in ((s['learnset'] as List?) ?? const []).cast<String>()) {
       if (!moveIds.contains(m)) problems.add('$id: learnset move $m unknown');
     }
@@ -77,12 +87,38 @@ void main() {
       if (!itemIds.contains(mega['item'])) {
         problems.add('$id: mega stone ${mega['item']} unknown');
       }
+      final megaAbility = (mega['ability'] as String?) ?? '';
+      if (megaAbility.isNotEmpty && !abilityNames.contains(megaAbility)) {
+        problems.add('$id: mega ability "$megaAbility" missing from '
+            'abilities.json');
+      }
+    }
+    // Sprites: the UI and the local sprite matcher both want these.
+    if (!File('assets/sprites/home/$id.png').existsSync()) {
+      problems.add('$id: missing assets/sprites/home/$id.png');
     }
   }
   summary.add('pokedex: ${speciesIds.length} species, $megaCount megas '
       '(source: ${pokedex['source']}, generated ${pokedex['generatedAt']})');
   summary.add('moves: ${moveIds.length} · items: ${itemIds.length} · '
-      'types: ${types.length}');
+      'abilities: ${abilityNames.length} · types: ${types.length}');
+  final movesNoDesc = [
+    for (final m in (movesDoc['moves'] as List?) ?? const [])
+      if ((((m as Map<String, dynamic>)['desc'] as String?) ?? '').isEmpty)
+        m['id'] as String
+  ];
+  if (movesNoDesc.isNotEmpty) {
+    summary.add('moves without desc (info sheets will be thin): '
+        '${movesNoDesc.join(', ')}');
+  }
+  final exemplarSeeds = Directory('assets/exemplars').existsSync()
+      ? Directory('assets/exemplars')
+          .listSync()
+          .whereType<File>()
+          .where((f) => f.path.endsWith('.png'))
+          .length
+      : 0;
+  summary.add('exemplar seeds (local sprite matcher): $exemplarSeeds');
 
   // ---- usage checks ----
   final usageList =

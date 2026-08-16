@@ -1,4 +1,5 @@
-/// Settings: recognition engine, API key, data pack info.
+/// Settings: recognition engine (Local / API / Mock), API provider config,
+/// data pack info.
 library;
 
 import 'package:flutter/material.dart';
@@ -13,11 +14,39 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  TextEditingController? _apiKeyControllerInternal;
+  TextEditingController? _apiKey;
+  TextEditingController? _baseUrl;
+  TextEditingController? _model;
 
-  TextEditingController get _apiKeyController =>
-      _apiKeyControllerInternal ??=
-          TextEditingController(text: AppScope.of(context).apiKey);
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final state = AppScope.of(context);
+    _apiKey ??= TextEditingController(text: state.apiKey);
+    _baseUrl ??= TextEditingController(text: state.apiBaseUrl);
+    _model ??= TextEditingController(text: state.apiModel);
+  }
+
+  @override
+  void dispose() {
+    _apiKey?.dispose();
+    _baseUrl?.dispose();
+    _model?.dispose();
+    super.dispose();
+  }
+
+  Future<void> _saveApiFields() async {
+    final state = AppScope.of(context);
+    await state.updateSettings(
+      newApiKey: _apiKey!.text.trim(),
+      newApiBaseUrl: _baseUrl!.text.trim(),
+      newApiModel: _model!.text.trim(),
+    );
+    if (mounted) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text('API settings saved')));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,51 +64,93 @@ class _SettingsScreenState extends State<SettingsScreen> {
             child: const Column(
               children: [
                 RadioListTile<String>(
-                  value: 'mock',
-                  title: Text('Mock (no camera, no API key)'),
-                  subtitle: Text(
-                      'Simulates recognition with plausible enemies — for testing',
-                      style: TextStyle(fontSize: 11)),
-                ),
-                RadioListTile<String>(
                   value: 'local',
-                  title: Text('Local / on-device (no cloud AI)'),
+                  title: Text('Local / on-device (no cloud AI, no tokens)'),
                   subtitle: Text(
-                      'Realtime tracking, offline: you confirm the enemies, the '
-                      'app shows types, stats, base stats & matchups. Camera '
-                      'auto-detect (sprite + OCR) lands in a later phase.',
+                      'Sprite matching for the team-preview screen + OCR for '
+                      'the battle screen, fully offline. Learns from every '
+                      'photo you confirm — expect a few corrections in your '
+                      'first battles.',
                       style: TextStyle(fontSize: 11)),
                 ),
                 RadioListTile<String>(
-                  value: 'cloud-vision',
-                  title: Text('Cloud vision (Anthropic API)'),
+                  value: 'api',
+                  title: Text('AI API (plug in any vision model)'),
                   subtitle: Text(
-                      'Reads real battle photos — needs the API key below',
+                      'Anthropic, or any OpenAI-compatible endpoint (OpenAI, '
+                      'Gemini, local Ollama/LM Studio). Most accurate; needs '
+                      'the settings below.',
+                      style: TextStyle(fontSize: 11)),
+                ),
+                RadioListTile<String>(
+                  value: 'mock',
+                  title: Text('Mock (no camera, no key — for testing)'),
+                  subtitle: Text(
+                      'Simulates recognition with plausible enemies',
                       style: TextStyle(fontSize: 11)),
                 ),
               ],
             ),
           ),
-          const SizedBox(height: 12),
-          TextField(
-            controller: _apiKeyController,
-            obscureText: true,
-            decoration: InputDecoration(
-              labelText: 'Anthropic API key',
-              helperText: 'Stored only on this device',
-              border: const OutlineInputBorder(),
-              suffixIcon: IconButton(
-                icon: const Icon(Icons.save),
-                onPressed: () async {
-                  await state.updateSettings(
-                      newApiKey: _apiKeyController.text.trim());
-                  if (context.mounted) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('API key saved')));
-                  }
-                },
-              ),
+          const Divider(height: 24),
+          Text('API engine settings',
+              style: Theme.of(context).textTheme.titleSmall),
+          const SizedBox(height: 8),
+          DropdownButtonFormField<String>(
+            initialValue: state.apiProvider,
+            decoration: const InputDecoration(
+              labelText: 'Provider',
+              border: OutlineInputBorder(),
             ),
+            items: const [
+              DropdownMenuItem(
+                  value: 'anthropic', child: Text('Anthropic (Claude)')),
+              DropdownMenuItem(
+                  value: 'openai',
+                  child: Text('OpenAI-compatible (OpenAI / Gemini / Ollama…)')),
+            ],
+            onChanged: (v) {
+              if (v != null) state.updateSettings(newApiProvider: v);
+            },
+          ),
+          const SizedBox(height: 10),
+          TextField(
+            controller: _model,
+            decoration: InputDecoration(
+              labelText: 'Model',
+              hintText: state.apiProvider == 'openai'
+                  ? 'e.g. gpt-4o, gemini-2.5-flash, llava'
+                  : 'e.g. claude-sonnet-4-5',
+              helperText: 'Leave empty for the default',
+              border: const OutlineInputBorder(),
+            ),
+          ),
+          const SizedBox(height: 10),
+          TextField(
+            controller: _baseUrl,
+            decoration: InputDecoration(
+              labelText: 'Base URL (optional)',
+              hintText: state.apiProvider == 'openai'
+                  ? 'e.g. http://192.168.1.20:11434/v1 for Ollama'
+                  : 'default: https://api.anthropic.com',
+              border: const OutlineInputBorder(),
+            ),
+          ),
+          const SizedBox(height: 10),
+          TextField(
+            controller: _apiKey,
+            obscureText: true,
+            decoration: const InputDecoration(
+              labelText: 'API key',
+              helperText: 'Stored only on this device',
+              border: OutlineInputBorder(),
+            ),
+          ),
+          const SizedBox(height: 8),
+          FilledButton.icon(
+            icon: const Icon(Icons.save),
+            label: const Text('Save API settings'),
+            onPressed: _saveApiFields,
           ),
           const SizedBox(height: 20),
           Card(
@@ -95,7 +166,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   Text('Source: ${state.pack.usage.source}'),
                   Text('Species: ${state.pack.species.length} · '
                       'Moves: ${state.pack.moves.length} · '
-                      'Items: ${state.pack.items.length}'),
+                      'Items: ${state.pack.items.length} · '
+                      'Abilities: ${state.pack.abilities.length}'),
                   if (state.pack.usage.note.isNotEmpty) ...[
                     const SizedBox(height: 6),
                     Text(state.pack.usage.note,

@@ -1,6 +1,7 @@
-/// Recognition engines: the mock (fully offline) and the cloud recognizer's
+/// Recognition engines: the mock (fully offline) and the API recognizer's
 /// request/parse logic against a fake HTTP transport (http's MockClient) —
-/// the same "fake firmware" trick the golf app used for its BLE link.
+/// the same "fake firmware" trick the golf app used for its BLE link. Both
+/// wire formats (Anthropic Messages, OpenAI chat-completions) are covered.
 library;
 
 import 'dart:convert';
@@ -44,9 +45,22 @@ void main() {
       expect(result.enemies.map((e) => e.speciesId).toList(),
           ['incineroar', 'rillaboom']);
     });
+
+    test('preview screen yields a full enemy team', () async {
+      const previewContext = BattleSnapshotContext(
+        yourSpeciesIds: ['chien-pao', 'torkoal', 'amoonguss', 'farigiraf'],
+        enemyFieldSlots: 2,
+        enemyTeamSize: 6,
+        screen: RecognitionScreen.preview,
+      );
+      final result = await MockRecognizer(pack, seed: 7)
+          .recognize(Uint8List(0), context: previewContext);
+      expect(result.enemies.length, 6);
+      expect(result.enemies.map((e) => e.speciesId).toSet().length, 6);
+    });
   });
 
-  group('CloudVisionRecognizer', () {
+  group('ApiRecognizer (Anthropic)', () {
     http.Client fakeApi(Map<String, dynamic> reply,
         {int status = 200, void Function(http.Request)? onRequest}) {
       return MockClient((request) async {
@@ -84,7 +98,7 @@ void main() {
       }));
 
       http.Request? seen;
-      final recognizer = CloudVisionRecognizer(
+      final recognizer = ApiRecognizer(
         pack,
         apiKey: 'sk-test',
         client: fakeApi(reply, onRequest: (r) => seen = r),
@@ -94,18 +108,45 @@ void main() {
         context: context,
       );
 
-      expect(result.engine, 'cloud-vision');
+      expect(result.engine, 'api');
       expect(result.enemies.length, 2);
       expect(result.enemies.first.speciesId, 'incineroar');
       expect(result.enemies.first.hpPercent, 87);
       expect(result.yours.single.speciesId, 'chien-pao');
 
-      // Request sanity: right headers, image attached.
+      // Request sanity: right headers, image attached, right endpoint.
       expect(seen!.headers['x-api-key'], 'sk-test');
+      expect(seen!.url.toString(), 'https://api.anthropic.com/v1/messages');
       final body = jsonDecode(seen!.body) as Map<String, dynamic>;
       final content =
           ((body['messages'] as List).first as Map)['content'] as List;
       expect((content.first as Map)['type'], 'image');
+    });
+
+    test('preview screen changes the prompt to sprite identification',
+        () async {
+      const previewContext = BattleSnapshotContext(
+        yourSpeciesIds: ['chien-pao', 'torkoal', 'amoonguss', 'farigiraf'],
+        enemyFieldSlots: 2,
+        enemyTeamSize: 6,
+        screen: RecognitionScreen.preview,
+      );
+      final reply = anthropicReply(jsonEncode({
+        'pokemon': [
+          {'name': 'Umbreon', 'side': 'enemy'},
+        ]
+      }));
+      http.Request? seen;
+      final recognizer = ApiRecognizer(pack,
+          apiKey: 'k', client: fakeApi(reply, onRequest: (r) => seen = r));
+      await recognizer.recognize(Uint8List.fromList([1]),
+          context: previewContext);
+      final body = jsonDecode(seen!.body) as Map<String, dynamic>;
+      final content =
+          ((body['messages'] as List).first as Map)['content'] as List;
+      final text = (content[1] as Map)['text'] as String;
+      expect(text, contains('TEAM-SELECT'));
+      expect(text, contains('2D sprite'));
     });
 
     test('tolerates prose/code-fence wrapping around the JSON', () async {
@@ -113,7 +154,7 @@ void main() {
           '{"pokemon":[{"name":"Gengar","side":"enemy","mega":true,'
           '"confidence":0.9,"hpPercent":55}]}\n```');
       final recognizer =
-          CloudVisionRecognizer(pack, apiKey: 'k', client: fakeApi(reply));
+          ApiRecognizer(pack, apiKey: 'k', client: fakeApi(reply));
       final result =
           await recognizer.recognize(Uint8List.fromList([1]), context: context);
       expect(result.enemies.single.speciesId, 'gengar');
@@ -128,7 +169,7 @@ void main() {
         ]
       }));
       final recognizer =
-          CloudVisionRecognizer(pack, apiKey: 'k', client: fakeApi(reply));
+          ApiRecognizer(pack, apiKey: 'k', client: fakeApi(reply));
       final result =
           await recognizer.recognize(Uint8List.fromList([1]), context: context);
       expect(result.enemies.single.speciesId, 'torkoal');
@@ -136,27 +177,91 @@ void main() {
 
     test('missing API key / empty image / API error all throw cleanly',
         () async {
-      final noKey = CloudVisionRecognizer(pack,
+      final noKey = ApiRecognizer(pack,
           apiKey: '', client: fakeApi(anthropicReply('{}')));
       expect(
         () => noKey.recognize(Uint8List.fromList([1]), context: context),
         throwsA(isA<RecognitionException>()),
       );
 
-      final withKey = CloudVisionRecognizer(pack,
+      final withKey = ApiRecognizer(pack,
           apiKey: 'k', client: fakeApi(anthropicReply('{}')));
       expect(
         () => withKey.recognize(Uint8List(0), context: context),
         throwsA(isA<RecognitionException>()),
       );
 
-      final apiError = CloudVisionRecognizer(pack,
+      final apiError = ApiRecognizer(pack,
           apiKey: 'k',
           client: fakeApi({'error': 'overloaded'}, status: 529));
       expect(
         () => apiError.recognize(Uint8List.fromList([1]), context: context),
         throwsA(isA<RecognitionException>()),
       );
+    });
+  });
+
+  group('ApiRecognizer (OpenAI-compatible)', () {
+    Map<String, dynamic> openAiReply(String text) => {
+          'choices': [
+            {
+              'message': {'role': 'assistant', 'content': text}
+            }
+          ],
+        };
+
+    test('speaks the chat-completions schema and parses replies', () async {
+      http.Request? seen;
+      final recognizer = ApiRecognizer(
+        pack,
+        provider: ApiProvider.openAiCompatible,
+        apiKey: 'sk-oa',
+        model: 'gpt-4o',
+        client: MockClient((request) async {
+          seen = request;
+          return http.Response(
+              jsonEncode(openAiReply(jsonEncode({
+                'pokemon': [
+                  {'name': 'Umbreon', 'side': 'enemy', 'hpPercent': 100},
+                ]
+              }))),
+              200,
+              headers: {'content-type': 'application/json'});
+        }),
+      );
+      final result = await recognizer.recognize(Uint8List.fromList([1]),
+          context: context);
+      expect(result.enemies.single.speciesId, 'umbreon');
+
+      expect(seen!.url.toString(),
+          'https://api.openai.com/v1/chat/completions');
+      expect(seen!.headers['authorization'], 'Bearer sk-oa');
+      final body = jsonDecode(seen!.body) as Map<String, dynamic>;
+      expect(body['model'], 'gpt-4o');
+      final content =
+          ((body['messages'] as List).first as Map)['content'] as List;
+      expect((content.first as Map)['type'], 'image_url');
+    });
+
+    test('custom base URL (e.g. local Ollama) is honored', () async {
+      http.Request? seen;
+      final recognizer = ApiRecognizer(
+        pack,
+        provider: ApiProvider.openAiCompatible,
+        apiKey: 'unused-but-set',
+        baseUrl: 'http://192.168.1.20:11434/v1',
+        model: 'llava',
+        client: MockClient((request) async {
+          seen = request;
+          return http.Response(
+              jsonEncode(openAiReply(
+                  '{"pokemon":[{"name":"Gengar","side":"enemy"}]}')),
+              200);
+        }),
+      );
+      await recognizer.recognize(Uint8List.fromList([1]), context: context);
+      expect(seen!.url.toString(),
+          'http://192.168.1.20:11434/v1/chat/completions');
     });
   });
 }

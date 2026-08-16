@@ -1,0 +1,322 @@
+{
+ "schemaVersion": 1,
+ "generatedAt": "2026-08-15",
+ "source": "pokeapi",
+ "abilities": [
+  {
+   "id": "adaptability",
+   "name": "Adaptability",
+   "desc": "Increases the same-type attack bonus from 1.5\u00d7 to 2\u00d7."
+  },
+  {
+   "id": "aerilate",
+   "name": "Aerilate",
+   "desc": "Turns the bearer's Normal moves into Flying moves and strengthens them to 1.3\u00d7 their power."
+  },
+  {
+   "id": "armor-tail",
+   "name": "Armor Tail",
+   "desc": "Prevents the opponent from using any moves that have priority, such as Quick Attack."
+  },
+  {
+   "id": "blaze",
+   "name": "Blaze",
+   "desc": "Strengthens Fire moves to inflict 1.5\u00d7 damage at 1/3 max HP or less."
+  },
+  {
+   "id": "chlorophyll",
+   "name": "Chlorophyll",
+   "desc": "Doubles Speed during strong sunlight."
+  },
+  {
+   "id": "clear-body",
+   "name": "Clear Body",
+   "desc": "Prevents stats from being lowered by other Pok\u00e9mon."
+  },
+  {
+   "id": "cud-chew",
+   "name": "Cud Chew",
+   "desc": "Causes the Pok\u00e9mon to reuse an already consumed Berry at the end of the next turn."
+  },
+  {
+   "id": "cursed-body",
+   "name": "Cursed Body",
+   "desc": "Has a 30% chance of Disabling any move that hits the Pok\u00e9mon."
+  },
+  {
+   "id": "cute-charm",
+   "name": "Cute Charm",
+   "desc": "Has a 30% chance of infatuating attacking Pok\u00e9mon on contact."
+  },
+  {
+   "id": "defiant",
+   "name": "Defiant",
+   "desc": "Raises Attack two stages upon having any stat lowered."
+  },
+  {
+   "id": "drizzle",
+   "name": "Drizzle",
+   "desc": "Summons rain that lasts indefinitely upon entering battle."
+  },
+  {
+   "id": "drought",
+   "name": "Drought",
+   "desc": "Summons strong sunlight that lasts indefinitely upon entering battle."
+  },
+  {
+   "id": "effect-spore",
+   "name": "Effect Spore",
+   "desc": "Has a 30% chance of inflcting either paralysis, poison, or sleep on attacking Pok\u00e9mon on contact."
+  },
+  {
+   "id": "flame-body",
+   "name": "Flame Body",
+   "desc": "Has a 30% chance of burning attacking Pok\u00e9mon on contact."
+  },
+  {
+   "id": "flash-fire",
+   "name": "Flash Fire",
+   "desc": "Protects against Fire moves.  Once one has been blocked, the Pok\u00e9mon's own Fire moves inflict 1.5\u00d7 damage until it leaves battle."
+  },
+  {
+   "id": "frisk",
+   "name": "Frisk",
+   "desc": "Reveals an opponent's held item upon entering battle."
+  },
+  {
+   "id": "gale-wings",
+   "name": "Gale Wings",
+   "desc": "Raises Flying moves' priority by one stage."
+  },
+  {
+   "id": "good-as-gold",
+   "name": "Good as Gold",
+   "desc": "Gives immunity to status moves."
+  },
+  {
+   "id": "grassy-surge",
+   "name": "Grassy Surge",
+   "desc": "When this Pok\u00e9mon enters battle, it changes the terrain to Grassy Terrain."
+  },
+  {
+   "id": "heatproof",
+   "name": "Heatproof",
+   "desc": "Halves damage from Fire moves and burns."
+  },
+  {
+   "id": "hospitality",
+   "name": "Hospitality",
+   "desc": "When a Pok\u00e9mon with Hospitality enters a battle, it restores HP for an ally by 25%."
+  },
+  {
+   "id": "ice-body",
+   "name": "Ice Body",
+   "desc": "Heals for 1/16 max HP after each turn during hail.  Protects against hail damage."
+  },
+  {
+   "id": "infiltrator",
+   "name": "Infiltrator",
+   "desc": "Bypasses Light Screen, Reflect, and Safeguard."
+  },
+  {
+   "id": "inner-focus",
+   "name": "Inner Focus",
+   "desc": "Prevents flinching."
+  },
+  {
+   "id": "intimidate",
+   "name": "Intimidate",
+   "desc": "Lowers opponents' Attack one stage upon entering battle."
+  },
+  {
+   "id": "justified",
+   "name": "Justified",
+   "desc": "Raises Attack one stage upon taking damage from a Dark move."
+  },
+  {
+   "id": "keen-eye",
+   "name": "Keen Eye",
+   "desc": "Prevents accuracy from being lowered."
+  },
+  {
+   "id": "light-metal",
+   "name": "Light Metal",
+   "desc": "Halves the Pok\u00e9mon's weight."
+  },
+  {
+   "id": "moxie",
+   "name": "Moxie",
+   "desc": "Raises Attack one stage upon KOing a Pok\u00e9mon."
+  },
+  {
+   "id": "multiscale",
+   "name": "Multiscale",
+   "desc": "Halves damage taken from full HP."
+  },
+  {
+   "id": "overgrow",
+   "name": "Overgrow",
+   "desc": "Strengthens Grass moves to inflict 1.5\u00d7 damage at 1/3 max HP or less."
+  },
+  {
+   "id": "own-tempo",
+   "name": "Own Tempo",
+   "desc": "Prevents confusion."
+  },
+  {
+   "id": "pickpocket",
+   "name": "Pickpocket",
+   "desc": "Steals attacking Pok\u00e9mon's held items on contact."
+  },
+  {
+   "id": "pixilate",
+   "name": "Pixilate",
+   "desc": "Turns the bearer's Normal moves into Fairy moves and strengthens them to 1.3\u00d7 their power."
+  },
+  {
+   "id": "poison-touch",
+   "name": "Poison Touch",
+   "desc": "Has a 30% chance of poisoning target Pok\u00e9mon upon contact."
+  },
+  {
+   "id": "prankster",
+   "name": "Prankster",
+   "desc": "Raises non-damaging moves' priority by one stage."
+  },
+  {
+   "id": "pressure",
+   "name": "Pressure",
+   "desc": "Increases the PP cost of moves targetting the Pok\u00e9mon by one."
+  },
+  {
+   "id": "rain-dish",
+   "name": "Rain Dish",
+   "desc": "Heals for 1/16 max HP after each turn during rain."
+  },
+  {
+   "id": "regenerator",
+   "name": "Regenerator",
+   "desc": "Heals for 1/3 max HP upon switching out."
+  },
+  {
+   "id": "rough-skin",
+   "name": "Rough Skin",
+   "desc": "Damages attacking Pok\u00e9mon for 1/8 their max HP on contact."
+  },
+  {
+   "id": "sand-rush",
+   "name": "Sand Rush",
+   "desc": "Doubles Speed during a sandstorm.  Protects against sandstorm damage."
+  },
+  {
+   "id": "sand-stream",
+   "name": "Sand Stream",
+   "desc": "Summons a sandstorm that lasts indefinitely upon entering battle."
+  },
+  {
+   "id": "sand-veil",
+   "name": "Sand Veil",
+   "desc": "Increases evasion to 1.25\u00d7 during a sandstorm.  Protects against sandstorm damage."
+  },
+  {
+   "id": "sap-sipper",
+   "name": "Sap Sipper",
+   "desc": "Absorbs Grass moves, raising Attack one stage."
+  },
+  {
+   "id": "scrappy",
+   "name": "Scrappy",
+   "desc": "Lets the Pok\u00e9mon's Normal and Fighting moves hit Ghost Pok\u00e9mon."
+  },
+  {
+   "id": "shadow-tag",
+   "name": "Shadow Tag",
+   "desc": "Prevents opponents from fleeing or switching out."
+  },
+  {
+   "id": "shell-armor",
+   "name": "Shell Armor",
+   "desc": "Protects against critical hits."
+  },
+  {
+   "id": "snow-cloak",
+   "name": "Snow Cloak",
+   "desc": "Increases evasion to 1.25\u00d7 during hail.  Protects against hail damage."
+  },
+  {
+   "id": "snow-warning",
+   "name": "Snow Warning",
+   "desc": "Summons hail that lasts indefinitely upon entering battle."
+  },
+  {
+   "id": "solar-power",
+   "name": "Solar Power",
+   "desc": "Increases Special Attack to 1.5\u00d7 but costs 1/8 max HP after each turn during strong sunlight."
+  },
+  {
+   "id": "stalwart",
+   "name": "Stalwart",
+   "desc": "Ignores moves and abilities that draw in moves."
+  },
+  {
+   "id": "stamina",
+   "name": "Stamina",
+   "desc": "Raises this Pok\u00e9mon's Defense by one stage when it takes damage from a move."
+  },
+  {
+   "id": "steadfast",
+   "name": "Steadfast",
+   "desc": "Raises Speed one stage upon flinching."
+  },
+  {
+   "id": "sturdy",
+   "name": "Sturdy",
+   "desc": "Prevents being KOed from full HP, leaving 1 HP instead.  Protects against the one-hit KO moves regardless of HP."
+  },
+  {
+   "id": "supreme-overlord",
+   "name": "Supreme Overlord",
+   "desc": "Attack and Special Attack are boosted for each party Pok\u00e9mon that has been defeated."
+  },
+  {
+   "id": "sword-of-ruin",
+   "name": "Sword of Ruin",
+   "desc": "Lowers Defense of all Pok\u00e9mon except itself."
+  },
+  {
+   "id": "synchronize",
+   "name": "Synchronize",
+   "desc": "Copies burns, paralysis, and poison received onto the Pok\u00e9mon that inflicted them."
+  },
+  {
+   "id": "tough-claws",
+   "name": "Tough Claws",
+   "desc": "Strengthens moves that make contact to 1.33\u00d7 their power."
+  },
+  {
+   "id": "unburden",
+   "name": "Unburden",
+   "desc": "Doubles Speed upon using or losing a held item."
+  },
+  {
+   "id": "unnerve",
+   "name": "Unnerve",
+   "desc": "Prevents opposing Pok\u00e9mon from eating held Berries."
+  },
+  {
+   "id": "unseen-fist",
+   "name": "Unseen Fist",
+   "desc": "Contact moves can strike through Protect/Detect."
+  },
+  {
+   "id": "vital-spirit",
+   "name": "Vital Spirit",
+   "desc": "Prevents sleep."
+  },
+  {
+   "id": "white-smoke",
+   "name": "White Smoke",
+   "desc": "Prevents stats from being lowered by other Pok\u00e9mon."
+  }
+ ]
+}

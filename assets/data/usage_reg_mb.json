@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "generatedAt": "2026-07-11",
+ "generatedAt": "2026-08-15",
  "regulation": "reg-mb",
  "source": "starter-placeholder",
  "note": "HAND-AUTHORED PLACEHOLDER usage data. Percentages are illustrative, not real ladder stats. Run tool/update_data.dart to replace.",
@@ -3470,6 +3470,665 @@
     {
      "speciesId": "landorus-therian",
      "pct": 8.6
+    }
+   ]
+  },
+  {
+   "speciesId": "froslass",
+   "usagePercent": 14.0,
+   "moves": [
+    {
+     "id": "icy-wind",
+     "pct": 68
+    },
+    {
+     "id": "blizzard",
+     "pct": 55
+    },
+    {
+     "id": "shadow-ball",
+     "pct": 71
+    },
+    {
+     "id": "destiny-bond",
+     "pct": 34
+    },
+    {
+     "id": "protect",
+     "pct": 52
+    },
+    {
+     "id": "thunder-wave",
+     "pct": 30
+    }
+   ],
+   "items": [
+    {
+     "id": "froslassite",
+     "pct": 44
+    },
+    {
+     "id": "focus-sash",
+     "pct": 31
+    },
+    {
+     "id": "choice-specs",
+     "pct": 8
+    }
+   ],
+   "abilities": [
+    {
+     "name": "Cursed Body",
+     "pct": 62
+    },
+    {
+     "name": "Snow Cloak",
+     "pct": 38
+    }
+   ],
+   "spreads": [
+    {
+     "nature": "Timid",
+     "sp": {
+      "spa": 32,
+      "spe": 32,
+      "hp": 2
+     },
+     "pct": 40.0
+    }
+   ],
+   "teammates": [
+    {
+     "speciesId": "avalugg",
+     "pct": 41
+    },
+    {
+     "speciesId": "gengar",
+     "pct": 22
+    }
+   ]
+  },
+  {
+   "speciesId": "avalugg",
+   "usagePercent": 6.5,
+   "moves": [
+    {
+     "id": "avalanche",
+     "pct": 78
+    },
+    {
+     "id": "body-press",
+     "pct": 70
+    },
+    {
+     "id": "recover",
+     "pct": 48
+    },
+    {
+     "id": "wide-guard",
+     "pct": 36
+    },
+    {
+     "id": "protect",
+     "pct": 41
+    },
+    {
+     "id": "earthquake",
+     "pct": 25
+    }
+   ],
+   "items": [
+    {
+     "id": "light-clay",
+     "pct": 28
+    },
+    {
+     "id": "leftovers",
+     "pct": 34
+    },
+    {
+     "id": "assault-vest",
+     "pct": 12
+    }
+   ],
+   "abilities": [
+    {
+     "name": "Sturdy",
+     "pct": 71
+    },
+    {
+     "name": "Ice Body",
+     "pct": 22
+    },
+    {
+     "name": "Own Tempo",
+     "pct": 7
+    }
+   ],
+   "spreads": [
+    {
+     "nature": "Relaxed",
+     "sp": {
+      "hp": 32,
+      "def": 16,
+      "atk": 18
+     },
+     "pct": 40.0
+    }
+   ],
+   "teammates": [
+    {
+     "speciesId": "froslass",
+     "pct": 41
+    }
+   ]
+  },
+  {
+   "speciesId": "sinistcha",
+   "usagePercent": 11.0,
+   "moves": [
+    {
+     "id": "matcha-gotcha",
+     "pct": 92
+    },
+    {
+     "id": "strength-sap",
+     "pct": 55
+    },
+    {
+     "id": "trick-room",
+     "pct": 49
+    },
+    {
+     "id": "hex",
+     "pct": 38
+    },
+    {
+     "id": "protect",
+     "pct": 40
+    },
+    {
+     "id": "shadow-ball",
+     "pct": 22
+    }
+   ],
+   "items": [
+    {
+     "id": "sitrus-berry",
+     "pct": 30
+    },
+    {
+     "id": "kasib-berry",
+     "pct": 21
+    },
+    {
+     "id": "leftovers",
+     "pct": 18
+    }
+   ],
+   "abilities": [
+    {
+     "name": "Hospitality",
+     "pct": 83
+    },
+    {
+     "name": "Heatproof",
+     "pct": 17
+    }
+   ],
+   "spreads": [
+    {
+     "nature": "Quiet",
+     "sp": {
+      "hp": 32,
+      "spa": 32,
+      "def": 2
+     },
+     "pct": 40.0
+    }
+   ],
+   "teammates": [
+    {
+     "speciesId": "torkoal",
+     "pct": 25
+    }
+   ]
+  },
+  {
+   "speciesId": "sneasler",
+   "usagePercent": 16.0,
+   "moves": [
+    {
+     "id": "dire-claw",
+     "pct": 88
+    },
+    {
+     "id": "close-combat",
+     "pct": 76
+    },
+    {
+     "id": "fake-out",
+     "pct": 44
+    },
+    {
+     "id": "protect",
+     "pct": 42
+    },
+    {
+     "id": "u-turn",
+     "pct": 30
+    },
+    {
+     "id": "feint",
+     "pct": 18
+    }
+   ],
+   "items": [
+    {
+     "id": "focus-sash",
+     "pct": 29
+    },
+    {
+     "id": "choice-band",
+     "pct": 22
+    },
+    {
+     "id": "loaded-dice",
+     "pct": 6
+    }
+   ],
+   "abilities": [
+    {
+     "name": "Unburden",
+     "pct": 58
+    },
+    {
+     "name": "Poison Touch",
+     "pct": 42
+    }
+   ],
+   "spreads": [
+    {
+     "nature": "Jolly",
+     "sp": {
+      "atk": 32,
+      "spe": 32,
+      "hp": 2
+     },
+     "pct": 40.0
+    }
+   ],
+   "teammates": [
+    {
+     "speciesId": "umbreon",
+     "pct": 18
+    }
+   ]
+  },
+  {
+   "speciesId": "umbreon",
+   "usagePercent": 9.0,
+   "moves": [
+    {
+     "id": "foul-play",
+     "pct": 81
+    },
+    {
+     "id": "snarl",
+     "pct": 56
+    },
+    {
+     "id": "moonlight",
+     "pct": 49
+    },
+    {
+     "id": "yawn",
+     "pct": 44
+    },
+    {
+     "id": "helping-hand",
+     "pct": 31
+    },
+    {
+     "id": "protect",
+     "pct": 38
+    }
+   ],
+   "items": [
+    {
+     "id": "leftovers",
+     "pct": 41
+    },
+    {
+     "id": "sitrus-berry",
+     "pct": 23
+    },
+    {
+     "id": "safety-goggles",
+     "pct": 13
+    }
+   ],
+   "abilities": [
+    {
+     "name": "Synchronize",
+     "pct": 12
+    },
+    {
+     "name": "Inner Focus",
+     "pct": 88
+    }
+   ],
+   "spreads": [
+    {
+     "nature": "Calm",
+     "sp": {
+      "hp": 32,
+      "spd": 32,
+      "def": 2
+     },
+     "pct": 40.0
+    }
+   ],
+   "teammates": [
+    {
+     "speciesId": "sneasler",
+     "pct": 18
+    },
+    {
+     "speciesId": "sylveon",
+     "pct": 15
+    }
+   ]
+  },
+  {
+   "speciesId": "decidueye-hisui",
+   "usagePercent": 7.5,
+   "moves": [
+    {
+     "id": "triple-arrows",
+     "pct": 90
+    },
+    {
+     "id": "leaf-blade",
+     "pct": 62
+    },
+    {
+     "id": "brave-bird",
+     "pct": 47
+    },
+    {
+     "id": "sucker-punch",
+     "pct": 41
+    },
+    {
+     "id": "u-turn",
+     "pct": 26
+    },
+    {
+     "id": "protect",
+     "pct": 33
+    }
+   ],
+   "items": [
+    {
+     "id": "focus-sash",
+     "pct": 24
+    },
+    {
+     "id": "assault-vest",
+     "pct": 19
+    },
+    {
+     "id": "life-orb",
+     "pct": 17
+    }
+   ],
+   "abilities": [
+    {
+     "name": "Scrappy",
+     "pct": 84
+    },
+    {
+     "name": "Overgrow",
+     "pct": 16
+    }
+   ],
+   "spreads": [
+    {
+     "nature": "Jolly",
+     "sp": {
+      "atk": 32,
+      "spe": 32,
+      "hp": 2
+     },
+     "pct": 40.0
+    }
+   ],
+   "teammates": [
+    {
+     "speciesId": "lycanroc",
+     "pct": 12
+    }
+   ]
+  },
+  {
+   "speciesId": "lycanroc",
+   "usagePercent": 8.0,
+   "moves": [
+    {
+     "id": "accelerock",
+     "pct": 83
+    },
+    {
+     "id": "rock-slide",
+     "pct": 77
+    },
+    {
+     "id": "close-combat",
+     "pct": 56
+    },
+    {
+     "id": "protect",
+     "pct": 39
+    },
+    {
+     "id": "crunch",
+     "pct": 25
+    },
+    {
+     "id": "stone-edge",
+     "pct": 22
+    }
+   ],
+   "items": [
+    {
+     "id": "focus-sash",
+     "pct": 35
+    },
+    {
+     "id": "life-orb",
+     "pct": 21
+    },
+    {
+     "id": "choice-band",
+     "pct": 13
+    }
+   ],
+   "abilities": [
+    {
+     "name": "Sand Rush",
+     "pct": 44
+    },
+    {
+     "name": "Keen Eye",
+     "pct": 8
+    },
+    {
+     "name": "Steadfast",
+     "pct": 48
+    }
+   ],
+   "spreads": [
+    {
+     "nature": "Jolly",
+     "sp": {
+      "atk": 32,
+      "spe": 32,
+      "hp": 2
+     },
+     "pct": 40.0
+    }
+   ],
+   "teammates": [
+    {
+     "speciesId": "arcanine",
+     "pct": 14
+    }
+   ]
+  },
+  {
+   "speciesId": "arcanine",
+   "usagePercent": 10.5,
+   "moves": [
+    {
+     "id": "flare-blitz",
+     "pct": 84
+    },
+    {
+     "id": "extreme-speed",
+     "pct": 73
+    },
+    {
+     "id": "will-o-wisp",
+     "pct": 41
+    },
+    {
+     "id": "snarl",
+     "pct": 38
+    },
+    {
+     "id": "protect",
+     "pct": 44
+    },
+    {
+     "id": "close-combat",
+     "pct": 28
+    }
+   ],
+   "items": [
+    {
+     "id": "sitrus-berry",
+     "pct": 26
+    },
+    {
+     "id": "safety-goggles",
+     "pct": 18
+    },
+    {
+     "id": "choice-band",
+     "pct": 14
+    }
+   ],
+   "abilities": [
+    {
+     "name": "Intimidate",
+     "pct": 96
+    },
+    {
+     "name": "Flash Fire",
+     "pct": 4
+    }
+   ],
+   "spreads": [
+    {
+     "nature": "Jolly",
+     "sp": {
+      "atk": 32,
+      "spe": 32,
+      "hp": 2
+     },
+     "pct": 40.0
+    }
+   ],
+   "teammates": [
+    {
+     "speciesId": "sylveon",
+     "pct": 16
+    }
+   ]
+  },
+  {
+   "speciesId": "sylveon",
+   "usagePercent": 12.0,
+   "moves": [
+    {
+     "id": "hyper-voice",
+     "pct": 90
+    },
+    {
+     "id": "moonblast",
+     "pct": 58
+    },
+    {
+     "id": "protect",
+     "pct": 46
+    },
+    {
+     "id": "mystical-fire",
+     "pct": 31
+    },
+    {
+     "id": "helping-hand",
+     "pct": 24
+    },
+    {
+     "id": "calm-mind",
+     "pct": 19
+    }
+   ],
+   "items": [
+    {
+     "id": "choice-specs",
+     "pct": 31
+    },
+    {
+     "id": "leftovers",
+     "pct": 22
+    },
+    {
+     "id": "sitrus-berry",
+     "pct": 17
+    }
+   ],
+   "abilities": [
+    {
+     "name": "Pixilate",
+     "pct": 95
+    },
+    {
+     "name": "Cute Charm",
+     "pct": 5
+    }
+   ],
+   "spreads": [
+    {
+     "nature": "Modest",
+     "sp": {
+      "hp": 16,
+      "spa": 32,
+      "spe": 18
+     },
+     "pct": 40.0
+    }
+   ],
+   "teammates": [
+    {
+     "speciesId": "umbreon",
+     "pct": 15
+    },
+    {
+     "speciesId": "arcanine",
+     "pct": 16
     }
    ]
   }

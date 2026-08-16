@@ -1,5 +1,5 @@
-/// BattleSession: the enemy-preview roster and reserve derivation that back
-/// the Local-engine tracking tabs. Pure Dart, real bundled pack.
+/// BattleSession: the enemy-preview roster, reserve derivation, and the
+/// match-history snapshot round trip. Pure Dart, real bundled pack.
 library;
 
 import 'package:flutter_test/flutter_test.dart';
@@ -58,9 +58,54 @@ void main() {
   group('enemy preview roster', () {
     test('holds the scouted species in order', () {
       final s = session();
-      s.enemyPreview.addAll(['incineroar', 'gengar']);
-      expect(s.enemyPreview, ['incineroar', 'gengar']);
+      s.enemyPreview
+          .addAll([PreviewSlot('incineroar'), PreviewSlot('gengar')]);
+      expect([for (final p in s.enemyPreview) p.speciesId],
+          ['incineroar', 'gengar']);
       expect(s.enemyPreview.length, lessThanOrEqualTo(s.format.teamSize));
+    });
+
+    test('auto-recognized slots start predicted; confirm flips them', () {
+      final slot = PreviewSlot('umbreon', confidence: 0.6, confirmed: false);
+      expect(slot.confirmed, isFalse);
+      final round = PreviewSlot.fromJson(slot.toJson());
+      expect(round.speciesId, 'umbreon');
+      expect(round.confirmed, isFalse);
+      expect(round.confidence, closeTo(0.6, 1e-9));
+    });
+
+    test('revealing an enemy in battle confirms its preview slot', () {
+      final s = session();
+      s.enemyPreview
+          .add(PreviewSlot('umbreon', confidence: 0.5, confirmed: false));
+      s.addEnemy('umbreon');
+      expect(s.previewSlotFor('umbreon')!.confirmed, isTrue);
+      // And a brand-new species lands in the preview roster too.
+      s.addEnemy('sneasler');
+      expect(s.previewSlotFor('sneasler'), isNotNull);
+    });
+  });
+
+  group('match snapshot', () {
+    test('round-trips picks, roster, and reveals', () {
+      final s = session();
+      s.enemyPreview.add(PreviewSlot('umbreon'));
+      final e = s.addEnemy('sneasler', hpPercent: 44);
+      e.revealedMoves.add('dire-claw');
+      e.revealedItem = 'focus-sash';
+
+      final snap = s.toSnapshotJson();
+      expect(snap['formatId'], doubles.id);
+      expect((snap['picks'] as List).length, 4);
+      final enemies = (snap['enemies'] as List).cast<Map<String, dynamic>>();
+      final sneasler =
+          enemies.singleWhere((m) => m['speciesId'] == 'sneasler');
+      expect(sneasler['hpPercent'], 44);
+      expect(sneasler['revealedMoves'], contains('dire-claw'));
+
+      final back = EnemyPokemon.fromJson(sneasler);
+      expect(back.revealedItem, 'focus-sash');
+      expect(back.revealedMoves, contains('dire-claw'));
     });
   });
 }

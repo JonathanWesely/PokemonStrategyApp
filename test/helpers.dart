@@ -16,5 +16,6 @@ DataPack loadRealDataPack() {
     typeChartJson: File('assets/data/type_chart.json').readAsStringSync(),
     usageJson: File('assets/data/usage_reg_mb.json').readAsStringSync(),
     regulationsJson: File('assets/data/regulations.json').readAsStringSync(),
+    abilitiesJson: File('assets/data/abilities.json').readAsStringSync(),
   );
 }

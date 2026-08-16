@@ -121,11 +121,21 @@ class MatchupGroups extends StatelessWidget {
   }
 }
 
-/// A predicted option row: label, usage bar, percent, confirm state.
+/// Color language shared across the app:
+///   green = confirmed (seen in this battle) · amber = predicted (usage data)
+///   grey = unknown / no data.
+const confirmedColor = Colors.green;
+final predictedColor = Colors.amber.shade800;
+
+/// A predicted-or-confirmed option row: label, usage bar, percent, confirm
+/// state, and an info tap for what the move/ability/item does.
 class RatedOptionRow extends StatelessWidget {
   final RatedOption option;
   final String? subtitle;
   final VoidCallback? onConfirm;
+
+  /// Opens the detail sheet for this option.
+  final VoidCallback? onInfo;
   final bool dim;
 
   const RatedOptionRow({
@@ -133,13 +143,19 @@ class RatedOptionRow extends StatelessWidget {
     required this.option,
     this.subtitle,
     this.onConfirm,
+    this.onInfo,
     this.dim = false,
   });
 
   @override
   Widget build(BuildContext context) {
     final pctText =
-        option.confirmed ? 'seen' : '${option.pct.toStringAsFixed(0)}%';
+        option.confirmed ? 'seen' : '~${option.pct.toStringAsFixed(0)}%';
+    final barColor = option.confirmed
+        ? confirmedColor
+        : dim
+            ? Colors.grey.shade400
+            : predictedColor;
     return InkWell(
       onTap: onConfirm,
       child: Padding(
@@ -151,7 +167,7 @@ class RatedOptionRow extends StatelessWidget {
                   ? Icons.check_circle
                   : Icons.radio_button_unchecked,
               size: 16,
-              color: option.confirmed ? Colors.green : Colors.grey.shade400,
+              color: option.confirmed ? confirmedColor : Colors.grey.shade400,
             ),
             const SizedBox(width: 6),
             Expanded(
@@ -165,7 +181,13 @@ class RatedOptionRow extends StatelessWidget {
                         fontWeight: option.confirmed
                             ? FontWeight.w700
                             : FontWeight.w400,
-                        color: dim ? Colors.grey : null,
+                        fontStyle:
+                            option.confirmed ? null : FontStyle.italic,
+                        color: dim
+                            ? Colors.grey
+                            : option.confirmed
+                                ? null
+                                : predictedColor,
                       )),
                   if (subtitle != null)
                     Text(subtitle!,
@@ -182,11 +204,7 @@ class RatedOptionRow extends StatelessWidget {
                   value: (option.confirmed ? 100 : option.pct) / 100,
                   minHeight: 6,
                   backgroundColor: Colors.grey.shade200,
-                  color: option.confirmed
-                      ? Colors.green
-                      : dim
-                          ? Colors.grey.shade400
-                          : Theme.of(context).colorScheme.primary,
+                  color: barColor,
                 ),
               ),
             ),
@@ -196,9 +214,40 @@ class RatedOptionRow extends StatelessWidget {
                   textAlign: TextAlign.right,
                   style: const TextStyle(fontSize: 11)),
             ),
+            if (onInfo != null)
+              IconButton(
+                visualDensity: VisualDensity.compact,
+                padding: EdgeInsets.zero,
+                constraints:
+                    const BoxConstraints(minWidth: 28, minHeight: 28),
+                icon: Icon(Icons.info_outline,
+                    size: 15, color: Colors.grey.shade500),
+                onPressed: onInfo,
+              ),
           ],
         ),
       ),
+    );
+  }
+}
+
+/// Bundled 2D sprite for a species, with a graceful fallback icon.
+class SpeciesIcon extends StatelessWidget {
+  final String speciesId;
+  final double size;
+
+  const SpeciesIcon(this.speciesId, {super.key, this.size = 40});
+
+  @override
+  Widget build(BuildContext context) {
+    return Image.asset(
+      'assets/sprites/home/$speciesId.png',
+      width: size,
+      height: size,
+      fit: BoxFit.contain,
+      filterQuality: FilterQuality.medium,
+      errorBuilder: (_, __, ___) => Icon(Icons.catching_pokemon,
+          size: size * 0.8, color: Colors.grey.shade400),
     );
   }
 }
