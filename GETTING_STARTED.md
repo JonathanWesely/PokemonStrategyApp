@@ -85,6 +85,18 @@ dart run tool/update_data.dart
    **Snap** instead of using the gallery. Flip on **Auto** to re-scan
    every 5 s (the hands-free tracking mode).
 
+**C. With the camera rig (or any MJPEG stream):**
+
+1. On either scan screen, tap the **Wi-Fi icon** (top right) to switch
+   the source from phone camera to **Rig**.
+2. Enter the stream address — just the rig's IP is enough (it becomes
+   `http://<ip>:81/stream`) — and hit **Connect**. The address is
+   remembered. Snap and Auto work exactly like the camera.
+3. No rig yet? Install the **IP Webcam** app on any Android phone, start
+   its server, and connect to `http://<phone-ip>:8080/video` — same
+   format, great for testing. Full rig assembly + firmware: vault note
+   §12.
+
 5. On each enemy card: amber rows are predictions — tap a move/item/
    ability when the battle reveals it (turns green, list re-ranks); the
    ⓘ icon explains what anything does; "Saw a move not listed?" handles

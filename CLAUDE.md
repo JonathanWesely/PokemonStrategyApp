@@ -25,7 +25,13 @@ updated when direction changes — Jonathan relies on it between sessions.
   endpoint), `mock` (emulator demo).
 - **Plugin isolation rule**: camera/image_picker only in
   `ui/capture_screen.dart`; ML Kit only in `recognition/mlkit_ocr.dart`;
-  network only in `recognition/cloud_vision_recognizer.dart`.
+  network only in `recognition/cloud_vision_recognizer.dart` +
+  `recognition/network_camera.dart`.
+- **Capture sources (2026-08-23)**: phone camera, gallery, and **Rig**
+  (network MJPEG stream from the camera pod at `http://<ip>:81/stream`;
+  `network_camera.dart` holds the client + SOI/EOI frame parser, URL
+  persisted as setting `net_cam_url`). Any MJPEG source works (IP Webcam
+  at `:8080/video` for rig-free testing).
 - **Data packs** in `assets/data/` (now incl. `abilities.json` + move
   `desc` fields); sprites in `assets/sprites{,/home,/icons}`; exemplar
   seeds in `assets/exemplars/`. `dart run tool/update_data.dart` validates

@@ -1,15 +1,22 @@
-/// Camera capture + gallery import for snapshots — the ONLY file that
-/// imports the camera / image_picker plugins.
+/// Camera capture + gallery import + network-rig streaming for snapshots —
+/// the ONLY file that imports the camera / image_picker plugins. (Network
+/// bytes come from `recognition/network_camera.dart`, per the isolation
+/// rule in CLAUDE.md.)
+///
+/// Three sources, one scan path:
+///   * Phone camera — point the phone at the Switch (or the emulator's
+///     Webcam0 at your laptop camera).
+///   * Gallery — import a screenshot / photo.
+///   * Rig — the clamp-on/TV-stand camera pod streaming MJPEG at
+///     `http://<ip>:81/stream` (also works with any MJPEG source, e.g. the
+///     IP Webcam Android app, for testing without the rig).
 ///
 /// Two modes, matching the two battle tabs:
-///   * Team Preview scan — point at the team-select screen (or import a
-///     screenshot); fills the enemy roster boxes.
-///   * Battle scan — point at the battle screen; updates who is on the field.
+///   * Team Preview scan — fills the enemy roster boxes.
+///   * Battle scan — updates who is on the field.
 ///
-/// "Auto" re-scans every few seconds for hands-mostly-free tracking (the
-/// plan's live mode, v1). On the Android emulator, set the AVD's back camera
-/// to "Webcam0" and point your laptop camera at the Switch — or use the
-/// gallery button with a photo dragged onto the emulator.
+/// "Auto" re-scans every few seconds for hands-free tracking in either
+/// source.
 library;
 
 import 'dart:async';
@@ -21,6 +28,7 @@ import 'package:image_picker/image_picker.dart';
 
 import '../app_state.dart';
 import '../models/recognition_result.dart';
+import '../recognition/network_camera.dart';
 import '../recognition/recognition_service.dart';
 
 class CaptureScreen extends StatefulWidget {
@@ -40,12 +48,28 @@ class _CaptureScreenState extends State<CaptureScreen> {
   Timer? _autoTimer;
   String _status = '';
 
+  // Network rig source.
+  bool _netMode = false;
+  final NetworkCameraClient _netClient = NetworkCameraClient();
+  StreamSubscription<Uint8List>? _netSub;
+  Uint8List? _netFrame;
+  String? _netError;
+  TextEditingController? _urlCtrl;
+  int _lastFramePaintMs = 0;
+
   static const autoInterval = Duration(seconds: 5);
 
   @override
   void initState() {
     super.initState();
     _initCamera();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _urlCtrl ??=
+        TextEditingController(text: AppScope.of(context).netCamUrl);
   }
 
   Future<void> _initCamera() async {
@@ -79,6 +103,8 @@ class _CaptureScreenState extends State<CaptureScreen> {
   @override
   void dispose() {
     _autoTimer?.cancel();
+    _netSub?.cancel();
+    _urlCtrl?.dispose();
     _camera?.dispose();
     super.dispose();
   }
@@ -108,8 +134,14 @@ class _CaptureScreenState extends State<CaptureScreen> {
   }
 
   Future<void> _shoot() async {
+    if (_busy) return;
+    if (_netMode) {
+      final frame = _netFrame;
+      if (frame != null) await _recognize(frame);
+      return;
+    }
     final camera = _camera;
-    if (camera == null || _busy) return;
+    if (camera == null) return;
     try {
       final file = await camera.takePicture();
       await _recognize(await file.readAsBytes());
@@ -136,29 +168,190 @@ class _CaptureScreenState extends State<CaptureScreen> {
     }
   }
 
+  // ------------------------------------------------------- network rig --
+
+  bool get _connected => _netSub != null && _netError == null;
+
+  void _connectNet() {
+    final text = _urlCtrl?.text ?? '';
+    final url = normalizeStreamUrl(text);
+    if (url == null) {
+      setState(() => _netError =
+          'Enter the rig address, e.g. 192.168.4.2 or http://ip:81/stream');
+      return;
+    }
+    // Remember it for next time (and across pod/dock swaps).
+    AppScope.of(context).updateSettings(newNetCamUrl: text.trim());
+    _netSub?.cancel();
+    setState(() {
+      _netError = null;
+      _netFrame = null;
+      _status = 'Connecting to $url…';
+    });
+    _netSub = _netClient.frames(url).listen(
+      (frame) {
+        if (!mounted) return;
+        // Cap preview repaints at ~15 fps; scans always use the newest frame.
+        final now = DateTime.now().millisecondsSinceEpoch;
+        _netFrame = frame;
+        if (now - _lastFramePaintMs > 66) {
+          _lastFramePaintMs = now;
+          setState(() {
+            if (_status.startsWith('Connecting')) _status = '';
+          });
+        }
+      },
+      onError: (Object e) {
+        if (!mounted) return;
+        setState(() {
+          _netError = '$e';
+          _netSub = null;
+        });
+      },
+      onDone: () {
+        if (!mounted) return;
+        setState(() {
+          _netError ??= 'Stream ended — is the rig still powered?';
+          _netSub = null;
+        });
+      },
+    );
+  }
+
+  void _disconnectNet() {
+    _netSub?.cancel();
+    setState(() {
+      _netSub = null;
+      _netError = null;
+      _status = '';
+    });
+  }
+
+  Widget _buildNetPane() {
+    final frame = _netFrame;
+    if (_connected && frame != null) {
+      return Stack(
+        fit: StackFit.expand,
+        children: [
+          Image.memory(frame, fit: BoxFit.contain, gaplessPlayback: true),
+          Positioned(
+            top: 8,
+            right: 8,
+            child: FilledButton.tonalIcon(
+              icon: const Icon(Icons.link_off, size: 16),
+              label: const Text('Disconnect'),
+              onPressed: _disconnectNet,
+            ),
+          ),
+        ],
+      );
+    }
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Icon(Icons.wifi_tethering, size: 40),
+            const SizedBox(height: 12),
+            TextField(
+              controller: _urlCtrl,
+              keyboardType: TextInputType.url,
+              decoration: const InputDecoration(
+                labelText: 'Rig stream address',
+                hintText: '192.168.4.2  (or http://ip:81/stream)',
+                border: OutlineInputBorder(),
+              ),
+              onSubmitted: (_) => _connectNet(),
+            ),
+            const SizedBox(height: 12),
+            FilledButton.icon(
+              icon: Icon(_connected ? Icons.sync : Icons.link),
+              label: Text(_connected ? 'Waiting for frames…' : 'Connect'),
+              onPressed: _connected ? null : _connectNet,
+            ),
+            if (_netError != null)
+              Padding(
+                padding: const EdgeInsets.only(top: 12),
+                child: Text(
+                  _netError!,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontSize: 12, color: Theme.of(context).colorScheme.error),
+                ),
+              ),
+            const Padding(
+              padding: EdgeInsets.only(top: 12),
+              child: Text(
+                'The rig streams at http://<its-ip>:81/stream once it joins '
+                'your hotspot (IP shown in its serial log). Any MJPEG source '
+                'works — e.g. the IP Webcam app at http://<phone-ip>:8080/video.',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 11, color: Colors.grey),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // --------------------------------------------------------------- build --
+
   @override
   Widget build(BuildContext context) {
     final camera = _camera;
     final title = widget.mode == RecognitionScreen.preview
         ? 'Scan team preview'
         : 'Scan battle';
+    final canSnap = !_busy &&
+        (_netMode ? (_connected && _netFrame != null) : camera != null);
+    final canAuto = _netMode ? _connected : camera != null;
     return Scaffold(
-      appBar: AppBar(title: Text(title)),
+      appBar: AppBar(
+        title: Text(title),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 8),
+            child: SegmentedButton<bool>(
+              showSelectedIcon: false,
+              style: const ButtonStyle(
+                  visualDensity: VisualDensity.compact,
+                  tapTargetSize: MaterialTapTargetSize.shrinkWrap),
+              segments: const [
+                ButtonSegment(
+                    value: false,
+                    icon: Icon(Icons.photo_camera_outlined, size: 18),
+                    tooltip: 'Phone camera'),
+                ButtonSegment(
+                    value: true,
+                    icon: Icon(Icons.wifi_tethering, size: 18),
+                    tooltip: 'Camera rig (network stream)'),
+              ],
+              selected: {_netMode},
+              onSelectionChanged: (sel) =>
+                  setState(() => _netMode = sel.first),
+            ),
+          ),
+        ],
+      ),
       body: Column(
         children: [
           Expanded(
-            child: camera != null
-                ? CameraPreview(camera)
-                : Center(
-                    child: Padding(
-                      padding: const EdgeInsets.all(24),
-                      child: Text(
-                        _cameraError ?? 'Starting camera…',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.grey.shade600),
-                      ),
-                    ),
-                  ),
+            child: _netMode
+                ? _buildNetPane()
+                : (camera != null
+                    ? CameraPreview(camera)
+                    : Center(
+                        child: Padding(
+                          padding: const EdgeInsets.all(24),
+                          child: Text(
+                            _cameraError ?? 'Starting camera…',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(color: Colors.grey.shade600),
+                          ),
+                        ),
+                      )),
           ),
           if (_status.isNotEmpty)
             Padding(
@@ -186,7 +379,7 @@ class _CaptureScreenState extends State<CaptureScreen> {
                             child: CircularProgressIndicator(strokeWidth: 2))
                         : const Icon(Icons.photo_camera),
                     label: Text(_busy ? 'Working…' : 'Snap'),
-                    onPressed: (_busy || camera == null) ? null : _shoot,
+                    onPressed: canSnap ? _shoot : null,
                   ),
                   const Spacer(),
                   Column(
@@ -194,8 +387,7 @@ class _CaptureScreenState extends State<CaptureScreen> {
                     children: [
                       Switch(
                         value: _auto,
-                        onChanged:
-                            camera == null ? null : (v) => _toggleAuto(v),
+                        onChanged: canAuto ? (v) => _toggleAuto(v) : null,
                       ),
                       const Text('Auto', style: TextStyle(fontSize: 11)),
                     ],

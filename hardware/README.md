@@ -69,9 +69,13 @@ too). ~51 cm³ total ≈ $15–25 shipped depending on vendor.
 
 ## Assembly (once)
 
-1. Foam-line the clamp jaws (0.5 mm strips; dry-fit first).
-2. Swap the 160° camera module onto the XIAO (lift the socket latch).
-3. Solder battery leads to the BAT pads (optional inline micro switch).
+1. Foam-line the clamp jaws (thin strips ≤1 mm; dry-fit first).
+2. Swap the 160° camera module onto the XIAO (lift the socket latch —
+   until it arrives, the Sense's stock camera works for bring-up).
+3. Attach battery leads to the BAT pads — **no solder required to start**:
+   run USB-C power for bring-up, then conductive-glue the pads for the
+   cordless build (full solderless protocol + solder upgrade path: vault
+   note §12).
 4. Board into the pod's front bay lens-down over the window; battery into
    the rear bay; wires through the divider gap; one zip tie over each bay
    through the side-wall notches.

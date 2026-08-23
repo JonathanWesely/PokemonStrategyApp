@@ -30,6 +30,7 @@ const settingApiBaseUrl = 'api_base_url';
 const settingApiModel = 'api_model';
 const settingActiveProfile = 'active_profile';
 const settingOnboarded = 'onboarded';
+const settingNetCamUrl = 'net_cam_url'; // MJPEG rig stream, e.g. http://ip:81/stream
 
 class AppState extends ChangeNotifier {
   final DataPack pack;
@@ -57,6 +58,7 @@ class AppState extends ChangeNotifier {
   String apiProvider = 'anthropic';
   String apiBaseUrl = '';
   String apiModel = '';
+  String netCamUrl = '';
   BattleSession? battle;
 
   late RecognitionService _recognizer;
@@ -96,6 +98,7 @@ class AppState extends ChangeNotifier {
     apiProvider = await db.getSetting(settingApiProvider) ?? 'anthropic';
     apiBaseUrl = await db.getSetting(settingApiBaseUrl) ?? '';
     apiModel = await db.getSetting(settingApiModel) ?? '';
+    netCamUrl = await db.getSetting(settingNetCamUrl) ?? '';
     _rebuildRecognizer();
     notifyListeners();
   }
@@ -182,6 +185,7 @@ class AppState extends ChangeNotifier {
     String? newApiProvider,
     String? newApiBaseUrl,
     String? newApiModel,
+    String? newNetCamUrl,
   }) async {
     if (newApiKey != null) {
       apiKey = newApiKey;
@@ -202,6 +206,10 @@ class AppState extends ChangeNotifier {
     if (newApiModel != null) {
       apiModel = newApiModel;
       await db.setSetting(settingApiModel, newApiModel);
+    }
+    if (newNetCamUrl != null) {
+      netCamUrl = newNetCamUrl;
+      await db.setSetting(settingNetCamUrl, newNetCamUrl);
     }
     _rebuildRecognizer();
     notifyListeners();
