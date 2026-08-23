@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="300" viewBox="0 0 940 300" role="img" aria-label="Build path: USB-C bring-up, then optional cordless conversion">
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+          orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f2933"/></marker>
+  <marker id="arrowR" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+          orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c0392b"/></marker>
+  <marker id="arrowM" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"
+          orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#6b7280"/></marker>
+  <marker id="arrowG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+          orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#15803d"/></marker>
+  <pattern id="hatch" width="6" height="6" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+    <line x1="0" y1="0" x2="0" y2="6" stroke="#9ca3af" stroke-width="2.5"/></pattern>
+</defs>
+<rect width="940" height="300" fill="#ffffff"/>
+<text x="24.0" y="34.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="17" fill="#1f2933" text-anchor="start" font-weight="700">Build path — you are never blocked on a joint</text>
+<text x="24.0" y="55.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" fill="#6b7280" text-anchor="start" font-weight="400">Phase A works with zero electrical joints. Only convert to cordless when you want to; the gate decides whether glue is enough.</text>
+<rect x="24.0" y="80.0" width="210.0" height="96.0" rx="10" fill="#ffffff" stroke="#15803d" stroke-width="2"/>
+<circle cx="44.0" cy="102.0" r="11.0" fill="#15803d" stroke="none" stroke-width="1.4"/>
+<text x="44.0" y="106.2" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12.5" fill="#ffffff" text-anchor="middle" font-weight="700">1</text>
+<text x="64.0" y="107.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="13.5" fill="#15803d" text-anchor="start" font-weight="700">Phase A — USB-C</text>
+<text x="40.0" y="132.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" fill="#6b7280" text-anchor="start" font-weight="400">Battery stays in the bag.</text>
+<text x="40.0" y="146.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" fill="#6b7280" text-anchor="start" font-weight="400">Power the pod from a wall brick</text>
+<text x="40.0" y="160.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" fill="#6b7280" text-anchor="start" font-weight="400">or power bank. Flash, stream,</text>
+<text x="40.0" y="174.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" fill="#6b7280" text-anchor="start" font-weight="400">scan — everything works.</text>
+<text x="129.0" y="196.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" fill="#15803d" text-anchor="middle" font-weight="600">0 joints · do this first</text>
+<line x1="244.0" y1="128.0" x2="286.0" y2="128.0" stroke="#6b7280" stroke-width="1.6" stroke-linecap="round" marker-end="url(#arrowM)"/>
+<text x="265.0" y="120.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10.5" fill="#6b7280" text-anchor="middle" font-weight="400">then</text>
+<rect x="292.0" y="80.0" width="230.0" height="96.0" rx="10" fill="#ffffff" stroke="#d97706" stroke-width="2"/>
+<circle cx="312.0" cy="102.0" r="11.0" fill="#d97706" stroke="none" stroke-width="1.4"/>
+<text x="312.0" y="106.2" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12.5" fill="#ffffff" text-anchor="middle" font-weight="700">2</text>
+<text x="332.0" y="107.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="13.5" fill="#d97706" text-anchor="start" font-weight="700">Phase B — cordless</text>
+<text x="308.0" y="132.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" fill="#6b7280" text-anchor="start" font-weight="400">Cut JST plug, switch inline on</text>
+<text x="308.0" y="146.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" fill="#6b7280" text-anchor="start" font-weight="400">red, conductive glue on the two</text>
+<text x="308.0" y="160.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" fill="#6b7280" text-anchor="start" font-weight="400">BAT pads, strain-relief tape,</text>
+<text x="308.0" y="174.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" fill="#6b7280" text-anchor="start" font-weight="400">E6000 overcoat, full cure.</text>
+<text x="407.0" y="196.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" fill="#d97706" text-anchor="middle" font-weight="600">2 glued joints · your golf-tracker supplies</text>
+<line x1="532.0" y1="128.0" x2="574.0" y2="128.0" stroke="#6b7280" stroke-width="1.6" stroke-linecap="round" marker-end="url(#arrowM)"/>
+<path d="M660,74 L762,128 L660,182 L558,128 Z" fill="#f3f4f6" stroke="#1f2933" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="660.0" y="112.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" fill="#1f2933" text-anchor="middle" font-weight="700">THE GATE</text>
+<text x="660.0" y="130.0" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" font-size="11.5" fill="#1f2933" text-anchor="middle" font-weight="400">joint ≤ 0.2 Ω</text>
+<text x="660.0" y="148.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" font-weight="400">+ 10 min stream, no reboot</text>
+<line x1="766.0" y1="114.0" x2="762.0" y2="88.0" stroke="#15803d" stroke-width="1.8" stroke-linecap="round" marker-end="url(#arrowG)"/>
+<text x="768.0" y="84.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" fill="#15803d" text-anchor="start" font-weight="700">PASS</text>
+<text x="768.0" y="100.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" fill="#1f2933" text-anchor="start" font-weight="400">Done — cordless build.</text>
+<text x="768.0" y="115.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" fill="#6b7280" text-anchor="start" font-weight="400">USB-C still charges it.</text>
+<line x1="766.0" y1="142.0" x2="762.0" y2="162.0" stroke="#c0392b" stroke-width="1.8" stroke-linecap="round" marker-end="url(#arrowR)"/>
+<text x="768.0" y="158.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" fill="#c0392b" text-anchor="start" font-weight="700">FAIL</text>
+<text x="768.0" y="173.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" fill="#1f2933" text-anchor="start" font-weight="400">Re-glue once (more contact</text>
+<text x="768.0" y="187.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" fill="#1f2933" text-anchor="start" font-weight="400">area) → still failing? Solder</text>
+<text x="768.0" y="201.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" fill="#1f2933" text-anchor="start" font-weight="400">the 2 pads, ~5 min (§12.1).</text>
+<rect x="24.0" y="236.0" width="498.0" height="46.0" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="1.2"/>
+<text x="38.0" y="254.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" fill="#92400e" text-anchor="start" font-weight="700">Why a gate at all?</text>
+<text x="38.0" y="271.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" fill="#92400e" text-anchor="start" font-weight="400">Wi-Fi streaming pulls ~150–250 mA with bursts to ~500 mA — 100× the golf tracker's glued joint.</text>
+</svg>
