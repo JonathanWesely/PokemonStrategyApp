@@ -10,7 +10,7 @@ ZF_B, ZF_T, Z_TOP = RAIL_H, RAIL_H + FLOOR_T, 13.0
 BAY_Y0, BAY_Y1 = POD_FRONT + 2.0, POD_FRONT + 2.0 + BAY_L
 REAR_Y0, REAR_Y1 = BAY_Y1 + 1.6, POD_REAR - WALL_T
 
-W, H = 960, 640
+W, H = 990, 680
 s = Svg(W, H, "Pod loading — exploded side view and top view, to scale")
 s.text(24, 32, "Pod loading — drawn to scale from the printed part", size=17, weight="700")
 s.text(24, 52, "Board goes in lens-down over the window; battery lies across the pod in the rear bay; both wires cross through the divider gap.",
@@ -27,7 +27,7 @@ s.text(60, 104, "SIDE VIEW — exploded, cut lengthwise down the middle", size=1
 # ---- floating parts, labels on fixed rows
 FL = 244
 s.text(sx(-12), 150, "XIAO + Sense board", size=10.5, weight="700", anchor="middle")
-s.text(sx(-12), 163, "USB-C up · camera down", size=9.5, fill=MUTED, anchor="middle")
+s.text(sx(-12), 163, "USB-C up · 160° module lens-down", size=9.5, fill=MUTED, anchor="middle")
 s.text(sx(11), 150, "502030 LiPo", size=10.5, weight="700", anchor="middle")
 s.text(sx(11), 163, "5 mm thick", size=9.5, fill=MUTED, anchor="middle")
 
@@ -35,7 +35,7 @@ s.rect(sx(BAY_Y0), FL - 20, BAY_L * K, 20, fill="#eef2ff", stroke=INK, sw=1.6, r
 s.rect(sx(WY - 4), FL, 8 * K, 13, fill="#374151", stroke=INK, sw=1.3, rx=1)
 s.rect(sx(-22.5), FL - 31, 5 * K, 11, fill="#9ca3af", stroke=INK, sw=1.2, rx=2)
 s.rect(sx(REAR_Y0), FL - 22, (REAR_Y1 - REAR_Y0) * K, 22, fill=PANEL, stroke=INK, sw=1.6, rx=2)
-s.text(sx(-7), FL + 27, "camera faces down", size=9.5, fill="#374151", anchor="start", weight="700")
+s.text(sx(-7), FL + 27, "160° module, lens-down", size=9.5, fill="#374151", anchor="start", weight="700")
 
 s.line(sx(-19), FL + 6, sx(-19), sz(Z_TOP) - 12, stroke=INK, sw=1.8, marker="arrow", dash="5 4")
 s.line(sx(11), FL + 6, sx(11), sz(Z_TOP) - 12, stroke=INK, sw=1.8, marker="arrow", dash="5 4")
@@ -121,8 +121,11 @@ s.lines(24, FY + 22, [
     "2.  Battery flat in the REAR bay, lying across the pod (its 30 mm side spans the width, its 20 mm side runs along the length).",
     "3.  Both wires through the divider's centre gap — nothing pinched under the board, nothing lying over the window.",
     "4.  One zip tie over each bay, threaded through the side-wall notches; snug, not crushing. Trim the tails flush so the pod still slides in.",
+    "5.  Fold the camera ribbon flat beside the board — never across the window, and never pinched under a zip tie.",
 ], size=11.5, lh=17, fill=INK)
-s.rect(24, FY + 96, W - 48, 28, fill="#dbeafe", stroke=BLUE, sw=1.2, rx=6)
-s.text(38, FY + 114, "Keep the window clear: no tape, no glue, no wire across the 12 × 12 mm opening — that square is the camera's entire view.",
+s.rect(24, FY + 100, W - 48, 46, fill="#dbeafe", stroke=BLUE, sw=1.2, rx=6)
+s.text(38, FY + 118, "Dry-fit the 160° module first — its barrel is taller than the stock camera. The window is a 12 mm hole through 2.4 mm of floor, so the barrel",
+       size=11.5, fill="#1e3a8a", weight="600")
+s.text(38, FY + 136, "nests into it and buys back that height. Keep the opening otherwise clear: no tape, no glue, no wire, no ribbon across it.",
        size=11.5, fill="#1e3a8a", weight="600")
 s.save('/home/claude/diagrams/PokemonRig-PodLoading.svg')

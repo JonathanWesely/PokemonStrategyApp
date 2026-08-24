@@ -11,6 +11,7 @@ embeds them as `![[PokemonRig-*.svg]]`.
 | `d2_wiring.py` | Wiring | battery → SPDT switch → BAT pads. **Polarity per Seeed's wiki: negative is the pad closest to USB-C.** |
 | `d3_gluejoint.py` | GlueJoint | 4-step cross-section: clean → tape → glue → overcoat, then the gate |
 | `d4_podloading.py` | PodLoading | exploded side view + top view, **to scale** |
+| `d5_camera.py` | Camera | 160° module swap (FPC latch) + why the stream runs at UXGA |
 
 `d4_podloading.py` hard-codes the same constants as `../switch_cam_rig.py`
 (POD_W, POD_FRONT/REAR, WIN, WY, BAY_W/L, RAIL_*). If the pod geometry
