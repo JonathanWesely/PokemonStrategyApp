@@ -22,8 +22,8 @@ s.line(244, BOXY + 48, 286, BOXY + 48, stroke=MUTED, sw=1.6, marker="arrowM")
 s.text(265, BOXY + 40, "then", size=10.5, fill=MUTED, anchor="middle")
 
 box(292, 230, "Phase B — cordless", [
-    "Cut JST plug, wrap + glue the", "switch pins, glue the two BAT", "pads, strain-relief tape,", "E6000 overcoat, full cure."], AMBER, 2)
-s.text(292 + 115, BOXY + BOXH + 20, "4 glue joints · your golf-tracker supplies", size=11, fill=AMBER, anchor="middle", weight="600")
+    "Battery keeps its plug: a JST", "switch cable carries it. Glue only", "the two BAT pads, strain-relief", "tape, E6000 overcoat, full cure."], AMBER, 2)
+s.text(292 + 115, BOXY + BOXH + 20, "2 glue joints with the JST switch cable", size=11, fill=AMBER, anchor="middle", weight="600")
 
 s.line(532, BOXY + 48, 574, BOXY + 48, stroke=MUTED, sw=1.6, marker="arrowM")
 
@@ -31,7 +31,7 @@ s.line(532, BOXY + 48, 574, BOXY + 48, stroke=MUTED, sw=1.6, marker="arrowM")
 gx, gy = 660, BOXY + 48
 s.path(f"M{gx},{gy-54} L{gx+102},{gy} L{gx},{gy+54} L{gx-102},{gy} Z", fill=PANEL, stroke=INK, sw=2)
 s.text(gx, gy - 16, "THE GATE", size=11.5, weight="700", anchor="middle")
-s.text(gx, gy + 2, "battery→pad ≤ 0.4 Ω", size=11, anchor="middle", font=MONO)
+s.text(gx, gy + 2, "battery→pad ≤ 0.3 Ω", size=11, anchor="middle", font=MONO)
 s.text(gx, gy + 20, "+ 10 min stream, no reboot", size=11, anchor="middle", fill=MUTED)
 
 # Pass

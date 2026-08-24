@@ -29,15 +29,15 @@
 <circle cx="312.0" cy="102.0" r="11.0" fill="#d97706" stroke="none" stroke-width="1.4"/>
 <text x="312.0" y="106.2" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12.5" fill="#ffffff" text-anchor="middle" font-weight="700">2</text>
 <text x="332.0" y="107.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="13.5" fill="#d97706" text-anchor="start" font-weight="700">Phase B — cordless</text>
-<text x="308.0" y="132.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" fill="#6b7280" text-anchor="start" font-weight="400">Cut JST plug, wrap + glue the</text>
-<text x="308.0" y="146.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" fill="#6b7280" text-anchor="start" font-weight="400">switch pins, glue the two BAT</text>
-<text x="308.0" y="160.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" fill="#6b7280" text-anchor="start" font-weight="400">pads, strain-relief tape,</text>
-<text x="308.0" y="174.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" fill="#6b7280" text-anchor="start" font-weight="400">E6000 overcoat, full cure.</text>
-<text x="407.0" y="196.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" fill="#d97706" text-anchor="middle" font-weight="600">4 glue joints · your golf-tracker supplies</text>
+<text x="308.0" y="132.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" fill="#6b7280" text-anchor="start" font-weight="400">Battery keeps its plug: a JST</text>
+<text x="308.0" y="146.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" fill="#6b7280" text-anchor="start" font-weight="400">switch cable carries it. Glue only</text>
+<text x="308.0" y="160.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" fill="#6b7280" text-anchor="start" font-weight="400">the two BAT pads, strain-relief</text>
+<text x="308.0" y="174.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" fill="#6b7280" text-anchor="start" font-weight="400">tape, E6000 overcoat, full cure.</text>
+<text x="407.0" y="196.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" fill="#d97706" text-anchor="middle" font-weight="600">2 glue joints with the JST switch cable</text>
 <line x1="532.0" y1="128.0" x2="574.0" y2="128.0" stroke="#6b7280" stroke-width="1.6" stroke-linecap="round" marker-end="url(#arrowM)"/>
 <path d="M660,74 L762,128 L660,182 L558,128 Z" fill="#f3f4f6" stroke="#1f2933" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 <text x="660.0" y="112.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" fill="#1f2933" text-anchor="middle" font-weight="700">THE GATE</text>
-<text x="660.0" y="130.0" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" font-size="11" fill="#1f2933" text-anchor="middle" font-weight="400">battery→pad ≤ 0.4 Ω</text>
+<text x="660.0" y="130.0" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" font-size="11" fill="#1f2933" text-anchor="middle" font-weight="400">battery→pad ≤ 0.3 Ω</text>
 <text x="660.0" y="148.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="middle" font-weight="400">+ 10 min stream, no reboot</text>
 <line x1="766.0" y1="114.0" x2="762.0" y2="88.0" stroke="#15803d" stroke-width="1.8" stroke-linecap="round" marker-end="url(#arrowG)"/>
 <text x="768.0" y="84.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" fill="#15803d" text-anchor="start" font-weight="700">PASS</text>
