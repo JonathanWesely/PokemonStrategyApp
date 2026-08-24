@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="960" height="580" viewBox="0 0 960 580" role="img" aria-label="Cordless wiring: battery, inline switch, XIAO BAT pads">
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="596" viewBox="0 0 960 596" role="img" aria-label="Cordless wiring: battery, inline switch, XIAO BAT pads">
 <defs>
   <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
           orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f2933"/></marker>
@@ -11,10 +11,10 @@
   <pattern id="hatch" width="6" height="6" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
     <line x1="0" y1="0" x2="0" y2="6" stroke="#9ca3af" stroke-width="2.5"/></pattern>
 </defs>
-<rect width="960" height="580" fill="#ffffff"/>
+<rect width="960" height="596" fill="#ffffff"/>
 <text x="24.0" y="32.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="17" fill="#1f2933" text-anchor="start" font-weight="700">Cordless wiring — battery → switch → BAT pads</text>
-<text x="24.0" y="52.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" fill="#6b7280" text-anchor="start" font-weight="400">The two BAT pads are the only glue-electrical joints in the rig. Switch lugs have holes:</text>
-<text x="24.0" y="68.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" fill="#6b7280" text-anchor="start" font-weight="400">thread the wire through and wrap it tight (metal-to-metal) — glue is only the lock.</text>
+<text x="24.0" y="52.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" fill="#6b7280" text-anchor="start" font-weight="400">Four glue joints total: two BAT pads + two switch pins. The kit's switches have solid PCB pins (no holes), so each wire gets</text>
+<text x="24.0" y="68.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" fill="#6b7280" text-anchor="start" font-weight="400">4–5 tight turns wrapped around the pin with pliers, then glue over the coil. Use an SS12D00G5 — smallest body, 0.5 A / 50 V.</text>
 <text x="710.0" y="96.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="13" fill="#1f2933" text-anchor="middle" font-weight="700">③ XIAO ESP32S3 — underside</text>
 <rect x="560.0" y="108.0" width="300.0" height="130.0" rx="8" fill="#eef2ff" stroke="#1f2933" stroke-width="1.8"/>
 <rect x="572.0" y="100.0" width="14.0" height="9.0" rx="1" fill="#d1d5db" stroke="#9ca3af" stroke-width="0.8"/>
@@ -58,14 +58,22 @@
 <rect x="262.0" y="192.0" width="140.0" height="44.0" rx="5" fill="#f3f4f6" stroke="#1f2933" stroke-width="1.8"/>
 <rect x="306.0" y="176.0" width="52.0" height="18.0" rx="3" fill="#d1d5db" stroke="#1f2933" stroke-width="1.4"/>
 <text x="332.0" y="219.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10.5" fill="#6b7280" text-anchor="middle" font-weight="400">slide</text>
-<line x1="288.0" y1="236.0" x2="288.0" y2="254.0" stroke="#1f2933" stroke-width="3" stroke-linecap="round"/>
-<circle cx="288.0" cy="260.0" r="5.5" fill="#fff" stroke="#1f2933" stroke-width="2.2"/>
-<line x1="332.0" y1="236.0" x2="332.0" y2="254.0" stroke="#1f2933" stroke-width="3" stroke-linecap="round"/>
-<circle cx="332.0" cy="260.0" r="5.5" fill="#fff" stroke="#1f2933" stroke-width="2.2"/>
-<line x1="376.0" y1="236.0" x2="376.0" y2="254.0" stroke="#1f2933" stroke-width="3" stroke-linecap="round"/>
-<circle cx="376.0" cy="260.0" r="5.5" fill="#fff" stroke="#1f2933" stroke-width="2.2"/>
-<text x="332.0" y="330.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10.5" fill="#1f2933" text-anchor="middle" font-weight="700">centre lug = COMMON (in)</text>
-<text x="332.0" y="344.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10.5" fill="#6b7280" text-anchor="middle" font-weight="400">either outer lug = ON (out)</text>
+<line x1="288.0" y1="236.0" x2="288.0" y2="272.0" stroke="#1f2933" stroke-width="3.4" stroke-linecap="round"/>
+<line x1="332.0" y1="236.0" x2="332.0" y2="272.0" stroke="#1f2933" stroke-width="3.4" stroke-linecap="round"/>
+<line x1="376.0" y1="236.0" x2="376.0" y2="272.0" stroke="#1f2933" stroke-width="3.4" stroke-linecap="round"/>
+<path d="M327,248 Q332,245 337,248" fill="none" stroke="#c0392b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M327,252 Q332,249 337,252" fill="none" stroke="#c0392b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M327,256 Q332,253 337,256" fill="none" stroke="#c0392b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M327,260 Q332,257 337,260" fill="none" stroke="#c0392b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M371,248 Q376,245 381,248" fill="none" stroke="#c0392b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M371,252 Q376,249 381,252" fill="none" stroke="#c0392b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M371,256 Q376,253 381,256" fill="none" stroke="#c0392b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M371,260 Q376,257 381,260" fill="none" stroke="#c0392b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="282.0" y1="244.0" x2="294.0" y2="256.0" stroke="#c0392b" stroke-width="2.2" stroke-linecap="round"/>
+<line x1="282.0" y1="256.0" x2="294.0" y2="244.0" stroke="#c0392b" stroke-width="2.2" stroke-linecap="round"/>
+<text x="274.0" y="254.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="9.5" fill="#c0392b" text-anchor="end" font-weight="700">clip</text>
+<text x="358.0" y="330.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10.5" fill="#1f2933" text-anchor="middle" font-weight="700">centre pin = COMMON (in from battery)</text>
+<text x="358.0" y="344.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10.5" fill="#6b7280" text-anchor="middle" font-weight="400">one outer pin = OUT to BAT+ · clip the third</text>
 <path d="M220,268 L332,268" fill="none" stroke="#c0392b" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M376,268 L649,268 L649,249" fill="none" stroke="#c0392b" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M220,306 L751,306 L751,249" fill="none" stroke="#111827" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -74,9 +82,9 @@
 <text x="42.0" y="401.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" fill="#991b1b" text-anchor="start" font-weight="400">Snipping both at once shorts the cell</text>
 <text x="42.0" y="415.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" fill="#991b1b" text-anchor="start" font-weight="400">across the blades — sparks.</text>
 <rect x="312.0" y="360.0" width="250.0" height="62.0" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="1.3"/>
-<text x="326.0" y="382.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12.5" fill="#92400e" text-anchor="start" font-weight="700">Switch needs no glue joint</text>
-<text x="326.0" y="401.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" fill="#92400e" text-anchor="start" font-weight="400">Wire goes through the lug hole and</text>
-<text x="326.0" y="415.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" fill="#92400e" text-anchor="start" font-weight="400">wraps back on itself; glue locks it.</text>
+<text x="326.0" y="382.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12.5" fill="#92400e" text-anchor="start" font-weight="700">Clip the unused third pin</text>
+<text x="326.0" y="401.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" fill="#92400e" text-anchor="start" font-weight="400">In the OFF position it sits at battery +</text>
+<text x="326.0" y="415.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" fill="#92400e" text-anchor="start" font-weight="400">potential — a bare pin waiting to short.</text>
 <rect x="578.0" y="360.0" width="354.0" height="84.0" rx="8" fill="#dcfce7" stroke="#15803d" stroke-width="1.6"/>
 <text x="594.0" y="382.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12.5" fill="#14532d" text-anchor="start" font-weight="700">Polarity rule — from Seeed's wiki:</text>
 <text x="594.0" y="402.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12.5" fill="#14532d" text-anchor="start" font-weight="700">NEGATIVE is the pad closest to USB-C.</text>
@@ -87,4 +95,5 @@
 <text x="24.0" y="512.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" fill="#6b7280" text-anchor="start" font-weight="400">•  USB-C still charges the cell once it's attached — built-in charger at 100 mA, empty-to-full ≈ 3 h, and streaming while charging is fine.</text>
 <text x="24.0" y="529.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" fill="#6b7280" text-anchor="start" font-weight="400">•  The switch earns its place: this firmware never sleeps (~60–100 mA idle), so a hardwired cell would drain in a few hours on the shelf.</text>
 <text x="24.0" y="546.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" fill="#6b7280" text-anchor="start" font-weight="400">•  Route both wires toward the pod's divider gap before the board goes in — never trapped under the Sense expansion board.</text>
+<text x="24.0" y="563.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" fill="#6b7280" text-anchor="start" font-weight="400">•  The printed pod has no switch pocket: glue the switch flat on the OUTSIDE of the pod's rear end wall, handle up. Both docks stay clear of it.</text>
 </svg>
