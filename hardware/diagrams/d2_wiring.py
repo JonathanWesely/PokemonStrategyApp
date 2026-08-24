@@ -1,117 +1,168 @@
 import sys; sys.path.insert(0, '/home/claude/diagrams')
 from svgkit import *
 
-W, H = 980, 716
-s = Svg(W, H, "Cordless wiring: keep the battery's JST plug, switch on the cable")
-s.text(24, 32, "Cordless wiring — keep the battery's white JST plug", size=17, weight="700")
-s.text(24, 52, "Golf-tracker doctrine: never cut the battery — a replaceable LiPo is a feature. A JST switch cable does the same job with HALF the", size=12, fill=MUTED)
-s.text(24, 68, "glue joints, because the switch is already wired inline: nothing to wrap, nothing to clip. You cut the CABLE's far end, not the cell.", size=12, fill=MUTED)
+W, H = 1020, 906
+s = Svg(W, H, "Battery wiring, step by step, using the Adafruit JST-PH switch cable")
+s.text(24, 34, "Battery wiring — step by step", size=18, weight="700")
+s.text(24, 55, "The battery is never cut and stays swappable. The switch is already wired into the cable, so the whole build has exactly TWO glue joints:", size=12, fill=MUTED)
+s.text(24, 71, "the two BAT pads on the XIAO. Everything else is a plug or a factory joint.", size=12, fill=MUTED)
 
-# ============================================== ROW A — recommended =======
-s.rect(20, 88, W - 40, 250, fill="#f0fdf4", stroke=GREEN, sw=1.6, rx=10)
-s.badge(46, 114, "A", color=GREEN)
-s.text(66, 119, "RECOMMENDED — JST switch cable (≈$5)", size=13.5, weight="700", fill="#14532d")
-s.text(500, 119, "2 glue joints · battery stays stock and swappable", size=11.5, fill="#14532d")
+# ------------------------------------------------------------- the part --
+s.rect(24, 88, W - 48, 96, fill="#f8fafc", stroke="#e5e7eb", sw=1.4, rx=10)
+s.text(44, 112, "THE PART:", size=11.5, weight="700")
+s.text(126, 112, "Adafruit \"JST 2-pin Extension Cable with On/Off Switch — JST PH2\"  ·  ~20 in / 508 mm  ·  22 AWG  ·  $7.25  ·  qty 1 is plenty", size=11.5)
+# cable sketch
+cy = 152
+s.rect(60, cy - 11, 26, 22, fill="#fffbeb", stroke=INK, sw=1.5, rx=3)
+s.text(73, cy + 30, "socket end", size=9.5, anchor="middle", fill=MUTED)
+s.text(73, cy + 42, "(battery goes here)", size=9, anchor="middle", fill=MUTED)
+s.line(86, cy - 4, 300, cy - 4, stroke=RED, sw=2.6)
+s.line(86, cy + 4, 300, cy + 4, stroke=BLK, sw=2.6)
+s.rect(300, cy - 15, 74, 30, fill="#334155", stroke=INK, sw=1.5, rx=7)
+s.circle(337, cy, 7, fill="#94a3b8", stroke=INK, sw=1.3)
+s.text(337, cy + 34, "in-line switch", size=9.5, anchor="middle", fill=MUTED, weight="700")
+s.text(337, cy + 46, "click on / click off", size=9, anchor="middle", fill=MUTED)
+s.line(374, cy - 4, 640, cy - 4, stroke=RED, sw=2.6)
+s.line(374, cy + 4, 640, cy + 4, stroke=BLK, sw=2.6)
+s.rect(640, cy - 11, 26, 22, fill="#fef9c3", stroke=INK, sw=1.5, rx=3)
+s.text(653, cy + 30, "plug end", size=9.5, anchor="middle", fill=MUTED)
+s.text(653, cy + 42, "CUT THIS OFF", size=9.5, anchor="middle", fill=RED, weight="700")
+s.text(700, cy - 8, "Only one end fits the battery —", size=11, fill=INK)
+s.text(700, cy + 6, "it is keyed and cannot go in wrong.", size=11, fill=INK)
+s.text(700, cy + 24, "The end that does NOT fit is", size=11, weight="700", fill=INK)
+s.text(700, cy + 38, "the end you cut off.", size=11, weight="700", fill=INK)
 
-BUS_R, BUS_K = 214, 252
+# ------------------------------------------------------------- 6 steps ---
+PW_, PH_, GAP_ = 314, 244, 14
+def step(i, title):
+    col, row = i % 3, i // 3
+    x = 24 + col * (PW_ + GAP_)
+    y = 208 + row * (PH_ + 16)
+    s.rect(x, y, PW_, PH_, fill=CARD, stroke="#e5e7eb", sw=1.4, rx=10)
+    s.badge(x + 26, y + 26, i + 1, color=INK)
+    s.text(x + 46, y + 31, title, size=12.5, weight="700")
+    return x, y
 
-# battery, plug intact
-bx, by, bw, bh = 44, 176, 118, 100
-s.rect(bx, by, bw, bh, fill=PANEL, stroke=INK, sw=1.8, rx=6)
-s.rect(bx + 9, by + 9, bw - 18, bh - 18, fill="#e5e7eb", stroke=LIGHT, sw=1, rx=3)
-s.text(bx + bw / 2, by + 44, "EEMB 502030", size=11.5, weight="700", anchor="middle")
-s.text(bx + bw / 2, by + 60, "3.7 V · 250 mAh", size=10.5, fill=MUTED, anchor="middle")
-s.text(bx + bw / 2, by - 10, "battery — untouched", size=11, weight="700", anchor="middle", fill=GREEN)
-s.line(bx + bw, BUS_R, bx + bw + 26, BUS_R, stroke=RED, sw=3)
-s.line(bx + bw, BUS_K, bx + bw + 26, BUS_K, stroke=BLK, sw=3)
+# 1 — plug the battery in
+x, y = step(0, "Plug the battery in")
+s.lines(x + 18, y + 56, [
+    "Leave the battery exactly as it came.",
+    "Push its white plug into the cable end",
+    "that accepts it — it clicks and only",
+    "goes one way.",
+], size=10.5, lh=13)
+s.rect(x + 30, y + 138, 96, 58, fill=PANEL, stroke=INK, sw=1.5, rx=4)
+s.text(x + 78, y + 172, "battery", size=10.5, anchor="middle", weight="700")
+s.line(x + 126, y + 160, x + 150, y + 160, stroke=RED, sw=2.6)
+s.line(x + 126, y + 170, x + 150, y + 170, stroke=BLK, sw=2.6)
+s.rect(x + 150, y + 150, 20, 30, fill="#fffbeb", stroke=INK, sw=1.5, rx=3)
+s.rect(x + 170, y + 150, 20, 30, fill="#fef9c3", stroke=INK, sw=1.5, rx=3)
+s.text(x + 200, y + 162, "click", size=10, fill=GREEN, weight="700")
+s.text(x + 200, y + 176, "no tools", size=9.5, fill=MUTED)
+s.text(x + 18, y + 222, "Nothing about the cell is modified.", size=10.5, weight="700", fill=GREEN)
 
-# JST junction: battery plug into the cable's socket
-jx = bx + bw + 26
-s.rect(jx, BUS_R - 14, 26, 66, fill="#fffbeb", stroke=INK, sw=1.6, rx=3)
-s.rect(jx + 26, BUS_R - 14, 26, 66, fill="#fef9c3", stroke=INK, sw=1.6, rx=3)
-s.line(jx + 26, BUS_R - 14, jx + 26, BUS_R + 52, stroke=INK, sw=1.6)
-s.text(jx + 26, BUS_R - 24, "the white clip", size=10.5, weight="700", anchor="middle")
-s.text(jx + 26, BUS_R + 68, "stays plugged in", size=10, fill=MUTED, anchor="middle")
-s.text(jx + 26, BUS_R + 82, "(unplug to swap cells)", size=9.5, fill=MUTED, anchor="middle")
+# 2 — lay it out, then cut
+x, y = step(1, "Lay it out, then cut")
+s.lines(x + 18, y + 56, [
+    "Hold the pod where it will sit and the",
+    "switch where you want it — flat on the",
+    "OUTSIDE of the pod's rear end wall.",
+    "Cut the far (plug) end leaving ~80 mm",
+    "of cable past the switch.",
+], size=10.5, lh=13)
+s.line(x + 24, y + 168, x + 150, y + 168, stroke=RED, sw=2.6)
+s.rect(x + 150, y + 156, 52, 24, fill="#334155", stroke=INK, sw=1.4, rx=6)
+s.line(x + 202, y + 168, x + 268, y + 168, stroke=RED, sw=2.6)
+for d in (-8, 8):
+    s.line(x + 262, y + 168 + d, x + 276, y + 168 - d, stroke=RED, sw=2.2)
+s.text(x + 235, y + 150, "~80 mm", size=9.5, anchor="middle", fill=MUTED, weight="700")
+s.text(x + 18, y + 208, "Spare cable on the battery side: coil it,", size=10, fill="#92400e")
+s.text(x + 18, y + 222, "zip-tie it to the pod. Don't splice it out.", size=10, fill="#92400e")
 
-# cable run + inline switch
-cx0 = jx + 52
-s.line(cx0, BUS_R, cx0 + 78, BUS_R, stroke=RED, sw=3)
-s.line(cx0, BUS_K, cx0 + 190, BUS_K, stroke=BLK, sw=3)
-swx = cx0 + 78
-s.rect(swx, BUS_R - 20, 74, 40, fill="#e2e8f0", stroke=INK, sw=1.8, rx=6)
-s.rect(swx + 34, BUS_R - 32, 26, 13, fill="#94a3b8", stroke=INK, sw=1.3, rx=2)
-s.text(swx + 37, BUS_R + 5, "SWITCH", size=10, weight="700", anchor="middle")
-s.text(swx + 37, BUS_R - 50, "already wired inline", size=10, fill=MUTED, anchor="middle")
-s.line(swx + 74, BUS_R, swx + 112, BUS_R, stroke=RED, sw=3)
+# 3 — strip and fan
+x, y = step(2, "Strip 6 mm, fan the strands")
+s.lines(x + 18, y + 56, [
+    "22 AWG is thick for a 1 mm pad, so",
+    "splay the strands into a flat fan with",
+    "your fingernail. More contact area,",
+    "less bulk, a flatter joint.",
+], size=10.5, lh=13)
+s.line(x + 40, y + 160, x + 150, y + 160, stroke=RED, sw=6)
+for k, dy in enumerate((-9, -4.5, 0, 4.5, 9)):
+    s.line(x + 150, y + 160, x + 196, y + 160 + dy, stroke="#b45309", sw=1.5)
+s.text(x + 172, y + 186, "6 mm", size=9.5, anchor="middle", fill=MUTED)
+s.line(x + 150, y + 176, x + 196, y + 176, stroke=MUTED, sw=1)
+s.text(x + 18, y + 216, "Do both wires. Keep the two ends apart —", size=10, fill=RED)
+s.text(x + 18, y + 230, "the cell is live even with the switch OFF.", size=10, fill=RED)
 
-# cut mark on the CABLE
-cutx = swx + 118
-for yy in (BUS_R, BUS_K):
-    s.line(cutx - 7, yy - 9, cutx + 7, yy + 9, stroke=RED, sw=2.2)
-    s.line(cutx - 7, yy + 9, cutx + 7, yy - 9, stroke=RED, sw=2.2)
-s.text(cutx + 26, BUS_R - 26, "cut the CABLE here", size=10.5, weight="700", anchor="middle", fill=RED)
-s.text(cutx, BUS_K + 30, "(this end is scrap — the battery never gets cut)", size=9.5, fill=MUTED, anchor="middle")
-s.line(cutx + 10, BUS_R, cutx + 60, BUS_R, stroke=RED, sw=3)
-s.line(cutx + 10, BUS_K, cutx + 60, BUS_K, stroke=BLK, sw=3)
+# 4 — meter
+x, y = step(3, "METER before anything touches")
+s.lines(x + 18, y + 56, [
+    "Switch ON. Put the meter on DC volts",
+    "and touch the two bare ends. A reading",
+    "of +3.5 to +4.2 V means the RED probe",
+    "is on the positive wire. Mark it.",
+], size=10.5, lh=13)
+s.rect(x + 24, y + 138, 74, 56, fill=PANEL, stroke=INK, sw=1.5, rx=6)
+s.rect(x + 32, y + 146, 58, 22, fill="#e2e8f0", stroke=LIGHT, sw=1, rx=2)
+s.text(x + 61, y + 162, "3.94 V", size=11, anchor="middle", weight="700", font=MONO)
+s.path(f"M{x+98},{y+180} L{x+150},{y+164} L{x+196},{y+164}", stroke=RED, sw=2.2)
+s.path(f"M{x+98},{y+190} L{x+150},{y+186} L{x+196},{y+186}", stroke=BLK, sw=2.2)
+s.text(x + 204, y + 168, "+", size=13, weight="700", fill=RED)
+s.text(x + 204, y + 190, "−", size=13, weight="700", fill=BLK)
+s.text(x + 18, y + 218, "Wire colour is NOT proof — housings", size=10, weight="700", fill=RED)
+s.text(x + 18, y + 232, "aren't wired to one convention.", size=10, weight="700", fill=RED)
 
-# XIAO with pads
-xx, xy, xw, xh = 700, 150, 236, 116
-s.text(xx + xw / 2, by - 10, "XIAO ESP32S3 — underside", size=11.5, weight="700", anchor="middle")
-s.rect(xx, xy, xw, xh, fill="#eef2ff", stroke=INK, sw=1.8, rx=8)
-s.rect(xx + xw - 4, xy + 40, 22, 38, fill="#9ca3af", stroke=INK, sw=1.5, rx=5)
-s.text(xx + xw + 6, xy + 92, "USB-C", size=10.5, weight="700", anchor="middle")
-padP_x, padN_x = xx + 44, xx + 132
-pad_y, pad_h = xy + xh - 10, 20
-s.rect(padP_x, pad_y, 34, pad_h, fill=RED, stroke=RED, sw=1, rx=2)
-s.rect(padN_x, pad_y, 34, pad_h, fill=BLK, stroke=BLK, sw=1, rx=2)
-s.text(padP_x + 17, pad_y - 8, "BAT +", size=11, weight="700", fill=RED, anchor="middle")
-s.text(padN_x + 17, pad_y - 8, "BAT −", size=11, weight="700", fill=BLK, anchor="middle")
-s.text(xx + xw / 2, xy + 34, "the only two glue joints", size=10.5, weight="700", anchor="middle", fill=GREEN)
-s.text(xx + xw / 2, xy + 50, "in the whole build", size=10.5, weight="700", anchor="middle", fill=GREEN)
-s.path(f"M{cutx+60},{BUS_R} L{cutx+96},{BUS_R} L{cutx+96},{300} L{padP_x+17},{300} L{padP_x+17},{pad_y+pad_h}", stroke=RED, sw=3)
-s.path(f"M{cutx+60},{BUS_K} L{cutx+120},{BUS_K} L{cutx+120},{320} L{padN_x+17},{320} L{padN_x+17},{pad_y+pad_h}", stroke=BLK, sw=3)
+# 5 — tape then glue
+x, y = step(4, "Tape first, then glue")
+s.lines(x + 18, y + 56, [
+    "Clean both pads with 91% IPA. Tape the",
+    "wire body to the board edge so the tape",
+    "takes every tug. Then a small dab of",
+    "wire glue bridging fan → pad. Cure",
+    "12–24 h, then E6000 over the top.",
+], size=10.5, lh=13)
+s.rect(x + 30, y + 176, 200, 22, fill="#eef2ff", stroke=INK, sw=1.4, rx=3)
+s.rect(x + 120, y + 170, 54, 6, fill=BLK, stroke="none")
+s.line(x + 34, y + 164, x + 112, y + 164, stroke=RED, sw=3.4)
+s.rect(x + 40, y + 156, 40, 14, fill="#bfdbfe", stroke=BLUE, sw=1.3, rx=2, op="0.9")
+s.text(x + 60, y + 150, "tape", size=9, anchor="middle", fill=BLUE, weight="700")
+s.path(f"M{x+112},{y+171} Q{x+140},{y+152} {x+172},{y+171} Z", fill="#fcd34d", stroke=AMBER, sw=1.4)
+s.text(x + 196, y + 158, "glue", size=9.5, fill="#92400e", weight="700")
+s.text(x + 18, y + 222, "+ → pad FARTHER from USB-C.", size=10.5, weight="700", fill=RED)
 
-# ============================================== ROW B — fallback ==========
-s.rect(20, 352, W - 40, 140, fill="#fffbeb", stroke=AMBER, sw=1.4, rx=10)
-s.badge(46, 378, "B", color=AMBER)
-s.text(66, 383, "FALLBACK — nothing to order: cut the plug, use a kit switch", size=13.5, weight="700", fill="#92400e")
-s.text(560, 383, "4 glue joints · battery permanently attached", size=11.5, fill="#92400e")
+# 6 — mount
+x, y = step(5, "Mount it on the rear wall")
+s.lines(x + 18, y + 56, [
+    "Switch and plug junction live OUTSIDE,",
+    "flat on the pod's rear end wall (34.6 ×",
+    "6.6 mm of free face). Wires cross the",
+    "wall top — the pod is an open tray.",
+], size=10.5, lh=13)
+s.rect(x + 46, y + 150, 170, 46, fill="#f8fafc", stroke=INK, sw=1.6, rx=3)
+s.text(x + 131, y + 178, "pod, rear face", size=10, anchor="middle", fill=MUTED)
+s.rect(x + 70, y + 128, 56, 20, fill="#334155", stroke=INK, sw=1.4, rx=5)
+s.circle(x + 98, y + 138, 5, fill="#94a3b8", stroke=INK, sw=1)
+s.rect(x + 136, y + 128, 34, 20, fill="#fef9c3", stroke=INK, sw=1.4, rx=3)
+s.text(x + 98, y + 120, "switch", size=9, anchor="middle", weight="700")
+s.text(x + 153, y + 120, "junction", size=9, anchor="middle", weight="700")
+s.text(x + 18, y + 216, "Clear of the dovetail on both docks, and", size=10, fill=MUTED)
+s.text(x + 18, y + 230, "on TOP when the TV stand is in use.", size=10, fill=MUTED)
 
-y0 = 428
-def chip(x, w, label, sub, fill="#fff"):
-    s.rect(x, y0 - 22, w, 44, fill=fill, stroke=INK, sw=1.4, rx=5)
-    s.text(x + w / 2, y0 - 4, label, size=10.5, weight="700", anchor="middle")
-    s.text(x + w / 2, y0 + 11, sub, size=9.5, fill=MUTED, anchor="middle")
-    return x + w
+# ----------------------------------------------------------- callouts ----
+CY = 744
+s.rect(24, CY, 486, 92, fill="#dcfce7", stroke=GREEN, sw=1.6, rx=8)
+s.text(42, CY + 24, "Which pad is which — from Seeed's wiki:", size=12.5, weight="700", fill="#14532d")
+s.text(42, CY + 45, "NEGATIVE is the pad CLOSEST to the USB-C port.", size=13, weight="700", fill="#14532d")
+s.text(42, CY + 64, "Positive is the pad farther away. The two sit ~2 mm apart — never let", size=11.5, fill="#14532d")
+s.text(42, CY + 80, "glue bridge them, and confirm on your own board before you commit.", size=11.5, fill="#14532d")
 
-e = chip(52, 116, "battery", "plug cut off")
-s.line(e, y0, e + 30, y0, stroke=RED, sw=2.6, marker="arrowR")
-e = chip(e + 30, 150, "SS12D00G5", "wrap + glue 2 pins")
-s.line(e, y0, e + 30, y0, stroke=RED, sw=2.6, marker="arrowR")
-e = chip(e + 30, 150, "clip 3rd pin", "it sits at battery +")
-s.line(e, y0, e + 30, y0, stroke=RED, sw=2.6, marker="arrowR")
-chip(e + 30, 190, "glue to BAT + / BAT −", "same pads as above")
-s.text(52, y0 + 44, "Works fine — it is simply more joints to get right, and the cell is committed to this build once it's glued on.", size=11.5, fill="#92400e")
+s.rect(524, CY, 472, 92, fill="#f8fafc", stroke=INK, sw=1.5, rx=8)
+s.text(542, CY + 24, "Then the gate — before you trust it in a match", size=12.5, weight="700")
+s.text(542, CY + 45, "Meter battery → pad through the switch: ≤ ~0.3 Ω (subtract your", size=11.5, fill=MUTED)
+s.text(542, CY + 61, "probe leads). Then stream 10 minutes on battery alone with zero", size=11.5, fill=MUTED)
+s.text(542, CY + 77, "reboots. Reboots = joint resistance → re-glue, or solder those 2 pads.", size=11.5, fill=MUTED)
 
-# ================================================= shared callouts ========
-CY = 520
-s.rect(24, CY, 452, 92, fill="#dcfce7", stroke=GREEN, sw=1.6, rx=8)
-s.text(40, CY + 22, "Polarity rule — from Seeed's wiki:", size=12.5, weight="700", fill="#14532d")
-s.text(40, CY + 42, "NEGATIVE is the pad closest to USB-C.", size=12.5, weight="700", fill="#14532d")
-s.text(40, CY + 60, "Positive is the pad farther away. Confirm on your own board", size=11.5, fill="#14532d")
-s.text(40, CY + 75, "before gluing — reversing it kills the XIAO.", size=11.5, fill="#14532d")
-
-s.rect(492, CY, 464, 92, fill="#fee2e2", stroke=RED, sw=1.6, rx=8)
-s.text(508, CY + 22, "⚠  Meter the cut end — don't trust wire colours", size=12.5, weight="700", fill="#991b1b")
-s.text(508, CY + 42, "JST housings are not wired to a universal convention, so the red", size=11.5, fill="#991b1b")
-s.text(508, CY + 57, "wire at the cut end is not proof of anything. Plug the battery in,", size=11.5, fill="#991b1b")
-s.text(508, CY + 72, "switch ON, and meter the two bare ends before either one touches a pad.", size=11.5, fill="#991b1b")
-
-s.line(24, 634, W - 24, 634, stroke="#e5e7eb", sw=1)
-s.lines(24, 656, [
-    "•  Cable: Adafruit #3064 \"JST 2-pin Extension Cable with On/Off Switch\" (JST-PH 2.0, 22 AWG, ~20 in) — battery plugs into its socket end; trim the rest to length.",
-    "•  Mount the switch and the plug junction on the OUTSIDE of the pod's rear end wall (the pod is an open tray, so the wires just cross the wall top).",
-    "•  USB-C still charges the cell through the cable; leave the switch ON to charge. The firmware never sleeps (~60–100 mA idle) — that's what the switch is for.",
-], size=11.5, lh=17)
+s.text(24, 866, "USB-C still charges the cell right through the cable — leave the switch ON to charge.", size=11, fill=MUTED)
+s.text(24, 882, "The firmware never sleeps (~60–100 mA idle), which is the whole reason the switch is there at all.", size=11, fill=MUTED)
 s.save('/home/claude/diagrams/PokemonRig-Wiring.svg')

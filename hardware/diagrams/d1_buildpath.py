@@ -22,8 +22,8 @@ s.line(244, BOXY + 48, 286, BOXY + 48, stroke=MUTED, sw=1.6, marker="arrowM")
 s.text(265, BOXY + 40, "then", size=10.5, fill=MUTED, anchor="middle")
 
 box(292, 230, "Phase B — cordless", [
-    "Battery keeps its plug: a JST", "switch cable carries it. Glue only", "the two BAT pads, strain-relief", "tape, E6000 overcoat, full cure."], AMBER, 2)
-s.text(292 + 115, BOXY + BOXH + 20, "2 glue joints with the JST switch cable", size=11, fill=AMBER, anchor="middle", weight="600")
+    "Battery keeps its plug — the JST", "switch cable carries it. Glue ONLY", "the two BAT pads: tape, glue, cure,", "E6000 overcoat."], AMBER, 2)
+s.text(292 + 115, BOXY + BOXH + 20, "exactly 2 glue joints · cell stays swappable", size=11, fill=AMBER, anchor="middle", weight="600")
 
 s.line(532, BOXY + 48, 574, BOXY + 48, stroke=MUTED, sw=1.6, marker="arrowM")
 
