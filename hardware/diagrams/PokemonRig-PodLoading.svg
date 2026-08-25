@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="990" height="680" viewBox="0 0 990 680" role="img" aria-label="Pod loading — exploded side view and top view, to scale">
+<svg xmlns="http://www.w3.org/2000/svg" width="990" height="704" viewBox="0 0 990 704" role="img" aria-label="Pod loading — exploded side view and top view, to scale">
 <defs>
   <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
           orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f2933"/></marker>
@@ -11,7 +11,7 @@
   <pattern id="hatch" width="6" height="6" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
     <line x1="0" y1="0" x2="0" y2="6" stroke="#9ca3af" stroke-width="2.5"/></pattern>
 </defs>
-<rect width="990" height="680" fill="#ffffff"/>
+<rect width="990" height="704" fill="#ffffff"/>
 <text x="24.0" y="32.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="17" fill="#1f2933" text-anchor="start" font-weight="700">Pod loading — drawn to scale from the printed part</text>
 <text x="24.0" y="52.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" fill="#6b7280" text-anchor="start" font-weight="400">Board goes in lens-down over the window; battery lies across the pod in the rear bay; both wires cross through the divider gap.</text>
 <text x="60.0" y="104.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="13" fill="#1f2933" text-anchor="start" font-weight="700">SIDE VIEW — exploded, cut lengthwise down the middle</text>
@@ -83,7 +83,8 @@
 <text x="24.0" y="568.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" fill="#1f2933" text-anchor="start" font-weight="400">3.  Both wires through the divider's centre gap — nothing pinched under the board, nothing lying over the window.</text>
 <text x="24.0" y="585.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" fill="#1f2933" text-anchor="start" font-weight="400">4.  One zip tie over each bay, threaded through the side-wall notches; snug, not crushing. Trim the tails flush so the pod still slides in.</text>
 <text x="24.0" y="602.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" fill="#1f2933" text-anchor="start" font-weight="400">5.  Fold the camera ribbon flat beside the board — never across the window, and never pinched under a zip tie.</text>
-<rect x="24.0" y="612.0" width="942.0" height="46.0" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.2"/>
-<text x="38.0" y="630.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" fill="#1e3a8a" text-anchor="start" font-weight="600">Dry-fit the 160° module first — its barrel is taller than the stock camera. The window is a 12 mm hole through 2.4 mm of floor, so the barrel</text>
-<text x="38.0" y="648.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" fill="#1e3a8a" text-anchor="start" font-weight="600">nests into it and buys back that height. Keep the opening otherwise clear: no tape, no glue, no wire, no ribbon across it.</text>
+<text x="24.0" y="619.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" fill="#1f2933" text-anchor="start" font-weight="400">6.  Snap on the U.FL antenna (in the XIAO's box — it is required) and tape it OUTSIDE a side wall. Never on top of the battery: foil detunes it.</text>
+<rect x="24.0" y="632.0" width="942.0" height="46.0" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.2"/>
+<text x="38.0" y="650.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" fill="#1e3a8a" text-anchor="start" font-weight="600">Dry-fit the 160° module first — its barrel is taller than the stock camera. The window is a 12 mm hole through 2.4 mm of floor, so the barrel</text>
+<text x="38.0" y="668.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" fill="#1e3a8a" text-anchor="start" font-weight="600">nests into it and buys back that height. Keep the opening otherwise clear: no tape, no glue, no wire, no ribbon across it.</text>
 </svg>

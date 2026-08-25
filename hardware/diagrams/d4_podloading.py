@@ -10,7 +10,7 @@ ZF_B, ZF_T, Z_TOP = RAIL_H, RAIL_H + FLOOR_T, 13.0
 BAY_Y0, BAY_Y1 = POD_FRONT + 2.0, POD_FRONT + 2.0 + BAY_L
 REAR_Y0, REAR_Y1 = BAY_Y1 + 1.6, POD_REAR - WALL_T
 
-W, H = 990, 680
+W, H = 990, 704
 s = Svg(W, H, "Pod loading — exploded side view and top view, to scale")
 s.text(24, 32, "Pod loading — drawn to scale from the printed part", size=17, weight="700")
 s.text(24, 52, "Board goes in lens-down over the window; battery lies across the pod in the rear bay; both wires cross through the divider gap.",
@@ -122,10 +122,11 @@ s.lines(24, FY + 22, [
     "3.  Both wires through the divider's centre gap — nothing pinched under the board, nothing lying over the window.",
     "4.  One zip tie over each bay, threaded through the side-wall notches; snug, not crushing. Trim the tails flush so the pod still slides in.",
     "5.  Fold the camera ribbon flat beside the board — never across the window, and never pinched under a zip tie.",
+    "6.  Snap on the U.FL antenna (in the XIAO's box — it is required) and tape it OUTSIDE a side wall. Never on top of the battery: foil detunes it.",
 ], size=11.5, lh=17, fill=INK)
-s.rect(24, FY + 100, W - 48, 46, fill="#dbeafe", stroke=BLUE, sw=1.2, rx=6)
-s.text(38, FY + 118, "Dry-fit the 160° module first — its barrel is taller than the stock camera. The window is a 12 mm hole through 2.4 mm of floor, so the barrel",
+s.rect(24, FY + 120, W - 48, 46, fill="#dbeafe", stroke=BLUE, sw=1.2, rx=6)
+s.text(38, FY + 138, "Dry-fit the 160° module first — its barrel is taller than the stock camera. The window is a 12 mm hole through 2.4 mm of floor, so the barrel",
        size=11.5, fill="#1e3a8a", weight="600")
-s.text(38, FY + 136, "nests into it and buys back that height. Keep the opening otherwise clear: no tape, no glue, no wire, no ribbon across it.",
+s.text(38, FY + 156, "nests into it and buys back that height. Keep the opening otherwise clear: no tape, no glue, no wire, no ribbon across it.",
        size=11.5, fill="#1e3a8a", weight="600")
 s.save('/home/claude/diagrams/PokemonRig-PodLoading.svg')
