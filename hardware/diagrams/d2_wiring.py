@@ -1,7 +1,7 @@
 import sys; sys.path.insert(0, '/home/claude/diagrams')
 from svgkit import *
 
-W, H = 1020, 906
+W, H = 1020, 1044
 s = Svg(W, H, "Battery wiring, step by step, using the Adafruit JST-PH switch cable")
 s.text(24, 34, "Battery wiring — step by step", size=18, weight="700")
 s.text(24, 55, "The battery is never cut and stays swappable. The switch is already wired into the cable, so the whole build has exactly TWO glue joints:", size=12, fill=MUTED)
@@ -163,6 +163,30 @@ s.text(542, CY + 45, "Meter battery → pad through the switch: ≤ ~0.3 Ω (sub
 s.text(542, CY + 61, "probe leads). Then stream 10 minutes on battery alone with zero", size=11.5, fill=MUTED)
 s.text(542, CY + 77, "reboots. Reboots = joint resistance → re-glue, or solder those 2 pads.", size=11.5, fill=MUTED)
 
-s.text(24, 866, "USB-C still charges the cell right through the cable — leave the switch ON to charge.", size=11, fill=MUTED)
-s.text(24, 882, "The firmware never sleeps (~60–100 mA idle), which is the whole reason the switch is there at all.", size=11, fill=MUTED)
+# ------------------------------------------- battery state timeline -----
+TY = 858
+s.text(24, TY, "Battery state through the build — glue and cure with the circuit DEAD", size=13.5, weight="700")
+s.text(24, TY + 18, "The cell is plugged in for exactly two moments: the voltage check, and the final soak test. Everything else happens with nothing live.", size=11, fill=MUTED)
+
+segs = [
+    ("Cut + strip", "battery OUT", GREEN, 176),
+    ("Volt check", "battery IN", AMBER, 132),
+    ("Fan · clean · tape · glue · cure · overcoat", "battery OUT — and no USB either", GREEN, 350),
+    ("Ω gate", "battery OUT", GREEN, 132),
+    ("10-min soak", "battery IN", AMBER, 182),
+]
+bx = 24
+for label, state, col, w in segs:
+    fill = "#dcfce7" if col == GREEN else "#fef3c7"
+    s.rect(bx, TY + 34, w, 54, fill=fill, stroke=col, sw=1.6, rx=6)
+    s.text(bx + w / 2, TY + 55, label, size=10.5, weight="700", anchor="middle",
+           fill="#14532d" if col == GREEN else "#92400e")
+    s.text(bx + w / 2, TY + 74, state, size=9.5, anchor="middle",
+           fill="#14532d" if col == GREEN else "#92400e")
+    bx += w + 6
+
+s.text(24, TY + 114, "Why it matters", size=11.5, weight="700")
+s.text(24, TY + 132, "Wet conductive glue bridging the ~2 mm pad gap is just a smear you wipe off when nothing is powered — with a cell or USB live, it is a dead", size=11, fill=MUTED)
+s.text(24, TY + 148, "short across the battery. Cutting the cable is the same story: strippers across both conductors only matter if the cell is plugged in.", size=11, fill=MUTED)
+s.text(24, TY + 170, "Keeping the plug pays off again here — an unplugged cell sits safely in its own housing, where a cut-off one would be two bare live wires.", size=11, fill=INK, weight="600")
 s.save('/home/claude/diagrams/PokemonRig-Wiring.svg')
