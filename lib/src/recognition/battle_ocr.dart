@@ -42,7 +42,7 @@ class BattleTextMatcher {
     final found = <String, RecognizedPokemon>{};
     for (var i = 0; i < lines.length; i++) {
       final line = lines[i];
-      final speciesId = _resolveName(line.text);
+      final speciesId = resolveName(line.text);
       if (speciesId == null || found.containsKey(speciesId)) continue;
       final inYourPicks = context.yourSpeciesIds.contains(speciesId);
       final side = inYourPicks
@@ -62,8 +62,10 @@ class BattleTextMatcher {
   }
 
   /// Fuzzy roster lookup: exact (case/punctuation-insensitive), then
-  /// edit-distance <= 2 for names of length >= 5.
-  String? _resolveName(String raw) {
+  /// edit-distance <= 2 for names of length >= 5. Public because the
+  /// battle-event tracker resolves "`<Name>` used `<Move>`!" lines with the
+  /// same rules.
+  String? resolveName(String raw) {
     final q = _clean(raw);
     if (q.length < 3) return null;
     // Reject obvious UI words fast.

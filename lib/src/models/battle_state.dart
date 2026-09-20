@@ -110,6 +110,37 @@ class BattleSession {
   /// Team Preview tab and narrows which four they can have brought.
   final List<PreviewSlot> enemyPreview = [];
 
+  // ---- field conditions + speed-order evidence (in-match text tracker) ----
+
+  /// Trick Room is up (set/cleared by "twisted the dimensions" messages).
+  bool trickRoom = false;
+
+  /// Tailwind flags per side (set/cleared by the Tailwind messages).
+  bool yourTailwind = false;
+  bool enemyTailwind = false;
+
+  /// Confirmed raw-speed orderings observed this match, as
+  /// `[fasterKey, slowerKey]` pairs with keys `y:<speciesId>` /
+  /// `e:<speciesId>`. "Moved first at the same move priority" is the
+  /// evidence (inverted while Trick Room is up — the tracker handles that);
+  /// speed ties are deliberately not modelled.
+  final List<List<String>> speedEvidence = [];
+
+  /// Record that [faster] outsped [slower]. The latest observation wins:
+  /// a contradicting earlier pair (a Tailwind or paralysis changed the
+  /// order) is replaced.
+  void addSpeedEvidence({required String faster, required String slower}) {
+    speedEvidence.removeWhere((p) =>
+        (p[0] == faster && p[1] == slower) ||
+        (p[0] == slower && p[1] == faster));
+    speedEvidence.add([faster, slower]);
+  }
+
+  /// True when the observed order of [aKey] vs [bKey] is known.
+  bool speedRelationKnown(String aKey, String bKey) => speedEvidence.any(
+      (p) =>
+          (p[0] == aKey && p[1] == bKey) || (p[0] == bKey && p[1] == aKey));
+
   BattleSession(
       {required this.format, required this.team, List<PokemonBuild>? picks})
       : picks = picks ?? [] {
@@ -209,5 +240,6 @@ class BattleSession {
         'picks': [for (final p in picks) p.toJson()],
         'enemyPreview': [for (final s in enemyPreview) s.toJson()],
         'enemies': [for (final e in enemies) e.toJson()],
+        if (speedEvidence.isNotEmpty) 'speedEvidence': speedEvidence,
       };
 }

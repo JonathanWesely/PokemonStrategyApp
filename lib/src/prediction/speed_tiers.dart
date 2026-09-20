@@ -22,6 +22,11 @@ class SpeedTierEntry {
   /// ceiling is 1.5x what the range shows.
   final bool scarfLikely;
 
+  /// True when this Pokemon's place relative to at least one other entry
+  /// was CONFIRMED by the match itself (it moved first/last at the same
+  /// move priority) — the strip shows ✓ instead of ?.
+  final bool orderConfirmed;
+
   const SpeedTierEntry({
     required this.speciesId,
     required this.label,
@@ -30,17 +35,36 @@ class SpeedTierEntry {
     required this.max,
     required this.likely,
     this.scarfLikely = false,
+    this.orderConfirmed = false,
   });
 
+  /// Evidence key, matching BattleSession.speedEvidence.
+  String get key => '${yours ? 'y' : 'e'}:$speciesId';
+
   bool get isExact => min == max;
+
+  SpeedTierEntry withOrderConfirmed() => SpeedTierEntry(
+        speciesId: speciesId,
+        label: label,
+        yours: yours,
+        min: min,
+        max: max,
+        likely: likely,
+        scarfLikely: scarfLikely,
+        orderConfirmed: true,
+      );
 }
 
 /// Entries for everything on the field, sorted fastest-likely first.
+///
+/// [evidence] (BattleSession.speedEvidence) reorders the prediction where
+/// the match has revealed the real order and marks those entries confirmed.
 List<SpeedTierEntry> buildSpeedTiers(
   DataPack pack,
   List<PokemonBuild> yourActive,
-  List<EnemyPokemon> enemiesOnField,
-) {
+  List<EnemyPokemon> enemiesOnField, {
+  List<List<String>> evidence = const [],
+}) {
   final engine = PredictionEngine(pack);
   final entries = <SpeedTierEntry>[];
 
@@ -87,5 +111,40 @@ List<SpeedTierEntry> buildSpeedTiers(
   }
 
   entries.sort((a, b) => b.likely.compareTo(a.likely));
-  return entries;
+  return applySpeedEvidence(entries, evidence);
+}
+
+/// Reorder [entries] so every observed `[faster, slower]` pair holds, and
+/// mark the entries those pairs pin down. Bubble passes: cheap and stable
+/// for the 4 Pokemon a doubles field holds.
+List<SpeedTierEntry> applySpeedEvidence(
+    List<SpeedTierEntry> entries, List<List<String>> evidence) {
+  if (evidence.isEmpty || entries.length < 2) return entries;
+  final out = [...entries];
+  final keys = {for (final e in out) e.key};
+  final pairs = [
+    for (final p in evidence)
+      if (p.length >= 2 && keys.contains(p[0]) && keys.contains(p[1])) p
+  ];
+  if (pairs.isEmpty) return out;
+  int indexOf(String key) => out.indexWhere((e) => e.key == key);
+  for (var pass = 0; pass < out.length * pairs.length; pass++) {
+    var moved = false;
+    for (final p in pairs) {
+      final fi = indexOf(p[0]), si = indexOf(p[1]);
+      if (fi > si) {
+        final e = out.removeAt(fi);
+        out.insert(si, e);
+        moved = true;
+      }
+    }
+    if (!moved) break;
+  }
+  final confirmedKeys = {for (final p in pairs) p[0], for (final p in pairs) p[1]};
+  for (var i = 0; i < out.length; i++) {
+    if (confirmedKeys.contains(out[i].key)) {
+      out[i] = out[i].withOrderConfirmed();
+    }
+  }
+  return out;
 }

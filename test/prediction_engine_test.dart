@@ -85,8 +85,8 @@ void main() {
         ],
       );
       for (final id in [
-        'umbreon', 'sneasler', 'decidueye-hisui',
-        'lycanroc', 'arcanine', 'sylveon'
+        'umbreon', 'sneasler', 'decidueye',
+        'lycanroc-dusk', 'arcanine', 'sylveon'
       ]) {
         session.enemyPreview.add(PreviewSlot(id));
       }
@@ -96,7 +96,7 @@ void main() {
       final bench = engine.predictBench(session);
       expect(bench.length, session.enemyUnknownReserveCount); // 2
       final scoutedLeft = {
-        'decidueye-hisui', 'lycanroc', 'arcanine', 'sylveon'
+        'decidueye', 'lycanroc-dusk', 'arcanine', 'sylveon'
       };
       for (final option in bench) {
         expect(scoutedLeft, contains(option.id),

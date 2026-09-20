@@ -1,0 +1,3577 @@
+{
+ "source": "RegulationMBPokemon1-4.png (Eligible Pokemon screen, national-dex order) + RegulationMC1 (2)-(6).jpeg (M-C additions, photos of the screen)",
+ "count": 262,
+ "sprites": [
+  {
+   "order": 1,
+   "file": "Venusaur.png",
+   "displayName": "Venusaur",
+   "formId": "venusaur",
+   "packSpeciesId": "venusaur",
+   "inDataPack": true,
+   "width": 98,
+   "height": 78,
+   "types": [
+    "Grass",
+    "Poison"
+   ]
+  },
+  {
+   "order": 2,
+   "file": "Charizard.png",
+   "displayName": "Charizard",
+   "formId": "charizard",
+   "packSpeciesId": "charizard",
+   "inDataPack": true,
+   "width": 99,
+   "height": 73,
+   "types": [
+    "Fire",
+    "Flying"
+   ]
+  },
+  {
+   "order": 3,
+   "file": "Blastoise.png",
+   "displayName": "Blastoise",
+   "formId": "blastoise",
+   "packSpeciesId": "blastoise",
+   "inDataPack": true,
+   "width": 87,
+   "height": 89,
+   "types": [
+    "Water"
+   ]
+  },
+  {
+   "order": 4,
+   "file": "Beedrill.png",
+   "displayName": "Beedrill",
+   "formId": "beedrill",
+   "packSpeciesId": "beedrill",
+   "inDataPack": true,
+   "width": 82,
+   "height": 91,
+   "types": [
+    "Bug",
+    "Poison"
+   ]
+  },
+  {
+   "order": 5,
+   "file": "Pidgeot.png",
+   "displayName": "Pidgeot",
+   "formId": "pidgeot",
+   "packSpeciesId": "pidgeot",
+   "inDataPack": true,
+   "width": 100,
+   "height": 96,
+   "types": [
+    "Normal",
+    "Flying"
+   ]
+  },
+  {
+   "order": 6,
+   "file": "Arbok.png",
+   "displayName": "Arbok",
+   "formId": "arbok",
+   "packSpeciesId": "arbok",
+   "inDataPack": true,
+   "width": 75,
+   "height": 91,
+   "types": [
+    "Poison"
+   ]
+  },
+  {
+   "order": 7,
+   "file": "Pikachu.png",
+   "displayName": "Pikachu",
+   "formId": "pikachu",
+   "packSpeciesId": "pikachu",
+   "inDataPack": true,
+   "width": 66,
+   "height": 69,
+   "types": [
+    "Electric"
+   ]
+  },
+  {
+   "order": 8,
+   "file": "Raichu.png",
+   "displayName": "Raichu",
+   "formId": "raichu",
+   "packSpeciesId": "raichu",
+   "inDataPack": true,
+   "width": 73,
+   "height": 100,
+   "types": [
+    "Electric"
+   ]
+  },
+  {
+   "order": 9,
+   "file": "Alolan Raichu.png",
+   "displayName": "Alolan Raichu",
+   "formId": "raichu-alola",
+   "packSpeciesId": "raichu-alola",
+   "inDataPack": true,
+   "width": 98,
+   "height": 103,
+   "types": [
+    "Electric",
+    "Psychic"
+   ]
+  },
+  {
+   "order": 10,
+   "file": "Clefable.png",
+   "displayName": "Clefable",
+   "formId": "clefable",
+   "packSpeciesId": "clefable",
+   "inDataPack": true,
+   "width": 90,
+   "height": 77,
+   "types": [
+    "Fairy"
+   ]
+  },
+  {
+   "order": 11,
+   "file": "Ninetales.png",
+   "displayName": "Ninetales",
+   "formId": "ninetales",
+   "packSpeciesId": "ninetales",
+   "inDataPack": true,
+   "width": 83,
+   "height": 90,
+   "types": [
+    "Fire"
+   ]
+  },
+  {
+   "order": 12,
+   "file": "Ninetales-Alola.png",
+   "displayName": "Ninetales-Alola",
+   "formId": "ninetales-alola",
+   "packSpeciesId": "ninetales-alola",
+   "inDataPack": true,
+   "width": 89,
+   "height": 87,
+   "types": [
+    "Ice",
+    "Fairy"
+   ]
+  },
+  {
+   "order": 13,
+   "file": "Wigglytuff.png",
+   "displayName": "Wigglytuff",
+   "formId": "wigglytuff",
+   "packSpeciesId": "wigglytuff",
+   "inDataPack": true,
+   "width": 84,
+   "height": 90,
+   "types": [
+    "Normal",
+    "Fairy"
+   ]
+  },
+  {
+   "order": 14,
+   "file": "Vileplume.png",
+   "displayName": "Vileplume",
+   "formId": "vileplume",
+   "packSpeciesId": "vileplume",
+   "inDataPack": true,
+   "width": 99,
+   "height": 65,
+   "types": [
+    "Grass",
+    "Poison"
+   ]
+  },
+  {
+   "order": 15,
+   "file": "Persian.png",
+   "displayName": "Persian",
+   "formId": "persian",
+   "packSpeciesId": "persian",
+   "inDataPack": true,
+   "width": 77,
+   "height": 90,
+   "types": [
+    "Normal"
+   ]
+  },
+  {
+   "order": 16,
+   "file": "Alolan Persian.png",
+   "displayName": "Alolan Persian",
+   "formId": "persian-alola",
+   "packSpeciesId": "persian-alola",
+   "inDataPack": true,
+   "width": 84,
+   "height": 90,
+   "types": [
+    "Dark"
+   ]
+  },
+  {
+   "order": 17,
+   "file": "Arcanine.png",
+   "displayName": "Arcanine",
+   "formId": "arcanine",
+   "packSpeciesId": "arcanine",
+   "inDataPack": true,
+   "width": 86,
+   "height": 98,
+   "types": [
+    "Fire"
+   ]
+  },
+  {
+   "order": 18,
+   "file": "Hisuian Arcanine.png",
+   "displayName": "Hisuian Arcanine",
+   "formId": "arcanine-hisui",
+   "packSpeciesId": "arcanine-hisui",
+   "inDataPack": true,
+   "width": 78,
+   "height": 98,
+   "types": [
+    "Fire",
+    "Rock"
+   ]
+  },
+  {
+   "order": 19,
+   "file": "Alakazam.png",
+   "displayName": "Alakazam",
+   "formId": "alakazam",
+   "packSpeciesId": "alakazam",
+   "inDataPack": true,
+   "width": 93,
+   "height": 100,
+   "types": [
+    "Psychic"
+   ]
+  },
+  {
+   "order": 20,
+   "file": "Machamp.png",
+   "displayName": "Machamp",
+   "formId": "machamp",
+   "packSpeciesId": "machamp",
+   "inDataPack": true,
+   "width": 79,
+   "height": 100,
+   "types": [
+    "Fighting"
+   ]
+  },
+  {
+   "order": 21,
+   "file": "Victreebel.png",
+   "displayName": "Victreebel",
+   "formId": "victreebel",
+   "packSpeciesId": "victreebel",
+   "inDataPack": true,
+   "width": 100,
+   "height": 74,
+   "types": [
+    "Grass",
+    "Poison"
+   ]
+  },
+  {
+   "order": 22,
+   "file": "Slowbro.png",
+   "displayName": "Slowbro",
+   "formId": "slowbro",
+   "packSpeciesId": "slowbro",
+   "inDataPack": true,
+   "width": 101,
+   "height": 77,
+   "types": [
+    "Water",
+    "Psychic"
+   ]
+  },
+  {
+   "order": 23,
+   "file": "Galarian Slowbro.png",
+   "displayName": "Galarian Slowbro",
+   "formId": "slowbro-galar",
+   "packSpeciesId": "slowbro-galar",
+   "inDataPack": true,
+   "width": 73,
+   "height": 89,
+   "types": [
+    "Poison",
+    "Psychic"
+   ]
+  },
+  {
+   "order": 24,
+   "file": "Farfetch'd.png",
+   "displayName": "Farfetch'd",
+   "formId": "farfetchd",
+   "packSpeciesId": "farfetchd",
+   "inDataPack": true,
+   "width": 62,
+   "height": 79,
+   "types": [
+    "Normal",
+    "Flying"
+   ]
+  },
+  {
+   "order": 25,
+   "file": "Gengar.png",
+   "displayName": "Gengar",
+   "formId": "gengar",
+   "packSpeciesId": "gengar",
+   "inDataPack": true,
+   "width": 84,
+   "height": 88,
+   "types": [
+    "Ghost",
+    "Poison"
+   ]
+  },
+  {
+   "order": 26,
+   "file": "Kangaskhan.png",
+   "displayName": "Kangaskhan",
+   "formId": "kangaskhan",
+   "packSpeciesId": "kangaskhan",
+   "inDataPack": true,
+   "width": 99,
+   "height": 97,
+   "types": [
+    "Normal"
+   ]
+  },
+  {
+   "order": 27,
+   "file": "Starmie.png",
+   "displayName": "Starmie",
+   "formId": "starmie",
+   "packSpeciesId": "starmie",
+   "inDataPack": true,
+   "width": 77,
+   "height": 77,
+   "types": [
+    "Water",
+    "Psychic"
+   ]
+  },
+  {
+   "order": 28,
+   "file": "Mr. Mime.png",
+   "displayName": "Mr. Mime",
+   "formId": "mr-mime",
+   "packSpeciesId": "mr-mime",
+   "inDataPack": true,
+   "width": 82,
+   "height": 90,
+   "types": [
+    "Psychic",
+    "Fairy"
+   ]
+  },
+  {
+   "order": 29,
+   "file": "Pinsir.png",
+   "displayName": "Pinsir",
+   "formId": "pinsir",
+   "packSpeciesId": "pinsir",
+   "inDataPack": true,
+   "width": 89,
+   "height": 72,
+   "types": [
+    "Bug"
+   ]
+  },
+  {
+   "order": 30,
+   "file": "Tauros.png",
+   "displayName": "Tauros",
+   "formId": "tauros",
+   "packSpeciesId": "tauros",
+   "inDataPack": true,
+   "width": 91,
+   "height": 89,
+   "types": [
+    "Normal"
+   ]
+  },
+  {
+   "order": 31,
+   "file": "Paldean Tauros (Combat).png",
+   "displayName": "Paldean Tauros (Combat)",
+   "formId": "tauros-paldea-combat-breed",
+   "packSpeciesId": "tauros-paldea-combat-breed",
+   "inDataPack": true,
+   "width": 88,
+   "height": 90,
+   "types": [
+    "Fighting"
+   ]
+  },
+  {
+   "order": 32,
+   "file": "Paldean Tauros (Blaze).png",
+   "displayName": "Paldean Tauros (Blaze)",
+   "formId": "tauros-paldea-blaze-breed",
+   "packSpeciesId": "tauros-paldea-blaze-breed",
+   "inDataPack": true,
+   "width": 90,
+   "height": 89,
+   "types": [
+    "Fighting",
+    "Fire"
+   ]
+  },
+  {
+   "order": 33,
+   "file": "Paldean Tauros (Aqua).png",
+   "displayName": "Paldean Tauros (Aqua)",
+   "formId": "tauros-paldea-aqua-breed",
+   "packSpeciesId": "tauros-paldea-aqua-breed",
+   "inDataPack": true,
+   "width": 92,
+   "height": 74,
+   "types": [
+    "Fighting",
+    "Water"
+   ]
+  },
+  {
+   "order": 34,
+   "file": "Gyarados.png",
+   "displayName": "Gyarados",
+   "formId": "gyarados",
+   "packSpeciesId": "gyarados",
+   "inDataPack": true,
+   "width": 100,
+   "height": 88,
+   "types": [
+    "Water",
+    "Flying"
+   ]
+  },
+  {
+   "order": 35,
+   "file": "Ditto.png",
+   "displayName": "Ditto",
+   "formId": "ditto",
+   "packSpeciesId": "ditto",
+   "inDataPack": true,
+   "width": 68,
+   "height": 64,
+   "types": [
+    "Normal"
+   ]
+  },
+  {
+   "order": 36,
+   "file": "Vaporeon.png",
+   "displayName": "Vaporeon",
+   "formId": "vaporeon",
+   "packSpeciesId": "vaporeon",
+   "inDataPack": true,
+   "width": 97,
+   "height": 67,
+   "types": [
+    "Water"
+   ]
+  },
+  {
+   "order": 37,
+   "file": "Jolteon.png",
+   "displayName": "Jolteon",
+   "formId": "jolteon",
+   "packSpeciesId": "jolteon",
+   "inDataPack": true,
+   "width": 66,
+   "height": 79,
+   "types": [
+    "Electric"
+   ]
+  },
+  {
+   "order": 38,
+   "file": "Flareon.png",
+   "displayName": "Flareon",
+   "formId": "flareon",
+   "packSpeciesId": "flareon",
+   "inDataPack": true,
+   "width": 68,
+   "height": 90,
+   "types": [
+    "Fire"
+   ]
+  },
+  {
+   "order": 39,
+   "file": "Aerodactyl.png",
+   "displayName": "Aerodactyl",
+   "formId": "aerodactyl",
+   "packSpeciesId": "aerodactyl",
+   "inDataPack": true,
+   "width": 98,
+   "height": 81,
+   "types": [
+    "Rock",
+    "Flying"
+   ]
+  },
+  {
+   "order": 40,
+   "file": "Snorlax.png",
+   "displayName": "Snorlax",
+   "formId": "snorlax",
+   "packSpeciesId": "snorlax",
+   "inDataPack": true,
+   "width": 99,
+   "height": 99,
+   "types": [
+    "Normal"
+   ]
+  },
+  {
+   "order": 41,
+   "file": "Dragonite.png",
+   "displayName": "Dragonite",
+   "formId": "dragonite",
+   "packSpeciesId": "dragonite",
+   "inDataPack": true,
+   "width": 77,
+   "height": 99,
+   "types": [
+    "Dragon",
+    "Flying"
+   ]
+  },
+  {
+   "order": 42,
+   "file": "Meganium.png",
+   "displayName": "Meganium",
+   "formId": "meganium",
+   "packSpeciesId": "meganium",
+   "inDataPack": true,
+   "width": 59,
+   "height": 90,
+   "types": [
+    "Grass"
+   ]
+  },
+  {
+   "order": 43,
+   "file": "Typhlosion.png",
+   "displayName": "Typhlosion",
+   "formId": "typhlosion",
+   "packSpeciesId": "typhlosion",
+   "inDataPack": true,
+   "width": 77,
+   "height": 101,
+   "types": [
+    "Fire"
+   ]
+  },
+  {
+   "order": 44,
+   "file": "Hisuian Typhlosion.png",
+   "displayName": "Hisuian Typhlosion",
+   "formId": "typhlosion-hisui",
+   "packSpeciesId": "typhlosion-hisui",
+   "inDataPack": true,
+   "width": 59,
+   "height": 99,
+   "types": [
+    "Fire",
+    "Ghost"
+   ]
+  },
+  {
+   "order": 45,
+   "file": "Feraligatr.png",
+   "displayName": "Feraligatr",
+   "formId": "feraligatr",
+   "packSpeciesId": "feraligatr",
+   "inDataPack": true,
+   "width": 92,
+   "height": 99,
+   "types": [
+    "Water"
+   ]
+  },
+  {
+   "order": 46,
+   "file": "Ariados.png",
+   "displayName": "Ariados",
+   "formId": "ariados",
+   "packSpeciesId": "ariados",
+   "inDataPack": true,
+   "width": 78,
+   "height": 67,
+   "types": [
+    "Bug",
+    "Poison"
+   ]
+  },
+  {
+   "order": 47,
+   "file": "Ampharos.png",
+   "displayName": "Ampharos",
+   "formId": "ampharos",
+   "packSpeciesId": "ampharos",
+   "inDataPack": true,
+   "width": 73,
+   "height": 99,
+   "types": [
+    "Electric"
+   ]
+  },
+  {
+   "order": 48,
+   "file": "Azumarill.png",
+   "displayName": "Azumarill",
+   "formId": "azumarill",
+   "packSpeciesId": "azumarill",
+   "inDataPack": true,
+   "width": 79,
+   "height": 86,
+   "types": [
+    "Water",
+    "Fairy"
+   ]
+  },
+  {
+   "order": 49,
+   "file": "Politoed.png",
+   "displayName": "Politoed",
+   "formId": "politoed",
+   "packSpeciesId": "politoed",
+   "inDataPack": true,
+   "width": 77,
+   "height": 91,
+   "types": [
+    "Water"
+   ]
+  },
+  {
+   "order": 50,
+   "file": "Espeon.png",
+   "displayName": "Espeon",
+   "formId": "espeon",
+   "packSpeciesId": "espeon",
+   "inDataPack": true,
+   "width": 80,
+   "height": 73,
+   "types": [
+    "Psychic"
+   ]
+  },
+  {
+   "order": 51,
+   "file": "Umbreon.png",
+   "displayName": "Umbreon",
+   "formId": "umbreon",
+   "packSpeciesId": "umbreon",
+   "inDataPack": true,
+   "width": 66,
+   "height": 80,
+   "types": [
+    "Dark"
+   ]
+  },
+  {
+   "order": 52,
+   "file": "Slowking.png",
+   "displayName": "Slowking",
+   "formId": "slowking",
+   "packSpeciesId": "slowking",
+   "inDataPack": true,
+   "width": 63,
+   "height": 100,
+   "types": [
+    "Water",
+    "Psychic"
+   ]
+  },
+  {
+   "order": 53,
+   "file": "Galarian Slowking.png",
+   "displayName": "Galarian Slowking",
+   "formId": "slowking-galar",
+   "packSpeciesId": "slowking-galar",
+   "inDataPack": true,
+   "width": 59,
+   "height": 91,
+   "types": [
+    "Poison",
+    "Psychic"
+   ]
+  },
+  {
+   "order": 54,
+   "file": "Forretress.png",
+   "displayName": "Forretress",
+   "formId": "forretress",
+   "packSpeciesId": "forretress",
+   "inDataPack": true,
+   "width": 93,
+   "height": 69,
+   "types": [
+    "Bug",
+    "Steel"
+   ]
+  },
+  {
+   "order": 55,
+   "file": "Steelix.png",
+   "displayName": "Steelix",
+   "formId": "steelix",
+   "packSpeciesId": "steelix",
+   "inDataPack": true,
+   "width": 98,
+   "height": 101,
+   "types": [
+    "Steel",
+    "Ground"
+   ]
+  },
+  {
+   "order": 56,
+   "file": "Qwilfish.png",
+   "displayName": "Qwilfish",
+   "formId": "qwilfish",
+   "packSpeciesId": "qwilfish",
+   "inDataPack": true,
+   "width": 78,
+   "height": 65,
+   "types": [
+    "Water",
+    "Poison"
+   ]
+  },
+  {
+   "order": 57,
+   "file": "Scizor.png",
+   "displayName": "Scizor",
+   "formId": "scizor",
+   "packSpeciesId": "scizor",
+   "inDataPack": true,
+   "width": 75,
+   "height": 96,
+   "types": [
+    "Bug",
+    "Steel"
+   ]
+  },
+  {
+   "order": 58,
+   "file": "Heracross.png",
+   "displayName": "Heracross",
+   "formId": "heracross",
+   "packSpeciesId": "heracross",
+   "inDataPack": true,
+   "width": 87,
+   "height": 86,
+   "types": [
+    "Bug",
+    "Fighting"
+   ]
+  },
+  {
+   "order": 59,
+   "file": "Skarmory.png",
+   "displayName": "Skarmory",
+   "formId": "skarmory",
+   "packSpeciesId": "skarmory",
+   "inDataPack": true,
+   "width": 97,
+   "height": 89,
+   "types": [
+    "Steel",
+    "Flying"
+   ]
+  },
+  {
+   "order": 60,
+   "file": "Houndoom.png",
+   "displayName": "Houndoom",
+   "formId": "houndoom",
+   "packSpeciesId": "houndoom",
+   "inDataPack": true,
+   "width": 60,
+   "height": 88,
+   "types": [
+    "Dark",
+    "Fire"
+   ]
+  },
+  {
+   "order": 61,
+   "file": "Tyranitar.png",
+   "displayName": "Tyranitar",
+   "formId": "tyranitar",
+   "packSpeciesId": "tyranitar",
+   "inDataPack": true,
+   "width": 76,
+   "height": 99,
+   "types": [
+    "Rock",
+    "Dark"
+   ]
+  },
+  {
+   "order": 62,
+   "file": "Sceptile.png",
+   "displayName": "Sceptile",
+   "formId": "sceptile",
+   "packSpeciesId": "sceptile",
+   "inDataPack": true,
+   "width": 91,
+   "height": 86,
+   "types": [
+    "Grass"
+   ]
+  },
+  {
+   "order": 63,
+   "file": "Blaziken.png",
+   "displayName": "Blaziken",
+   "formId": "blaziken",
+   "packSpeciesId": "blaziken",
+   "inDataPack": true,
+   "width": 87,
+   "height": 98,
+   "types": [
+    "Fire",
+    "Fighting"
+   ]
+  },
+  {
+   "order": 64,
+   "file": "Swampert.png",
+   "displayName": "Swampert",
+   "formId": "swampert",
+   "packSpeciesId": "swampert",
+   "inDataPack": true,
+   "width": 87,
+   "height": 86,
+   "types": [
+    "Water",
+    "Ground"
+   ]
+  },
+  {
+   "order": 65,
+   "file": "Pelipper.png",
+   "displayName": "Pelipper",
+   "formId": "pelipper",
+   "packSpeciesId": "pelipper",
+   "inDataPack": true,
+   "width": 98,
+   "height": 73,
+   "types": [
+    "Water",
+    "Flying"
+   ]
+  },
+  {
+   "order": 66,
+   "file": "Gardevoir.png",
+   "displayName": "Gardevoir",
+   "formId": "gardevoir",
+   "packSpeciesId": "gardevoir",
+   "inDataPack": true,
+   "width": 54,
+   "height": 89,
+   "types": [
+    "Psychic",
+    "Fairy"
+   ]
+  },
+  {
+   "order": 67,
+   "file": "Sableye.png",
+   "displayName": "Sableye",
+   "formId": "sableye",
+   "packSpeciesId": "sableye",
+   "inDataPack": true,
+   "width": 58,
+   "height": 77,
+   "types": [
+    "Dark",
+    "Ghost"
+   ]
+  },
+  {
+   "order": 68,
+   "file": "Mawile.png",
+   "displayName": "Mawile",
+   "formId": "mawile",
+   "packSpeciesId": "mawile",
+   "inDataPack": true,
+   "width": 78,
+   "height": 64,
+   "types": [
+    "Steel",
+    "Fairy"
+   ]
+  },
+  {
+   "order": 69,
+   "file": "Aggron.png",
+   "displayName": "Aggron",
+   "formId": "aggron",
+   "packSpeciesId": "aggron",
+   "inDataPack": true,
+   "width": 98,
+   "height": 90,
+   "types": [
+    "Steel",
+    "Rock"
+   ]
+  },
+  {
+   "order": 70,
+   "file": "Medicham.png",
+   "displayName": "Medicham",
+   "formId": "medicham",
+   "packSpeciesId": "medicham",
+   "inDataPack": true,
+   "width": 64,
+   "height": 90,
+   "types": [
+    "Fighting",
+    "Psychic"
+   ]
+  },
+  {
+   "order": 71,
+   "file": "Manectric.png",
+   "displayName": "Manectric",
+   "formId": "manectric",
+   "packSpeciesId": "manectric",
+   "inDataPack": true,
+   "width": 56,
+   "height": 91,
+   "types": [
+    "Electric"
+   ]
+  },
+  {
+   "order": 72,
+   "file": "Swalot.png",
+   "displayName": "Swalot",
+   "formId": "swalot",
+   "packSpeciesId": "swalot",
+   "inDataPack": true,
+   "width": 90,
+   "height": 90,
+   "types": [
+    "Poison"
+   ]
+  },
+  {
+   "order": 73,
+   "file": "Sharpedo.png",
+   "displayName": "Sharpedo",
+   "formId": "sharpedo",
+   "packSpeciesId": "sharpedo",
+   "inDataPack": true,
+   "width": 87,
+   "height": 99,
+   "types": [
+    "Water",
+    "Dark"
+   ]
+  },
+  {
+   "order": 74,
+   "file": "Camerupt.png",
+   "displayName": "Camerupt",
+   "formId": "camerupt",
+   "packSpeciesId": "camerupt",
+   "inDataPack": true,
+   "width": 100,
+   "height": 94,
+   "types": [
+    "Fire",
+    "Ground"
+   ]
+  },
+  {
+   "order": 75,
+   "file": "Torkoal.png",
+   "displayName": "Torkoal",
+   "formId": "torkoal",
+   "packSpeciesId": "torkoal",
+   "inDataPack": true,
+   "width": 66,
+   "height": 82,
+   "types": [
+    "Fire"
+   ]
+  },
+  {
+   "order": 76,
+   "file": "Altaria.png",
+   "displayName": "Altaria",
+   "formId": "altaria",
+   "packSpeciesId": "altaria",
+   "inDataPack": true,
+   "width": 101,
+   "height": 65,
+   "types": [
+    "Dragon",
+    "Flying"
+   ]
+  },
+  {
+   "order": 77,
+   "file": "Milotic.png",
+   "displayName": "Milotic",
+   "formId": "milotic",
+   "packSpeciesId": "milotic",
+   "inDataPack": true,
+   "width": 88,
+   "height": 95,
+   "types": [
+    "Water"
+   ]
+  },
+  {
+   "order": 78,
+   "file": "Castform.png",
+   "displayName": "Castform",
+   "formId": "castform",
+   "packSpeciesId": "castform",
+   "inDataPack": true,
+   "width": 42,
+   "height": 68,
+   "types": [
+    "Normal"
+   ]
+  },
+  {
+   "order": 79,
+   "file": "Banette.png",
+   "displayName": "Banette",
+   "formId": "banette",
+   "packSpeciesId": "banette",
+   "inDataPack": true,
+   "width": 76,
+   "height": 78,
+   "types": [
+    "Ghost"
+   ]
+  },
+  {
+   "order": 80,
+   "file": "Chimecho.png",
+   "displayName": "Chimecho",
+   "formId": "chimecho",
+   "packSpeciesId": "chimecho",
+   "inDataPack": true,
+   "width": 36,
+   "height": 79,
+   "types": [
+    "Psychic"
+   ]
+  },
+  {
+   "order": 81,
+   "file": "Absol.png",
+   "displayName": "Absol",
+   "formId": "absol",
+   "packSpeciesId": "absol",
+   "inDataPack": true,
+   "width": 65,
+   "height": 87,
+   "types": [
+    "Dark"
+   ]
+  },
+  {
+   "order": 82,
+   "file": "Glalie.png",
+   "displayName": "Glalie",
+   "formId": "glalie",
+   "packSpeciesId": "glalie",
+   "inDataPack": true,
+   "width": 87,
+   "height": 83,
+   "types": [
+    "Ice"
+   ]
+  },
+  {
+   "order": 83,
+   "file": "Salamence.png",
+   "displayName": "Salamence",
+   "formId": "salamence",
+   "packSpeciesId": "salamence",
+   "inDataPack": true,
+   "width": 99,
+   "height": 58,
+   "types": [
+    "Dragon",
+    "Flying"
+   ]
+  },
+  {
+   "order": 84,
+   "file": "Metagross.png",
+   "displayName": "Metagross",
+   "formId": "metagross",
+   "packSpeciesId": "metagross",
+   "inDataPack": true,
+   "width": 99,
+   "height": 58,
+   "types": [
+    "Steel",
+    "Psychic"
+   ]
+  },
+  {
+   "order": 85,
+   "file": "Torterra.png",
+   "displayName": "Torterra",
+   "formId": "torterra",
+   "packSpeciesId": "torterra",
+   "inDataPack": true,
+   "width": 88,
+   "height": 99,
+   "types": [
+    "Grass",
+    "Ground"
+   ]
+  },
+  {
+   "order": 86,
+   "file": "Infernape.png",
+   "displayName": "Infernape",
+   "formId": "infernape",
+   "packSpeciesId": "infernape",
+   "inDataPack": true,
+   "width": 90,
+   "height": 99,
+   "types": [
+    "Fire",
+    "Fighting"
+   ]
+  },
+  {
+   "order": 87,
+   "file": "Empoleon.png",
+   "displayName": "Empoleon",
+   "formId": "empoleon",
+   "packSpeciesId": "empoleon",
+   "inDataPack": true,
+   "width": 69,
+   "height": 97,
+   "types": [
+    "Water",
+    "Steel"
+   ]
+  },
+  {
+   "order": 88,
+   "file": "Staraptor.png",
+   "displayName": "Staraptor",
+   "formId": "staraptor",
+   "packSpeciesId": "staraptor",
+   "inDataPack": true,
+   "width": 71,
+   "height": 93,
+   "types": [
+    "Normal",
+    "Flying"
+   ]
+  },
+  {
+   "order": 89,
+   "file": "Luxray.png",
+   "displayName": "Luxray",
+   "formId": "luxray",
+   "packSpeciesId": "luxray",
+   "inDataPack": true,
+   "width": 80,
+   "height": 85,
+   "types": [
+    "Electric"
+   ]
+  },
+  {
+   "order": 90,
+   "file": "Roserade.png",
+   "displayName": "Roserade",
+   "formId": "roserade",
+   "packSpeciesId": "roserade",
+   "inDataPack": true,
+   "width": 73,
+   "height": 85,
+   "types": [
+    "Grass",
+    "Poison"
+   ]
+  },
+  {
+   "order": 91,
+   "file": "Rampardos.png",
+   "displayName": "Rampardos",
+   "formId": "rampardos",
+   "packSpeciesId": "rampardos",
+   "inDataPack": true,
+   "width": 75,
+   "height": 86,
+   "types": [
+    "Rock"
+   ]
+  },
+  {
+   "order": 92,
+   "file": "Bastiodon.png",
+   "displayName": "Bastiodon",
+   "formId": "bastiodon",
+   "packSpeciesId": "bastiodon",
+   "inDataPack": true,
+   "width": 97,
+   "height": 80,
+   "types": [
+    "Rock",
+    "Steel"
+   ]
+  },
+  {
+   "order": 93,
+   "file": "Lopunny.png",
+   "displayName": "Lopunny",
+   "formId": "lopunny",
+   "packSpeciesId": "lopunny",
+   "inDataPack": true,
+   "width": 75,
+   "height": 85,
+   "types": [
+    "Normal"
+   ]
+  },
+  {
+   "order": 94,
+   "file": "Spiritomb.png",
+   "displayName": "Spiritomb",
+   "formId": "spiritomb",
+   "packSpeciesId": "spiritomb",
+   "inDataPack": true,
+   "width": 71,
+   "height": 88,
+   "types": [
+    "Ghost",
+    "Dark"
+   ]
+  },
+  {
+   "order": 95,
+   "file": "Garchomp.png",
+   "displayName": "Garchomp",
+   "formId": "garchomp",
+   "packSpeciesId": "garchomp",
+   "inDataPack": true,
+   "width": 97,
+   "height": 95,
+   "types": [
+    "Dragon",
+    "Ground"
+   ]
+  },
+  {
+   "order": 96,
+   "file": "Lucario.png",
+   "displayName": "Lucario",
+   "formId": "lucario",
+   "packSpeciesId": "lucario",
+   "inDataPack": true,
+   "width": 42,
+   "height": 86,
+   "types": [
+    "Fighting",
+    "Steel"
+   ]
+  },
+  {
+   "order": 97,
+   "file": "Hippowdon.png",
+   "displayName": "Hippowdon",
+   "formId": "hippowdon",
+   "packSpeciesId": "hippowdon",
+   "inDataPack": true,
+   "width": 99,
+   "height": 69,
+   "types": [
+    "Ground"
+   ]
+  },
+  {
+   "order": 98,
+   "file": "Toxicroak.png",
+   "displayName": "Toxicroak",
+   "formId": "toxicroak",
+   "packSpeciesId": "toxicroak",
+   "inDataPack": true,
+   "width": 95,
+   "height": 78,
+   "types": [
+    "Poison",
+    "Fighting"
+   ]
+  },
+  {
+   "order": 99,
+   "file": "Abomasnow.png",
+   "displayName": "Abomasnow",
+   "formId": "abomasnow",
+   "packSpeciesId": "abomasnow",
+   "inDataPack": true,
+   "width": 96,
+   "height": 83,
+   "types": [
+    "Grass",
+    "Ice"
+   ]
+  },
+  {
+   "order": 100,
+   "file": "Weavile.png",
+   "displayName": "Weavile",
+   "formId": "weavile",
+   "packSpeciesId": "weavile",
+   "inDataPack": true,
+   "width": 76,
+   "height": 89,
+   "types": [
+    "Dark",
+    "Ice"
+   ]
+  },
+  {
+   "order": 101,
+   "file": "Rhyperior.png",
+   "displayName": "Rhyperior",
+   "formId": "rhyperior",
+   "packSpeciesId": "rhyperior",
+   "inDataPack": true,
+   "width": 98,
+   "height": 84,
+   "types": [
+    "Ground",
+    "Rock"
+   ]
+  },
+  {
+   "order": 102,
+   "file": "Leafeon.png",
+   "displayName": "Leafeon",
+   "formId": "leafeon",
+   "packSpeciesId": "leafeon",
+   "inDataPack": true,
+   "width": 74,
+   "height": 78,
+   "types": [
+    "Grass"
+   ]
+  },
+  {
+   "order": 103,
+   "file": "Glaceon.png",
+   "displayName": "Glaceon",
+   "formId": "glaceon",
+   "packSpeciesId": "glaceon",
+   "inDataPack": true,
+   "width": 69,
+   "height": 78,
+   "types": [
+    "Ice"
+   ]
+  },
+  {
+   "order": 104,
+   "file": "Gliscor.png",
+   "displayName": "Gliscor",
+   "formId": "gliscor",
+   "packSpeciesId": "gliscor",
+   "inDataPack": true,
+   "width": 89,
+   "height": 86,
+   "types": [
+    "Ground",
+    "Flying"
+   ]
+  },
+  {
+   "order": 105,
+   "file": "Mamoswine.png",
+   "displayName": "Mamoswine",
+   "formId": "mamoswine",
+   "packSpeciesId": "mamoswine",
+   "inDataPack": true,
+   "width": 99,
+   "height": 78,
+   "types": [
+    "Ice",
+    "Ground"
+   ]
+  },
+  {
+   "order": 106,
+   "file": "Gallade.png",
+   "displayName": "Gallade",
+   "formId": "gallade",
+   "packSpeciesId": "gallade",
+   "inDataPack": true,
+   "width": 49,
+   "height": 89,
+   "types": [
+    "Psychic",
+    "Fighting"
+   ]
+  },
+  {
+   "order": 107,
+   "file": "Froslass.png",
+   "displayName": "Froslass",
+   "formId": "froslass",
+   "packSpeciesId": "froslass",
+   "inDataPack": true,
+   "width": 77,
+   "height": 90,
+   "types": [
+    "Ice",
+    "Ghost"
+   ]
+  },
+  {
+   "order": 108,
+   "file": "Rotom.png",
+   "displayName": "Rotom",
+   "formId": "rotom",
+   "packSpeciesId": "rotom",
+   "inDataPack": true,
+   "width": 63,
+   "height": 44,
+   "types": [
+    "Electric",
+    "Ghost"
+   ]
+  },
+  {
+   "order": 109,
+   "file": "Heat Rotom.png",
+   "displayName": "Heat Rotom",
+   "formId": "rotom-heat",
+   "packSpeciesId": "rotom-heat",
+   "inDataPack": true,
+   "width": 70,
+   "height": 48,
+   "types": [
+    "Electric",
+    "Fire"
+   ]
+  },
+  {
+   "order": 110,
+   "file": "Wash Rotom.png",
+   "displayName": "Wash Rotom",
+   "formId": "rotom-wash",
+   "packSpeciesId": "rotom-wash",
+   "inDataPack": true,
+   "width": 64,
+   "height": 42,
+   "types": [
+    "Electric",
+    "Water"
+   ]
+  },
+  {
+   "order": 111,
+   "file": "Frost Rotom.png",
+   "displayName": "Frost Rotom",
+   "formId": "rotom-frost",
+   "packSpeciesId": "rotom-frost",
+   "inDataPack": true,
+   "width": 69,
+   "height": 50,
+   "types": [
+    "Electric",
+    "Ice"
+   ]
+  },
+  {
+   "order": 112,
+   "file": "Fan Rotom.png",
+   "displayName": "Fan Rotom",
+   "formId": "rotom-fan",
+   "packSpeciesId": "rotom-fan",
+   "inDataPack": true,
+   "width": 71,
+   "height": 55,
+   "types": [
+    "Electric",
+    "Flying"
+   ]
+  },
+  {
+   "order": 113,
+   "file": "Mow Rotom.png",
+   "displayName": "Mow Rotom",
+   "formId": "rotom-mow",
+   "packSpeciesId": "rotom-mow",
+   "inDataPack": true,
+   "width": 68,
+   "height": 53,
+   "types": [
+    "Electric",
+    "Grass"
+   ]
+  },
+  {
+   "order": 114,
+   "file": "Serperior.png",
+   "displayName": "Serperior",
+   "formId": "serperior",
+   "packSpeciesId": "serperior",
+   "inDataPack": true,
+   "width": 85,
+   "height": 98,
+   "types": [
+    "Grass"
+   ]
+  },
+  {
+   "order": 115,
+   "file": "Emboar.png",
+   "displayName": "Emboar",
+   "formId": "emboar",
+   "packSpeciesId": "emboar",
+   "inDataPack": true,
+   "width": 100,
+   "height": 92,
+   "types": [
+    "Fire",
+    "Fighting"
+   ]
+  },
+  {
+   "order": 116,
+   "file": "Samurott.png",
+   "displayName": "Samurott",
+   "formId": "samurott",
+   "packSpeciesId": "samurott",
+   "inDataPack": true,
+   "width": 89,
+   "height": 99,
+   "types": [
+    "Water"
+   ]
+  },
+  {
+   "order": 117,
+   "file": "Hisuian Samurott.png",
+   "displayName": "Hisuian Samurott",
+   "formId": "samurott-hisui",
+   "packSpeciesId": "samurott-hisui",
+   "inDataPack": true,
+   "width": 86,
+   "height": 98,
+   "types": [
+    "Water",
+    "Dark"
+   ]
+  },
+  {
+   "order": 118,
+   "file": "Watchog.png",
+   "displayName": "Watchog",
+   "formId": "watchog",
+   "packSpeciesId": "watchog",
+   "inDataPack": true,
+   "width": 42,
+   "height": 77,
+   "types": [
+    "Normal"
+   ]
+  },
+  {
+   "order": 119,
+   "file": "Liepard.png",
+   "displayName": "Liepard",
+   "formId": "liepard",
+   "packSpeciesId": "liepard",
+   "inDataPack": true,
+   "width": 48,
+   "height": 87,
+   "types": [
+    "Dark"
+   ]
+  },
+  {
+   "order": 120,
+   "file": "Simisage.png",
+   "displayName": "Simisage",
+   "formId": "simisage",
+   "packSpeciesId": "simisage",
+   "inDataPack": true,
+   "width": 61,
+   "height": 87,
+   "types": [
+    "Grass"
+   ]
+  },
+  {
+   "order": 121,
+   "file": "Simisear.png",
+   "displayName": "Simisear",
+   "formId": "simisear",
+   "packSpeciesId": "simisear",
+   "inDataPack": true,
+   "width": 73,
+   "height": 88,
+   "types": [
+    "Fire"
+   ]
+  },
+  {
+   "order": 122,
+   "file": "Simipour.png",
+   "displayName": "Simipour",
+   "formId": "simipour",
+   "packSpeciesId": "simipour",
+   "inDataPack": true,
+   "width": 63,
+   "height": 90,
+   "types": [
+    "Water"
+   ]
+  },
+  {
+   "order": 123,
+   "file": "Musharna.png",
+   "displayName": "Musharna",
+   "formId": "musharna",
+   "packSpeciesId": "musharna",
+   "inDataPack": true,
+   "width": 85,
+   "height": 88,
+   "types": [
+    "Psychic"
+   ]
+  },
+  {
+   "order": 124,
+   "file": "Excadrill.png",
+   "displayName": "Excadrill",
+   "formId": "excadrill",
+   "packSpeciesId": "excadrill",
+   "inDataPack": true,
+   "width": 81,
+   "height": 71,
+   "types": [
+    "Ground",
+    "Steel"
+   ]
+  },
+  {
+   "order": 125,
+   "file": "Audino.png",
+   "displayName": "Audino",
+   "formId": "audino",
+   "packSpeciesId": "audino",
+   "inDataPack": true,
+   "width": 63,
+   "height": 81,
+   "types": [
+    "Normal"
+   ]
+  },
+  {
+   "order": 126,
+   "file": "Conkeldurr.png",
+   "displayName": "Conkeldurr",
+   "formId": "conkeldurr",
+   "packSpeciesId": "conkeldurr",
+   "inDataPack": true,
+   "width": 100,
+   "height": 71,
+   "types": [
+    "Fighting"
+   ]
+  },
+  {
+   "order": 127,
+   "file": "Scolipede.png",
+   "displayName": "Scolipede",
+   "formId": "scolipede",
+   "packSpeciesId": "scolipede",
+   "inDataPack": true,
+   "width": 67,
+   "height": 96,
+   "types": [
+    "Bug",
+    "Poison"
+   ]
+  },
+  {
+   "order": 128,
+   "file": "Whimsicott.png",
+   "displayName": "Whimsicott",
+   "formId": "whimsicott",
+   "packSpeciesId": "whimsicott",
+   "inDataPack": true,
+   "width": 78,
+   "height": 74,
+   "types": [
+    "Grass",
+    "Fairy"
+   ]
+  },
+  {
+   "order": 129,
+   "file": "Krookodile.png",
+   "displayName": "Krookodile",
+   "formId": "krookodile",
+   "packSpeciesId": "krookodile",
+   "inDataPack": true,
+   "width": 81,
+   "height": 98,
+   "types": [
+    "Ground",
+    "Dark"
+   ]
+  },
+  {
+   "order": 130,
+   "file": "Scrafty.png",
+   "displayName": "Scrafty",
+   "formId": "scrafty",
+   "packSpeciesId": "scrafty",
+   "inDataPack": true,
+   "width": 48,
+   "height": 90,
+   "types": [
+    "Dark",
+    "Fighting"
+   ]
+  },
+  {
+   "order": 131,
+   "file": "Cofagrigus.png",
+   "displayName": "Cofagrigus",
+   "formId": "cofagrigus",
+   "packSpeciesId": "cofagrigus",
+   "inDataPack": true,
+   "width": 97,
+   "height": 72,
+   "types": [
+    "Ghost"
+   ]
+  },
+  {
+   "order": 132,
+   "file": "Garbodor.png",
+   "displayName": "Garbodor",
+   "formId": "garbodor",
+   "packSpeciesId": "garbodor",
+   "inDataPack": true,
+   "width": 99,
+   "height": 82,
+   "types": [
+    "Poison"
+   ]
+  },
+  {
+   "order": 133,
+   "file": "Zoroark.png",
+   "displayName": "Zoroark",
+   "formId": "zoroark",
+   "packSpeciesId": "zoroark",
+   "inDataPack": true,
+   "width": 86,
+   "height": 88,
+   "types": [
+    "Dark"
+   ]
+  },
+  {
+   "order": 134,
+   "file": "Hisuian Zoroark.png",
+   "displayName": "Hisuian Zoroark",
+   "formId": "zoroark-hisui",
+   "packSpeciesId": "zoroark-hisui",
+   "inDataPack": true,
+   "width": 66,
+   "height": 89,
+   "types": [
+    "Normal",
+    "Ghost"
+   ]
+  },
+  {
+   "order": 135,
+   "file": "Reuniclus.png",
+   "displayName": "Reuniclus",
+   "formId": "reuniclus",
+   "packSpeciesId": "reuniclus",
+   "inDataPack": true,
+   "width": 100,
+   "height": 54,
+   "types": [
+    "Psychic"
+   ]
+  },
+  {
+   "order": 136,
+   "file": "Vanilluxe.png",
+   "displayName": "Vanilluxe",
+   "formId": "vanilluxe",
+   "packSpeciesId": "vanilluxe",
+   "inDataPack": true,
+   "width": 84,
+   "height": 88,
+   "types": [
+    "Ice"
+   ]
+  },
+  {
+   "order": 137,
+   "file": "Emolga.png",
+   "displayName": "Emolga",
+   "formId": "emolga",
+   "packSpeciesId": "emolga",
+   "inDataPack": true,
+   "width": 58,
+   "height": 69,
+   "types": [
+    "Electric",
+    "Flying"
+   ]
+  },
+  {
+   "order": 138,
+   "file": "Eelektross.png",
+   "displayName": "Eelektross",
+   "formId": "eelektross",
+   "packSpeciesId": "eelektross",
+   "inDataPack": true,
+   "width": 94,
+   "height": 94,
+   "types": [
+    "Electric"
+   ]
+  },
+  {
+   "order": 139,
+   "file": "Chandelure.png",
+   "displayName": "Chandelure",
+   "formId": "chandelure",
+   "packSpeciesId": "chandelure",
+   "inDataPack": true,
+   "width": 96,
+   "height": 95,
+   "types": [
+    "Ghost",
+    "Fire"
+   ]
+  },
+  {
+   "order": 140,
+   "file": "Beartic.png",
+   "displayName": "Beartic",
+   "formId": "beartic",
+   "packSpeciesId": "beartic",
+   "inDataPack": true,
+   "width": 95,
+   "height": 97,
+   "types": [
+    "Ice"
+   ]
+  },
+  {
+   "order": 141,
+   "file": "Stunfisk.png",
+   "displayName": "Stunfisk",
+   "formId": "stunfisk",
+   "packSpeciesId": "stunfisk",
+   "inDataPack": true,
+   "width": 78,
+   "height": 63,
+   "types": [
+    "Ground",
+    "Electric"
+   ]
+  },
+  {
+   "order": 142,
+   "file": "Galarian Stunfisk.png",
+   "displayName": "Galarian Stunfisk",
+   "formId": "stunfisk-galar",
+   "packSpeciesId": "stunfisk-galar",
+   "inDataPack": true,
+   "width": 77,
+   "height": 51,
+   "types": [
+    "Ground",
+    "Steel"
+   ]
+  },
+  {
+   "order": 143,
+   "file": "Golurk.png",
+   "displayName": "Golurk",
+   "formId": "golurk",
+   "packSpeciesId": "golurk",
+   "inDataPack": true,
+   "width": 79,
+   "height": 100,
+   "types": [
+    "Ground",
+    "Ghost"
+   ]
+  },
+  {
+   "order": 144,
+   "file": "Hydreigon.png",
+   "displayName": "Hydreigon",
+   "formId": "hydreigon",
+   "packSpeciesId": "hydreigon",
+   "inDataPack": true,
+   "width": 98,
+   "height": 99,
+   "types": [
+    "Dark",
+    "Dragon"
+   ]
+  },
+  {
+   "order": 145,
+   "file": "Volcarona.png",
+   "displayName": "Volcarona",
+   "formId": "volcarona",
+   "packSpeciesId": "volcarona",
+   "inDataPack": true,
+   "width": 84,
+   "height": 88,
+   "types": [
+    "Bug",
+    "Fire"
+   ]
+  },
+  {
+   "order": 146,
+   "file": "Chesnaught.png",
+   "displayName": "Chesnaught",
+   "formId": "chesnaught",
+   "packSpeciesId": "chesnaught",
+   "inDataPack": true,
+   "width": 100,
+   "height": 81,
+   "types": [
+    "Grass",
+    "Fighting"
+   ]
+  },
+  {
+   "order": 147,
+   "file": "Delphox.png",
+   "displayName": "Delphox",
+   "formId": "delphox",
+   "packSpeciesId": "delphox",
+   "inDataPack": true,
+   "width": 66,
+   "height": 90,
+   "types": [
+    "Fire",
+    "Psychic"
+   ]
+  },
+  {
+   "order": 148,
+   "file": "Greninja.png",
+   "displayName": "Greninja",
+   "formId": "greninja",
+   "packSpeciesId": "greninja",
+   "inDataPack": true,
+   "width": 101,
+   "height": 66,
+   "types": [
+    "Water",
+    "Dark"
+   ]
+  },
+  {
+   "order": 149,
+   "file": "Diggersby.png",
+   "displayName": "Diggersby",
+   "formId": "diggersby",
+   "packSpeciesId": "diggersby",
+   "inDataPack": true,
+   "width": 95,
+   "height": 78,
+   "types": [
+    "Normal",
+    "Ground"
+   ]
+  },
+  {
+   "order": 150,
+   "file": "Talonflame.png",
+   "displayName": "Talonflame",
+   "formId": "talonflame",
+   "packSpeciesId": "talonflame",
+   "inDataPack": true,
+   "width": 73,
+   "height": 93,
+   "types": [
+    "Fire",
+    "Flying"
+   ]
+  },
+  {
+   "order": 151,
+   "file": "Vivillon.png",
+   "displayName": "Vivillon",
+   "formId": "vivillon",
+   "packSpeciesId": "vivillon",
+   "inDataPack": true,
+   "width": 95,
+   "height": 95,
+   "types": [
+    "Bug",
+    "Flying"
+   ]
+  },
+  {
+   "order": 152,
+   "file": "Pyroar.png",
+   "displayName": "Pyroar",
+   "formId": "pyroar-male",
+   "packSpeciesId": "pyroar-male",
+   "inDataPack": true,
+   "width": 75,
+   "height": 95,
+   "types": [
+    "Fire",
+    "Normal"
+   ]
+  },
+  {
+   "order": 153,
+   "file": "Eternal Flower Floette.png",
+   "displayName": "Eternal Flower Floette",
+   "formId": "floette-eternal",
+   "packSpeciesId": "floette-eternal",
+   "inDataPack": true,
+   "width": 59,
+   "height": 72,
+   "types": [
+    "Fairy"
+   ]
+  },
+  {
+   "order": 154,
+   "file": "Florges.png",
+   "displayName": "Florges",
+   "formId": "florges",
+   "packSpeciesId": "florges",
+   "inDataPack": true,
+   "width": 75,
+   "height": 94,
+   "types": [
+    "Fairy"
+   ]
+  },
+  {
+   "order": 155,
+   "file": "Gogoat.png",
+   "displayName": "Gogoat",
+   "formId": "gogoat",
+   "packSpeciesId": "gogoat",
+   "inDataPack": true,
+   "width": 51,
+   "height": 89,
+   "types": [
+    "Grass"
+   ]
+  },
+  {
+   "order": 156,
+   "file": "Pangoro.png",
+   "displayName": "Pangoro",
+   "formId": "pangoro",
+   "packSpeciesId": "pangoro",
+   "inDataPack": true,
+   "width": 96,
+   "height": 104,
+   "types": [
+    "Fighting",
+    "Dark"
+   ]
+  },
+  {
+   "order": 157,
+   "file": "Furfrou.png",
+   "displayName": "Furfrou",
+   "formId": "furfrou",
+   "packSpeciesId": "furfrou",
+   "inDataPack": true,
+   "width": 49,
+   "height": 93,
+   "types": [
+    "Normal"
+   ]
+  },
+  {
+   "order": 158,
+   "file": "Meowstic (Male).png",
+   "displayName": "Meowstic (Male)",
+   "formId": "meowstic-male",
+   "packSpeciesId": "meowstic-male",
+   "inDataPack": true,
+   "width": 64,
+   "height": 82,
+   "types": [
+    "Psychic"
+   ]
+  },
+  {
+   "order": 159,
+   "file": "Meowstic (Female).png",
+   "displayName": "Meowstic (Female)",
+   "formId": "meowstic-female",
+   "packSpeciesId": "meowstic-female",
+   "inDataPack": true,
+   "width": 71,
+   "height": 82,
+   "types": [
+    "Psychic"
+   ]
+  },
+  {
+   "order": 160,
+   "file": "Aegislash.png",
+   "displayName": "Aegislash",
+   "formId": "aegislash-shield",
+   "packSpeciesId": "aegislash-shield",
+   "inDataPack": true,
+   "width": 75,
+   "height": 94,
+   "types": [
+    "Steel",
+    "Ghost"
+   ]
+  },
+  {
+   "order": 161,
+   "file": "Aromatisse.png",
+   "displayName": "Aromatisse",
+   "formId": "aromatisse",
+   "packSpeciesId": "aromatisse",
+   "inDataPack": true,
+   "width": 62,
+   "height": 83,
+   "types": [
+    "Fairy"
+   ]
+  },
+  {
+   "order": 162,
+   "file": "Slurpuff.png",
+   "displayName": "Slurpuff",
+   "formId": "slurpuff",
+   "packSpeciesId": "slurpuff",
+   "inDataPack": true,
+   "width": 78,
+   "height": 84,
+   "types": [
+    "Fairy"
+   ]
+  },
+  {
+   "order": 163,
+   "file": "Malamar.png",
+   "displayName": "Malamar",
+   "formId": "malamar",
+   "packSpeciesId": "malamar",
+   "inDataPack": true,
+   "width": 69,
+   "height": 93,
+   "types": [
+    "Dark",
+    "Psychic"
+   ]
+  },
+  {
+   "order": 164,
+   "file": "Barbaracle.png",
+   "displayName": "Barbaracle",
+   "formId": "barbaracle",
+   "packSpeciesId": "barbaracle",
+   "inDataPack": true,
+   "width": 104,
+   "height": 98,
+   "types": [
+    "Rock",
+    "Water"
+   ]
+  },
+  {
+   "order": 165,
+   "file": "Dragalge.png",
+   "displayName": "Dragalge",
+   "formId": "dragalge",
+   "packSpeciesId": "dragalge",
+   "inDataPack": true,
+   "width": 103,
+   "height": 97,
+   "types": [
+    "Poison",
+    "Dragon"
+   ]
+  },
+  {
+   "order": 166,
+   "file": "Clawitzer.png",
+   "displayName": "Clawitzer",
+   "formId": "clawitzer",
+   "packSpeciesId": "clawitzer",
+   "inDataPack": true,
+   "width": 97,
+   "height": 79,
+   "types": [
+    "Water"
+   ]
+  },
+  {
+   "order": 167,
+   "file": "Heliolisk.png",
+   "displayName": "Heliolisk",
+   "formId": "heliolisk",
+   "packSpeciesId": "heliolisk",
+   "inDataPack": true,
+   "width": 55,
+   "height": 94,
+   "types": [
+    "Electric",
+    "Normal"
+   ]
+  },
+  {
+   "order": 168,
+   "file": "Tyrantrum.png",
+   "displayName": "Tyrantrum",
+   "formId": "tyrantrum",
+   "packSpeciesId": "tyrantrum",
+   "inDataPack": true,
+   "width": 100,
+   "height": 105,
+   "types": [
+    "Rock",
+    "Dragon"
+   ]
+  },
+  {
+   "order": 169,
+   "file": "Aurorus.png",
+   "displayName": "Aurorus",
+   "formId": "aurorus",
+   "packSpeciesId": "aurorus",
+   "inDataPack": true,
+   "width": 53,
+   "height": 103,
+   "types": [
+    "Rock",
+    "Ice"
+   ]
+  },
+  {
+   "order": 170,
+   "file": "Sylveon.png",
+   "displayName": "Sylveon",
+   "formId": "sylveon",
+   "packSpeciesId": "sylveon",
+   "inDataPack": true,
+   "width": 50,
+   "height": 85,
+   "types": [
+    "Fairy"
+   ]
+  },
+  {
+   "order": 171,
+   "file": "Hawlucha.png",
+   "displayName": "Hawlucha",
+   "formId": "hawlucha",
+   "packSpeciesId": "hawlucha",
+   "inDataPack": true,
+   "width": 84,
+   "height": 66,
+   "types": [
+    "Fighting",
+    "Flying"
+   ]
+  },
+  {
+   "order": 172,
+   "file": "Dedenne.png",
+   "displayName": "Dedenne",
+   "formId": "dedenne",
+   "packSpeciesId": "dedenne",
+   "inDataPack": true,
+   "width": 73,
+   "height": 58,
+   "types": [
+    "Electric",
+    "Fairy"
+   ]
+  },
+  {
+   "order": 173,
+   "file": "Goodra.png",
+   "displayName": "Goodra",
+   "formId": "goodra",
+   "packSpeciesId": "goodra",
+   "inDataPack": true,
+   "width": 51,
+   "height": 104,
+   "types": [
+    "Dragon"
+   ]
+  },
+  {
+   "order": 174,
+   "file": "Hisuian Goodra.png",
+   "displayName": "Hisuian Goodra",
+   "formId": "goodra-hisui",
+   "packSpeciesId": "goodra-hisui",
+   "inDataPack": true,
+   "width": 59,
+   "height": 94,
+   "types": [
+    "Steel",
+    "Dragon"
+   ]
+  },
+  {
+   "order": 175,
+   "file": "Klefki.png",
+   "displayName": "Klefki",
+   "formId": "klefki",
+   "packSpeciesId": "klefki",
+   "inDataPack": true,
+   "width": 44,
+   "height": 73,
+   "types": [
+    "Steel",
+    "Fairy"
+   ]
+  },
+  {
+   "order": 176,
+   "file": "Trevenant.png",
+   "displayName": "Trevenant",
+   "formId": "trevenant",
+   "packSpeciesId": "trevenant",
+   "inDataPack": true,
+   "width": 106,
+   "height": 88,
+   "types": [
+    "Ghost",
+    "Grass"
+   ]
+  },
+  {
+   "order": 177,
+   "file": "Gourgeist (Average).png",
+   "displayName": "Gourgeist (Average)",
+   "formId": "gourgeist-average",
+   "packSpeciesId": "gourgeist-average",
+   "inDataPack": true,
+   "width": 60,
+   "height": 94,
+   "types": [
+    "Ghost",
+    "Grass"
+   ]
+  },
+  {
+   "order": 178,
+   "file": "Gourgeist (Small).png",
+   "displayName": "Gourgeist (Small)",
+   "formId": "gourgeist-small",
+   "packSpeciesId": "gourgeist-small",
+   "inDataPack": true,
+   "width": 55,
+   "height": 85,
+   "types": [
+    "Ghost",
+    "Grass"
+   ]
+  },
+  {
+   "order": 179,
+   "file": "Gourgeist (Large).png",
+   "displayName": "Gourgeist (Large)",
+   "formId": "gourgeist-large",
+   "packSpeciesId": "gourgeist-large",
+   "inDataPack": true,
+   "width": 61,
+   "height": 98,
+   "types": [
+    "Ghost",
+    "Grass"
+   ]
+  },
+  {
+   "order": 180,
+   "file": "Gourgeist (Super).png",
+   "displayName": "Gourgeist (Super)",
+   "formId": "gourgeist-super",
+   "packSpeciesId": "gourgeist-super",
+   "inDataPack": true,
+   "width": 65,
+   "height": 103,
+   "types": [
+    "Ghost",
+    "Grass"
+   ]
+  },
+  {
+   "order": 181,
+   "file": "Avalugg.png",
+   "displayName": "Avalugg",
+   "formId": "avalugg",
+   "packSpeciesId": "avalugg",
+   "inDataPack": true,
+   "width": 103,
+   "height": 76,
+   "types": [
+    "Ice"
+   ]
+  },
+  {
+   "order": 182,
+   "file": "Hisuian Avalugg.png",
+   "displayName": "Hisuian Avalugg",
+   "formId": "avalugg-hisui",
+   "packSpeciesId": "avalugg-hisui",
+   "inDataPack": true,
+   "width": 104,
+   "height": 61,
+   "types": [
+    "Ice",
+    "Rock"
+   ]
+  },
+  {
+   "order": 183,
+   "file": "Noivern.png",
+   "displayName": "Noivern",
+   "formId": "noivern",
+   "packSpeciesId": "noivern",
+   "inDataPack": true,
+   "width": 93,
+   "height": 69,
+   "types": [
+    "Flying",
+    "Dragon"
+   ]
+  },
+  {
+   "order": 184,
+   "file": "Decidueye.png",
+   "displayName": "Decidueye",
+   "formId": "decidueye",
+   "packSpeciesId": "decidueye",
+   "inDataPack": true,
+   "width": 60,
+   "height": 103,
+   "types": [
+    "Grass",
+    "Ghost"
+   ]
+  },
+  {
+   "order": 185,
+   "file": "Decidueye-Hisui.png",
+   "displayName": "Decidueye-Hisui",
+   "formId": "decidueye-hisui",
+   "packSpeciesId": "decidueye-hisui",
+   "inDataPack": true,
+   "width": 59,
+   "height": 102,
+   "types": [
+    "Grass",
+    "Fighting"
+   ]
+  },
+  {
+   "order": 186,
+   "file": "Incineroar.png",
+   "displayName": "Incineroar",
+   "formId": "incineroar",
+   "packSpeciesId": "incineroar",
+   "inDataPack": true,
+   "width": 107,
+   "height": 78,
+   "types": [
+    "Fire",
+    "Dark"
+   ]
+  },
+  {
+   "order": 187,
+   "file": "Primarina.png",
+   "displayName": "Primarina",
+   "formId": "primarina",
+   "packSpeciesId": "primarina",
+   "inDataPack": true,
+   "width": 81,
+   "height": 104,
+   "types": [
+    "Water",
+    "Fairy"
+   ]
+  },
+  {
+   "order": 188,
+   "file": "Toucannon.png",
+   "displayName": "Toucannon",
+   "formId": "toucannon",
+   "packSpeciesId": "toucannon",
+   "inDataPack": true,
+   "width": 95,
+   "height": 90,
+   "types": [
+    "Normal",
+    "Flying"
+   ]
+  },
+  {
+   "order": 189,
+   "file": "Crabominable.png",
+   "displayName": "Crabominable",
+   "formId": "crabominable",
+   "packSpeciesId": "crabominable",
+   "inDataPack": true,
+   "width": 102,
+   "height": 61,
+   "types": [
+    "Fighting",
+    "Ice"
+   ]
+  },
+  {
+   "order": 190,
+   "file": "Lycanroc (Midday).png",
+   "displayName": "Lycanroc (Midday)",
+   "formId": "lycanroc-midday",
+   "packSpeciesId": "lycanroc-midday",
+   "inDataPack": true,
+   "width": 70,
+   "height": 82,
+   "types": [
+    "Rock"
+   ]
+  },
+  {
+   "order": 191,
+   "file": "Lycanroc (Midnight).png",
+   "displayName": "Lycanroc (Midnight)",
+   "formId": "lycanroc-midnight",
+   "packSpeciesId": "lycanroc-midnight",
+   "inDataPack": true,
+   "width": 62,
+   "height": 84,
+   "types": [
+    "Rock"
+   ]
+  },
+  {
+   "order": 192,
+   "file": "Lycanroc (Dusk).png",
+   "displayName": "Lycanroc (Dusk)",
+   "formId": "lycanroc-dusk",
+   "packSpeciesId": "lycanroc-dusk",
+   "inDataPack": true,
+   "width": 62,
+   "height": 85,
+   "types": [
+    "Rock"
+   ]
+  },
+  {
+   "order": 193,
+   "file": "Toxapex.png",
+   "displayName": "Toxapex",
+   "formId": "toxapex",
+   "packSpeciesId": "toxapex",
+   "inDataPack": true,
+   "width": 93,
+   "height": 74,
+   "types": [
+    "Poison",
+    "Water"
+   ]
+  },
+  {
+   "order": 194,
+   "file": "Mudsdale.png",
+   "displayName": "Mudsdale",
+   "formId": "mudsdale",
+   "packSpeciesId": "mudsdale",
+   "inDataPack": true,
+   "width": 81,
+   "height": 105,
+   "types": [
+    "Ground"
+   ]
+  },
+  {
+   "order": 195,
+   "file": "Araquanid.png",
+   "displayName": "Araquanid",
+   "formId": "araquanid",
+   "packSpeciesId": "araquanid",
+   "inDataPack": true,
+   "width": 95,
+   "height": 74,
+   "types": [
+    "Water",
+    "Bug"
+   ]
+  },
+  {
+   "order": 196,
+   "file": "Salazzle.png",
+   "displayName": "Salazzle",
+   "formId": "salazzle",
+   "packSpeciesId": "salazzle",
+   "inDataPack": true,
+   "width": 77,
+   "height": 94,
+   "types": [
+    "Poison",
+    "Fire"
+   ]
+  },
+  {
+   "order": 197,
+   "file": "Tsareena.png",
+   "displayName": "Tsareena",
+   "formId": "tsareena",
+   "packSpeciesId": "tsareena",
+   "inDataPack": true,
+   "width": 69,
+   "height": 95,
+   "types": [
+    "Grass"
+   ]
+  },
+  {
+   "order": 198,
+   "file": "Oranguru.png",
+   "displayName": "Oranguru",
+   "formId": "oranguru",
+   "packSpeciesId": "oranguru",
+   "inDataPack": true,
+   "width": 84,
+   "height": 81,
+   "types": [
+    "Normal",
+    "Psychic"
+   ]
+  },
+  {
+   "order": 199,
+   "file": "Passimian.png",
+   "displayName": "Passimian",
+   "formId": "passimian",
+   "packSpeciesId": "passimian",
+   "inDataPack": true,
+   "width": 73,
+   "height": 104,
+   "types": [
+    "Fighting"
+   ]
+  },
+  {
+   "order": 200,
+   "file": "Golisopod.png",
+   "displayName": "Golisopod",
+   "formId": "golisopod",
+   "packSpeciesId": "golisopod",
+   "inDataPack": true,
+   "width": 99,
+   "height": 98,
+   "types": [
+    "Bug",
+    "Water"
+   ]
+  },
+  {
+   "order": 201,
+   "file": "Mimikyu.png",
+   "displayName": "Mimikyu",
+   "formId": "mimikyu-disguised",
+   "packSpeciesId": "mimikyu-disguised",
+   "inDataPack": true,
+   "width": 61,
+   "height": 73,
+   "types": [
+    "Ghost",
+    "Fairy"
+   ]
+  },
+  {
+   "order": 202,
+   "file": "Drampa.png",
+   "displayName": "Drampa",
+   "formId": "drampa",
+   "packSpeciesId": "drampa",
+   "inDataPack": true,
+   "width": 93,
+   "height": 69,
+   "types": [
+    "Normal",
+    "Dragon"
+   ]
+  },
+  {
+   "order": 203,
+   "file": "Kommo-o.png",
+   "displayName": "Kommo-o",
+   "formId": "kommo-o",
+   "packSpeciesId": "kommo-o",
+   "inDataPack": true,
+   "width": 90,
+   "height": 95,
+   "types": [
+    "Dragon",
+    "Fighting"
+   ]
+  },
+  {
+   "order": 204,
+   "file": "Rillaboom.png",
+   "displayName": "Rillaboom",
+   "formId": "rillaboom",
+   "packSpeciesId": "rillaboom",
+   "inDataPack": true,
+   "width": 94,
+   "height": 100,
+   "types": [
+    "Grass"
+   ]
+  },
+  {
+   "order": 205,
+   "file": "Cinderace.png",
+   "displayName": "Cinderace",
+   "formId": "cinderace",
+   "packSpeciesId": "cinderace",
+   "inDataPack": true,
+   "width": 37,
+   "height": 100,
+   "types": [
+    "Fire"
+   ]
+  },
+  {
+   "order": 206,
+   "file": "Inteleon.png",
+   "displayName": "Inteleon",
+   "formId": "inteleon",
+   "packSpeciesId": "inteleon",
+   "inDataPack": true,
+   "width": 49,
+   "height": 102,
+   "types": [
+    "Water"
+   ]
+  },
+  {
+   "order": 207,
+   "file": "Corviknight.png",
+   "displayName": "Corviknight",
+   "formId": "corviknight",
+   "packSpeciesId": "corviknight",
+   "inDataPack": true,
+   "width": 66,
+   "height": 103,
+   "types": [
+    "Flying",
+    "Steel"
+   ]
+  },
+  {
+   "order": 208,
+   "file": "Thievul.png",
+   "displayName": "Thievul",
+   "formId": "thievul",
+   "packSpeciesId": "thievul",
+   "inDataPack": true,
+   "width": 56,
+   "height": 91,
+   "types": [
+    "Dark"
+   ]
+  },
+  {
+   "order": 209,
+   "file": "Flapple.png",
+   "displayName": "Flapple",
+   "formId": "flapple",
+   "packSpeciesId": "flapple",
+   "inDataPack": true,
+   "width": 72,
+   "height": 56,
+   "types": [
+    "Grass",
+    "Dragon"
+   ]
+  },
+  {
+   "order": 210,
+   "file": "Appletun.png",
+   "displayName": "Appletun",
+   "formId": "appletun",
+   "packSpeciesId": "appletun",
+   "inDataPack": true,
+   "width": 59,
+   "height": 75,
+   "types": [
+    "Grass",
+    "Dragon"
+   ]
+  },
+  {
+   "order": 211,
+   "file": "Sandaconda.png",
+   "displayName": "Sandaconda",
+   "formId": "sandaconda",
+   "packSpeciesId": "sandaconda",
+   "inDataPack": true,
+   "width": 105,
+   "height": 100,
+   "types": [
+    "Ground"
+   ]
+  },
+  {
+   "order": 212,
+   "file": "Toxtricity (Amped).png",
+   "displayName": "Toxtricity (Amped)",
+   "formId": "toxtricity-amped",
+   "packSpeciesId": "toxtricity-amped",
+   "inDataPack": true,
+   "width": 46,
+   "height": 88,
+   "types": [
+    "Electric",
+    "Poison"
+   ]
+  },
+  {
+   "order": 213,
+   "file": "Toxtricity (Low Key).png",
+   "displayName": "Toxtricity (Low Key)",
+   "formId": "toxtricity-low-key",
+   "packSpeciesId": "toxtricity-low-key",
+   "inDataPack": true,
+   "width": 44,
+   "height": 88,
+   "types": [
+    "Electric",
+    "Poison"
+   ]
+  },
+  {
+   "order": 214,
+   "file": "Grapploct.png",
+   "displayName": "Grapploct",
+   "formId": "grapploct",
+   "packSpeciesId": "grapploct",
+   "inDataPack": true,
+   "width": 89,
+   "height": 83,
+   "types": [
+    "Fighting"
+   ]
+  },
+  {
+   "order": 215,
+   "file": "Polteageist.png",
+   "displayName": "Polteageist",
+   "formId": "polteageist",
+   "packSpeciesId": "polteageist",
+   "inDataPack": true,
+   "width": 74,
+   "height": 71,
+   "types": [
+    "Ghost"
+   ]
+  },
+  {
+   "order": 216,
+   "file": "Hatterene.png",
+   "displayName": "Hatterene",
+   "formId": "hatterene",
+   "packSpeciesId": "hatterene",
+   "inDataPack": true,
+   "width": 47,
+   "height": 103,
+   "types": [
+    "Psychic",
+    "Fairy"
+   ]
+  },
+  {
+   "order": 217,
+   "file": "Grimmsnarl.png",
+   "displayName": "Grimmsnarl",
+   "formId": "grimmsnarl",
+   "packSpeciesId": "grimmsnarl",
+   "inDataPack": true,
+   "width": 101,
+   "height": 82,
+   "types": [
+    "Dark",
+    "Fairy"
+   ]
+  },
+  {
+   "order": 218,
+   "file": "Perrserker.png",
+   "displayName": "Perrserker",
+   "formId": "perrserker",
+   "packSpeciesId": "perrserker",
+   "inDataPack": true,
+   "width": 63,
+   "height": 77,
+   "types": [
+    "Steel"
+   ]
+  },
+  {
+   "order": 219,
+   "file": "Sirfetch'd.png",
+   "displayName": "Sirfetch'd",
+   "formId": "sirfetchd",
+   "packSpeciesId": "sirfetchd",
+   "inDataPack": true,
+   "width": 53,
+   "height": 98,
+   "types": [
+    "Fighting"
+   ]
+  },
+  {
+   "order": 220,
+   "file": "Mr. Rime.png",
+   "displayName": "Mr. Rime",
+   "formId": "mr-rime",
+   "packSpeciesId": "mr-rime",
+   "inDataPack": true,
+   "width": 81,
+   "height": 89,
+   "types": [
+    "Ice",
+    "Psychic"
+   ]
+  },
+  {
+   "order": 221,
+   "file": "Runerigus.png",
+   "displayName": "Runerigus",
+   "formId": "runerigus",
+   "packSpeciesId": "runerigus",
+   "inDataPack": true,
+   "width": 101,
+   "height": 57,
+   "types": [
+    "Ground",
+    "Ghost"
+   ]
+  },
+  {
+   "order": 222,
+   "file": "Alcremie.png",
+   "displayName": "Alcremie",
+   "formId": "alcremie",
+   "packSpeciesId": "alcremie",
+   "inDataPack": true,
+   "width": 52,
+   "height": 77,
+   "types": [
+    "Fairy"
+   ]
+  },
+  {
+   "order": 223,
+   "file": "Falinks.png",
+   "displayName": "Falinks",
+   "formId": "falinks",
+   "packSpeciesId": "falinks",
+   "inDataPack": true,
+   "width": 92,
+   "height": 65,
+   "types": [
+    "Fighting"
+   ]
+  },
+  {
+   "order": 224,
+   "file": "Pincurchin.png",
+   "displayName": "Pincurchin",
+   "formId": "pincurchin",
+   "packSpeciesId": "pincurchin",
+   "inDataPack": true,
+   "width": 69,
+   "height": 55,
+   "types": [
+    "Electric"
+   ]
+  },
+  {
+   "order": 225,
+   "file": "Indeedee (Male).png",
+   "displayName": "Indeedee (Male)",
+   "formId": "indeedee-male",
+   "packSpeciesId": "indeedee-male",
+   "inDataPack": true,
+   "width": 46,
+   "height": 80,
+   "types": [
+    "Psychic",
+    "Normal"
+   ]
+  },
+  {
+   "order": 226,
+   "file": "Indeedee (Female).png",
+   "displayName": "Indeedee (Female)",
+   "formId": "indeedee-female",
+   "packSpeciesId": "indeedee-female",
+   "inDataPack": true,
+   "width": 57,
+   "height": 80,
+   "types": [
+    "Psychic",
+    "Normal"
+   ]
+  },
+  {
+   "order": 227,
+   "file": "Morpeko.png",
+   "displayName": "Morpeko",
+   "formId": "morpeko-full-belly",
+   "packSpeciesId": "morpeko-full-belly",
+   "inDataPack": true,
+   "width": 45,
+   "height": 75,
+   "types": [
+    "Electric",
+    "Dark"
+   ]
+  },
+  {
+   "order": 228,
+   "file": "Dragapult.png",
+   "displayName": "Dragapult",
+   "formId": "dragapult",
+   "packSpeciesId": "dragapult",
+   "inDataPack": true,
+   "width": 104,
+   "height": 84,
+   "types": [
+    "Dragon",
+    "Ghost"
+   ]
+  },
+  {
+   "order": 229,
+   "file": "Wyrdeer.png",
+   "displayName": "Wyrdeer",
+   "formId": "wyrdeer",
+   "packSpeciesId": "wyrdeer",
+   "inDataPack": true,
+   "width": 49,
+   "height": 95,
+   "types": [
+    "Normal",
+    "Psychic"
+   ]
+  },
+  {
+   "order": 230,
+   "file": "Kleavor.png",
+   "displayName": "Kleavor",
+   "formId": "kleavor",
+   "packSpeciesId": "kleavor",
+   "inDataPack": true,
+   "width": 80,
+   "height": 93,
+   "types": [
+    "Bug",
+    "Rock"
+   ]
+  },
+  {
+   "order": 231,
+   "file": "Basculegion (Male).png",
+   "displayName": "Basculegion (Male)",
+   "formId": "basculegion-male",
+   "packSpeciesId": "basculegion-male",
+   "inDataPack": true,
+   "width": 104,
+   "height": 93,
+   "types": [
+    "Water",
+    "Ghost"
+   ]
+  },
+  {
+   "order": 232,
+   "file": "Basculegion (Female).png",
+   "displayName": "Basculegion (Female)",
+   "formId": "basculegion-female",
+   "packSpeciesId": "basculegion-female",
+   "inDataPack": true,
+   "width": 101,
+   "height": 90,
+   "types": [
+    "Water",
+    "Ghost"
+   ]
+  },
+  {
+   "order": 233,
+   "file": "Sneasler.png",
+   "displayName": "Sneasler",
+   "formId": "sneasler",
+   "packSpeciesId": "sneasler",
+   "inDataPack": true,
+   "width": 44,
+   "height": 92,
+   "types": [
+    "Fighting",
+    "Poison"
+   ]
+  },
+  {
+   "order": 234,
+   "file": "Overqwil.png",
+   "displayName": "Overqwil",
+   "formId": "overqwil",
+   "packSpeciesId": "overqwil",
+   "inDataPack": true,
+   "width": 96,
+   "height": 99,
+   "types": [
+    "Dark",
+    "Poison"
+   ]
+  },
+  {
+   "order": 235,
+   "file": "Meowscarada.png",
+   "displayName": "Meowscarada",
+   "formId": "meowscarada",
+   "packSpeciesId": "meowscarada",
+   "inDataPack": true,
+   "width": 80,
+   "height": 100,
+   "types": [
+    "Grass",
+    "Dark"
+   ]
+  },
+  {
+   "order": 236,
+   "file": "Skeledirge.png",
+   "displayName": "Skeledirge",
+   "formId": "skeledirge",
+   "packSpeciesId": "skeledirge",
+   "inDataPack": true,
+   "width": 104,
+   "height": 52,
+   "types": [
+    "Fire",
+    "Ghost"
+   ]
+  },
+  {
+   "order": 237,
+   "file": "Quaquaval.png",
+   "displayName": "Quaquaval",
+   "formId": "quaquaval",
+   "packSpeciesId": "quaquaval",
+   "inDataPack": true,
+   "width": 62,
+   "height": 101,
+   "types": [
+    "Water",
+    "Fighting"
+   ]
+  },
+  {
+   "order": 238,
+   "file": "Pawmot.png",
+   "displayName": "Pawmot",
+   "formId": "pawmot",
+   "packSpeciesId": "pawmot",
+   "inDataPack": true,
+   "width": 63,
+   "height": 90,
+   "types": [
+    "Electric",
+    "Fighting"
+   ]
+  },
+  {
+   "order": 239,
+   "file": "Maushold.png",
+   "displayName": "Maushold",
+   "formId": "maushold-family-of-four",
+   "packSpeciesId": "maushold-family-of-four",
+   "inDataPack": true,
+   "width": 75,
+   "height": 48,
+   "types": [
+    "Normal"
+   ]
+  },
+  {
+   "order": 240,
+   "file": "Arboliva.png",
+   "displayName": "Arboliva",
+   "formId": "arboliva",
+   "packSpeciesId": "arboliva",
+   "inDataPack": true,
+   "width": 99,
+   "height": 81,
+   "types": [
+    "Grass",
+    "Normal"
+   ]
+  },
+  {
+   "order": 241,
+   "file": "Squawkabilly (Green Plumage).png",
+   "displayName": "Squawkabilly (Green Plumage)",
+   "formId": "squawkabilly-green-plumage",
+   "packSpeciesId": "squawkabilly-green-plumage",
+   "inDataPack": true,
+   "width": 57,
+   "height": 79,
+   "types": [
+    "Normal",
+    "Flying"
+   ]
+  },
+  {
+   "order": 242,
+   "file": "Squawkabilly (Yellow Plumage).png",
+   "displayName": "Squawkabilly (Yellow Plumage)",
+   "formId": "squawkabilly-yellow-plumage",
+   "packSpeciesId": "squawkabilly-yellow-plumage",
+   "inDataPack": true,
+   "width": 58,
+   "height": 79,
+   "types": [
+    "Normal",
+    "Flying"
+   ]
+  },
+  {
+   "order": 243,
+   "file": "Garganacl.png",
+   "displayName": "Garganacl",
+   "formId": "garganacl",
+   "packSpeciesId": "garganacl",
+   "inDataPack": true,
+   "width": 88,
+   "height": 102,
+   "types": [
+    "Rock"
+   ]
+  },
+  {
+   "order": 244,
+   "file": "Armarouge.png",
+   "displayName": "Armarouge",
+   "formId": "armarouge",
+   "packSpeciesId": "armarouge",
+   "inDataPack": true,
+   "width": 57,
+   "height": 93,
+   "types": [
+    "Fire",
+    "Psychic"
+   ]
+  },
+  {
+   "order": 245,
+   "file": "Ceruledge.png",
+   "displayName": "Ceruledge",
+   "formId": "ceruledge",
+   "packSpeciesId": "ceruledge",
+   "inDataPack": true,
+   "width": 62,
+   "height": 89,
+   "types": [
+    "Fire",
+    "Ghost"
+   ]
+  },
+  {
+   "order": 246,
+   "file": "Bellibolt.png",
+   "displayName": "Bellibolt",
+   "formId": "bellibolt",
+   "packSpeciesId": "bellibolt",
+   "inDataPack": true,
+   "width": 84,
+   "height": 93,
+   "types": [
+    "Electric"
+   ]
+  },
+  {
+   "order": 247,
+   "file": "Mabosstiff.png",
+   "displayName": "Mabosstiff",
+   "formId": "mabosstiff",
+   "packSpeciesId": "mabosstiff",
+   "inDataPack": true,
+   "width": 89,
+   "height": 77,
+   "types": [
+    "Dark"
+   ]
+  },
+  {
+   "order": 248,
+   "file": "Scovillain.png",
+   "displayName": "Scovillain",
+   "formId": "scovillain",
+   "packSpeciesId": "scovillain",
+   "inDataPack": true,
+   "width": 87,
+   "height": 93,
+   "types": [
+    "Grass",
+    "Fire"
+   ]
+  },
+  {
+   "order": 249,
+   "file": "Espathra.png",
+   "displayName": "Espathra",
+   "formId": "espathra",
+   "packSpeciesId": "espathra",
+   "inDataPack": true,
+   "width": 75,
+   "height": 102,
+   "types": [
+    "Psychic"
+   ]
+  },
+  {
+   "order": 250,
+   "file": "Tinkaton.png",
+   "displayName": "Tinkaton",
+   "formId": "tinkaton",
+   "packSpeciesId": "tinkaton",
+   "inDataPack": true,
+   "width": 91,
+   "height": 90,
+   "types": [
+    "Fairy",
+    "Steel"
+   ]
+  },
+  {
+   "order": 251,
+   "file": "Palafin.png",
+   "displayName": "Palafin",
+   "formId": "palafin-zero",
+   "packSpeciesId": "palafin-zero",
+   "inDataPack": true,
+   "width": 90,
+   "height": 74,
+   "types": [
+    "Water"
+   ]
+  },
+  {
+   "order": 252,
+   "file": "Orthworm.png",
+   "displayName": "Orthworm",
+   "formId": "orthworm",
+   "packSpeciesId": "orthworm",
+   "inDataPack": true,
+   "width": 78,
+   "height": 104,
+   "types": [
+    "Steel"
+   ]
+  },
+  {
+   "order": 253,
+   "file": "Glimmora.png",
+   "displayName": "Glimmora",
+   "formId": "glimmora",
+   "packSpeciesId": "glimmora",
+   "inDataPack": true,
+   "width": 93,
+   "height": 70,
+   "types": [
+    "Rock",
+    "Poison"
+   ]
+  },
+  {
+   "order": 254,
+   "file": "Houndstone.png",
+   "displayName": "Houndstone",
+   "formId": "houndstone",
+   "packSpeciesId": "houndstone",
+   "inDataPack": true,
+   "width": 103,
+   "height": 91,
+   "types": [
+    "Ghost"
+   ]
+  },
+  {
+   "order": 255,
+   "file": "Annihilape.png",
+   "displayName": "Annihilape",
+   "formId": "annihilape",
+   "packSpeciesId": "annihilape",
+   "inDataPack": true,
+   "width": 85,
+   "height": 92,
+   "types": [
+    "Fighting",
+    "Ghost"
+   ]
+  },
+  {
+   "order": 256,
+   "file": "Farigiraf.png",
+   "displayName": "Farigiraf",
+   "formId": "farigiraf",
+   "packSpeciesId": "farigiraf",
+   "inDataPack": true,
+   "width": 52,
+   "height": 103,
+   "types": [
+    "Normal",
+    "Psychic"
+   ]
+  },
+  {
+   "order": 257,
+   "file": "Kingambit.png",
+   "displayName": "Kingambit",
+   "formId": "kingambit",
+   "packSpeciesId": "kingambit",
+   "inDataPack": true,
+   "width": 68,
+   "height": 101,
+   "types": [
+    "Dark",
+    "Steel"
+   ]
+  },
+  {
+   "order": 258,
+   "file": "Baxcalibur.png",
+   "displayName": "Baxcalibur",
+   "formId": "baxcalibur",
+   "packSpeciesId": "baxcalibur",
+   "inDataPack": true,
+   "width": 79,
+   "height": 99,
+   "types": [
+    "Dragon",
+    "Ice"
+   ]
+  },
+  {
+   "order": 259,
+   "file": "Gholdengo.png",
+   "displayName": "Gholdengo",
+   "formId": "gholdengo",
+   "packSpeciesId": "gholdengo",
+   "inDataPack": true,
+   "width": 65,
+   "height": 95,
+   "types": [
+    "Steel",
+    "Ghost"
+   ]
+  },
+  {
+   "order": 260,
+   "file": "Sinistcha.png",
+   "displayName": "Sinistcha",
+   "formId": "sinistcha",
+   "packSpeciesId": "sinistcha",
+   "inDataPack": true,
+   "width": 50,
+   "height": 73,
+   "types": [
+    "Grass",
+    "Ghost"
+   ]
+  },
+  {
+   "order": 261,
+   "file": "Archaludon.png",
+   "displayName": "Archaludon",
+   "formId": "archaludon",
+   "packSpeciesId": "archaludon",
+   "inDataPack": true,
+   "width": 84,
+   "height": 102,
+   "types": [
+    "Steel",
+    "Dragon"
+   ]
+  },
+  {
+   "order": 262,
+   "file": "Hydrapple.png",
+   "displayName": "Hydrapple",
+   "formId": "hydrapple",
+   "packSpeciesId": "hydrapple",
+   "inDataPack": true,
+   "width": 47,
+   "height": 94,
+   "types": [
+    "Grass",
+    "Dragon"
+   ]
+  }
+ ],
+ "segmentation": "v4 (2026-09-06): per-cell tile detection, sprites run to the tile edge; hue-aware distance; tile-colour fill stripped; v5 (2026-09-14) for the 27 M-C cells: photo rectification, glare background field, dehaze - see tool/split_photo_sheets.py; Sableye re-cut 2026-09-19 with segment_lowcontrast (v4 holed it - see RECUTS in tool/split_sprite_sheets.py)"
+}

@@ -46,3 +46,6 @@ flutter:
     - assets/sprites/home/
     - assets/sprites/icons/
     - assets/exemplars/
+    # Trained sprite classifier (tool/sprite_cnn/). Pure-Dart inference in
+    # lib/src/recognition/sprite_cnn.dart — no native ML runtime.
+    - assets/models/

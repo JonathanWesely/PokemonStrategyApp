@@ -16,6 +16,7 @@ import 'package:flutter/material.dart';
 
 import '../app_state.dart';
 import '../models/battle_state.dart';
+import '../recognition/auto_scan.dart';
 import '../models/recognition_result.dart';
 import '../prediction/prediction_engine.dart';
 import '../prediction/speed_tiers.dart';
@@ -170,6 +171,7 @@ class _BattleScreenState extends State<BattleScreen> {
     return ListView(
       padding: const EdgeInsets.all(12),
       children: [
+        const _AutoScanChip(),
         Row(
           children: [
             Expanded(
@@ -180,7 +182,7 @@ class _BattleScreenState extends State<BattleScreen> {
                         height: 16,
                         child: CircularProgressIndicator(strokeWidth: 2))
                     : const Icon(Icons.photo_camera),
-                label: Text('Scan preview (${state.engineName})'),
+                label: const Text('Manually scan'),
                 onPressed:
                     _recognizing ? null : () => _scan(RecognitionScreen.preview),
               ),
@@ -189,9 +191,10 @@ class _BattleScreenState extends State<BattleScreen> {
         ),
         const SizedBox(height: 8),
         Text(
-          'Tap any Pokemon for its full page: base stats, typing, matchups, '
-          'learnset, abilities and common builds. Amber boxes are '
-          'auto-recognized guesses — tap to confirm or fix.',
+          'The rig fills these boxes by itself while auto-scan is on; '
+          'Manually scan opens the camera view (phone / gallery / rig) if '
+          'you need to line something up. Tap any Pokemon for its full '
+          'page. Amber boxes are guesses — tap to confirm or fix.',
           style: TextStyle(fontSize: 12, color: Colors.grey.shade700),
         ),
         const SizedBox(height: 12),
@@ -448,13 +451,15 @@ class _BattleScreenState extends State<BattleScreen> {
     if (!battle.picksChosen || _editingPicks) {
       return _buildPickSelector(context, state);
     }
-    final tiers =
-        buildSpeedTiers(pack, battle.activeYours, battle.enemiesOnField);
+    final tiers = buildSpeedTiers(
+        pack, battle.activeYours, battle.enemiesOnField,
+        evidence: battle.speedEvidence);
     final benchPredictions = PredictionEngine(pack).predictBench(battle);
 
     return ListView(
       padding: const EdgeInsets.all(10),
       children: [
+        const _AutoScanChip(),
         Row(
           children: [
             Expanded(
@@ -465,9 +470,7 @@ class _BattleScreenState extends State<BattleScreen> {
                         height: 16,
                         child: CircularProgressIndicator(strokeWidth: 2))
                     : const Icon(Icons.photo_camera),
-                label: Text(_recognizing
-                    ? 'Recognizing…'
-                    : 'Scan battle (${state.engineName})'),
+                label: Text(_recognizing ? 'Recognizing…' : 'Manually scan'),
                 onPressed:
                     _recognizing ? null : () => _scan(RecognitionScreen.battle),
               ),
@@ -482,7 +485,13 @@ class _BattleScreenState extends State<BattleScreen> {
         ),
         const SizedBox(height: 10),
 
-        if (tiers.isNotEmpty) _SpeedStrip(tiers: tiers),
+        if (tiers.isNotEmpty)
+          _SpeedStrip(
+            tiers: tiers,
+            trickRoom: battle.trickRoom,
+            yourTailwind: battle.yourTailwind,
+            enemyTailwind: battle.enemyTailwind,
+          ),
         const SizedBox(height: 10),
 
         if (battle.enemiesOnField.isEmpty)
@@ -702,8 +711,16 @@ class _PreviewBox extends StatelessWidget {
 
 class _SpeedStrip extends StatelessWidget {
   final List<SpeedTierEntry> tiers;
+  final bool trickRoom;
+  final bool yourTailwind;
+  final bool enemyTailwind;
 
-  const _SpeedStrip({required this.tiers});
+  const _SpeedStrip({
+    required this.tiers,
+    this.trickRoom = false,
+    this.yourTailwind = false,
+    this.enemyTailwind = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -713,8 +730,28 @@ class _SpeedStrip extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Speed check (fastest first)',
-                style: Theme.of(context).textTheme.titleSmall),
+            Row(
+              children: [
+                Expanded(
+                  child: Text('Speed check (fastest first)',
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context).textTheme.titleSmall),
+                ),
+                if (trickRoom)
+                  const _ConditionBadge('Trick Room', Colors.purple),
+                if (yourTailwind)
+                  const _ConditionBadge('Your Tailwind', Colors.blue),
+                if (enemyTailwind)
+                  const _ConditionBadge('Enemy Tailwind', Colors.red),
+              ],
+            ),
+            if (trickRoom)
+              const Padding(
+                padding: EdgeInsets.only(bottom: 2),
+                child: Text('Trick Room is up — the SLOWER Pokemon act first.',
+                    style: TextStyle(fontSize: 10, color: Colors.purple)),
+              ),
             const SizedBox(height: 6),
             for (final entry in tiers)
               Padding(
@@ -747,12 +784,164 @@ class _SpeedStrip extends StatelessWidget {
                               size: 14, color: Colors.orange),
                         ),
                       ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 6),
+                      child: Tooltip(
+                        message: entry.orderConfirmed
+                            ? 'Order confirmed this match (moved first/last '
+                                'at the same move priority)'
+                            : 'Predicted from stats and usage — not yet '
+                                'seen in this match',
+                        child: entry.orderConfirmed
+                            ? const Icon(Icons.check_circle,
+                                size: 14, color: confirmedColor)
+                            : Text('?',
+                                style: TextStyle(
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w700,
+                                    color: predictedColor)),
+                      ),
+                    ),
                   ],
                 ),
               ),
+            Padding(
+              padding: const EdgeInsets.only(top: 4),
+              child: Text(
+                '✓ = order confirmed by this match · ? = prediction',
+                style: TextStyle(fontSize: 10, color: Colors.grey.shade600),
+              ),
+            ),
           ],
         ),
       ),
+    );
+  }
+}
+
+class _ConditionBadge extends StatelessWidget {
+  final String label;
+  final MaterialColor color;
+
+  const _ConditionBadge(this.label, this.color);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(left: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+      decoration: BoxDecoration(
+        color: color.shade50,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: color.shade300),
+      ),
+      child: Text(label,
+          style: TextStyle(fontSize: 10, color: color.shade800)),
+    );
+  }
+}
+
+/// Status chip for the hands-free rig scanning: what it is doing, when it
+/// last scanned, and a pause/resume toggle. Shows the reason when auto-scan
+/// cannot run (engine, address, setting).
+class _AutoScanChip extends StatelessWidget {
+  const _AutoScanChip();
+
+  @override
+  Widget build(BuildContext context) {
+    final state = AppScope.of(context);
+    final controller = state.autoScan;
+    if (controller == null) {
+      final reason = state.autoScanUnavailableReason;
+      if (reason == null) return const SizedBox.shrink();
+      return Padding(
+        padding: const EdgeInsets.only(bottom: 8),
+        child: Row(
+          children: [
+            Icon(Icons.motion_photos_off,
+                size: 16, color: Colors.grey.shade500),
+            const SizedBox(width: 6),
+            Expanded(
+              child: Text(reason,
+                  style:
+                      TextStyle(fontSize: 11, color: Colors.grey.shade600)),
+            ),
+          ],
+        ),
+      );
+    }
+    return ValueListenableBuilder<AutoScanStatus>(
+      valueListenable: controller.status,
+      builder: (context, status, _) {
+        final IconData icon;
+        final Color color;
+        final String text;
+        if (status.paused) {
+          icon = Icons.pause_circle_outline;
+          color = Colors.grey;
+          text = 'Auto-scan paused';
+        } else if (!status.connected) {
+          icon = Icons.wifi_tethering_error;
+          color = Colors.orange;
+          text = status.message.isEmpty
+              ? 'Connecting to the rig…'
+              : status.message;
+        } else if (status.phase == AutoScanPhase.battle) {
+          icon = Icons.radio_button_checked;
+          color = confirmedColor;
+          text = 'Tracking the match from the rig (2 scans/s) — names, '
+              'moves, items, speed order';
+        } else {
+          icon = Icons.radio_button_checked;
+          color = confirmedColor;
+          text = 'Auto-scanning the rig every 5 s — the enemy boxes fill '
+              'by themselves';
+        }
+        final last = status.lastScanAt;
+        return Card(
+          margin: const EdgeInsets.only(bottom: 8),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+            child: Row(
+              children: [
+                Icon(icon, size: 18, color: color),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(text, style: const TextStyle(fontSize: 11)),
+                      if (last != null && !status.paused)
+                        Text(
+                          'scans: ${status.scans} · last '
+                          '${last.hour.toString().padLeft(2, '0')}:'
+                          '${last.minute.toString().padLeft(2, '0')}:'
+                          '${last.second.toString().padLeft(2, '0')}',
+                          style: TextStyle(
+                              fontSize: 10, color: Colors.grey.shade600),
+                        ),
+                    ],
+                  ),
+                ),
+                IconButton(
+                  visualDensity: VisualDensity.compact,
+                  tooltip: status.paused ? 'Resume auto-scan' : 'Pause auto-scan',
+                  icon: Icon(
+                      status.paused ? Icons.play_arrow : Icons.pause,
+                      size: 18),
+                  onPressed: () {
+                    if (status.paused) {
+                      controller.resume();
+                    } else {
+                      controller.pause('paused by you');
+                    }
+                  },
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }

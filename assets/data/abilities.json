@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "generatedAt": "2026-08-16",
+ "generatedAt": "2026-09-14",
  "source": "pokeapi",
  "abilities": [
   {
@@ -42,6 +42,11 @@
    "id": "aroma-veil",
    "name": "Aroma Veil",
    "desc": "Protects allies against moves that affect their mental state."
+  },
+  {
+   "id": "aura-guard",
+   "name": "Aura Guard",
+   "desc": "A Pok\u00e9mon with Aura Guard takes half damage from moves that make contact."
   },
   {
    "id": "battle-armor",
@@ -194,6 +199,11 @@
    "desc": "When hit by an attack, the power of the next Electric-type move it uses is doubled."
   },
   {
+   "id": "emergency-exit",
+   "name": "Emergency Exit",
+   "desc": "This Pok\u00e9mon automatically switches out when its HP drops below half."
+  },
+  {
    "id": "fairy-aura",
    "name": "Fairy Aura",
    "desc": "Strengthens Fairy moves to 1.33\u00d7 their power for all friendly and opposing Pok\u00e9mon."
@@ -272,6 +282,21 @@
    "id": "gooey",
    "name": "Gooey",
    "desc": "Lowers attacking Pok\u00e9mon's Speed by one stage on contact."
+  },
+  {
+   "id": "grass-pelt",
+   "name": "Grass Pelt",
+   "desc": "Boosts Defense while Grassy Terrain is in effect."
+  },
+  {
+   "id": "grassy-surge",
+   "name": "Grassy Surge",
+   "desc": "When this Pok\u00e9mon enters battle, it changes the terrain to Grassy Terrain."
+  },
+  {
+   "id": "guard-dog",
+   "name": "Guard Dog",
+   "desc": "Boosts Attack if intimidated, and prevents being forced to switch out."
   },
   {
    "id": "guts",
@@ -409,6 +434,11 @@
    "desc": "Evades Ground moves."
   },
   {
+   "id": "libero",
+   "name": "Libero",
+   "desc": "Libero changes the Pok\u00e9mon's type to that of its previously used attack."
+  },
+  {
    "id": "light-metal",
    "name": "Light Metal",
    "desc": "Halves the Pok\u00e9mon's weight."
@@ -422,6 +452,11 @@
    "id": "limber",
    "name": "Limber",
    "desc": "Prevents paralysis."
+  },
+  {
+   "id": "liquid-ooze",
+   "name": "Liquid Ooze",
+   "desc": "Damages opponents using leeching moves for as much as they would heal."
   },
   {
    "id": "liquid-voice",
@@ -614,6 +649,16 @@
    "desc": "Changes the bearer's type to match each move it uses."
   },
   {
+   "id": "psychic-surge",
+   "name": "Psychic Surge",
+   "desc": "When this Pok\u00e9mon enters battle, it changes the terrain to Psychic Terrain."
+  },
+  {
+   "id": "punk-rock",
+   "name": "Punk Rock",
+   "desc": "Boosts sound-based moves and halves damage from the same moves."
+  },
+  {
    "id": "pure-power",
    "name": "Pure Power",
    "desc": "Doubles Attack in battle."
@@ -642,6 +687,11 @@
    "id": "rain-dish",
    "name": "Rain Dish",
    "desc": "Heals for 1/16 max HP after each turn during rain."
+  },
+  {
+   "id": "rattled",
+   "name": "Rattled",
+   "desc": "Raises Speed one stage upon being hit by a Dark, Ghost, or Bug move."
   },
   {
    "id": "receiver",
@@ -684,6 +734,11 @@
    "desc": "Damages attacking Pok\u00e9mon for 1/8 their max HP on contact."
   },
   {
+   "id": "run-away",
+   "name": "Run Away",
+   "desc": "Ensures success fleeing from wild battles."
+  },
+  {
    "id": "sand-force",
    "name": "Sand Force",
    "desc": "Strengthens Rock, Ground, and Steel moves to 1.3\u00d7 their power during a sandstorm.  Protects against sandstorm damage."
@@ -722,6 +777,11 @@
    "id": "screen-cleaner",
    "name": "Screen Cleaner",
    "desc": "Nullifies effects of Light Screen, Reflect, and Aurora Veil."
+  },
+  {
+   "id": "seed-sower",
+   "name": "Seed Sower",
+   "desc": "Turns the ground into Grassy Terrain when the Pok\u00e9mon is hit by an attack."
   },
   {
    "id": "shadow-tag",
@@ -804,6 +864,11 @@
    "desc": "When the Pok\u00e9mon takes damage from a move, it burns the attacker."
   },
   {
+   "id": "stakeout",
+   "name": "Stakeout",
+   "desc": "This Pok\u00e9mon's moves have double power against Pok\u00e9mon that switched in this turn."
+  },
+  {
    "id": "stall",
    "name": "Stall",
    "desc": "Makes the Pok\u00e9mon move last within its move's priority bracket."
@@ -832,6 +897,11 @@
    "id": "steadfast",
    "name": "Steadfast",
    "desc": "Raises Speed one stage upon flinching."
+  },
+  {
+   "id": "steely-spirit",
+   "name": "Steely Spirit",
+   "desc": "Powers up ally Pok\u00e9mon's Steel-type moves."
   },
   {
    "id": "stench",
@@ -917,6 +987,11 @@
    "id": "telepathy",
    "name": "Telepathy",
    "desc": "Protects against friendly Pok\u00e9mon's damaging moves."
+  },
+  {
+   "id": "thermal-exchange",
+   "name": "Thermal Exchange",
+   "desc": "Raises Attack when hit by a Fire-type move. Cannot be burned."
   },
   {
    "id": "thick-fat",

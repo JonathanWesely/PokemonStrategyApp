@@ -93,6 +93,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
           ),
           const Divider(height: 24),
+          SwitchListTile(
+            value: state.autoScanEnabled,
+            onChanged: (v) => state.updateSettings(newAutoScanEnabled: v),
+            title: const Text('Auto-scan with the camera rig'),
+            subtitle: const Text(
+                'During a battle, connect to the saved rig stream by '
+                'itself: team preview every 5 s until picks are locked, '
+                'then in-match text tracking twice a second. Local engine '
+                'only. Manually scan always works either way.',
+                style: TextStyle(fontSize: 11)),
+          ),
+          const Divider(height: 24),
           Text('API engine settings',
               style: Theme.of(context).textTheme.titleSmall),
           const SizedBox(height: 8),
@@ -194,6 +206,47 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         ],
                       ),
                     ),
+                  ),
+                  const SizedBox(height: 8),
+                  OutlinedButton.icon(
+                    icon: const Icon(Icons.restart_alt),
+                    label: Text('Reset learned sprites '
+                        '(${state.exemplars.runtimeTotal} saved)'),
+                    onPressed: state.exemplars.runtimeTotal == 0
+                        ? null
+                        : () => showDialog<void>(
+                              context: context,
+                              builder: (dialogContext) => AlertDialog(
+                                title: const Text('Reset learned sprites?'),
+                                content: const Text(
+                                    'Forgets every enemy sprite you have '
+                                    'confirmed so far. Recognition goes back '
+                                    'to the bundled Champions sprites. Do '
+                                    'this when a run of wrong confirmations '
+                                    'has taught it nonsense — the learned '
+                                    'crops outrank the bundled ones.'),
+                                actions: [
+                                  TextButton(
+                                      onPressed: () =>
+                                          Navigator.pop(dialogContext),
+                                      child: const Text('Cancel')),
+                                  FilledButton(
+                                      onPressed: () {
+                                        state.exemplars.clearRuntime();
+                                        Navigator.pop(dialogContext);
+                                        setState(() {});
+                                      },
+                                      child: const Text('Reset')),
+                                ],
+                              ),
+                            ),
+                  ),
+                  const SizedBox(height: 6),
+                  const Text(
+                    'After a bad scan: the frame, where the matcher looked, '
+                    'and each crop are in the app\'s documents folder under '
+                    'last_scan/ (also printed to the flutter run console).',
+                    style: TextStyle(fontSize: 11, color: Colors.grey),
                   ),
                 ],
               ),

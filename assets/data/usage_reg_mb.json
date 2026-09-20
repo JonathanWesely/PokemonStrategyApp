@@ -3014,13 +3014,13 @@
    ],
    "teammates": [
     {
-     "speciesId": "lycanroc",
+     "speciesId": "lycanroc-dusk",
      "pct": 12
     }
    ]
   },
   {
-   "speciesId": "lycanroc",
+   "speciesId": "lycanroc-dusk",
    "usagePercent": 8.0,
    "moves": [
     {
@@ -3064,16 +3064,8 @@
    ],
    "abilities": [
     {
-     "name": "Sand Rush",
-     "pct": 44
-    },
-    {
-     "name": "Keen Eye",
-     "pct": 8
-    },
-    {
-     "name": "Steadfast",
-     "pct": 48
+     "name": "Tough Claws",
+     "pct": 100
     }
    ],
    "spreads": [

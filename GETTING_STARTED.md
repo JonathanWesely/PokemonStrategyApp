@@ -52,6 +52,12 @@ dart run tool/update_data.dart
 
 ### Testing recognition on the emulator — two ways
 
+> **Recognition now works from a cold start.** The app ships the game's own
+> 2D sprites for all 223 species plus its 18 type badges, so the enemy team is
+> identified on your very first scan — no confirmations needed to prime it.
+> Confirming still helps: your own crops become exemplars that outrank the
+> bundled templates for your exact lighting.
+
 **A. With the fixture photos (most reliable, no camera):**
 
 1. Get the photos into the emulator (adb is the reliable way; drag-drop

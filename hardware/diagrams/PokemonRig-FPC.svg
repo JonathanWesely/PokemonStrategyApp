@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="640" viewBox="0 0 980 640" role="img" aria-label="Removing the camera ribbon from its FPC connector">
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+          orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f2933"/></marker>
+  <marker id="arrowR" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+          orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c0392b"/></marker>
+  <marker id="arrowM" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"
+          orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#6b7280"/></marker>
+  <marker id="arrowG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+          orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#15803d"/></marker>
+  <pattern id="hatch" width="6" height="6" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+    <line x1="0" y1="0" x2="0" y2="6" stroke="#9ca3af" stroke-width="2.5"/></pattern>
+</defs>
+<rect width="980" height="640" fill="#ffffff"/>
+<text x="24.0" y="32.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="18" fill="#1f2933" text-anchor="start" font-weight="700">Getting the old camera off — the FPC latch</text>
+<text x="24.0" y="53.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" fill="#6b7280" text-anchor="start" font-weight="400">The ribbon is clamped by a tiny latch. Until that latch is open the ribbon will not move, and pulling on it tears the contacts off</text>
+<text x="24.0" y="69.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" fill="#6b7280" text-anchor="start" font-weight="400">or rips the connector off the board. Two latch styles exist; find yours first.</text>
+<rect x="24.0" y="86.0" width="932.0" height="40.0" rx="8" fill="#fef2f2" stroke="#c0392b" stroke-width="1.6"/>
+<text x="44.0" y="112.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="13" fill="#991b1b" text-anchor="start" font-weight="700">THE GOLDEN RULE:  if it needs force, you are moving the wrong part, or the wrong way. Every step here is fingertip-light.</text>
+<rect x="24.0" y="144.0" width="460.0" height="268.0" rx="10" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.4"/>
+<circle cx="50.0" cy="170.0" r="11.0" fill="#1f2933" stroke="none" stroke-width="1.4"/>
+<text x="50.0" y="174.2" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12.5" fill="#ffffff" text-anchor="middle" font-weight="700">A</text>
+<text x="70.0" y="175.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="13.5" fill="#1f2933" text-anchor="start" font-weight="700">Flip-lock (most common)</text>
+<text x="48.0" y="198.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="start" font-weight="400">A thin dark flap hinged at the BACK edge.</text>
+<rect x="54.0" y="294.0" width="380.0" height="22.0" rx="2" fill="#1e3a5f" stroke="#1f2933" stroke-width="1.5"/>
+<text x="84.0" y="309.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="9.5" fill="#93c5fd" text-anchor="start" font-weight="400">board</text>
+<rect x="214.0" y="264.0" width="150.0" height="30.0" rx="2" fill="#cbd5e1" stroke="#1f2933" stroke-width="1.6"/>
+<text x="289.0" y="284.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="9" fill="#1f2933" text-anchor="middle" font-weight="400">connector body</text>
+<rect x="84.0" y="272.0" width="130.0" height="8.0" rx="0" fill="#f59e0b" stroke="#b45309" stroke-width="1.3"/>
+<text x="129.0" y="266.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="9.5" fill="#92400e" text-anchor="start" font-weight="700">ribbon</text>
+<rect x="219.0" y="256.0" width="140.0" height="9.0" rx="0" fill="#94a3b8" stroke="#6b7280" stroke-width="1.2" stroke-dasharray="3 2" opacity="0.5"/>
+<text x="289.0" y="250.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="9" fill="#9ca3af" text-anchor="middle" font-weight="400">closed</text>
+<path d="M359,264 L369,162 L380,164 L370,265 Z" fill="#bbf7d0" stroke="#15803d" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M324,240 A 60 60 0 0 1 364,194" fill="none" stroke="#15803d" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowG)"/>
+<text x="214.0" y="226.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" fill="#15803d" text-anchor="middle" font-weight="700">rotates UP ~90°</text>
+<text x="214.0" y="241.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" fill="#6b7280" text-anchor="middle" font-weight="400">hinge at the far edge</text>
+<text x="48.0" y="344.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10.5" fill="#1f2933" text-anchor="start" font-weight="400">Get a fingernail under the flap's FRONT edge (the ribbon</text>
+<text x="48.0" y="360.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10.5" fill="#1f2933" text-anchor="start" font-weight="400">side) and rotate it up and back. It stops with a light click.</text>
+<text x="48.0" y="384.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10.5" fill="#1f2933" text-anchor="start" font-weight="700">Travel: about a quarter turn. That's all.</text>
+<rect x="496.0" y="144.0" width="460.0" height="268.0" rx="10" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.4"/>
+<circle cx="522.0" cy="170.0" r="11.0" fill="#1f2933" stroke="none" stroke-width="1.4"/>
+<text x="522.0" y="174.2" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12.5" fill="#ffffff" text-anchor="middle" font-weight="700">B</text>
+<text x="542.0" y="175.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="13.5" fill="#1f2933" text-anchor="start" font-weight="700">Slide-lock</text>
+<text x="520.0" y="198.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" fill="#6b7280" text-anchor="start" font-weight="400">A collar that slides straight back, flat and parallel.</text>
+<rect x="526.0" y="294.0" width="380.0" height="22.0" rx="2" fill="#1e3a5f" stroke="#1f2933" stroke-width="1.5"/>
+<text x="556.0" y="309.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="9.5" fill="#93c5fd" text-anchor="start" font-weight="400">board</text>
+<rect x="686.0" y="264.0" width="150.0" height="30.0" rx="2" fill="#cbd5e1" stroke="#1f2933" stroke-width="1.6"/>
+<text x="761.0" y="284.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="9" fill="#1f2933" text-anchor="middle" font-weight="400">connector body</text>
+<rect x="556.0" y="272.0" width="130.0" height="8.0" rx="0" fill="#f59e0b" stroke="#b45309" stroke-width="1.3"/>
+<text x="601.0" y="266.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="9.5" fill="#92400e" text-anchor="start" font-weight="700">ribbon</text>
+<rect x="691.0" y="256.0" width="150.0" height="10.0" rx="0" fill="#94a3b8" stroke="#6b7280" stroke-width="1.2" stroke-dasharray="3 2" opacity="0.5"/>
+<text x="766.0" y="250.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="9" fill="#9ca3af" text-anchor="middle" font-weight="400">closed</text>
+<rect x="721.0" y="256.0" width="150.0" height="10.0" rx="0" fill="#bbf7d0" stroke="#15803d" stroke-width="1.8"/>
+<line x1="846.0" y1="236.0" x2="888.0" y2="236.0" stroke="#15803d" stroke-width="2.4" stroke-linecap="round" marker-end="url(#arrowG)"/>
+<text x="796.0" y="228.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" fill="#15803d" text-anchor="middle" font-weight="700">slides back ~1 mm</text>
+<text x="520.0" y="344.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10.5" fill="#1f2933" text-anchor="start" font-weight="400">Push the collar AWAY from the ribbon with two nails, one</text>
+<text x="520.0" y="360.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10.5" fill="#1f2933" text-anchor="start" font-weight="400">at each end, a little at a time so it doesn't cock sideways.</text>
+<text x="520.0" y="384.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10.5" fill="#1f2933" text-anchor="start" font-weight="700">Travel: about a millimetre. It stays parallel.</text>
+<text x="24.0" y="434.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="14" fill="#1f2933" text-anchor="start" font-weight="700">Whichever you have</text>
+<text x="24.0" y="458.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" fill="#1f2933" text-anchor="start" font-weight="400">1.  Photograph the seated ribbon first — which face the silver contacts point toward is the thing you cannot look up later.</text>
+<text x="24.0" y="475.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" fill="#1f2933" text-anchor="start" font-weight="400">2.  Work under bright light with your phone camera zoomed in. These parts are ~1 mm; you are not going to do this by feel.</text>
+<text x="24.0" y="492.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" fill="#1f2933" text-anchor="start" font-weight="400">3.  Fingernails or a plastic spudger/toothpick only. Metal tweezers slip, gouge the board and short things.</text>
+<text x="24.0" y="509.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" fill="#1f2933" text-anchor="start" font-weight="400">4.  Lift or push BOTH ENDS evenly, alternating in small steps. Levering one corner is what snaps latches.</text>
+<text x="24.0" y="526.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" fill="#1f2933" text-anchor="start" font-weight="400">5.  With the latch open the ribbon slides out with ZERO force — pinch it flat and draw it straight back. If it resists, the latch is not open.</text>
+<text x="24.0" y="543.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" fill="#1f2933" text-anchor="start" font-weight="400">6.  Hold the BOARD, never the ribbon or the connector, and keep it flat on the desk while you work.</text>
+<rect x="24.0" y="566.0" width="932.0" height="62.0" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="1.3"/>
+<text x="40.0" y="584.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" fill="#92400e" text-anchor="start" font-weight="700">If the ribbon is free but the module still won't lift</text>
+<text x="40.0" y="602.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" fill="#92400e" text-anchor="start" font-weight="400">Many camera modules are also stuck down with a foam pad or double-sided tape. Ease it up slowly from one edge rather</text>
+<text x="40.0" y="619.0" font-family="ui-sans-serif, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" fill="#92400e" text-anchor="start" font-weight="400">than pulling — you have three spare modules, but only one connector.</text>
+</svg>

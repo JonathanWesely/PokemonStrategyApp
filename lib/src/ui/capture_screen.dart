@@ -23,13 +23,51 @@ import 'dart:async';
 import 'dart:typed_data';
 
 import 'package:camera/camera.dart';
+import 'package:flutter/foundation.dart' show compute;
 import 'package:flutter/material.dart';
+import 'package:image/image.dart' as img;
 import 'package:image_picker/image_picker.dart';
 
 import '../app_state.dart';
 import '../models/recognition_result.dart';
 import '../recognition/network_camera.dart';
 import '../recognition/recognition_service.dart';
+
+/// Sharpness of a JPEG frame: variance of the Laplacian over the centre
+/// half of the image, downscaled so the number is comparable across stream
+/// resolutions. Runs in an isolate via [compute]; pure Dart, no plugins.
+double focusScoreOf(Uint8List jpeg) {
+  final im = img.decodeImage(jpeg);
+  if (im == null) return 0;
+  var c = img.copyCrop(im,
+      x: im.width ~/ 4,
+      y: im.height ~/ 4,
+      width: im.width ~/ 2,
+      height: im.height ~/ 2);
+  if (c.width > 480) c = img.copyResize(c, width: 480);
+  final g = img.grayscale(c);
+  final w = g.width, h = g.height;
+  final lum = Float64List(w * h);
+  var i = 0;
+  for (var y = 0; y < h; y++) {
+    for (var x = 0; x < w; x++, i++) {
+      lum[i] = g.getPixel(x, y).r.toDouble();
+    }
+  }
+  var sum = 0.0, sum2 = 0.0, n = 0;
+  for (var y = 1; y < h - 1; y++) {
+    for (var x = 1; x < w - 1; x++) {
+      final k = y * w + x;
+      final lap = 4 * lum[k] - lum[k - 1] - lum[k + 1] - lum[k - w] - lum[k + w];
+      sum += lap;
+      sum2 += lap * lap;
+      n++;
+    }
+  }
+  if (n == 0) return 0;
+  final mean = sum / n;
+  return sum2 / n - mean * mean;
+}
 
 class CaptureScreen extends StatefulWidget {
   final RecognitionScreen mode;
@@ -53,9 +91,24 @@ class _CaptureScreenState extends State<CaptureScreen> {
   final NetworkCameraClient _netClient = NetworkCameraClient();
   StreamSubscription<Uint8List>? _netSub;
   Uint8List? _netFrame;
+
+  /// Live sharpness of the rig stream (Laplacian variance of the frame
+  /// centre), refreshed about once a second off the UI isolate. Higher is
+  /// sharper; the number only means anything relative to itself — turn the
+  /// lens until it peaks. The first rig frame scored ~30 where a usable
+  /// phone photo of the same screen scores 400+.
+  double? _focus;
+  int _lastFocusMs = 0;
+  bool _focusBusy = false;
   String? _netError;
   TextEditingController? _urlCtrl;
   int _lastFramePaintMs = 0;
+
+  /// Auto-scan is paused while this screen is open: the rig's ESP32 serves
+  /// ONE stream client at a time, so the manual view must own it. If the
+  /// user had paused it THEMSELVES, closing this screen keeps it paused.
+  AppState? _appState;
+  bool _autoScanWasPaused = false;
 
   static const autoInterval = Duration(seconds: 5);
 
@@ -68,8 +121,13 @@ class _CaptureScreenState extends State<CaptureScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _urlCtrl ??=
-        TextEditingController(text: AppScope.of(context).netCamUrl);
+    final state = AppScope.of(context);
+    _urlCtrl ??= TextEditingController(text: state.netCamUrl);
+    if (_appState == null) {
+      _appState = state;
+      _autoScanWasPaused = state.autoScan?.isPaused ?? false;
+      state.autoScan?.pause('paused while the manual camera view is open');
+    }
   }
 
   Future<void> _initCamera() async {
@@ -84,7 +142,9 @@ class _CaptureScreenState extends State<CaptureScreen> {
         (c) => c.lensDirection == CameraLensDirection.back,
         orElse: () => cameras.first,
       );
-      final controller = CameraController(back, ResolutionPreset.high,
+      // 1080p, not 720p: the enemy sprites are ~4% of the frame height, and
+      // at 720p that is a 25-px creature. The matcher's references are 32 px.
+      final controller = CameraController(back, ResolutionPreset.veryHigh,
           enableAudio: false);
       await controller.initialize();
       if (!mounted) {
@@ -106,6 +166,7 @@ class _CaptureScreenState extends State<CaptureScreen> {
     _netSub?.cancel();
     _urlCtrl?.dispose();
     _camera?.dispose();
+    if (!_autoScanWasPaused) _appState?.autoScan?.resume();
     super.dispose();
   }
 
@@ -200,6 +261,19 @@ class _CaptureScreenState extends State<CaptureScreen> {
             if (_status.startsWith('Connecting')) _status = '';
           });
         }
+        if (!_focusBusy && now - _lastFocusMs > 1000) {
+          _focusBusy = true;
+          _lastFocusMs = now;
+          compute(focusScoreOf, frame).then((score) {
+            if (!mounted) return;
+            setState(() {
+              _focus = score;
+              _focusBusy = false;
+            });
+          }).catchError((Object _) {
+            _focusBusy = false;
+          });
+        }
       },
       onError: (Object e) {
         if (!mounted) return;
@@ -243,6 +317,24 @@ class _CaptureScreenState extends State<CaptureScreen> {
               onPressed: _disconnectNet,
             ),
           ),
+          if (_focus != null)
+            Positioned(
+              top: 8,
+              left: 8,
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                decoration: BoxDecoration(
+                  color: Colors.black54,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Text(
+                  'Focus ${_focus!.toStringAsFixed(0)}  '
+                  '${_focus! < 120 ? "— turn the lens" : _focus! < 300 ? "— getting there" : "— sharp"}',
+                  style: const TextStyle(color: Colors.white, fontSize: 12),
+                ),
+              ),
+            ),
         ],
       );
     }

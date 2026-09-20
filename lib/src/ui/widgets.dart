@@ -149,8 +149,9 @@ class RatedOptionRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // The ✓ / ? convention: ✓ = confirmed in this match, ? = prediction.
     final pctText =
-        option.confirmed ? 'seen' : '~${option.pct.toStringAsFixed(0)}%';
+        option.confirmed ? 'seen ✓' : '~${option.pct.toStringAsFixed(0)}% ?';
     final barColor = option.confirmed
         ? confirmedColor
         : dim

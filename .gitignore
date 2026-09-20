@@ -37,3 +37,10 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 _to_delete/
+
+# Scan diagnostics: tool/pull_scan.ps1 and test/scan_dump_test.dart write here
+test/_scan_dump/
+last_scan.tar
+
+# Sprite classifier training data (tool/sprite_cnn/gen.py) - regenerate, do not commit
+tool/sprite_cnn/_data/

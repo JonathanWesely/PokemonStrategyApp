@@ -14,10 +14,13 @@ import 'models/pokemon_build.dart';
 import 'models/recognition_result.dart';
 import 'models/regulation.dart';
 import 'models/team.dart';
+import 'recognition/auto_scan.dart';
+import 'recognition/battle_events.dart';
 import 'recognition/battle_ocr.dart';
 import 'recognition/cloud_vision_recognizer.dart';
 import 'recognition/local_recognizer.dart';
 import 'recognition/mock_recognizer.dart';
+import 'recognition/network_camera.dart';
 import 'recognition/recognition_service.dart';
 import 'recognition/sprite_matcher.dart';
 import 'storage/app_database.dart';
@@ -31,6 +34,7 @@ const settingApiModel = 'api_model';
 const settingActiveProfile = 'active_profile';
 const settingOnboarded = 'onboarded';
 const settingNetCamUrl = 'net_cam_url'; // MJPEG rig stream, e.g. http://ip:81/stream
+const settingAutoScan = 'auto_scan'; // 'yes' (default) | 'no'
 
 class AppState extends ChangeNotifier {
   final DataPack pack;
@@ -46,6 +50,10 @@ class AppState extends ChangeNotifier {
   /// On-device OCR engine; null where unavailable (tests inject fakes).
   final TextOcr? ocr;
 
+  /// Diagnostics sink for the local sprite matcher (see [SpriteMatchDebug]);
+  /// main.dart writes each report to documents/last_scan/ and the console.
+  final void Function(SpriteMatchDebug report)? matchDebug;
+
   List<Profile> profiles = [];
   int activeProfileId = 1;
   bool onboarded = true;
@@ -59,7 +67,20 @@ class AppState extends ChangeNotifier {
   String apiBaseUrl = '';
   String apiModel = '';
   String netCamUrl = '';
+
+  /// Hands-free scanning from the rig (default ON): every battle connects
+  /// to [netCamUrl] and scans by itself — team preview every 5 s until the
+  /// picks are locked, then the 0.5 s in-match text tracker. Local engine
+  /// only (an API engine at 2 scans/s would eat tokens).
+  bool autoScanEnabled = true;
   BattleSession? battle;
+
+  /// Live while a battle is running and auto-scan is possible; the battle
+  /// screen shows its [AutoScanController.status] and the manual capture
+  /// screen pauses it (the rig serves one stream client at a time).
+  AutoScanController? autoScan;
+  BattleEventTracker? _tracker;
+  final NetworkCameraClient _netCamera = NetworkCameraClient();
 
   late RecognitionService _recognizer;
 
@@ -69,6 +90,7 @@ class AppState extends ChangeNotifier {
     required this.assetLoader,
     ExemplarStore? exemplars,
     this.ocr,
+    this.matchDebug,
   }) : exemplars = exemplars ?? ExemplarStore(loadBundled: assetLoader) {
     _rebuildRecognizer();
   }
@@ -99,6 +121,7 @@ class AppState extends ChangeNotifier {
     apiBaseUrl = await db.getSetting(settingApiBaseUrl) ?? '';
     apiModel = await db.getSetting(settingApiModel) ?? '';
     netCamUrl = await db.getSetting(settingNetCamUrl) ?? '';
+    autoScanEnabled = (await db.getSetting(settingAutoScan)) != 'no';
     _rebuildRecognizer();
     notifyListeners();
   }
@@ -118,7 +141,9 @@ class AppState extends ChangeNotifier {
       _ => LocalRecognizer(
           pack,
           matcher: SpriteMatcher(pack,
-              loadBytes: assetLoader, exemplars: exemplars),
+              loadBytes: assetLoader,
+              exemplars: exemplars,
+              onDebug: matchDebug),
           ocr: ocr,
         ),
     };
@@ -127,6 +152,9 @@ class AppState extends ChangeNotifier {
   // ----------------------------------------------------------- profiles --
 
   Future<void> switchProfile(int profileId) async {
+    autoScan?.stop();
+    autoScan = null;
+    _tracker = null;
     activeProfileId = profileId;
     await db.setSetting(settingActiveProfile, '$profileId');
     teams = await db.loadTeams(profileId: profileId);
@@ -186,6 +214,7 @@ class AppState extends ChangeNotifier {
     String? newApiBaseUrl,
     String? newApiModel,
     String? newNetCamUrl,
+    bool? newAutoScanEnabled,
   }) async {
     if (newApiKey != null) {
       apiKey = newApiKey;
@@ -211,7 +240,13 @@ class AppState extends ChangeNotifier {
       netCamUrl = newNetCamUrl;
       await db.setSetting(settingNetCamUrl, newNetCamUrl);
     }
+    if (newAutoScanEnabled != null) {
+      autoScanEnabled = newAutoScanEnabled;
+      await db.setSetting(settingAutoScan, newAutoScanEnabled ? 'yes' : 'no');
+    }
     _rebuildRecognizer();
+    // A new engine / rig address / toggle can change whether auto-scan runs.
+    if (battle != null) _startAutoScan();
     notifyListeners();
   }
 
@@ -223,7 +258,55 @@ class AppState extends ChangeNotifier {
   void startBattle(FormatSpec format, Team team,
       {List<PokemonBuild>? picks}) {
     battle = BattleSession(format: format, team: team, picks: picks);
+    _tracker = BattleEventTracker(pack, battle!);
+    _startAutoScan();
     notifyListeners();
+  }
+
+  /// Why auto-scan is not running (for the battle screen's status chip);
+  /// null when it IS running.
+  String? get autoScanUnavailableReason {
+    if (!autoScanEnabled) return 'Auto-scan is off (Settings)';
+    if (engineName != 'local') {
+      return 'Auto-scan needs the Local engine (Settings)';
+    }
+    if (normalizeStreamUrl(netCamUrl) == null) {
+      return 'No rig address saved yet — connect once via Manually scan';
+    }
+    return null;
+  }
+
+  void _startAutoScan() {
+    // Keep the paused state across a restart (a settings change while the
+    // manual capture screen holds the rig's single stream slot must not
+    // start a second connection).
+    final wasPaused = autoScan?.isPaused ?? false;
+    autoScan?.stop();
+    autoScan = null;
+    if (battle == null || autoScanUnavailableReason != null) return;
+    autoScan = AutoScanController(
+      framesOf: _netCamera.frames,
+      urlOf: () => normalizeStreamUrl(netCamUrl),
+      phaseOf: () {
+        final session = battle;
+        if (session == null) return AutoScanPhase.off;
+        return session.picksChosen ? AutoScanPhase.battle : AutoScanPhase.preview;
+      },
+      onFrame: (frame, phase) async {
+        try {
+          if (phase == AutoScanPhase.preview) {
+            await runSnapshot(frame, screen: RecognitionScreen.preview);
+          } else {
+            await runSnapshot(frame, screen: RecognitionScreen.battle);
+          }
+        } on RecognitionException {
+          // No panels in this frame (menu open, scene transition) — fine,
+          // the next tick gets another look.
+        }
+      },
+    );
+    if (wasPaused) autoScan!.pause('paused while the camera view is open');
+    autoScan!.start();
   }
 
   /// Lock in (or change) which of your six you're bringing.
@@ -235,6 +318,9 @@ class AppState extends ChangeNotifier {
   /// End the battle; when [result] is 'win' | 'loss' | 'unknown' and there is
   /// anything worth keeping, the session is saved to match history.
   Future<void> endBattle({String result = 'unknown', bool save = true}) async {
+    autoScan?.stop();
+    autoScan = null;
+    _tracker = null;
     final session = battle;
     battle = null;
     if (save &&
@@ -272,6 +358,11 @@ class AppState extends ChangeNotifier {
     if (session == null) {
       throw const RecognitionException('No battle in progress.');
     }
+    if (screen == RecognitionScreen.battle &&
+        engineName == 'local' &&
+        ocr != null) {
+      return _runBattleTextScan(session, imageBytes);
+    }
     final result = await _recognizer.recognize(
       imageBytes,
       context: BattleSnapshotContext(
@@ -288,16 +379,73 @@ class AppState extends ChangeNotifier {
     if (screen == RecognitionScreen.preview) {
       _mergePreview(session, result);
     } else {
-      for (final slot in result.enemies) {
-        session.addEnemy(
-          slot.speciesId,
-          mega: slot.isMega,
-          hpPercent: slot.hpPercent,
-        );
-      }
+      _applyBattleSlots(session, result);
     }
     notifyListeners();
     return result;
+  }
+
+  /// Local-engine battle scan: OCR ONCE, then feed the same lines to both
+  /// the name-banner matcher (who is on the field, HP) and the in-match
+  /// event tracker (moves, abilities, items, Trick Room, speed order).
+  /// Both the manual "Manually scan" flow and the 0.5 s auto-scan land
+  /// here, so a manual snap teaches the tracker too.
+  Future<RecognitionResult> _runBattleTextScan(
+      BattleSession session, Uint8List imageBytes) async {
+    final lines = await ocr!.readLines(imageBytes);
+    final slots = BattleTextMatcher(pack).match(
+      lines,
+      BattleSnapshotContext(
+        yourSpeciesIds: [for (final p in session.picks) p.speciesId],
+        enemyFieldSlots: session.format.fieldSlots,
+        enemyTeamSize: session.format.teamSize,
+        screen: RecognitionScreen.battle,
+      ),
+    );
+    final result = RecognitionResult(slots: slots, engine: 'local');
+    _applyBattleSlots(session, result);
+    final events = _tracker?.consume(lines) ?? const <BattleEvent>[];
+    if (slots.isEmpty && events.isEmpty) {
+      throw const RecognitionException(
+          'No Pokemon names found in this photo — make sure the name banners '
+          'are visible, or add the enemy manually.');
+    }
+    notifyListeners();
+    return result;
+  }
+
+  /// Battle-screen result -> session: enemies join/update the field, and
+  /// recognized Pokemon of YOURS sync the on-field chips.
+  void _applyBattleSlots(BattleSession session, RecognitionResult result) {
+    for (final slot in result.enemies) {
+      session.addEnemy(
+        slot.speciesId,
+        mega: slot.isMega,
+        hpPercent: slot.hpPercent,
+      );
+    }
+    final yoursSeen = result.yours.map((s) => s.speciesId).toSet();
+    if (yoursSeen.isEmpty) return;
+    for (var i = 0; i < session.picks.length; i++) {
+      if (yoursSeen.contains(session.picks[i].speciesId)) {
+        session.activePickIndexes.add(i);
+      }
+    }
+    // Too many actives now? Drop the ones the screen did NOT show.
+    if (session.activePickIndexes.length > session.format.fieldSlots) {
+      final keep = session.activePickIndexes
+          .where((i) => yoursSeen.contains(session.picks[i].speciesId))
+          .toList();
+      if (keep.length <= session.format.fieldSlots) {
+        final rest = session.activePickIndexes
+            .where((i) => !keep.contains(i))
+            .take(session.format.fieldSlots - keep.length)
+            .toList(); // materialize BEFORE the clear() below
+        session.activePickIndexes
+          ..clear()
+          ..addAll([...keep, ...rest]);
+      }
+    }
   }
 
   void _mergePreview(BattleSession session, RecognitionResult result) {

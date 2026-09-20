@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "generatedAt": "2026-08-16",
+ "generatedAt": "2026-09-14",
  "items": [
   {
    "id": "abomasnowite",
@@ -11,6 +11,11 @@
    "id": "absolite",
    "name": "Absolite",
    "desc": "Mega Stone: lets Absol Mega Evolve. (Held: Allows Absol to Mega Evolve into Mega Absol.)"
+  },
+  {
+   "id": "absolite-z",
+   "name": "Absolite Z",
+   "desc": "Mega Stone: Absol -> Mega Absol Z (Pokemon Champions, Reg M-C)"
   },
   {
    "id": "aerodactylite",
@@ -61,6 +66,11 @@
    "id": "barbaracleite",
    "name": "Barbaracleite",
    "desc": "Mega Stone: lets Barbaracle Mega Evolve."
+  },
+  {
+   "id": "baxcaliburite",
+   "name": "Baxcaliburite",
+   "desc": "Mega Stone: Baxcalibur -> Mega Baxcalibur (Pokemon Champions, Reg M-C)"
   },
   {
    "id": "beedrillite",
@@ -243,6 +253,11 @@
    "desc": "Mega Stone: lets Garchomp Mega Evolve. (Held: Allows Garchomp to Mega Evolve into Mega Garchomp.)"
   },
   {
+   "id": "garchompite-z",
+   "name": "Garchompite Z",
+   "desc": "Mega Stone: Garchomp -> Mega Garchomp Z (Pokemon Champions, Reg M-C)"
+  },
+  {
    "id": "gardevoirite",
    "name": "Gardevoirite",
    "desc": "Mega Stone: lets Gardevoir Mega Evolve. (Held: Allows Gardevoir to Mega Evolve into Mega Gardevoir.)"
@@ -261,6 +276,11 @@
    "id": "glimmoraite",
    "name": "Glimmoraite",
    "desc": "Mega Stone: lets Glimmora Mega Evolve."
+  },
+  {
+   "id": "golisopodite",
+   "name": "Golisopodite",
+   "desc": "Mega Stone: Golisopod -> Mega Golisopod (Pokemon Champions, Reg M-C)"
   },
   {
    "id": "golurkite",
@@ -336,6 +356,11 @@
    "id": "lucarionite",
    "name": "Lucarionite",
    "desc": "Mega Stone: Lucario -> Mega Lucario"
+  },
+  {
+   "id": "lucarionite-z",
+   "name": "Lucarionite Z",
+   "desc": "Mega Stone: Lucario -> Mega Lucario Z (Pokemon Champions, Reg M-C)"
   },
   {
    "id": "lum-berry",

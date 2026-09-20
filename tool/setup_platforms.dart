@@ -6,8 +6,10 @@
 ///  1. Adds CAMERA + INTERNET permissions to AndroidManifest.xml
 ///     (snapshot recognition needs both; INTERNET is required in release
 ///     builds for the cloud vision API).
-///  2. Adds NSCameraUsageDescription + NSPhotoLibraryUsageDescription to
-///     the iOS Info.plist.
+///  2. Adds NSCameraUsageDescription, NSPhotoLibraryUsageDescription and
+///     NSLocalNetworkUsageDescription to the iOS Info.plist, plus an App
+///     Transport Security exception for local-network http:// (both are
+///     required for the camera-rig stream to work on iOS 14+).
 ///  3. Deletes the stock counter-app test/widget_test.dart that
 ///     `flutter create` drops next to the real suite.
 library;
@@ -63,6 +65,11 @@ void _patchIosPlist() {
             'identify the Pokemon on the field.',
     'NSPhotoLibraryUsageDescription':
         'Lets you pick a battle screenshot for recognition.',
+    // iOS 14+ gates ANY local-network traffic behind this string plus a
+    // user prompt. Without it the camera rig's stream fails silently.
+    'NSLocalNetworkUsageDescription':
+        'Connects to your camera rig on the local Wi-Fi network to receive '
+            'its video stream.',
   };
   var changed = false;
   entries.forEach((key, description) {
@@ -74,9 +81,26 @@ void _patchIosPlist() {
       changed = true;
     }
   });
+  // App Transport Security: the rig serves plain http:// on a LAN address,
+  // which iOS blocks by default. NSAllowsLocalNetworking is the minimal
+  // exception (local/link-local addresses only) — deliberately NOT
+  // NSAllowsArbitraryLoads, which disables ATS globally and draws review
+  // scrutiny.
+  if (!content.contains('NSAppTransportSecurity')) {
+    content = content.replaceFirst(
+      '</dict>\n</plist>',
+      '\t<key>NSAppTransportSecurity</key>\n'
+          '\t<dict>\n'
+          '\t\t<key>NSAllowsLocalNetworking</key>\n'
+          '\t\t<true/>\n'
+          '\t</dict>\n'
+          '</dict>\n</plist>',
+    );
+    changed = true;
+  }
   if (changed) {
     file.writeAsStringSync(content);
-    stdout.writeln('Info.plist: usage descriptions added — DONE');
+    stdout.writeln('Info.plist: usage descriptions + ATS exception — DONE');
   } else {
     stdout.writeln('Info.plist: already patched — DONE');
   }

@@ -22,6 +22,12 @@ Future<Uint8List?> fileLoader(String path) async {
 
 /// Compose a fake team-select screen: six crimson panels on the right half,
 /// each with a sprite pasted at the panel's sprite position.
+///
+/// The sprites come from `test/fixtures/champions/` — the game's own 2D art,
+/// the same domain the matcher's reference atlas holds. Composing from the
+/// bundled HOME renders instead would test the matcher against artwork the
+/// game never draws, which is what the old art-histogram tier existed to
+/// cope with and what the atlas replaced.
 Uint8List composePreview(List<String> speciesIds) {
   const w = 1200, h = 900;
   final canvas = img.Image(width: w, height: h);
@@ -36,8 +42,10 @@ Uint8List composePreview(List<String> speciesIds) {
         x2: panelX + panelW,
         y2: y0 + panelH,
         color: img.ColorRgb8(216, 44, 100)); // crimson panel
-    final spriteBytes =
-        File('assets/sprites/home/${speciesIds[i]}.png').readAsBytesSync();
+    final champions = File('test/fixtures/champions/${speciesIds[i]}.png');
+    final spriteBytes = champions.existsSync()
+        ? champions.readAsBytesSync()
+        : File('assets/sprites/home/${speciesIds[i]}.png').readAsBytesSync();
     final sprite = img.decodeImage(spriteBytes)!;
     final scaled = img.copyResize(sprite, height: panelH - 10);
     img.compositeImage(canvas, scaled,
@@ -49,11 +57,13 @@ Uint8List composePreview(List<String> speciesIds) {
 void main() {
   final pack = loadRealDataPack();
 
-  SpriteMatcher freshMatcher({bool withSeeds = true}) => SpriteMatcher(
+  SpriteMatcher freshMatcher({bool withSeeds = true, bool useCnn = true}) =>
+      SpriteMatcher(
         pack,
         loadBytes: fileLoader,
         exemplars: ExemplarStore(
             loadBundled: withSeeds ? fileLoader : (_) async => null),
+        useCnn: useCnn,
       );
 
   group('synthetic preview screen', () {
@@ -71,10 +81,11 @@ void main() {
       final matches = await matcher.matchPreview(composePreview(truth));
       expect(matches.length, 6);
       final assigned = [for (final m in matches) m.assigned.speciesId];
-      // Cold-start art matching is the fallback path: near-identical
-      // palettes (e.g. Garchomp vs Sneasler) may swap on close calls, so
-      // assert top-3 containment per panel and a strong majority assigned
-      // exactly — the exemplar loop (next test) is what makes it exact.
+      // Runs through the trained classifier by default (6/6 top-1 in the
+      // Python twin; Metagross weakest at ~0.35). The bar stays at top-3
+      // containment plus a strong majority exact so the same test also holds
+      // for the template fallback — the exemplar loop (next test) is what
+      // makes a confirmed species exact.
       var exact = 0;
       for (var i = 0; i < matches.length; i++) {
         final top3 = [
@@ -112,11 +123,15 @@ void main() {
   group('real fixture photo', () {
     const fixture = 'test/fixtures/preview1.jpeg';
     final fixtureMissing = !File(fixture).existsSync();
+    // Read off the photo itself, badges included: panel 3 is the GREEN-hooded
+    // owl with Grass+Ghost badges (base Decidueye — the Hisuian form is
+    // red/white and Grass/Fighting), and panel 4's orange wolf is the Dusk
+    // form. Both were mislabelled before the true-sprite matcher caught it.
     const truth = [
       'sneasler',
       'umbreon',
-      'decidueye-hisui',
-      'lycanroc',
+      'decidueye',
+      'lycanroc-dusk',
       'arcanine',
       'sylveon'
     ];
@@ -134,18 +149,27 @@ void main() {
         timeout: const Timeout(Duration(minutes: 3)),
         skip: fixtureMissing ? 'fixture photo not present' : false);
 
-    test('without exemplars, art fallback still ranks the truth sensibly',
+    // The template tier is now the fallback for when the classifier model is
+    // absent; useCnn: false keeps it honest.
+    test('without exemplars, the Champions template tier ranks the truth high',
         () async {
-      final matcher = freshMatcher(withSeeds: false);
+      final matcher = freshMatcher(withSeeds: false, useCnn: false);
       final matches =
           await matcher.matchPreview(File(fixture).readAsBytesSync());
-      var topEight = 0;
+      var topThree = 0, exact = 0;
       for (var i = 0; i < matches.length; i++) {
         final order = [for (final c in matches[i].ranked) c.speciesId];
-        if (order.take(8).contains(truth[i])) topEight++;
+        if (order.take(3).contains(truth[i])) topThree++;
+        if (matches[i].assigned.speciesId == truth[i]) exact++;
       }
-      expect(topEight, greaterThanOrEqualTo(4),
-          reason: 'cold-start art matching is a fallback, not the main path');
+      // The old art-histogram tier managed the truth in the top EIGHT for
+      // only 3 of 6 panels here. Matching the game's own artwork puts it at
+      // rank 1 on all six in the Python reference run (including the exact
+      // Lycanroc form); one panel of slack covers detector differences.
+      expect(topThree, 6,
+          reason: 'template tier should rank the truth in the top three');
+      expect(exact, greaterThanOrEqualTo(5),
+          reason: 'and get nearly all of them outright, with no exemplars');
     },
         timeout: const Timeout(Duration(minutes: 3)),
         skip: fixtureMissing ? 'fixture photo not present' : false);

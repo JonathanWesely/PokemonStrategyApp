@@ -1,14 +1,14 @@
 {
  "schemaVersion": 1,
- "generatedAt": "2026-07-11",
+ "generatedAt": "2026-09-14",
  "formats": [
   {
    "id": "ranked-doubles",
-   "name": "Ranked Battle (Reg M-B Doubles)",
-   "regulation": "reg-mb",
-   "regulationName": "Regulation Set M-B",
-   "start": "2026-06-17",
-   "end": "2026-09-02",
+   "name": "Ranked Battle (Reg M-C Doubles)",
+   "regulation": "reg-mc",
+   "regulationName": "Regulation Set M-C",
+   "start": "2026-09-09",
+   "end": "2026-12-02",
    "style": "doubles",
    "teamSize": 6,
    "pickSize": 4,
@@ -20,7 +20,7 @@
   {
    "id": "casual-singles",
    "name": "Casual Battle (Singles)",
-   "regulation": "reg-mb",
+   "regulation": "reg-mc",
    "style": "singles",
    "teamSize": 6,
    "pickSize": 3,
@@ -32,7 +32,7 @@
   {
    "id": "casual-doubles",
    "name": "Casual Battle (Doubles)",
-   "regulation": "reg-mb",
+   "regulation": "reg-mc",
    "style": "doubles",
    "teamSize": 6,
    "pickSize": 4,
@@ -44,7 +44,7 @@
   {
    "id": "private",
    "name": "Private Battle",
-   "regulation": "reg-mb",
+   "regulation": "reg-mc",
    "style": "doubles",
    "teamSize": 6,
    "pickSize": 4,

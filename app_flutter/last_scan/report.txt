@@ -1,0 +1,4 @@
+frame 1600x1200  detect@1200  scale 1.33
+runtime exemplars: {sylveon: 4, arcanine: 3, lycanroc: 3, sneasler: 3, umbreon: 2}
+panel 1 182x45px @(1237,388) types[-]  vileplume:0.33[t]  vaporeon:0.32[t]  crabominable:0.26[t]  wyrdeer:0.25[t]  pidgeot:0.25[t]
+tiers: [e]xemplar [t]emplate [a]rt
