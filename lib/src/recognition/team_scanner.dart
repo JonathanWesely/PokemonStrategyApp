@@ -178,7 +178,7 @@ class TeamScanner {
 
   /// The six card rects in ORIGINAL pixels, row-major (the 1..6 order).
   static List<List<int>> findTeamCards(img.Image photo) {
-    final w = photo.width, h = photo.height;
+    final w = photo.width;
     final k = w > detectWidth ? w / detectWidth : 1.0;
     final small = k > 1.0
         ? img.copyResize(photo,

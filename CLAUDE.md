@@ -218,6 +218,17 @@ updated when direction changes — Jonathan relies on it between sessions.
   2026-09-21 team photos showed the real ones: `sableyeite`->`sablenite`,
   `scolipedeite`->`scolipite` (ids AND names), Grassy Seed added. If another
   guessed name shows up on screen, fix the pack, don't fuzzy around it.
+- **iOS via Codemagic + TestFlight (2026-09-22)**: no Mac anywhere —
+  `codemagic.yaml` (repo root) builds the ipa on a cloud Mac with
+  automatic signing through the App Store Connect API key (integration
+  name `AppStoreConnect`) and uploads to TestFlight; build number =
+  `$PROJECT_BUILD_NUMBER`, builds started MANUALLY on codemagic.io.
+  Deployment target is **15.5** (ML Kit floor) in project.pbxproj AND the
+  new ios/Podfile; Info.plist carries the usage strings + the
+  `NSAllowsLocalNetworking` ATS exception + `ITSAppUsesNonExemptEncryption
+  = false`. The step-by-step (accounts, first install, updates,
+  distributing) lives in the vault:
+  `JonWesOBVault/how to make android app available for iPhone.md`.
 - **Capture sources (2026-08-23)**: phone camera, gallery, and **Rig**
   (network MJPEG stream from the camera pod at `http://<ip>:81/stream`;
   `network_camera.dart` holds the client + SOI/EOI frame parser, URL

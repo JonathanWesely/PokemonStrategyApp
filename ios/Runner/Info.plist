@@ -66,5 +66,20 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>Takes snapshots of your Pokemon Champions battle screen to identify the Pokemon on the field.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Lets you pick a battle screenshot for recognition.</string>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>Connects to your camera rig on the local Wi-Fi network to receive its video stream.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Required by the camera component. The app does not record audio.</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsLocalNetworking</key>
+		<true/>
+	</dict>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 </dict>
 </plist>
