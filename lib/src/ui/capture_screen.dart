@@ -69,10 +69,27 @@ double focusScoreOf(Uint8List jpeg) {
   return sum2 / n - mean * mean;
 }
 
+/// Pick an image from the gallery and return its bytes (null = cancelled).
+/// Lives here because of the plugin-isolation rule: image_picker is only
+/// imported by this file.
+Future<Uint8List?> pickGalleryImageBytes() async {
+  final picked = await ImagePicker().pickImage(source: ImageSource.gallery);
+  if (picked == null) return null;
+  return picked.readAsBytes();
+}
+
 class CaptureScreen extends StatefulWidget {
   final RecognitionScreen mode;
 
-  const CaptureScreen({super.key, required this.mode});
+  /// Photo mode: instead of scanning, "Snap" pops this route with the raw
+  /// JPEG bytes (Scan Team uses it to collect the two display images). The
+  /// rig is preselected when an address is saved — same default as
+  /// auto-scan.
+  final bool returnPhoto;
+  final String? photoTitle;
+
+  const CaptureScreen(
+      {super.key, required this.mode, this.returnPhoto = false, this.photoTitle});
 
   @override
   State<CaptureScreen> createState() => _CaptureScreenState();
@@ -127,6 +144,13 @@ class _CaptureScreenState extends State<CaptureScreen> {
       _appState = state;
       _autoScanWasPaused = state.autoScan?.isPaused ?? false;
       state.autoScan?.pause('paused while the manual camera view is open');
+      // Photo mode defaults to the rig, like every other capture path.
+      if (widget.returnPhoto && state.netCamUrl.trim().isNotEmpty) {
+        _netMode = true;
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (mounted && !_connected) _connectNet();
+        });
+      }
     }
   }
 
@@ -171,6 +195,10 @@ class _CaptureScreenState extends State<CaptureScreen> {
   }
 
   Future<void> _recognize(Uint8List bytes) async {
+    if (widget.returnPhoto) {
+      if (mounted) Navigator.pop(context, bytes);
+      return;
+    }
     final state = AppScope.of(context);
     setState(() {
       _busy = true;
@@ -393,12 +421,14 @@ class _CaptureScreenState extends State<CaptureScreen> {
   @override
   Widget build(BuildContext context) {
     final camera = _camera;
-    final title = widget.mode == RecognitionScreen.preview
-        ? 'Scan team preview'
-        : 'Scan battle';
+    final title = widget.photoTitle ??
+        (widget.mode == RecognitionScreen.preview
+            ? 'Scan team preview'
+            : 'Scan battle');
     final canSnap = !_busy &&
         (_netMode ? (_connected && _netFrame != null) : camera != null);
-    final canAuto = _netMode ? _connected : camera != null;
+    final canAuto =
+        !widget.returnPhoto && (_netMode ? _connected : camera != null);
     return Scaffold(
       appBar: AppBar(
         title: Text(title),

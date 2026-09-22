@@ -23,6 +23,10 @@ class PokemonBuild {
   /// Selected Mega forme id (must be one of the species' megas), or null.
   String? megaFormeId;
 
+  /// 'male' | 'female' | null (unknown / genderless). Read off the team
+  /// display by Scan Team; informational for now.
+  String? gender;
+
   PokemonBuild({
     required this.speciesId,
     this.nickname,
@@ -32,6 +36,7 @@ class PokemonBuild {
     this.nature = 'Serious',
     Map<String, int>? sp,
     this.megaFormeId,
+    this.gender,
   })  : moveIds = moveIds ?? [],
         sp = sp ?? {};
 
@@ -55,6 +60,7 @@ class PokemonBuild {
         sp: ((json['sp'] as Map?) ?? const {})
             .map((k, v) => MapEntry(k as String, v as int)),
         megaFormeId: json['megaFormeId'] as String?,
+        gender: json['gender'] as String?,
       );
 
   Map<String, dynamic> toJson() => {
@@ -66,6 +72,7 @@ class PokemonBuild {
         'nature': nature,
         'sp': sp,
         if (megaFormeId != null) 'megaFormeId': megaFormeId,
+        if (gender != null) 'gender': gender,
       };
 
   PokemonBuild copy() => PokemonBuild.fromJson(toJson());

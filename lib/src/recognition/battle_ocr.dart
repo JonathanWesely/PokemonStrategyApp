@@ -11,13 +11,17 @@ import '../models/recognition_result.dart';
 import 'recognition_service.dart';
 
 /// One line of recognized text with its normalized center (0–1 in both axes,
-/// y grows downward).
+/// y grows downward) and, when the engine provides it, its normalized box
+/// size ([w]/[h] are 0 when unknown — the team scanner degrades gracefully).
 class OcrLine {
   final String text;
   final double cx;
   final double cy;
+  final double w;
+  final double h;
 
-  const OcrLine(this.text, {required this.cx, required this.cy});
+  const OcrLine(this.text,
+      {required this.cx, required this.cy, this.w = 0, this.h = 0});
 }
 
 /// The seam to the platform OCR engine. mlkit_ocr.dart implements this with

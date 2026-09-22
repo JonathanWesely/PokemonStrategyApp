@@ -181,6 +181,43 @@ updated when direction changes — Jonathan relies on it between sessions.
   `BattleSession.speedEvidence` as [fasterKey, slowerKey] with keys
   `y:<id>`/`e:<id>`, latest observation wins, and
   `applySpeedEvidence` reorders the strip over the stat-based prediction.
+- **Scan Team (2026-09-21)** imports a whole team from the game's two
+  team-display pages — `recognition/team_scanner.dart`, button inside the
+  team editor, flow in `ui/scan_team_screen.dart` (upload or take a picture;
+  the camera view defaults to the rig). Cards = purple chromaticity mask;
+  species = printed name first (nicknames fall back to sprite DETECTION:
+  slide each 32 px reference tile over the icon window, masked NCC with the
+  template's own alpha, coarse 96 px pass then a 160 px re-rank — no
+  segmentation, because white sprites on cream and purple on the card broke
+  every gate, 18/24 vs detection's 20/24; `tool/team_scan/`). Form families
+  whose members DIFFER IN TYPING (Tauros breeds, Rotoms, base-vs-regional)
+  are settled by the card's own TYPE BADGES (`familyFromBadges` +
+  `ChampionsReferenceSet.badgeTypeScore`, twin `tool/team_scan/badge.py`):
+  two fixed slots in the name strip (fx 0.461/0.518 of card width, single
+  badge always slot 1; runs kept only when centered in a slot — the gender
+  circle and a card-edge artifact sit outside), white-GLYPH fraction >0.035
+  marks a slot whose badge body hides in the strip purple (Ghost/Poison/
+  Dragon), candidates filtered by badge COUNT then scored against their
+  OWN types only — never an 18-way read, which genuinely fails here. 24/24
+  counts, 6/6 picks on the fixtures, Blaze vs Aqua 0.75 vs 0.47. The
+  sprite still settles SAME-type families (Indeedee, Lycanroc…) and is the
+  fallback when badges can't call it; a near-tie there (<0.05 — the
+  Paldean bulls differ by pixels at tile size) is imported but FLAGGED.
+  Gender = the ♂/♀ circle right after the name box
+  (royal blue / pink-red; badges sit further right). NATURE IS MATH, not
+  arrows: every displayed stat must reproduce from StatCalculator under
+  exactly one of x0.9/x1.0/x1.1 given base+SP, which identifies the nature
+  AND self-checks the OCR (a missing SP number is re-solved from the shown
+  stat; anything that verifies under no multiplier is flagged). The held
+  stone sets megaFormeId; PokemonBuild gained `gender`. The scanned team
+  opens PRE-FILLED in the editor with a warnings dialog — review, then
+  save. Fixtures: `test/fixtures/team{1,2}_{moves,stats}.jpeg` +
+  `test/team_scanner_test.dart` (scripted OCR laid out against the card
+  boxes the scanner itself finds).
+- **The pack's Champions-original stone names were guesses** until the
+  2026-09-21 team photos showed the real ones: `sableyeite`->`sablenite`,
+  `scolipedeite`->`scolipite` (ids AND names), Grassy Seed added. If another
+  guessed name shows up on screen, fix the pack, don't fuzzy around it.
 - **Capture sources (2026-08-23)**: phone camera, gallery, and **Rig**
   (network MJPEG stream from the camera pod at `http://<ip>:81/stream`;
   `network_camera.dart` holds the client + SOI/EOI frame parser, URL
@@ -309,6 +346,14 @@ when `test/fixtures/preview1.jpeg` is absent.
   `tool/split_sprite_sheets.py`; `--recut Sableye` redoes it and patches the
   manifest). Quaquaval shows the same speckled holes and Glimmora/Milotic
   may too — check any blue/purple sprite on magenta before trusting it.
+- **Never run index-writing git commands through the Cowork sandbox**
+  (`git status`/`add`/`commit` via device_bash): git creates `.git/index.lock`
+  while it works, and the sandbox is not allowed to DELETE files, so the lock
+  is left behind and every later git operation — including GitHub Desktop —
+  fails with "A lock file already exists". That is exactly where the stale
+  Aug 28 `HEAD.lock` and Sep 6 `index.lock` came from (cleared 2026-09-20
+  into `_to_delete/`). Read-only inspection (`git log`, `cat .git/HEAD`) is
+  fine; anything that touches the index belongs in Jonathan's own shell.
 - The four `images/RegulationMBPokemon*.png` captures OVERLAP — the list was
   scrolled between shots. The splitter de-duplicates by matching tail rows
   against head rows; don't assume 4 x 80 cells.

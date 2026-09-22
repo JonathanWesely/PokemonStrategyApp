@@ -6,7 +6,9 @@ import 'package:flutter/material.dart';
 import '../app_state.dart';
 import '../data/legality.dart';
 import '../models/team.dart';
+import '../recognition/team_scanner.dart';
 import 'build_editor_screen.dart';
+import 'scan_team_screen.dart';
 import 'widgets.dart';
 
 class TeamEditorScreen extends StatefulWidget {
@@ -21,6 +23,52 @@ class TeamEditorScreen extends StatefulWidget {
 class _TeamEditorScreenState extends State<TeamEditorScreen> {
   late final TextEditingController _nameController =
       TextEditingController(text: widget.team.name);
+
+  /// Fill this team from the two Champions team-display images. The result
+  /// REPLACES the current slots; anything uncertain arrives as a warning
+  /// dialog plus per-slot notes.
+  Future<void> _scanTeam() async {
+    final scanned = await Navigator.push<ScannedTeam>(
+      context,
+      MaterialPageRoute(builder: (_) => const ScanTeamScreen()),
+    );
+    if (scanned == null || !mounted) return;
+    setState(() {
+      if (scanned.team.name != 'Scanned team') {
+        _nameController.text = scanned.team.name;
+      }
+      widget.team.builds
+        ..clear()
+        ..addAll(scanned.team.builds);
+    });
+    final warnings = scanned.allWarnings;
+    if (warnings.isNotEmpty && mounted) {
+      await showDialog<void>(
+        context: context,
+        builder: (dialogContext) => AlertDialog(
+          title: const Text('Check these before saving'),
+          content: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                for (final w in warnings)
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 6),
+                    child: Text('• $w', style: const TextStyle(fontSize: 13)),
+                  ),
+              ],
+            ),
+          ),
+          actions: [
+            FilledButton(
+                onPressed: () => Navigator.pop(dialogContext),
+                child: const Text('Got it')),
+          ],
+        ),
+      );
+    }
+  }
 
   Future<void> _save() async {
     final state = AppScope.of(context);
@@ -61,6 +109,12 @@ class _TeamEditorScreenState extends State<TeamEditorScreen> {
             ),
           ),
           const SizedBox(height: 12),
+          OutlinedButton.icon(
+            icon: const Icon(Icons.document_scanner_outlined),
+            label: const Text('Scan team from Champions (2 photos)'),
+            onPressed: _scanTeam,
+          ),
+          const SizedBox(height: 8),
           if (issues.isNotEmpty)
             Card(
               color: Colors.amber.shade50,
@@ -116,6 +170,7 @@ class _TeamEditorScreenState extends State<TeamEditorScreen> {
                       TypeChip(t, small: true),
                   ]),
                   Text(
+                    '${build.gender == 'male' ? '♂ ' : build.gender == 'female' ? '♀ ' : ''}'
                     '${build.nature} · ${state.pack.itemName(build.itemId)} · '
                     '${build.moveIds.map(state.pack.moveName).join(", ")}',
                     style: const TextStyle(fontSize: 11),

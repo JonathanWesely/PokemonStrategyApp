@@ -238,6 +238,40 @@ class ChampionsReferenceSet {
     return best;
   }
 
+  /// Raw match score of one badge region against ONE type's signature —
+  /// no argmax over the 18 types and none of [readBadge]'s absolute gates.
+  /// This is the *restricted* comparison the team scanner uses inside a
+  /// form family, where the question is never "which of 18 types?" but
+  /// "Fire or Water?": a Ghost badge whose purple body hides against the
+  /// card strip fails every detection gate yet still scores higher against
+  /// the Ghost signature than the Fire one. Returns -1 when the type is
+  /// unknown, the badges are unloaded, or the region is degenerate.
+  double badgeTypeScore(img.Image photo, int x0, int y0, int x1, int y1,
+      double bgR, double bgG, double bgB, String type) {
+    _BadgeSig? sig;
+    for (final s in _badges) {
+      if (s.type == type) sig = s;
+    }
+    if (sig == null) return -1.0;
+    x0 = x0.clamp(0, photo.width - 1);
+    x1 = x1.clamp(x0 + 1, photo.width);
+    y0 = y0.clamp(0, photo.height - 1);
+    y1 = y1.clamp(y0 + 1, photo.height);
+    if (x1 - x0 < 8 || y1 - y0 < 8) return -1.0;
+    final box = _tightBox(photo, x0, y0, x1, y1, bgR, bgG, bgB);
+    final f = _featureFrom(photo, box[0], box[1], box[2], box[3], badgeTile);
+    final dc = math.sqrt((f.cr - sig.cr) * (f.cr - sig.cr) +
+        (f.cg - sig.cg) * (f.cg - sig.cg));
+    var inter = 0.0, union = 0.0;
+    for (var i = 0; i < f.glyph.length && i < sig.glyph.length; i++) {
+      final a = f.glyph[i], b = sig.glyph[i];
+      inter += a * b;
+      union += a > b ? a : b;
+    }
+    final iou = union > 0 ? inter / union : 0.0;
+    return 0.55 * (1 - math.min(dc / 0.22, 1.0)) + 0.45 * iou;
+  }
+
   /// Badge squares inside a panel's badge area [x0,x1) x [y0,y1): column runs
   /// of off-card pixels, a run about twice as wide as it is tall split into
   /// two squares (badges are square and sit side by side). One run of about

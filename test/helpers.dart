@@ -3,8 +3,10 @@
 library;
 
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:pokemon_strategy_app/src/data/data_pack.dart';
+import 'package:pokemon_strategy_app/src/recognition/champions_atlas.dart';
 
 DataPack? _cached;
 
@@ -19,3 +21,15 @@ DataPack loadRealDataPack() {
     abilitiesJson: File('assets/data/abilities.json').readAsStringSync(),
   );
 }
+
+
+Future<Uint8List?> helperFileLoader(String path) async {
+  final f = File(path);
+  return f.existsSync() ? f.readAsBytesSync() : null;
+}
+
+ChampionsReferenceSet? _refs;
+
+/// The bundled sprite/badge reference set, loaded once per test run.
+Future<ChampionsReferenceSet> loadRefsForTest() async =>
+    _refs ??= (await ChampionsReferenceSet.load(helperFileLoader))!;

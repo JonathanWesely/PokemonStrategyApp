@@ -288,6 +288,11 @@
    "desc": "Mega Stone: lets Golurk Mega Evolve."
   },
   {
+   "id": "grassy-seed",
+   "name": "Grassy Seed",
+   "desc": "Boosts Defense on Grassy Terrain. Single use."
+  },
+  {
    "id": "greninjaite",
    "name": "Greninjaite",
    "desc": "Mega Stone: lets Greninja Mega Evolve."
@@ -453,8 +458,8 @@
    "desc": "Contact attackers lose 1/6 HP"
   },
   {
-   "id": "sableyeite",
-   "name": "Sableyeite",
+   "id": "sablenite",
+   "name": "Sablenite",
    "desc": "Mega Stone: lets Sableye Mega Evolve."
   },
   {
@@ -478,8 +483,8 @@
    "desc": "Mega Stone: lets Scizor Mega Evolve. (Held: Allows Scizor to Mega Evolve into Mega Scizor.)"
   },
   {
-   "id": "scolipedeite",
-   "name": "Scolipedeite",
+   "id": "scolipite",
+   "name": "Scolipite",
    "desc": "Mega Stone: lets Scolipede Mega Evolve."
   },
   {

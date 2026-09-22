@@ -37,6 +37,8 @@ class MlkitTextOcr implements TextOcr {
             line.text,
             cx: ((box.left + box.right) / 2 / w).clamp(0.0, 1.0),
             cy: ((box.top + box.bottom) / 2 / h).clamp(0.0, 1.0),
+            w: ((box.right - box.left) / w).clamp(0.0, 1.0),
+            h: ((box.bottom - box.top) / h).clamp(0.0, 1.0),
           ));
         }
       }
