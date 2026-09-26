@@ -5,6 +5,7 @@ library;
 
 import 'dart:typed_data';
 
+import 'package:flutter/foundation.dart' show kDebugMode;
 import 'package:flutter/widgets.dart';
 
 import 'data/data_pack.dart';
