@@ -223,6 +223,11 @@ updated when direction changes — Jonathan relies on it between sessions.
   automatic signing through the App Store Connect API key (integration
   name `AppStoreConnect`) and uploads to TestFlight; build number =
   `$PROJECT_BUILD_NUMBER`, builds started MANUALLY on codemagic.io.
+  Codemagic FETCHES signing files, it does not create them: the Apple
+  Distribution cert lives in Codemagic Code signing identities and the
+  App Store profile was made on the developer portal + fetched
+  (2026-09-23) — a build failing pre-step with “No matching profiles
+  found” means those are missing, not that the yaml is wrong.
   Deployment target is **15.5** (ML Kit floor) in project.pbxproj AND the
   new ios/Podfile; Info.plist carries the usage strings + the
   `NSAllowsLocalNetworking` ATS exception + `ITSAppUsesNonExemptEncryption
@@ -259,6 +264,15 @@ then scan again. Pull it with
 ```powershell
 .\tool\pull_scan.ps1          # -> test\_scan_dump\live\, prints report.txt
 ```
+
+**On iPhone (2026-09-26)**: no adb — instead the dump is gated on the
+`scan_diagnostics` setting (debug builds default ON, release OFF; toggle
+in Settings → “Save scan diagnostics”), and Info.plist now sets
+`UIFileSharingEnabled` + `LSSupportsOpeningDocumentsInPlace`, so the
+app's documents folder shows in the Files app: On My iPhone → Pokemon
+Strategy → last_scan. Share frame.jpg + overlay.jpg + report.txt (and
+panel crops) straight into a Claude session — the twin runs on the exact
+scanner input.
 
 (`run-as ... cp /sdcard/Download` is denied on this emulator image; the script
 uses the base64 tar pipe, the one route that works without root.) Every pull is

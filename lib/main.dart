@@ -9,7 +9,7 @@ library;
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:flutter/foundation.dart' show kDebugMode;
+import 'package:flutter/foundation.dart' show debugPrint;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:image/image.dart' as img;
@@ -171,7 +171,9 @@ Future<void> main() async {
     assetLoader: _bundleLoader,
     exemplars: exemplars,
     ocr: MlkitTextOcr(),
-    matchDebug: kDebugMode ? _scanDebugWriter(docs) : null,
+    // Always constructed; AppState only invokes it when scan diagnostics
+    // are enabled (debug builds default on; release = Settings toggle).
+    matchDebug: _scanDebugWriter(docs),
   );
   await state.restore();
 

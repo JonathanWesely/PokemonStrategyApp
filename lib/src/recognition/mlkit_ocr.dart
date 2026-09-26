@@ -20,8 +20,15 @@ class MlkitTextOcr implements TextOcr {
   Future<List<OcrLine>> readLines(Uint8List imageBytes) async {
     // ML Kit wants a file or a raw-format buffer; a temp JPEG file is the
     // simplest reliable path on both platforms.
-    final decoded = img.decodeImage(imageBytes);
-    if (decoded == null) return const [];
+    final raw = img.decodeImage(imageBytes);
+    if (raw == null) return const [];
+    // iPhone JPEGs carry rotation as an EXIF tag, not rotated pixels
+    // (Android bakes it into the pixels). ML Kit applies the tag itself,
+    // but the cx/cy fractions below are computed against the DECODED
+    // dimensions — so bake the rotation in and hand ML Kit the same
+    // upright image the fractions describe. Without this, every line
+    // lands at the wrong position on iOS (2026-09-25 field test).
+    final decoded = img.bakeOrientation(raw);
     final w = decoded.width.toDouble(), h = decoded.height.toDouble();
     final tmp = File(
         '${Directory.systemTemp.path}/psa_ocr_${DateTime.now().microsecondsSinceEpoch}.jpg');

@@ -35,6 +35,8 @@ const settingActiveProfile = 'active_profile';
 const settingOnboarded = 'onboarded';
 const settingNetCamUrl = 'net_cam_url'; // MJPEG rig stream, e.g. http://ip:81/stream
 const settingAutoScan = 'auto_scan'; // 'yes' (default) | 'no'
+// 'yes' | 'no' — unset defaults to ON in debug builds, OFF in release.
+const settingScanDiagnostics = 'scan_diagnostics';
 
 class AppState extends ChangeNotifier {
   final DataPack pack;
@@ -73,6 +75,12 @@ class AppState extends ChangeNotifier {
   /// picks are locked, then the 0.5 s in-match text tracker. Local engine
   /// only (an API engine at 2 scans/s would eat tokens).
   bool autoScanEnabled = true;
+
+  /// Write frame/overlay/crops/report to documents/last_scan on every
+  /// local team-preview scan. Debug builds default ON (unchanged); release
+  /// builds get a Settings toggle so a TestFlight install can capture the
+  /// exact scanner input for debugging.
+  bool scanDiagnosticsEnabled = kDebugMode;
   BattleSession? battle;
 
   /// Live while a battle is running and auto-scan is possible; the battle
@@ -122,6 +130,8 @@ class AppState extends ChangeNotifier {
     apiModel = await db.getSetting(settingApiModel) ?? '';
     netCamUrl = await db.getSetting(settingNetCamUrl) ?? '';
     autoScanEnabled = (await db.getSetting(settingAutoScan)) != 'no';
+    final diag = await db.getSetting(settingScanDiagnostics);
+    scanDiagnosticsEnabled = diag == null ? kDebugMode : diag == 'yes';
     _rebuildRecognizer();
     notifyListeners();
   }
@@ -143,7 +153,7 @@ class AppState extends ChangeNotifier {
           matcher: SpriteMatcher(pack,
               loadBytes: assetLoader,
               exemplars: exemplars,
-              onDebug: matchDebug),
+              onDebug: scanDiagnosticsEnabled ? matchDebug : null),
           ocr: ocr,
         ),
     };
@@ -247,6 +257,13 @@ class AppState extends ChangeNotifier {
     _rebuildRecognizer();
     // A new engine / rig address / toggle can change whether auto-scan runs.
     if (battle != null) _startAutoScan();
+    notifyListeners();
+  }
+
+  Future<void> setScanDiagnostics(bool enabled) async {
+    scanDiagnosticsEnabled = enabled;
+    await db.setSetting(settingScanDiagnostics, enabled ? 'yes' : 'no');
+    _rebuildRecognizer();
     notifyListeners();
   }
 
