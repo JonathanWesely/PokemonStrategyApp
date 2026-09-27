@@ -274,6 +274,17 @@ Strategy → last_scan. Share frame.jpg + overlay.jpg + report.txt (and
 panel crops) straight into a Claude session — the twin runs on the exact
 scanner input.
 
+**Naming (Jonathan's convention, 2026-09-27)**: the in-match enemy scan
+is the **match preview scan** (dump: `last_scan/`); the two-photo team
+import is the **team build scan** (dump: `last_team_scan/` — moves.jpg,
+stats.jpg, an overlay per photo with card boxes green + OCR lines
+yellow, and report.txt with every OCR line and the per-slot result;
+written by `_teamScanDebugWriter` in main.dart via `TeamScanner.scan`'s
+`onDebug`, fired on failed scans too). SEPARATE folders on purpose —
+the two dumps get analyzed in parallel. One Settings toggle gates both.
+Also 2026-09-27: the Battle tab's "+ Enemy" picker offers only the
+enemy team from the Team Preview tab, not the whole roster.
+
 (`run-as ... cp /sdcard/Download` is denied on this emulator image; the script
 uses the base64 tar pipe, the one route that works without root.) Every pull is
 also copied to `test\_scan_dump\archive\<timestamp>\`; add

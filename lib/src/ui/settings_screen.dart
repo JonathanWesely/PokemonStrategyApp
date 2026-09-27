@@ -247,9 +247,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     dense: true,
                     title: const Text('Save scan diagnostics'),
                     subtitle: const Text(
-                        'Each team-preview scan writes its frame, overlay, '
-                        'crops and report to last_scan/ (overwritten per '
-                        'scan).'),
+                        'Match preview scans write to last_scan/, team '
+                        'build scans to last_team_scan/ (each overwritten '
+                        'per scan).'),
                     value: state.scanDiagnosticsEnabled,
                     onChanged: (v) async {
                       await state.setScanDiagnostics(v);
@@ -260,7 +260,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   const Text(
                     'After a bad scan (diagnostics on): on iPhone open the '
                     'Files app → On My iPhone → Pokemon Strategy → '
-                    'last_scan and share the files; on Android/PC use '
+                    'last_scan (match preview) or last_team_scan (team '
+                    'build) and share the files; on Android/PC use '
                     'tool\\pull_scan.ps1 (also printed to the flutter run '
                     'console).',
                     style: TextStyle(fontSize: 11, color: Colors.grey),

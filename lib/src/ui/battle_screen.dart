@@ -80,8 +80,26 @@ class _BattleScreenState extends State<BattleScreen> {
         title: title, entries: [for (final s in all) MapEntry(s.id, s.name)]);
   }
 
+  /// The Battle tab's "+ Enemy" button. Choices are the enemy team from
+  /// the Team Preview tab — six knowns beat scrolling the whole roster
+  /// once the preview has named them.
   Future<void> _addEnemyManually() async {
-    final chosen = await _pickSpecies('Enemy Pokemon');
+    final state = AppScope.of(context);
+    final preview = state.battle?.enemyPreview ?? const [];
+    final seen = <String>{};
+    final entries = <MapEntry<String, String>>[
+      for (final slot in preview)
+        if (seen.add(slot.speciesId))
+          MapEntry(slot.speciesId, state.pack.speciesName(slot.speciesId)),
+    ];
+    if (entries.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text('No enemy team yet — scan or fill the Team Preview '
+              'tab first.')));
+      return;
+    }
+    final chosen = await showPickerDialog(context,
+        title: 'Enemy Pokemon (from team preview)', entries: entries);
     if (chosen != null && mounted) AppScope.of(context).addEnemyManually(chosen);
   }
 

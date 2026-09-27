@@ -18,8 +18,10 @@ import 'package:sqflite/sqflite.dart';
 
 import 'src/app_state.dart';
 import 'src/data/asset_loader.dart';
+import 'src/recognition/battle_ocr.dart' show OcrLine;
 import 'src/recognition/mlkit_ocr.dart';
 import 'src/recognition/sprite_matcher.dart';
+import 'src/recognition/team_scanner.dart';
 import 'src/storage/app_database.dart';
 import 'src/ui/home_screen.dart';
 
@@ -152,6 +154,108 @@ void Function(SpriteMatchDebug) _scanDebugWriter(Directory docs) {
   };
 }
 
+/// TEAM BUILD SCAN diagnostics: each run of the two-photo team import
+/// overwrites `documents/last_team_scan/` — kept SEPARATE from the match
+/// preview scan's `last_scan/` so the two can be analyzed in parallel.
+/// Contents: both input photos, an overlay per photo (card boxes green,
+/// OCR lines yellow), and a report with every OCR line plus the per-slot
+/// result. Same Settings toggle gates both dumps.
+void Function(TeamScanDebug) _teamScanDebugWriter(Directory docs) {
+  final dir = Directory(p.join(docs.path, 'last_team_scan'));
+
+  img.Image? overlay(
+      Uint8List bytes, List<List<int>> cards, List<OcrLine> lines) {
+    final raw = img.decodeImage(bytes);
+    if (raw == null) return null;
+    final baked = img.bakeOrientation(raw); // card coords are on baked pixels
+    final k = baked.width > 1600 ? 1600 / baked.width : 1.0;
+    final canvas = k < 1.0
+        ? img.copyResize(baked, width: (baked.width * k).round())
+        : baked;
+    for (final c in cards) {
+      img.drawRect(canvas,
+          x1: (c[0] * k).round(),
+          y1: (c[1] * k).round(),
+          x2: (c[2] * k).round(),
+          y2: (c[3] * k).round(),
+          color: img.ColorRgb8(0, 255, 0),
+          thickness: 2);
+    }
+    for (final l in lines) {
+      final cx = l.cx * canvas.width, cy = l.cy * canvas.height;
+      final w = l.w * canvas.width, h = l.h * canvas.height;
+      img.drawRect(canvas,
+          x1: (cx - w / 2).round(),
+          y1: (cy - h / 2).round(),
+          x2: (cx + w / 2).round(),
+          y2: (cy + h / 2).round(),
+          color: img.ColorRgb8(255, 230, 0),
+          thickness: 1);
+    }
+    return canvas;
+  }
+
+  String fmtLines(List<OcrLine> lines) => [
+        for (final l in lines)
+          '  [${l.cx.toStringAsFixed(3)},${l.cy.toStringAsFixed(3)} '
+              '${l.w.toStringAsFixed(3)}x${l.h.toStringAsFixed(3)}] '
+              '"${l.text}"',
+      ].join('\n');
+
+  return (d) {
+    try {
+      if (dir.existsSync()) dir.deleteSync(recursive: true);
+      dir.createSync(recursive: true);
+      File(p.join(dir.path, 'moves.jpg')).writeAsBytesSync(d.movesImage);
+      File(p.join(dir.path, 'stats.jpg')).writeAsBytesSync(d.statsImage);
+      final mo = overlay(d.movesImage, d.movesCards, d.movesLines);
+      if (mo != null) {
+        File(p.join(dir.path, 'moves_overlay.jpg'))
+            .writeAsBytesSync(img.encodeJpg(mo, quality: 85));
+      }
+      final so = overlay(d.statsImage, d.statsCards, d.statsLines);
+      if (so != null) {
+        File(p.join(dir.path, 'stats_overlay.jpg'))
+            .writeAsBytesSync(img.encodeJpg(so, quality: 85));
+      }
+      final r = d.result;
+      final lines = <String>[
+        'TEAM BUILD SCAN',
+        'moves: ${d.movesCards.length} cards '
+            '${[for (final c in d.movesCards) c.join(",")]}',
+        'stats: ${d.statsCards.length} cards '
+            '${[for (final c in d.statsCards) c.join(",")]}',
+        '--- moves OCR (${d.movesLines.length} lines, '
+            'fractions of the photo)',
+        fmtLines(d.movesLines),
+        '--- stats OCR (${d.statsLines.length} lines)',
+        fmtLines(d.statsLines),
+        '--- result: team "${r.team.name}"',
+      ];
+      for (var i = 0; i < r.slots.length; i++) {
+        final s = r.slots[i];
+        final b = s.build;
+        lines.add('slot ${i + 1}: ${b.speciesId} '
+            '(${s.speciesFromName ? "from name" : "from sprite"})'
+            '${b.nickname == null ? "" : " nick=${b.nickname}"}'
+            '${b.gender == null ? "" : " ${b.gender}"}'
+            '\n    ability=${b.ability} item=${b.itemId} '
+            'nature=${b.nature} sp=${b.sp}'
+            '${b.megaFormeId == null ? "" : " mega=${b.megaFormeId}"}'
+            '\n    moves=${b.moveIds}'
+            '${s.alternatives.isEmpty ? "" : "\n    alts=${s.alternatives}"}'
+            '${s.warnings.isEmpty ? "" : "\n    warnings=${s.warnings}"}');
+      }
+      if (r.warnings.isNotEmpty) lines.add('image warnings: ${r.warnings}');
+      final text = lines.join('\n');
+      File(p.join(dir.path, 'report.txt')).writeAsStringSync(text);
+      debugPrint('--- team scan debug -> ${dir.path}\n$text');
+    } catch (e) {
+      debugPrint('team scan debug write failed: $e');
+    }
+  };
+}
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -173,6 +277,7 @@ Future<void> main() async {
     // Always constructed; AppState only invokes it when scan diagnostics
     // are enabled (debug builds default on; release = Settings toggle).
     matchDebug: _scanDebugWriter(docs),
+    teamScanDebug: _teamScanDebugWriter(docs),
   );
   await state.restore();
 

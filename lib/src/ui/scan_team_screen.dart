@@ -76,6 +76,9 @@ class _ScanTeamScreenState extends State<ScanTeamScreen> {
         movesImage: _movesImage!,
         statsImage: _statsImage!,
         ocr: ocr,
+        // Team build scan diagnostics -> documents/last_team_scan/, gated
+        // on the same Settings toggle as the match preview scan's dump.
+        onDebug: state.scanDiagnosticsEnabled ? state.teamScanDebug : null,
       );
       if (!mounted) return;
       if (result.slots.isEmpty) {

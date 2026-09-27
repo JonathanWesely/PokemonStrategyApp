@@ -24,6 +24,7 @@ import 'recognition/mock_recognizer.dart';
 import 'recognition/network_camera.dart';
 import 'recognition/recognition_service.dart';
 import 'recognition/sprite_matcher.dart';
+import 'recognition/team_scanner.dart';
 import 'storage/app_database.dart';
 
 // Settings keys.
@@ -56,6 +57,12 @@ class AppState extends ChangeNotifier {
   /// Diagnostics sink for the local sprite matcher (see [SpriteMatchDebug]);
   /// main.dart writes each report to documents/last_scan/ and the console.
   final void Function(SpriteMatchDebug report)? matchDebug;
+
+  /// TEAM BUILD SCAN diagnostics writer (documents/last_team_scan/) —
+  /// separate from the match preview scan's [matchDebug] so the two dumps
+  /// can be analyzed in parallel. ScanTeamScreen passes it to
+  /// [TeamScanner.scan] only while [scanDiagnosticsEnabled] is on.
+  final void Function(TeamScanDebug report)? teamScanDebug;
 
   List<Profile> profiles = [];
   int activeProfileId = 1;
@@ -100,6 +107,7 @@ class AppState extends ChangeNotifier {
     ExemplarStore? exemplars,
     this.ocr,
     this.matchDebug,
+    this.teamScanDebug,
   }) : exemplars = exemplars ?? ExemplarStore(loadBundled: assetLoader) {
     _rebuildRecognizer();
   }

@@ -86,6 +86,30 @@ class ScannedTeam {
       ];
 }
 
+/// Everything a TEAM BUILD SCAN saw, for the diagnostics dump
+/// (`documents/last_team_scan/`): both input photos, the card boxes and
+/// OCR lines found in each, and the final result. Fired once per scan —
+/// including failed ones, where cards/lines may be empty.
+class TeamScanDebug {
+  final Uint8List movesImage;
+  final Uint8List statsImage;
+  final List<List<int>> movesCards;
+  final List<List<int>> statsCards;
+  final List<OcrLine> movesLines;
+  final List<OcrLine> statsLines;
+  final ScannedTeam result;
+
+  const TeamScanDebug({
+    required this.movesImage,
+    required this.statsImage,
+    required this.movesCards,
+    required this.statsCards,
+    required this.movesLines,
+    required this.statsLines,
+    required this.result,
+  });
+}
+
 class TeamScanner {
   TeamScanner(this.pack, {required this.loadBytes});
 
@@ -107,20 +131,44 @@ class TeamScanner {
     required Uint8List movesImage,
     required Uint8List statsImage,
     required TextOcr ocr,
+    void Function(TeamScanDebug)? onDebug,
   }) async {
+    // Every exit goes through this, so failed scans get diagnosed too.
+    ScannedTeam finish(
+      ScannedTeam r, {
+      List<List<int>> mc = const [],
+      List<List<int>> sc = const [],
+      List<OcrLine> ml = const [],
+      List<OcrLine> sl = const [],
+    }) {
+      onDebug?.call(TeamScanDebug(
+        movesImage: movesImage,
+        statsImage: statsImage,
+        movesCards: mc,
+        statsCards: sc,
+        movesLines: ml,
+        statsLines: sl,
+        result: r,
+      ));
+      return r;
+    }
+
     final warnings = <String>[];
     final moves = _decode(movesImage);
     final stats = _decode(statsImage);
     if (moves == null || stats == null) {
-      return ScannedTeam(Team(name: 'Scanned team'), const [],
-          ['Could not decode one of the images.']);
+      return finish(ScannedTeam(Team(name: 'Scanned team'), const [],
+          ['Could not decode one of the images.']));
     }
     final movesCards = findTeamCards(moves);
     final statsCards = findTeamCards(stats);
     if (movesCards.isEmpty) {
-      return ScannedTeam(Team(name: 'Scanned team'), const [],
-          ['No team cards found in the Moves & More image — make sure the '
-              'whole screen is in frame.']);
+      return finish(
+          ScannedTeam(Team(name: 'Scanned team'), const [],
+              ['No team cards found in the Moves & More image — make sure '
+                  'the whole screen is in frame.']),
+          mc: movesCards,
+          sc: statsCards);
     }
     if (movesCards.length != statsCards.length) {
       warnings.add('Found ${movesCards.length} cards in the Moves & More '
@@ -165,7 +213,8 @@ class TeamScanner {
       name: teamName ?? 'Scanned team',
       builds: [for (final s in slots) s.build],
     );
-    return ScannedTeam(team, slots, warnings);
+    return finish(ScannedTeam(team, slots, warnings),
+        mc: movesCards, sc: statsCards, ml: movesLines, sl: statsLines);
   }
 
   img.Image? _decode(Uint8List bytes) {
