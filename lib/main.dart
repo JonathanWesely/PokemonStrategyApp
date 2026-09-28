@@ -6,6 +6,7 @@
 /// mock in Settings.
 library;
 
+import 'dart:async' show unawaited;
 import 'dart:io';
 import 'dart:typed_data';
 
@@ -20,6 +21,7 @@ import 'src/app_state.dart';
 import 'src/data/asset_loader.dart';
 import 'src/recognition/battle_ocr.dart' show OcrLine;
 import 'src/recognition/mlkit_ocr.dart';
+import 'src/recognition/scan_uploader.dart';
 import 'src/recognition/sprite_matcher.dart';
 import 'src/recognition/team_scanner.dart';
 import 'src/storage/app_database.dart';
@@ -148,6 +150,9 @@ void Function(SpriteMatchDebug) _scanDebugWriter(Directory docs) {
       final text = lines.join('\n');
       File(p.join(dir.path, 'report.txt')).writeAsStringSync(text);
       debugPrint('--- scan debug -> ${dir.path}\n$text');
+      // Mirror the dump to Supabase Storage (fire-and-forget) so it can
+      // be inspected remotely without touching the phone.
+      unawaited(ScanUploader.uploadDir(dir, 'last_scan'));
     } catch (e) {
       debugPrint('scan debug write failed: $e');
     }
@@ -250,6 +255,9 @@ void Function(TeamScanDebug) _teamScanDebugWriter(Directory docs) {
       final text = lines.join('\n');
       File(p.join(dir.path, 'report.txt')).writeAsStringSync(text);
       debugPrint('--- team scan debug -> ${dir.path}\n$text');
+      // Mirror the dump to Supabase Storage (fire-and-forget) so it can
+      // be inspected remotely without touching the phone.
+      unawaited(ScanUploader.uploadDir(dir, 'last_team_scan'));
     } catch (e) {
       debugPrint('team scan debug write failed: $e');
     }

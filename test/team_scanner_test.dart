@@ -291,6 +291,108 @@ void main() {
     expect(rotom.first.$2, 'rotom-heat');
   }, timeout: const Timeout(Duration(minutes: 3)));
 
+  test('survives the OCR artifacts of a hand-held TV photo', () async {
+    // Replica of the 2026-09-27 iPhone scan of the earthquake team: row
+    // icons and nature arrows glued into stat labels, item lines with a
+    // leading icon glyph, and the gender/badge cluster OCR'd as a short
+    // junk line ABOVE the real name. All of it must read clean.
+    final texts = [
+      for (var i = 0; i < team1Moves.length; i++)
+        i == 0
+            ? const MovesCardText('Chesnaught', 'Bulletproof',
+                'S Charizardite Y', // icon glyph + the Y stone
+                ['Spiky Shield', 'Body Press', 'Grassy Glide', 'Synthesis'])
+            : i == 3
+                ? const MovesCardText('Sableye', 'Prankster',
+                    'S Garchompite Z',
+                    ['Psych Up', 'Will-O-Wisp', 'Encore', 'Disable'])
+                : team1Moves[i]
+    ];
+    final movesLines = movesLinesFor(movesPhoto, movesCards, texts);
+    // Charizard's ♂+Fire+Flying glyphs once read as "G3" a few pixels
+    // above the name and won the topmost rule; replicate at fx 0.46.
+    final c0 = movesCards[0];
+    movesLines.add(OcrLine('G3',
+        cx: (c0[0] + 0.46 * (c0[2] - c0[0])) / movesPhoto.width,
+        cy: (c0[1] + 0.10 * (c0[3] - c0[1])) / movesPhoto.height,
+        w: 0.01,
+        h: 0.01));
+    const junkLabel = {
+      'HP': 'HP', 'Attack': 'kAttack', 'Defense': 'K Defense',
+      'Sp. Atk': 'O Sp. Atk', 'Sp. Def': 'Sp. Def', 'Speed': '7 Speed A',
+    };
+    final junkStats = [
+      for (final card in team1Stats)
+        [for (final (l, s, p) in card) (junkLabel[l]!, s, p)]
+    ];
+    final scanner = TeamScanner(pack, loadBytes: fileLoader);
+    final result = await scanner.scan(
+      movesImage: movesBytes,
+      statsImage: statsBytes,
+      ocr: FakeOcr({
+        movesBytes: movesLines,
+        statsBytes: statsLinesFor(statsPhoto, statsCards, junkStats),
+      }),
+    );
+    expect(result.slots.length, 6);
+    final builds = [for (final s in result.slots) s.build];
+    // "G3" must not beat "Chesnaught" (it sits in the gender/badge zone).
+    expect(builds[0].speciesId, 'chesnaught');
+    expect(result.slots[0].speciesFromName, isTrue);
+    expect(builds[0].nickname, isNull);
+    // Variant stones resolve to THEIR letter, not the pack-order first.
+    expect(builds[0].itemId, 'charizardite-y');
+    expect(builds[3].itemId, 'garchompite-z');
+    // Decorated labels still name every row -> natures still solve.
+    expect([for (final b in builds) b.nature],
+        ['Impish', 'Timid', 'Adamant', 'Careful', 'Adamant', 'Modest']);
+    expect(result.allWarnings, isEmpty,
+        reason: 'TV-photo OCR junk should be absorbed silently');
+  }, timeout: const Timeout(Duration(minutes: 3)));
+
+  group('stat parsing (TV-photo artifacts)', () {
+    final photo = img.Image(width: 1000, height: 1000);
+    const card = [0, 0, 1000, 1000];
+
+    test('decorated labels and merged number tokens still parse', () {
+      final rows = TeamScanner.parseStatRows(const [
+        OcrLine('HP', cx: 0.10, cy: 0.20),
+        OcrLine('1305', cx: 0.30, cy: 0.20), // 130 + 5, no gap at all
+        OcrLine('kAttack', cx: 0.10, cy: 0.24), // row icon glued
+        OcrLine('76', cx: 0.30, cy: 0.24),
+        OcrLine('0', cx: 0.40, cy: 0.24),
+        OcrLine('Atack &', cx: 0.10, cy: 0.28), // OCR typo + arrow
+        OcrLine('101-11', cx: 0.30, cy: 0.28), // dash for the bar
+        OcrLine('O Sp. Atk', cx: 0.60, cy: 0.20), // icon glued
+        OcrLine('157 32', cx: 0.85, cy: 0.20), // merged value+SP
+        OcrLine('Sp. Def', cx: 0.60, cy: 0.24),
+        OcrLine('105-', cx: 0.80, cy: 0.24), // trailing bar residue
+        OcrLine('-0', cx: 0.90, cy: 0.24), // leading bar residue
+        OcrLine('7 Speed A', cx: 0.60, cy: 0.28), // icon + arrow
+        OcrLine('168-23', cx: 0.85, cy: 0.28),
+      ], photo, card);
+      expect(rows['hp'], (130, 5));
+      expect(rows['atk'], (76, 0));
+      expect(rows['def'], (101, 11));
+      expect(rows['spa'], (157, 32));
+      expect(rows['spd'], (105, 0));
+      expect(rows['spe'], (168, 23));
+    });
+
+    test("a row only reads numbers from its own half of the card", () {
+      // Whimsicott's HP once took the Sp.Atk column's 32 as its SP —
+      // same OCR row, other column.
+      final rows = TeamScanner.parseStatRows(const [
+        OcrLine('HP', cx: 0.10, cy: 0.20),
+        OcrLine('137', cx: 0.30, cy: 0.20),
+        OcrLine('Sp. Atk &', cx: 0.60, cy: 0.20),
+        OcrLine('141 32', cx: 0.85, cy: 0.20),
+      ], photo, card);
+      expect(rows['hp'], (137, null));
+      expect(rows['spa'], (141, 32));
+    });
+  });
+
   group('stat math', () {
     test('solves nature and verifies every stat', () {
       // Typhlosion: base 78/84/78/109/85/100, Timid, 2/0/0/32/0/32.
@@ -314,6 +416,20 @@ void main() {
       final solved = TeamScanner.solveSpAndNature(rows, base);
       expect(solved.nature, 'Timid');
       expect(solved.sp['spe'], 32);
+    });
+
+    test('an unreadable row cannot cost the nature when it is the only '
+        'candidate for the hindered stat', () {
+      // Timid Typhlosion with the atk row lost entirely: +spe verified,
+      // every other readable row verified neutral, so the hindered stat
+      // can only be atk -> Timid, not Serious.
+      final base = pack.speciesById('typhlosion')!.baseStats;
+      final rows = {
+        'hp': (155, 2), 'def': (98, 0),
+        'spa': (161, 32), 'spd': (105, 0), 'spe': (167, 32),
+      }.map((k, v) => MapEntry(k, (v.$1, v.$2 as int?)));
+      final solved = TeamScanner.solveSpAndNature(rows, base);
+      expect(solved.nature, 'Timid');
     });
 
     test('flags a stat that matches no multiplier', () {

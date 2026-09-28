@@ -249,7 +249,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     subtitle: const Text(
                         'Match preview scans write to last_scan/, team '
                         'build scans to last_team_scan/ (each overwritten '
-                        'per scan).'),
+                        'per scan). Each dump is also uploaded to the '
+                        'diagnostics server so Claude can inspect a bad '
+                        'scan directly.'),
                     value: state.scanDiagnosticsEnabled,
                     onChanged: (v) async {
                       await state.setScanDiagnostics(v);
@@ -258,8 +260,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                   const SizedBox(height: 6),
                   const Text(
-                    'After a bad scan (diagnostics on): on iPhone open the '
-                    'Files app → On My iPhone → Pokemon Strategy → '
+                    'After a bad scan (diagnostics on): the dump uploads '
+                    'itself over the network — just tell Claude to look at '
+                    'the last scan. If offline, pull it by hand: on iPhone '
+                    'open the Files app → On My iPhone → Pokemon Strategy → '
                     'last_scan (match preview) or last_team_scan (team '
                     'build) and share the files; on Android/PC use '
                     'tool\\pull_scan.ps1 (also printed to the flutter run '

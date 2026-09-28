@@ -153,7 +153,7 @@ updated when direction changes — Jonathan relies on it between sessions.
 - **Plugin isolation rule**: camera/image_picker only in
   `ui/capture_screen.dart`; ML Kit only in `recognition/mlkit_ocr.dart`;
   network only in `recognition/cloud_vision_recognizer.dart` +
-  `recognition/network_camera.dart`.
+  `recognition/network_camera.dart` + `recognition/scan_uploader.dart`.
 - **Auto-scan is the default capture path (2026-09-20)**: starting a battle
   connects to the saved rig stream (`net_cam_url`) by itself —
   `recognition/auto_scan.dart` (`AutoScanController`, injected frames/URL/
@@ -214,6 +214,29 @@ updated when direction changes — Jonathan relies on it between sessions.
   save. Fixtures: `test/fixtures/team{1,2}_{moves,stats}.jpeg` +
   `test/team_scanner_test.dart` (scripted OCR laid out against the card
   boxes the scanner itself finds).
+- **TV-photo OCR artifacts are handled, not avoided (2026-09-27)** — the
+  first iPhone-of-TV team build scan produced 11 "row unreadable"s, four
+  Serious natures, two wrong Mega stones and a "G3" nickname, all from
+  FOUR code-level causes, each now fixed + regression-tested ('survives
+  the OCR artifacts of a hand-held TV photo'): (1) stat labels are found
+  by fuzzy CONTAINS (row icons/arrows OCR into them: "kAttack",
+  "O Sp. Atk", "7 Speed A", "Atack &" — startsWith matched nothing, and
+  the numbers were all present; merged tokens like "1305"/"157 32"/
+  "168-23" were never the problem, `\d{1,3}` splits them); a row's
+  numbers must also sit in the label's own half of the card, and a found
+  boost with exactly one unverifiable row deduces the hindered stat, so
+  one dead row can't cost the nature. (2) `_matchName` takes the UNIQUE
+  best edit distance after dropping a leading icon glyph ("S Charizardite
+  Y" is d1 from the Y stone but d2 charizardite-x sat earlier in the pack
+  and first-within-2 took it, Mega and all). (3) the name line must sit
+  in the strip's LEFT 35% with 2+ letters — Charizard's ♂+badges OCR'd as
+  "G3" a few px ABOVE the name and won the old topmost rule. (4) the ♂/♀
+  circle sits in a FIXED slot right before badge slot 1 (fx ~0.42-0.455),
+  not "right after the name": the zone now runs to 0.45·cw regardless of
+  the name box (Froslass's undershot "Froslas" box left the circle 5 px
+  outside), and a washed pink body (d 55-90 vs the strip, under the
+  strict gates) falls back to counting plainly-pink pixels in that slot —
+  1700+ on the ♀ cards of the TV photo, 0 on every other card.
 - **The pack's Champions-original stone names were guesses** until the
   2026-09-21 team photos showed the real ones: `sableyeite`->`sablenite`,
   `scolipedeite`->`scolipite` (ids AND names), Grassy Seed added. If another
@@ -223,11 +246,6 @@ updated when direction changes — Jonathan relies on it between sessions.
   automatic signing through the App Store Connect API key (integration
   name `AppStoreConnect`) and uploads to TestFlight; build number =
   `$PROJECT_BUILD_NUMBER`, builds started MANUALLY on codemagic.io.
-  Codemagic FETCHES signing files, it does not create them: the Apple
-  Distribution cert lives in Codemagic Code signing identities and the
-  App Store profile was made on the developer portal + fetched
-  (2026-09-23) — a build failing pre-step with “No matching profiles
-  found” means those are missing, not that the yaml is wrong.
   Deployment target is **15.5** (ML Kit floor) in project.pbxproj AND the
   new ios/Podfile; Info.plist carries the usage strings + the
   `NSAllowsLocalNetworking` ATS exception + `ITSAppUsesNonExemptEncryption
@@ -256,6 +274,34 @@ updated when direction changes — Jonathan relies on it between sessions.
 
 ## Diagnosing a bad scan
 
+**The diagnostics upload themselves (2026-09-27).** Whenever the "Save
+scan diagnostics" toggle is on, both dumps are mirrored (fire-and-forget,
+`recognition/scan_uploader.dart`) to Supabase Storage — project
+`sebxviekcrnnhifdmfdl` ("JonathanWesely's Project"), public bucket
+`scans`, folders `last_scan/` and `last_team_scan/`, each scan
+overwriting the previous one. How Claude reads them — measured
+2026-09-27, don't re-derive: the Cowork sandbox's egress proxy AND the
+device-bridge shell both refuse CONNECT to `*.supabase.co` (403), so
+`curl` gets nothing from either side; **WebFetch works** and is the
+route for `report.txt`:
+
+```
+https://sebxviekcrnnhifdmfdl.supabase.co/storage/v1/object/public/scans/last_team_scan/report.txt
+  (same folder: moves.jpg, stats.jpg, moves_overlay.jpg, stats_overlay.jpg;
+   last_scan/: frame.jpg, overlay.jpg, panel_N.png, report.txt)
+```
+
+The report carries every OCR line with geometry plus the per-slot
+results — it alone diagnosed the 2026-09-27 scan. WebFetch cannot return
+image bytes, so when pixel-level work is needed Jonathan attaches the
+photos in chat (10 seconds; the URLs above open in any browser).
+Freshness check without downloading (Supabase MCP execute_sql):
+`select name, updated_at from storage.objects where bucket_id = 'scans'
+order by updated_at desc;` — if `updated_at` predates the scan Jonathan
+just ran, the upload failed (offline?) and the manual routes below still
+work. The shipped key is the publishable one and RLS boxes anon writes
+into those two folders.
+
 Debug builds write every local team-preview scan to `documents/last_scan/`
 (`frame.jpg`, `overlay.jpg`, `panel_N.png` crops, `report.txt`) and print the
 report to the `flutter run` console. Each scan OVERWRITES it — scan once, pull,
@@ -264,26 +310,6 @@ then scan again. Pull it with
 ```powershell
 .\tool\pull_scan.ps1          # -> test\_scan_dump\live\, prints report.txt
 ```
-
-**On iPhone (2026-09-26)**: no adb — instead the dump is gated on the
-`scan_diagnostics` setting (debug builds default ON, release OFF; toggle
-in Settings → “Save scan diagnostics”), and Info.plist now sets
-`UIFileSharingEnabled` + `LSSupportsOpeningDocumentsInPlace`, so the
-app's documents folder shows in the Files app: On My iPhone → Pokemon
-Strategy → last_scan. Share frame.jpg + overlay.jpg + report.txt (and
-panel crops) straight into a Claude session — the twin runs on the exact
-scanner input.
-
-**Naming (Jonathan's convention, 2026-09-27)**: the in-match enemy scan
-is the **match preview scan** (dump: `last_scan/`); the two-photo team
-import is the **team build scan** (dump: `last_team_scan/` — moves.jpg,
-stats.jpg, an overlay per photo with card boxes green + OCR lines
-yellow, and report.txt with every OCR line and the per-slot result;
-written by `_teamScanDebugWriter` in main.dart via `TeamScanner.scan`'s
-`onDebug`, fired on failed scans too). SEPARATE folders on purpose —
-the two dumps get analyzed in parallel. One Settings toggle gates both.
-Also 2026-09-27: the Battle tab's "+ Enemy" picker offers only the
-enemy team from the Team Preview tab, not the whole roster.
 
 (`run-as ... cp /sdcard/Download` is denied on this emulator image; the script
 uses the base64 tar pipe, the one route that works without root.) Every pull is

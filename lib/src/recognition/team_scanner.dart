@@ -346,11 +346,18 @@ class TeamScanner {
     final card = movesCard;
     final inCard = _linesIn(movesLines, moves, card, padTop: 0.05);
 
-    // name = the top-left line of the strip
+    // name = the top-left line of the strip. Only the left 35% of the
+    // strip can hold name text — the gender circle sits at fx ~0.42 and
+    // the badges at 0.4575+, and on a TV photo their glyphs OCR into
+    // short junk ("G3" for Charizard's ♂+Fire) that can land a few
+    // PIXELS above the real name, which the topmost rule then loses to.
+    // Two letters minimum: a stray glyph reads as "G3"/"O", a name
+    // never does.
     OcrLine? nameLine;
     for (final l in inCard) {
       final fy = _fy(l, moves, card), fx = _fx(l, moves, card);
-      if (fy < 0.32 && fx < 0.5 && l.text.trim().length >= 2) {
+      final letters = RegExp('[a-zA-Z]').allMatches(l.text).length;
+      if (fy < 0.32 && fx < 0.35 && letters >= 2) {
         if (nameLine == null || fy < _fy(nameLine, moves, card)) nameLine = l;
       }
     }
@@ -552,19 +559,37 @@ class TeamScanner {
       'spdef': 'spd',
       'speed': 'spe',
     };
+    double fxOf(OcrLine o) =>
+        (o.cx * photo.width - card[0]) / (card[2] - card[0]);
     final out = <String, (int, int?)>{};
     for (final l in lines) {
       final c = _clean(l.text);
+      // On a TV photo the row icon and the ▲/▼ nature arrows OCR INTO
+      // the label ("kAttack", "O Sp. Atk", "7 Speed A", "Atack &"), so
+      // the key is matched anywhere inside the cleaned text, with one
+      // edit allowed for keys long enough to stay unambiguous. Every
+      // "row was unreadable" on the 2026-09-27 iPhone scan was this —
+      // the numbers themselves were all present.
       String? key;
+      var ambiguous = false;
       for (final e in labels.entries) {
-        if (c.startsWith(e.key)) key = e.value;
+        final hit = c.contains(e.key) ||
+            (e.key.length >= 5 && _containsWithinOneEdit(c, e.key));
+        if (hit) {
+          if (key != null && key != e.value) ambiguous = true;
+          key = e.value;
+        }
       }
-      if (key == null || out.containsKey(key)) continue;
-      // numbers on the same row, right of the label
+      if (key == null || ambiguous || out.containsKey(key)) continue;
+      // numbers on the same row, right of the label, in the label's own
+      // HALF of the card — OCR rows span both columns, and Whimsicott's
+      // HP once took the Sp.Atk column's 32 as its SP.
+      final labelLeft = fxOf(l) < 0.5;
       final nums = <(double, int)>[];
       for (final n in lines) {
         if ((n.cy - l.cy).abs() > 0.011) continue;
         if (n.cx <= l.cx) continue;
+        if (labelLeft ? fxOf(n) >= 0.52 : fxOf(n) < 0.5) continue;
         for (final m in RegExp(r'\d{1,3}').allMatches(n.text)) {
           final v = int.parse(m.group(0)!);
           nums.add((n.cx + m.start * 0.0001, v));
@@ -592,12 +617,14 @@ class TeamScanner {
       solveSpAndNature(Map<String, (int, int?)> rows, BaseStats base) {
     final sp = <String, int>{};
     final warnings = <String>[];
+    final unsettled = <String>[]; // rows unread or failing the math
     String? plus;
     String? minus;
     for (final key in statKeys) {
       final row = rows[key];
       if (row == null) {
         warnings.add('the $key row was unreadable');
+        if (key != 'hp') unsettled.add(key);
         continue;
       }
       final (shown, spShownRaw) = row;
@@ -637,6 +664,7 @@ class TeamScanner {
         } else {
           warnings.add('the $key stat $shown did not verify against the '
               'level-50 math — check it');
+          if (key != 'hp') unsettled.add(key);
           goodSp = spShown ?? 0;
         }
       }
@@ -654,6 +682,27 @@ class TeamScanner {
       }
     }
     sp.removeWhere((_, v) => v == 0);
+    // Half a nature is still a nature when exactly one row escaped the
+    // math: every READABLE stat verified neutral, so the missing partner
+    // must be the one row that didn't — a dead OCR row no longer costs
+    // the nature (it cost four of six slots on the 2026-09-27 scan).
+    if (plus != null && minus == null) {
+      final cands = unsettled.where((k) => k != plus).toList();
+      if (cands.length == 1 &&
+          natures.any((n) => n.plus == plus && n.minus == cands.single)) {
+        minus = cands.single;
+        warnings.add('the ${cands.single} row could not be verified — the '
+            'boosted $plus leaves only one nature, so it must be hindered');
+      }
+    } else if (minus != null && plus == null) {
+      final cands = unsettled.where((k) => k != minus).toList();
+      if (cands.length == 1 &&
+          natures.any((n) => n.minus == minus && n.plus == cands.single)) {
+        plus = cands.single;
+        warnings.add('the ${cands.single} row could not be verified — the '
+            'hindered $minus leaves only one nature, so it must be boosted');
+      }
+    }
     String natureName = 'Serious';
     if (plus != null || minus != null) {
       final match = natures.where((n) => n.plus == plus && n.minus == minus);
@@ -681,13 +730,17 @@ class TeamScanner {
         ? ((nameLine.cx + nameLine.w / 2) * photo.width).round()
         : (x0 + 0.40 * cw).round();
     final zx0 = math.max(x0, nameRight);
-    // Wide enough to reach a ♂/♀ that trails a short name (measured up to
-    // ~3 strip-heights after the text) yet short of the right-aligned type
-    // badges for the shortest genderless name on the roster ("Rotom").
-    final zx1 = math.min(card[2], nameRight + (3.1 * stripH).round());
+    // The circle sits in a FIXED slot right before badge slot 1 (fx
+    // ~0.42-0.455 of the card — the badge reader's own measurement), so
+    // the zone runs to the badge zone regardless of the name's OCR box:
+    // "Froslass" once OCR'd as "Froslas", and 3.1 strip-heights from that
+    // undershot box stopped 5 px short of the ♀ circle.
+    final zx1 = math.min(card[2], x0 + (0.45 * cw).round());
     final zy0 = y0 + (0.03 * ch).round();
     final zy1 = y0 + (0.26 * ch).round();
-    if (zx1 - zx0 < 8 || zy1 - zy0 < 8) return null;
+    if (zx1 - zx0 < 8 || zy1 - zy0 < 8) {
+      return _washedFemale(photo, card, zy0, zy1, stripH);
+    }
     // strip background = median-ish mean of the zone borders
     var sr = 0.0, sg = 0.0, sb = 0.0, n = 0;
     for (var x = zx0; x < zx1; x += 2) {
@@ -731,7 +784,7 @@ class TeamScanner {
         break;
       }
     }
-    if (minX < 0) return null;
+    if (minX < 0) return _washedFemale(photo, card, zy0, zy1, stripH);
     final blobEnd = math.min(zx1, minX + (0.9 * stripH).round());
     var blobR = 0.0, blobG = 0.0, blobB = 0.0;
     var blobN = 0;
@@ -745,7 +798,9 @@ class TeamScanner {
         blobN++;
       }
     }
-    if (blobN < 0.02 * stripH * stripH) return null;
+    if (blobN < 0.02 * stripH * stripH) {
+      return _washedFemale(photo, card, zy0, zy1, stripH);
+    }
     blobR /= blobN;
     blobG /= blobN;
     blobB /= blobN;
@@ -753,7 +808,30 @@ class TeamScanner {
     if (blobR > blobB + 35 && blobR > blobG + 45 && blobR > 140) {
       return 'female';
     }
-    return null;
+    return _washedFemale(photo, card, zy0, zy1, stripH);
+  }
+
+  /// Pass 2, ♀ only: on a warm TV photo the pink circle body measures
+  /// d 55-90 against the strip — under the strict gates above — while the
+  /// ♂ royal blue always clears them. The circle's slot is FIXED (right
+  /// before badge slot 1) and nothing else plainly PINK ever sits there:
+  /// measured 1700+ pink pixels on the washed 2026-09-27 TV photo's two
+  /// ♀ cards vs 0 on every ♂ and genderless card (threshold ~130).
+  static String? _washedFemale(
+      img.Image photo, List<int> card, int zy0, int zy1, int stripH) {
+    final x0 = card[0];
+    final cw = card[2] - x0;
+    final wx0 = x0 + (0.385 * cw).round();
+    final wx1 = math.min(card[2], x0 + (0.4525 * cw).round());
+    var pink = 0;
+    for (var y = zy0; y < zy1; y++) {
+      for (var x = wx0; x < wx1; x++) {
+        final p = photo.getPixel(x, y);
+        final r = p.r.toDouble(), g = p.g.toDouble(), b = p.b.toDouble();
+        if (r - (g + b) / 2 > 15 && r > 120) pink++;
+      }
+    }
+    return pink >= 0.02 * stripH * stripH ? 'female' : null;
   }
 
   // ------------------------------------------------------- type badges --
@@ -1114,57 +1192,66 @@ class TeamScanner {
     };
   }
 
-  String? _matchAbility(String raw) {
-    final q = _clean(raw);
-    if (q.length < 3) return null;
-    for (final name in pack.abilities.keys) {
-      if (_clean(name) == q) return name;
+  /// OCR glues the little coloured icon before a name into the text
+  /// ("S Charizardite Y", "3 Electroweb", "O Protect"): drop a leading
+  /// 1-2 char token when a real word follows it.
+  static String _dropLeadingGlyph(String raw) {
+    final m = RegExp(r'^\S{1,2}\s+(?=\S{3,})').firstMatch(raw.trim());
+    return m == null ? raw.trim() : raw.trim().substring(m.end);
+  }
+
+  /// Exact match on the raw text or on the text minus a leading glyph,
+  /// else the UNIQUE best edit distance <= 2. "First match within 2"
+  /// once turned "S Charizardite Y" (distance 1 from the real stone)
+  /// into charizardite-X, distance 2 but earlier in the pack — and the
+  /// Mega forme with it. A tie on the best distance is ambiguity.
+  String? _matchName(String raw, Iterable<(String, String)> idNames) {
+    final stripped = _clean(_dropLeadingGlyph(raw));
+    for (final q in {_clean(raw), stripped}) {
+      if (q.length < 3) continue;
+      for (final (id, name) in idNames) {
+        if (_clean(name) == q) return id;
+      }
     }
-    for (final name in pack.abilities.keys) {
+    if (stripped.length < 5) return null;
+    String? best;
+    var bestD = 3;
+    var tie = false;
+    for (final (id, name) in idNames) {
       final c = _clean(name);
-      if (q.length >= 5 &&
-          (c.length - q.length).abs() <= 2 &&
-          _editDistance(q, c) <= 2) {
-        return name;
+      if ((c.length - stripped.length).abs() > 2) continue;
+      final d = _editDistance(stripped, c);
+      if (d < bestD) {
+        bestD = d;
+        best = id;
+        tie = false;
+      } else if (d == bestD && d < 3 && id != best) {
+        tie = true;
       }
     }
-    return null;
+    return (bestD <= 2 && !tie) ? best : null;
   }
 
-  String? _matchItem(String raw) {
-    final q = _clean(raw);
-    if (q.length < 3) return null;
-    for (final item in pack.items.values) {
-      if (_clean(item.name) == q) return item.id;
-    }
-    for (final item in pack.items.values) {
-      final c = _clean(item.name);
-      if (q.length >= 5 &&
-          (c.length - q.length).abs() <= 2 &&
-          _editDistance(q, c) <= 2) {
-        return item.id;
-      }
-    }
-    return null;
-  }
+  String? _matchAbility(String raw) => _matchName(
+      raw, [for (final name in pack.abilities.keys) (name, name)]);
 
-  String? _matchMove(String raw) {
-    final q = _clean(raw);
-    if (q.length < 3) return null;
-    for (final m in pack.moves.values) {
-      if (_clean(m.name) == q) return m.id;
-    }
-    String? found;
-    for (final m in pack.moves.values) {
-      final c = _clean(m.name);
-      if (q.length >= 5 &&
-          (c.length - q.length).abs() <= 2 &&
-          _editDistance(q, c) <= 2) {
-        if (found != null) return null; // ambiguous
-        found = m.id;
+  String? _matchItem(String raw) => _matchName(
+      raw, [for (final item in pack.items.values) (item.id, item.name)]);
+
+  String? _matchMove(String raw) => _matchName(
+      raw, [for (final m in pack.moves.values) (m.id, m.name)]);
+
+  /// True when any substring of [text] sits within one edit of [key] —
+  /// "atack" (the arrow ate a t) still names the Attack row. Only used
+  /// for keys of 5+ characters, where one edit cannot cross labels.
+  static bool _containsWithinOneEdit(String text, String key) {
+    for (final len in [key.length - 1, key.length, key.length + 1]) {
+      if (len < 1) continue;
+      for (var i = 0; i + len <= text.length; i++) {
+        if (_editDistance(text.substring(i, i + len), key) <= 1) return true;
       }
     }
-    return found;
+    return false;
   }
 
   static int _editDistance(String a, String b) {
