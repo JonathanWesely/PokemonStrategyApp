@@ -358,10 +358,10 @@ void main() {
       final rows = TeamScanner.parseStatRows(const [
         OcrLine('HP', cx: 0.10, cy: 0.20),
         OcrLine('1305', cx: 0.30, cy: 0.20), // 130 + 5, no gap at all
-        OcrLine('kAttack', cx: 0.10, cy: 0.24), // row icon glued
+        OcrLine('Atack &', cx: 0.10, cy: 0.24), // OCR typo + arrow
         OcrLine('76', cx: 0.30, cy: 0.24),
         OcrLine('0', cx: 0.40, cy: 0.24),
-        OcrLine('Atack &', cx: 0.10, cy: 0.28), // OCR typo + arrow
+        OcrLine('K Defense', cx: 0.10, cy: 0.28), // row icon glued
         OcrLine('101-11', cx: 0.30, cy: 0.28), // dash for the bar
         OcrLine('O Sp. Atk', cx: 0.60, cy: 0.20), // icon glued
         OcrLine('157 32', cx: 0.85, cy: 0.20), // merged value+SP
