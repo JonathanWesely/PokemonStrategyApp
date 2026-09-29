@@ -203,4 +203,40 @@ void main() {
       ['y:froslass', 'e:umbreon']
     ]);
   });
+
+  test('terrain and weather messages set timed conditions that tick down '
+      'at turn boundaries', () {
+    final s = session();
+    final tracker = BattleEventTracker(pack, s);
+
+    tracker.consume([
+      line('Grass grew to cover the battlefield!'),
+      line('It started to rain!'),
+    ], at: t0);
+    expect(s.terrain?.kind, 'grassy');
+    expect(s.terrain?.turnsLeft, 5);
+    expect(s.terrain?.uncertain, isTrue, reason: 'Terrain Extender unknown');
+    expect(s.weather?.kind, 'rain');
+
+    // Turn 1: two different actors — no boundary yet.
+    tracker.consume([line('Froslass used Blizzard!')],
+        at: t0.add(const Duration(seconds: 2)));
+    tracker.consume([line('The opposing Umbreon used Foul Play!')],
+        at: t0.add(const Duration(seconds: 4)));
+    expect(s.terrain?.turnsLeft, 5);
+
+    // Turn 2 starts (repeated actor) -> both conditions count down.
+    tracker.consume([line('Froslass used Protect!')],
+        at: t0.add(const Duration(seconds: 8)));
+    expect(s.terrain?.turnsLeft, 4);
+    expect(s.weather?.turnsLeft, 4);
+
+    // An end message clears the condition outright.
+    tracker.consume([line('The grass disappeared from the battlefield.')],
+        at: t0.add(const Duration(seconds: 10)));
+    expect(s.terrain, isNull);
+    tracker.consume([line('The rain stopped.')],
+        at: t0.add(const Duration(seconds: 12)));
+    expect(s.weather, isNull);
+  });
 }

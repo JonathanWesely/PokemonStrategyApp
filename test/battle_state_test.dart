@@ -163,4 +163,36 @@ void main() {
       expect(back.revealedMoves, contains('dire-claw'));
     });
   });
+
+  group('arena state', () {
+    test('swapPickPositions trades places; the field flags stay positional',
+        () {
+      final s = session(); // leads = positions 0 and 1
+      // weavile (position 1, on the field) <-> whimsicott (3, reserve).
+      s.swapPickPositions(1, 3);
+      expect(s.picks[1].speciesId, 'whimsicott');
+      expect(s.picks[3].speciesId, 'weavile');
+      expect(s.activePickIndexes, {0, 1});
+      expect([for (final b in s.activeYours) b.speciesId],
+          ['incineroar', 'whimsicott']);
+    });
+
+    test('timed conditions tick down; only certain ones expire at zero', () {
+      final s = session();
+      s.terrain = TimedCondition('grassy', turnsLeft: 1); // uncertain
+      s.trickRoomCond =
+          TimedCondition('trickroom', turnsLeft: 1, uncertain: false);
+      s.yourTailwindCond =
+          TimedCondition('tailwind', turnsLeft: 2, uncertain: false);
+      s.tickFieldConditions();
+      // Certain and done -> gone; the uncertain terrain holds at 0 (a
+      // Terrain Extender may buy three more turns).
+      expect(s.trickRoom, isFalse);
+      expect(s.terrain, isNotNull);
+      expect(s.terrain!.turnsLeft, 0);
+      expect(s.yourTailwindCond!.turnsLeft, 1);
+      s.tickFieldConditions();
+      expect(s.yourTailwind, isFalse);
+    });
+  });
 }

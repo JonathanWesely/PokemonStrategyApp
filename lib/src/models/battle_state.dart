@@ -90,6 +90,32 @@ class PreviewSlot {
       );
 }
 
+/// A timed field condition shown above the arena ("Grassy Terrain —
+/// 4 turns left?"). [turnsLeft] null = the count is unknown; [uncertain]
+/// = an extending item could not be ruled out, or the count was guessed,
+/// shown as a trailing "?".
+class TimedCondition {
+  /// terrain: grassy | misty | psychic | electric;
+  /// weather: snow | rain | sun | sandstorm; also trickroom / tailwind.
+  String kind;
+  int? turnsLeft;
+  bool uncertain;
+
+  TimedCondition(this.kind, {this.turnsLeft, this.uncertain = true});
+
+  /// One turn passed.
+  void tick() {
+    final t = turnsLeft;
+    if (t != null && t > 0) turnsLeft = t - 1;
+  }
+
+  /// Countdown hit zero and no extender can save it — the caller clears
+  /// the condition. An UNCERTAIN one holds at 0 ("0 turns left?"): the
+  /// extender may buy three more, so only an end message (or the user)
+  /// removes it.
+  bool get expired => turnsLeft == 0 && !uncertain;
+}
+
 class BattleSession {
   final FormatSpec format;
   final Team team;
@@ -110,14 +136,40 @@ class BattleSession {
   /// Team Preview tab and narrows which four they can have brought.
   final List<PreviewSlot> enemyPreview = [];
 
-  // ---- field conditions + speed-order evidence (in-match text tracker) ----
+  // ---- field conditions + speed-order evidence (in-match text tracker,
+  // ---- plus the arena's tap-to-edit sheet) ----
 
-  /// Trick Room is up (set/cleared by "twisted the dimensions" messages).
-  bool trickRoom = false;
+  /// Active terrain (kind grassy|misty|psychic|electric), or null.
+  TimedCondition? terrain;
 
-  /// Tailwind flags per side (set/cleared by the Tailwind messages).
-  bool yourTailwind = false;
-  bool enemyTailwind = false;
+  /// Active weather (kind snow|rain|sun|sandstorm), or null.
+  TimedCondition? weather;
+
+  /// Trick Room (set/cleared by "twisted the dimensions" messages).
+  TimedCondition? trickRoomCond;
+
+  /// Tailwind per side (set/cleared by the Tailwind messages).
+  TimedCondition? yourTailwindCond;
+  TimedCondition? enemyTailwindCond;
+
+  bool get trickRoom => trickRoomCond != null;
+  bool get yourTailwind => yourTailwindCond != null;
+  bool get enemyTailwind => enemyTailwindCond != null;
+
+  /// A new turn started: count every timed condition down; conditions
+  /// that certainly ended drop off.
+  void tickFieldConditions() {
+    terrain?.tick();
+    weather?.tick();
+    trickRoomCond?.tick();
+    yourTailwindCond?.tick();
+    enemyTailwindCond?.tick();
+    if (terrain?.expired ?? false) terrain = null;
+    if (weather?.expired ?? false) weather = null;
+    if (trickRoomCond?.expired ?? false) trickRoomCond = null;
+    if (yourTailwindCond?.expired ?? false) yourTailwindCond = null;
+    if (enemyTailwindCond?.expired ?? false) enemyTailwindCond = null;
+  }
 
   /// Confirmed raw-speed orderings observed this match, as
   /// `[fasterKey, slowerKey]` pairs with keys `y:<speciesId>` /
@@ -163,6 +215,19 @@ class BattleSession {
     for (var i = 0; i < format.fieldSlots && i < picks.length; i++) {
       activePickIndexes.add(i);
     }
+  }
+
+  /// Swap two POSITIONS among your picks (the arena's swap flow): the
+  /// builds trade places while the active flags stay with the positions,
+  /// so swapping an on-field spot with a reserve spot switches who is on
+  /// the field, and swapping two same-zone spots just reorders them.
+  void swapPickPositions(int a, int b) {
+    if (a < 0 || b < 0 || a >= picks.length || b >= picks.length || a == b) {
+      return;
+    }
+    final t = picks[a];
+    picks[a] = picks[b];
+    picks[b] = t;
   }
 
   List<PokemonBuild> get activeYours =>

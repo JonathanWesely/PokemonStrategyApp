@@ -22,7 +22,11 @@ import 'widgets.dart';
 class EnemyIntelCard extends StatelessWidget {
   final EnemyPokemon enemy;
 
-  const EnemyIntelCard({super.key, required this.enemy});
+  /// When set (the arena's detail overlay), the ↓ button asks which spot
+  /// to swap with instead of plain benching.
+  final VoidCallback? onSwapRequest;
+
+  const EnemyIntelCard({super.key, required this.enemy, this.onSwapRequest});
 
   @override
   Widget build(BuildContext context) {
@@ -82,10 +86,10 @@ class EnemyIntelCard extends StatelessWidget {
                         state.mutateBattle(() => enemy.mega = !enemy.mega),
                   ),
                 IconButton(
-                  tooltip: 'Bench',
+                  tooltip: onSwapRequest == null ? 'Bench' : 'Swap with…',
                   icon: const Icon(Icons.arrow_downward, size: 18),
-                  onPressed: () =>
-                      state.mutateBattle(() => enemy.onField = false),
+                  onPressed: onSwapRequest ??
+                      () => state.mutateBattle(() => enemy.onField = false),
                 ),
                 IconButton(
                   tooltip: 'Remove (misrecognized)',
@@ -270,7 +274,12 @@ class EnemyIntelCard extends StatelessWidget {
 class YourIntelCard extends StatelessWidget {
   final PokemonBuild pokemonBuild;
 
-  const YourIntelCard({super.key, required this.pokemonBuild});
+  /// When set (the arena's detail overlay), a ↓ button appears that asks
+  /// which spot to swap this Pokemon with.
+  final VoidCallback? onSwapRequest;
+
+  const YourIntelCard(
+      {super.key, required this.pokemonBuild, this.onSwapRequest});
 
   @override
   Widget build(BuildContext context) {
@@ -319,6 +328,12 @@ class YourIntelCard extends StatelessWidget {
                       '${pokemonBuild.ability} · ${pack.itemName(pokemonBuild.itemId)}',
                       style: const TextStyle(fontSize: 11)),
                 ),
+                if (onSwapRequest != null)
+                  IconButton(
+                    tooltip: 'Swap with…',
+                    icon: const Icon(Icons.arrow_downward, size: 18),
+                    onPressed: onSwapRequest,
+                  ),
               ],
             ),
             Wrap(spacing: 4, children: [for (final t in types) TypeChip(t)]),

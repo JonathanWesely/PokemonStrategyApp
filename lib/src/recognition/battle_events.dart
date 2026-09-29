@@ -134,6 +134,8 @@ class BattleEventTracker {
     final priority = pack.moveById(moveId)?.priority ?? 0;
     final gapped = _lastMoveAt != null && now.difference(_lastMoveAt!) > turnGap;
     if (gapped || _turnMoves.any((t) => t.$1 == actorKey)) {
+      // A genuine turn boundary: count the field conditions down.
+      if (_turnMoves.isNotEmpty) session.tickFieldConditions();
       _turnMoves.clear();
     }
     for (final (earlierKey, earlierPriority) in _turnMoves) {
@@ -171,23 +173,29 @@ class BattleEventTracker {
 
   // ---------------------------------------------------- field conditions --
 
+  /// Start messages carry a fresh countdown. Terrain and weather start at
+  /// 5 but an extender item (Terrain Extender, the weather rocks) makes it
+  /// 8 and cannot be ruled out from the message alone -> uncertain, shown
+  /// with a "?". Trick Room is always 5 and Tailwind always 4 -> certain.
   BattleEvent? _parseFieldCondition(String raw) {
     final lower = raw.toLowerCase();
     if (lower.contains('twisted the dimensions')) {
-      session.trickRoom = true;
+      session.trickRoomCond =
+          TimedCondition('trickroom', turnsLeft: 5, uncertain: false);
       return const BattleEvent('trickroom', 'Trick Room is up');
     }
     if (lower.contains('dimensions returned to normal') ||
         (lower.contains('twisted dimensions') && lower.contains('normal'))) {
-      session.trickRoom = false;
+      session.trickRoomCond = null;
       return const BattleEvent('trickroom', 'Trick Room ended');
     }
     if (lower.contains('tailwind blew')) {
       final enemy = lower.contains('opposing');
+      final cond = TimedCondition('tailwind', turnsLeft: 4, uncertain: false);
       if (enemy) {
-        session.enemyTailwind = true;
+        session.enemyTailwindCond = cond;
       } else {
-        session.yourTailwind = true;
+        session.yourTailwindCond = cond;
       }
       return BattleEvent(
           'tailwind', enemy ? 'enemy Tailwind is up' : 'your Tailwind is up');
@@ -195,12 +203,58 @@ class BattleEventTracker {
     if (lower.contains('tailwind petered out')) {
       final enemy = lower.contains('opposing');
       if (enemy) {
-        session.enemyTailwind = false;
+        session.enemyTailwindCond = null;
       } else {
-        session.yourTailwind = false;
+        session.yourTailwindCond = null;
       }
       return BattleEvent(
           'tailwind', enemy ? 'enemy Tailwind ended' : 'your Tailwind ended');
+    }
+    // Terrain.
+    const terrainStarts = {
+      'grass grew to cover': 'grassy',
+      'grassy terrain grew': 'grassy',
+      'mist swirled around': 'misty',
+      'battlefield got weird': 'psychic',
+      'electric current ran across': 'electric',
+    };
+    for (final e in terrainStarts.entries) {
+      if (lower.contains(e.key)) {
+        session.terrain = TimedCondition(e.value, turnsLeft: 5);
+        return BattleEvent('terrain', '${e.value} terrain is up');
+      }
+    }
+    if (lower.contains('disappeared from the battlefield')) {
+      final was = session.terrain?.kind;
+      session.terrain = null;
+      return BattleEvent('terrain', '${was ?? 'the'} terrain ended');
+    }
+    // Weather.
+    const weatherStarts = {
+      'started to rain': 'rain',
+      'sunlight turned harsh': 'sun',
+      'sandstorm kicked up': 'sandstorm',
+      'started to snow': 'snow',
+      'started to hail': 'snow',
+    };
+    for (final e in weatherStarts.entries) {
+      if (lower.contains(e.key)) {
+        session.weather = TimedCondition(e.value, turnsLeft: 5);
+        return BattleEvent('weather', '${e.value} is up');
+      }
+    }
+    const weatherEnds = {
+      'rain stopped': 'rain',
+      'sunlight faded': 'sun',
+      'sandstorm subsided': 'sandstorm',
+      'snow stopped': 'snow',
+      'hail stopped': 'snow',
+    };
+    for (final e in weatherEnds.entries) {
+      if (lower.contains(e.key)) {
+        session.weather = null;
+        return BattleEvent('weather', '${e.value} ended');
+      }
     }
     return null;
   }

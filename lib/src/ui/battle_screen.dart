@@ -18,11 +18,10 @@ import '../app_state.dart';
 import '../models/battle_state.dart';
 import '../recognition/auto_scan.dart';
 import '../models/recognition_result.dart';
-import '../prediction/prediction_engine.dart';
 import '../prediction/speed_tiers.dart';
 import '../recognition/recognition_service.dart';
+import 'arena_view.dart';
 import 'capture_screen.dart';
-import 'intel_card.dart';
 import 'species_detail_sheet.dart';
 import 'widgets.dart';
 
@@ -100,7 +99,32 @@ class _BattleScreenState extends State<BattleScreen> {
     }
     final chosen = await showPickerDialog(context,
         title: 'Enemy Pokemon (from team preview)', entries: entries);
-    if (chosen != null && mounted) AppScope.of(context).addEnemyManually(chosen);
+    if (chosen == null || !mounted) return;
+    final st = AppScope.of(context);
+    final battle = st.battle!;
+    final existing =
+        battle.enemies.where((e) => e.speciesId == chosen).firstOrNull;
+    if (existing?.onField ?? false) return; // already out there
+    final onField = battle.enemiesOnField;
+    if (onField.length >= battle.format.fieldSlots) {
+      // The field is full, so one of the shown two must be wrong — ask
+      // which, then swap it out for the one just confirmed.
+      final wrong = await showPickerDialog(context,
+          title: 'Which one is NOT actually in battle?',
+          entries: [
+            for (final e in onField)
+              MapEntry(e.speciesId, st.pack.speciesName(e.speciesId)),
+          ]);
+      if (wrong == null || !mounted) return;
+      AppScope.of(context).mutateBattle(() {
+        for (final e in battle.enemies) {
+          if (e.speciesId == wrong) e.onField = false;
+        }
+        battle.addEnemy(chosen, onField: true);
+      });
+    } else {
+      st.addEnemyManually(chosen);
+    }
   }
 
   Future<void> _appendEnemyPreview() async {
@@ -472,7 +496,6 @@ class _BattleScreenState extends State<BattleScreen> {
     final tiers = buildSpeedTiers(
         pack, battle.activeYours, battle.enemiesOnField,
         evidence: battle.speedEvidence);
-    final benchPredictions = PredictionEngine(pack).predictBench(battle);
 
     return ListView(
       padding: const EdgeInsets.all(10),
@@ -512,75 +535,23 @@ class _BattleScreenState extends State<BattleScreen> {
           ),
         const SizedBox(height: 10),
 
-        if (battle.enemiesOnField.isEmpty)
-          Card(
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: Text(
-                'No enemies on the field yet.\nScan the battle screen, or add '
-                'the active enemy Pokemon with "Enemy". The Team Preview tab '
-                'holds their full roster.',
-                style: TextStyle(color: Colors.grey.shade600),
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ),
+        // The arena: your four on the left (inside the box = on the
+        // field), theirs on the right, back two predicted with "?" until
+        // a swap-in proves them. Terrain/weather/Trick Room/Tailwind draw
+        // straight onto the floor with their turns-left above.
+        ArenaView(onAddEnemy: _addEnemyManually),
 
-        for (final enemy in battle.enemiesOnField)
-          EnemyIntelCard(enemy: enemy),
-        for (final build in battle.activeYours)
-          YourIntelCard(pokemonBuild: build),
-
-        // Enemy reserves: revealed benched enemies (confirmed) + predicted.
-        if (battle.enemyBench.isNotEmpty ||
-            battle.enemyUnknownReserveCount > 0) ...[
-          const SizedBox(height: 8),
-          Text('Enemy reserves', style: Theme.of(context).textTheme.titleSmall),
-          Wrap(
-            spacing: 6,
-            runSpacing: 4,
-            children: [
-              for (final enemy in battle.enemyBench)
-                ActionChip(
-                  avatar: SpeciesIcon(enemy.speciesId, size: 20),
-                  label: Text(pack.speciesName(enemy.speciesId)),
-                  side: const BorderSide(color: confirmedColor),
-                  onPressed: () =>
-                      state.mutateBattle(() => enemy.onField = true),
-                ),
-              for (final option in benchPredictions)
-                ActionChip(
-                  avatar: SpeciesIcon(option.id, size: 20),
-                  label: Text('${option.label}?',
-                      style: TextStyle(
-                          fontStyle: FontStyle.italic,
-                          color: predictedColor)),
-                  side: BorderSide(color: predictedColor),
-                  onPressed: () => state.mutateBattle(
-                      () => battle.addEnemy(option.id, onField: false)),
-                ),
-              for (var i = benchPredictions.length;
-                  i < battle.enemyUnknownReserveCount;
-                  i++)
-                const Chip(
-                  avatar: Icon(Icons.help_outline, size: 14),
-                  label: Text('?'),
-                ),
-            ],
-          ),
-          Text(
-            'Amber = predicted from usage + their scouted roster; tap when '
-            'revealed to confirm.',
-            style: TextStyle(fontSize: 10, color: Colors.grey.shade600),
-          ),
-        ],
-
-        const SizedBox(height: 8),
+        const SizedBox(height: 4),
         Row(
           children: [
-            Text('Your picks (tap to set who is on the field)',
-                style: Theme.of(context).textTheme.titleSmall),
-            const Spacer(),
+            Expanded(
+              child: Text(
+                'Tap a Pokemon for its full card — its ↓ swaps it with '
+                'another spot. Tap the line above the arena to fix field '
+                'conditions.',
+                style: TextStyle(fontSize: 10, color: Colors.grey.shade600),
+              ),
+            ),
             IconButton(
               tooltip: 'Change picks',
               visualDensity: VisualDensity.compact,
@@ -595,27 +566,6 @@ class _BattleScreenState extends State<BattleScreen> {
                 _editingPicks = true;
               }),
             ),
-          ],
-        ),
-        Wrap(
-          spacing: 6,
-          children: [
-            for (var i = 0; i < battle.picks.length; i++)
-              FilterChip(
-                avatar: battle.activePickIndexes.contains(i)
-                    ? null
-                    : SpeciesIcon(battle.picks[i].speciesId, size: 20),
-                selected: battle.activePickIndexes.contains(i),
-                label: Text(battle.picks[i].nickname ??
-                    pack.speciesName(battle.picks[i].speciesId)),
-                onSelected: (selected) => state.mutateBattle(() {
-                  if (selected) {
-                    battle.activePickIndexes.add(i);
-                  } else {
-                    battle.activePickIndexes.remove(i);
-                  }
-                }),
-              ),
           ],
         ),
         const SizedBox(height: 24),

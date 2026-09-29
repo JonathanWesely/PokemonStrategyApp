@@ -11,7 +11,27 @@ updated when direction changes — Jonathan relies on it between sessions.
   scoped per profile. No server anywhere.
 - **Battle mode = two tabs** (`ui/battle_screen.dart`):
   *Team Preview* — your 6 vs enemy 6 boxes; tap for the full per-species
-  page. *Battle* — on-field intel cards + predicted enemy bench.
+  page. *Battle* — scan/+Enemy buttons and the speed strip on top, then
+  the **arena view** (`ui/arena_view.dart`, 2026-09-29 — replaced the
+  scrolling intel-card list): a drawn battlefield, your 4 on the left /
+  enemy 4 on the right, inner tiles = on the field, outer = reserves
+  (enemy back two predicted amber "?" until a swap-in proves them). Every
+  tile carries a turn-order badge (1 = acts first at equal priority,
+  REVERSED under Trick Room, "?" until the order is match-confirmed —
+  same evidence as the speed strip). The arena floor paints the field
+  state: terrain squiggles BL→TR (green grassy / blue misty / purple
+  psychic / yellow electric), weather squiggles BR→TL (light-blue snow /
+  dark-blue rain / red sun / brown sandstorm), Trick Room = second
+  outline, Tailwind = white wind lines on that side; turns-left labels
+  sit above with "?" when an extender can't be ruled out
+  (`TimedCondition` on BattleSession; trickRoom/tailwind bools are now
+  getters). Conditions fill from the text tracker (terrain/weather
+  start+end messages added 2026-09-29; counters tick at its turn
+  boundaries) AND are tap-to-editable above the arena. Tap a tile → the
+  old intel card in a tall sheet (tap blank space to come back); its ↓
+  asks which of the other spots to swap with (`swapPickPositions` — the
+  builds trade places, field flags stay positional). "+ Enemy" with a
+  full field asks which shown enemy is NOT actually there and swaps.
   **Picks are chosen INSIDE the battle** (Battle tab shows the selector
   until locked; ✎ to change) — scout preview first, then commit, same
   order the game forces. BattleSession starts with empty picks.
