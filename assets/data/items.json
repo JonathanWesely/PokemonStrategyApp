@@ -78,6 +78,11 @@
    "desc": "Mega Stone: lets Beedrill Mega Evolve. (Held: Allows Beedrill to Mega Evolve into Mega Beedrill.)"
   },
   {
+   "id": "black-glasses",
+   "name": "Black Glasses",
+   "desc": "Held: boosts the power of the holder's Dark-type moves."
+  },
+  {
    "id": "blastoiseite",
    "name": "Blastoiseite",
    "desc": "Mega Stone: lets Blastoise Mega Evolve."
@@ -206,6 +211,11 @@
    "id": "expert-belt",
    "name": "Expert Belt",
    "desc": "1.2x super-effective damage"
+  },
+  {
+   "id": "fairy-feather",
+   "name": "Fairy Feather",
+   "desc": "Held: boosts the power of the holder's Fairy-type moves."
   },
   {
    "id": "falinksite",

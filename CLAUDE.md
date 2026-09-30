@@ -261,6 +261,15 @@ updated when direction changes — Jonathan relies on it between sessions.
   2026-09-21 team photos showed the real ones: `sableyeite`->`sablenite`,
   `scolipedeite`->`scolipite` (ids AND names), Grassy Seed added. If another
   guessed name shows up on screen, fix the pack, don't fuzzy around it.
+  Items seen on screen but MISSING from the pack get added the same way:
+  Black Glasses + Fairy Feather (2026-10-01, defeption-team scan).
+- **A stat that fails the level-50 math gets a digit-repair attempt
+  (2026-10-01)**: TV blur reads 6/8/9 as 0 and friends (three Sp.Def rows
+  in one scan), so `solveSpAndNature` tries single-digit confusion
+  variants (`_digitConfusions`) of the shown value and accepts only a
+  UNIQUE (stat, SP, nature) explanation, warning "corrected"; anything
+  ambiguous keeps the old "did not verify" flag. Never widen this to
+  multi-digit edits — uniqueness is what makes it safe.
 - **iOS via Codemagic + TestFlight (2026-09-22)**: no Mac anywhere —
   `codemagic.yaml` (repo root) builds the ipa on a cloud Mac with
   automatic signing through the App Store Connect API key (integration

@@ -661,6 +661,36 @@ class TeamScanner {
                 '${solutions.single.$1} matches the shown stat $shown — '
                 'used ${solutions.single.$1}');
           }
+        } else if (solutions.isEmpty) {
+          // The stat DIGITS may be the misread — TV blur turns 6/8/9
+          // into 0 and so on (three Sp.Def rows failed exactly this way
+          // on the 2026-10-01 scan). Try single-digit confusion variants
+          // of the shown value and accept only a UNIQUE
+          // (stat, SP, nature) explanation: the same math-does-the-
+          // checking spirit as the SP re-solve above.
+          final fixes = <(int, int, int)>[];
+          for (final v in _digitConfusions(shown)) {
+            for (final nat in natsToTry) {
+              for (var s = 0; s <= 32; s++) {
+                final ok = key == 'hp'
+                    ? StatCalculator.hpStat(b, s) == v
+                    : StatCalculator.otherStat(b, s, nat) == v;
+                if (ok) fixes.add((v, s, nat));
+              }
+            }
+          }
+          if (fixes.length == 1) {
+            goodSp = fixes.single.$2;
+            goodNat = fixes.single.$3;
+            warnings.add('the $key stat read as $shown but only '
+                '${fixes.single.$1} verifies against the level-50 math — '
+                'corrected');
+          } else {
+            warnings.add('the $key stat $shown did not verify against '
+                'the level-50 math — check it');
+            if (key != 'hp') unsettled.add(key);
+            goodSp = spShown ?? 0;
+          }
         } else {
           warnings.add('the $key stat $shown did not verify against the '
               'level-50 math — check it');
@@ -1240,6 +1270,32 @@ class TeamScanner {
 
   String? _matchMove(String raw) => _matchName(
       raw, [for (final m in pack.moves.values) (m.id, m.name)]);
+
+  /// OCR digit look-alikes on a blurred TV capture (kept symmetric).
+  static const Map<String, List<String>> _confusableDigits = {
+    '0': ['8', '6', '9'],
+    '1': ['7'],
+    '3': ['8'],
+    '4': ['9'],
+    '5': ['6'],
+    '6': ['0', '5', '8'],
+    '7': ['1'],
+    '8': ['0', '3', '6', '9'],
+    '9': ['0', '4', '8'],
+  };
+
+  /// Every value one digit-confusion away from [n], within stat range.
+  static List<int> _digitConfusions(int n) {
+    final s = n.toString();
+    final out = <int>{};
+    for (var i = 0; i < s.length; i++) {
+      for (final c in _confusableDigits[s[i]] ?? const <String>[]) {
+        final v = int.parse(s.replaceRange(i, i + 1, c));
+        if (v != n && v >= 40 && v <= 300) out.add(v);
+      }
+    }
+    return out.toList()..sort();
+  }
 
   /// True when any substring of [text] sits within one edit of [key] —
   /// "atack" (the arrow ate a t) still names the Attack row. Only used

@@ -432,6 +432,24 @@ void main() {
       expect(solved.nature, 'Timid');
     });
 
+    test('a misread stat digit is either corrected by the math or stays '
+        'flagged — never silently accepted', () {
+      final base = pack.speciesById('typhlosion')!.baseStats;
+      const sp = {'hp': 2, 'atk': 0, 'def': 0, 'spa': 32, 'spd': 0, 'spe': 32};
+      final truth = StatCalculator.computeStats(base, sp, 'Timid');
+      final shown = Map<String, int>.of(truth);
+      // Below the x0.9 floor of the SP=0 value: unreachable under every
+      // (SP, nature), so this row can never quietly parse as valid.
+      shown['spd'] = shown['spd']! - 25;
+      final rows = {for (final k in statKeys) k: (shown[k]!, sp[k])};
+      final solved = TeamScanner.solveSpAndNature(rows, base);
+      expect(solved.warnings, isNotEmpty,
+          reason: 'a wrong stat must surface as corrected or flagged');
+      // The damage stays contained to the bad row.
+      expect(solved.sp['spa'], 32);
+      expect(solved.sp['spe'], 32);
+    });
+
     test('flags a stat that matches no multiplier', () {
       final base = pack.speciesById('typhlosion')!.baseStats;
       final rows = {
